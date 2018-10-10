@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "judul": "Total Pasien Hari Ini",
+    "jumlah": 250,
+    "photo": "https://image.flaticon.com/icons/svg/754/754554.svg"
+  },
+  {
+    "id": 2,
+    "judul": "Pasien Dilayani",
+    "jumlah": 20,
+    "photo": "https://image.flaticon.com/icons/svg/753/753210.svg"
+  },
+  {
+    "id": 3,
+    "judul": "Total Pendapatan",
+    "jumlah": 365000,
+    "photo": "https://image.flaticon.com/icons/svg/189/189093.svg"
+  },
+  {
+    "id": 4,
+    "judul": "Total Pengeluaran",
+    "jumlah": 365000,
+    "photo": "https://image.flaticon.com/icons/svg/138/138280.svg"
+  }
+]

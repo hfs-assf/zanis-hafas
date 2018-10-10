@@ -1,0 +1,64 @@
+.hr2 {
+  border: 2px dashed rgb(216, 216, 251);
+}
+
+.tombol {
+  float: left;
+  position: relative;
+  top: 0;
+  cursor: pointer;
+  background: white;
+  margin: 0 7px 11px 0;
+  text-align: center;
+  /* so nobody selects the inside text on button */
+  user-select: none;
+
+  /* Smoothing out hover using css3 transitions, if not, the pressed button effect looks a bit hard */
+  transition: all 0.2s ease;
+}
+
+.btn-medium {
+  line-height: 45px;
+  height: 45px;
+  font-size: 120%;
+}
+
+.info {
+  background: #1976d2;
+  box-shadow: 0px 5px #0d549b;
+  color: white;
+}
+
+.info:hover {
+  background: #1976d2;
+  box-shadow: 0px 4px #0d549b;
+  color: white;
+}
+
+/* Imitate a pressed effect for buttons */
+.info:active {
+  top: 4px;
+  box-shadow: 0px 0px #d3545d;
+}
+
+/* CSS Pencarian Pasien  */
+.mainsearch {
+  width: 20rem;
+  margin: -10px -15px;
+}
+
+.has-search .form-control {
+  padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: 2.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  text-align: center;
+  pointer-events: none;
+  color: #aaa;
+}

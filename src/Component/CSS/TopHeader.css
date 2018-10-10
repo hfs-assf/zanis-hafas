@@ -1,0 +1,141 @@
+.warna1 {
+  background-color: #1976d2;
+}
+/* bagdes animasi cuy */
+
+.merah {
+  width: 6px;
+  height: 6px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  border-radius: 30px;
+  background-color: #ef5350;
+  position: absolute;
+  right: 33px;
+}
+.heartbit {
+  position: absolute;
+  top: 7px;
+  right: 24px;
+  height: 25px;
+  width: 25px;
+  z-index: 10;
+  border: 5px solid #ef5350;
+  border-radius: 70px;
+  -moz-animation: heartbit 1s ease-out;
+  -moz-animation-iteration-count: infinite;
+  -o-animation: heartbit 1s ease-out;
+  -o-animation-iteration-count: infinite;
+  -webkit-animation: heartbit 1s ease-out;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+@-moz-keyframes heartbit {
+  0% {
+    -moz-transform: scale(0);
+    opacity: 0;
+  }
+  25% {
+    -moz-transform: scale(0.1);
+    opacity: 0.1;
+  }
+  50% {
+    -moz-transform: scale(0.5);
+    opacity: 0.3;
+  }
+  75% {
+    -moz-transform: scale(0.8);
+    opacity: 0.5;
+  }
+  100% {
+    -moz-transform: scale(1);
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes heartbit {
+  0% {
+    -webkit-transform: scale(0);
+    opacity: 0;
+  }
+  25% {
+    -webkit-transform: scale(0.1);
+    opacity: 0.1;
+  }
+  50% {
+    -webkit-transform: scale(0.5);
+    opacity: 0.3;
+  }
+  75% {
+    -webkit-transform: scale(0.8);
+    opacity: 0.5;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    opacity: 0;
+  }
+}
+/* Tutup Animasi */
+
+.dropdown {
+  display: inline-block;
+  margin-left: 20px;
+  padding: 4px;
+}
+.item-info2 {
+  margin-top: -12px;
+  font-size: 12px;
+  color: #0030cf;
+}
+.item-info {
+  font-size: 12px;
+  color: #0030cf;
+}
+
+.notification {
+  min-width: 300px;
+  border-radius: 20px 5px;
+  height: 270px;
+  background-color: #001ccf;
+}
+
+.notifications-wrapper {
+  overflow: auto;
+  max-height: 200px;
+  max-width: 300px;
+  background-color: white;
+}
+
+.menu-title {
+  font-size: 12px;
+  display: inline-block;
+}
+
+.notification-heading,
+.notification-footer {
+  padding: 2px 10px;
+  color: rgb(255, 255, 255);
+  font-size: 12px;
+}
+
+.item-title {
+  font-size: 13px;
+  color: #000;
+}
+
+.notifications a.content {
+  text-decoration: none;
+  background: rgb(255, 255, 255);
+}
+
+.notification-item {
+  padding: 6px;
+  margin: 5px;
+  background: #ffffff;
+  color: white;
+  height: 80px;
+  font-style: normal;
+  border-radius: 10px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+}
