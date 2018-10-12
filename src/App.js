@@ -8,6 +8,7 @@ import Sidebar from "./Component/JSX/Sidebar/Sidebar";
 import Apotek from "./Component/JSX/Apotek/TimelineApotek";
 import KelolaApotek from "./Component/JSX/Apotek/KelolaApotek";
 import Pendaftaran from "./Component/JSX/Pendaftaran/Pendaftaran";
+import PendaftaranLayanan from "./Component/JSX/Pendaftaran/TambahPelayananAntrian";
 
 class App extends Component {
   render() {
@@ -22,6 +23,7 @@ class App extends Component {
             <Route path="/apotek" component={Apotek} />
             <Route path="/kelola_apotek" component={KelolaApotek} />
             <Route path="/pendaftaran" component={Pendaftaran} />
+            <Route path="/tambahlayanan" component={PendaftaranLayanan} />
           </Switch>
         </div>
       </div>
