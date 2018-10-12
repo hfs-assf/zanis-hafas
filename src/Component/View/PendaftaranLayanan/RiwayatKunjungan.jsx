@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import "../../CSS/RiwayatPasien.css";
 
 const RiwayatKunjunganProfile = props => (
-  <div class="listflex">
-    <div class="list-item">
-      <div class="list-content">
+  <div className="listflex">
+    <div className="list-item">
+      <div className="list-content">
         <div className="judulatas">
           <strong>20 Desember 2017</strong>
         </div>
@@ -16,8 +16,8 @@ const RiwayatKunjunganProfile = props => (
         </ul>
       </div>
     </div>
-    <div class="list-item">
-      <div class="list-content">
+    <div className="list-item">
+      <div className="list-content">
         <div className="judulatas">
           <strong>20 Desember 2017</strong>
         </div>
@@ -28,8 +28,8 @@ const RiwayatKunjunganProfile = props => (
         </ul>
       </div>
     </div>
-    <div class="list-item">
-      <div class="list-content">
+    <div className="list-item">
+      <div className="list-content">
         <div className="judulatas">
           <strong>20 Desember 2017</strong>
         </div>
@@ -40,8 +40,8 @@ const RiwayatKunjunganProfile = props => (
         </ul>
       </div>
     </div>
-    <div class="list-item">
-      <div class="list-content">
+    <div className="list-item">
+      <div className="list-content">
         <div className="judulatas">
           <strong>20 Desember 2017</strong>
         </div>
@@ -52,8 +52,8 @@ const RiwayatKunjunganProfile = props => (
         </ul>
       </div>
     </div>
-    <div class="list-item">
-      <div class="list-content">
+    <div className="list-item">
+      <div className="list-content">
         <div className="judulatas">
           <strong>20 Desember 2017</strong>
         </div>

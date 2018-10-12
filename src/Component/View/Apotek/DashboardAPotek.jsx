@@ -35,7 +35,7 @@ class DashboardApotek extends Component {
                 </div>
 
                 <div>
-                  <h3 class="text-white">Total Obat Yang Akan Expired</h3>
+                  <h3 class="text-white">Obat Yang Akan Expired</h3>
                   <h6 class="text-white">Oktober 2018</h6>{" "}
                 </div>
               </div>
