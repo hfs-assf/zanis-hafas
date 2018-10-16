@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import DashboardApotek from "../../View/Apotek/DashboardAPotek";
-import TableApotek from "../../View/Apotek/TableApotek";
+// import TableApotek from "../../View/Apotek/TableApotek";
 import "../../CSS/KelolaApotek.css";
 
 class KelolaApotek extends Component {
@@ -8,7 +8,7 @@ class KelolaApotek extends Component {
     return (
       <div className="container-fluid">
         <DashboardApotek />
-        <TableApotek />
+        {/* <TableApotek /> */}
       </div>
     );
   }

@@ -30,7 +30,7 @@ class TambahAntrianPelayanan extends Component {
                   value="color-1"
                   onClick={() => this.showHide(false)}
                 />
-                <label htmlFor="color-1">
+                <label htmlFor="color-1" className="radio-inline">
                   <span />
                 </label>
                 Umum
@@ -44,7 +44,7 @@ class TambahAntrianPelayanan extends Component {
                   value="color-2"
                   onClick={() => this.showHide(true)}
                 />
-                <label htmlFor="color-2">
+                <label htmlFor="color-2" className="radio-inline">
                   <span />
                 </label>
                 Asuransi / Jaminan
@@ -53,7 +53,7 @@ class TambahAntrianPelayanan extends Component {
           </div>
         </div>
         {this.state.showMe ? (
-          <div className="col-md-5 animated fadeInRight stylejaminan">
+          <div className="col-md-5 col-sm-6 col-xs-5 animated fadeInRight stylejaminan">
             <div className="form-style">
               <fieldset className="item3">
                 <legend>Asuransi / Jaminan</legend>
@@ -96,7 +96,7 @@ class TambahAntrianPelayanan extends Component {
             Layanan Medis
           </label>
           <div className="col-sm-5">
-            <select class="form-control">
+            <select className="form-control">
               <option>Rawat Jalan</option>
               <option>Laboratorium</option>
             </select>
@@ -107,7 +107,7 @@ class TambahAntrianPelayanan extends Component {
             Nama Dokter
           </label>
           <div className="col-sm-5">
-            <select class="form-control">
+            <select className="form-control">
               <option>dr. Miaw</option>
               <option>dr. Kucing</option>
               <option>dr. Suci</option>
@@ -119,7 +119,7 @@ class TambahAntrianPelayanan extends Component {
             Poliklinik
           </label>
           <div className="col-sm-5">
-            <select class="form-control">
+            <select className="form-control">
               <option>Umum</option>
               <option>Gigi</option>
             </select>

@@ -26,7 +26,7 @@ class Sidebar extends Component {
           <div className="col-md-3 hidden-sm hidden-xs">
             <ProfileKiriPasien />
           </div>
-          <div className="col-md-8 card-box ml-5">
+          <div className="col-md-8 order-first order-md-2 card-box1">
             <TambahAntrianPelayanan />
           </div>
         </div>

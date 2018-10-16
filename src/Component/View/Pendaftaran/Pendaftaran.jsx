@@ -23,6 +23,7 @@ class ViewPendaftaran extends Component {
                     </span>
                     <input type="text" className="form-control" name="no_ktp" />
                   </label>
+
                   <label for="nama_pasien">
                     <span>
                       Nama <span className="required">*</span>
@@ -34,7 +35,7 @@ class ViewPendaftaran extends Component {
                     />
                   </label>
                   <div className="row">
-                    <div className="col-sm">
+                    <div className="col-sm-6">
                       {" "}
                       <label for="tempat_lahir">
                         <span>
@@ -47,7 +48,7 @@ class ViewPendaftaran extends Component {
                         />
                       </label>
                     </div>
-                    <div className="col-sm">
+                    <div className="col-sm-6">
                       <label for="tempat_lahir">
                         <span>
                           Tanggal Lahir <span className="required">*</span>
@@ -62,7 +63,7 @@ class ViewPendaftaran extends Component {
                   </div>
 
                   <div class="row">
-                    <div class="col">
+                    <div class="col-sm-3">
                       {" "}
                       <label for="agama">
                         <span>Agama</span>
@@ -74,7 +75,7 @@ class ViewPendaftaran extends Component {
                         </select>
                       </label>
                     </div>
-                    <div class="col">
+                    <div class="col-sm-4">
                       {" "}
                       <label for="jenis_kelamin">
                         <span>Jenis Kelamin</span>
@@ -84,7 +85,7 @@ class ViewPendaftaran extends Component {
                         </select>
                       </label>
                     </div>
-                    <div class="col">
+                    <div class="col-sm-5">
                       <label for="status">
                         <span>Status</span>
                         <select name="status" className="form-control">

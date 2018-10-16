@@ -82,7 +82,7 @@
   line-height: 2.375rem;
   text-align: center;
   pointer-events: none;
-  color: rgb(35, 23, 206);
+  color: #0099cc;
 }
 
 /* Form Pendaftaran */
@@ -129,7 +129,7 @@
   border-bottom: 1px solid var(--font01); */
   color: white;
   border-radius: 15px 10px;
-  background: #0d549b;
+  background: #0099cc;
   width: 20rem;
   /* opacity: 0.3; */
   padding: 0px 8px 3px 8px;
