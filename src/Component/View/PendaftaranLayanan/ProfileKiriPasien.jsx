@@ -20,7 +20,7 @@ const ProfileKiriPasien = props => (
     </div>
     <div className="bottommenu">
       <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
-        <li className="nav-item warnatab">
+        <li className="nav-item warnatab col-sm-6">
           <a
             className="nav-link active"
             id="pills-home-tab"
@@ -36,7 +36,7 @@ const ProfileKiriPasien = props => (
             Biodata
           </a>
         </li>
-        <li className="nav-item warnatab">
+        <li className="nav-item warnatab col-sm-6">
           <a
             className="nav-link"
             id="pills-profile-tab"

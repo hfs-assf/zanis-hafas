@@ -96,7 +96,7 @@ class TambahAntrianPelayanan extends Component {
             Layanan Medis
           </label>
           <div className="col-sm-5">
-            <select class="form-control">
+            <select className="form-control">
               <option>Rawat Jalan</option>
               <option>Laboratorium</option>
             </select>
@@ -107,7 +107,7 @@ class TambahAntrianPelayanan extends Component {
             Nama Dokter
           </label>
           <div className="col-sm-5">
-            <select class="form-control">
+            <select className="form-control">
               <option>dr. Miaw</option>
               <option>dr. Kucing</option>
               <option>dr. Suci</option>
@@ -119,7 +119,7 @@ class TambahAntrianPelayanan extends Component {
             Poliklinik
           </label>
           <div className="col-sm-5">
-            <select class="form-control">
+            <select className="form-control">
               <option>Umum</option>
               <option>Gigi</option>
             </select>

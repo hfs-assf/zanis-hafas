@@ -99,9 +99,9 @@
 /* form pendaftaran */
 .form-style {
   max-width: 100%;
-  margin-left: -10px;
   text-align: justify;
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  padding: 10px;
 }
 .form-style label {
   font-size: 14px;

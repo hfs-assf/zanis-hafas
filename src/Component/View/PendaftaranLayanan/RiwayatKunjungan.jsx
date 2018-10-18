@@ -4,7 +4,7 @@ import "../../CSS/RiwayatPasien.css";
 
 const RiwayatKunjunganProfile = props => (
   <div className="listflex">
-    <div className="list-item">
+    <div className="list-item col-md-12">
       <div className="list-content">
         <div className="judulatas">
           <strong>20 Desember 2017</strong>
@@ -16,7 +16,7 @@ const RiwayatKunjunganProfile = props => (
         </ul>
       </div>
     </div>
-    <div className="list-item">
+    <div className="list-item col-md-12">
       <div className="list-content">
         <div className="judulatas">
           <strong>20 Desember 2017</strong>
@@ -28,7 +28,7 @@ const RiwayatKunjunganProfile = props => (
         </ul>
       </div>
     </div>
-    <div className="list-item">
+    <div className="list-item col-md-12">
       <div className="list-content">
         <div className="judulatas">
           <strong>20 Desember 2017</strong>
@@ -40,7 +40,7 @@ const RiwayatKunjunganProfile = props => (
         </ul>
       </div>
     </div>
-    <div className="list-item">
+    <div className="list-item col-md-12">
       <div className="list-content">
         <div className="judulatas">
           <strong>20 Desember 2017</strong>
@@ -52,7 +52,7 @@ const RiwayatKunjunganProfile = props => (
         </ul>
       </div>
     </div>
-    <div className="list-item">
+    <div className="list-item col-md-12">
       <div className="list-content">
         <div className="judulatas">
           <strong>20 Desember 2017</strong>

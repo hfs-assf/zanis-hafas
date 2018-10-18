@@ -115,3 +115,15 @@ table .table-body {
   overflow: hidden;
   color: black;
 }
+.header-resep {
+  background-color: #1976d2;
+  border-radius: 15px 15px 15px 15px;
+  color: white;
+  font-size: 20px;
+  padding: 10px;
+}
+.resep {
+  border: 2px solid #1976d2;
+  background-color: white;
+  color: #1976d2;
+}
