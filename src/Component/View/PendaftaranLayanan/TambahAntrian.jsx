@@ -30,7 +30,7 @@ class TambahAntrianPelayanan extends Component {
                   value="color-1"
                   onClick={() => this.showHide(false)}
                 />
-                <label htmlFor="color-1">
+                <label htmlFor="color-1" className="radio-inline">
                   <span />
                 </label>
                 Umum
@@ -44,7 +44,7 @@ class TambahAntrianPelayanan extends Component {
                   value="color-2"
                   onClick={() => this.showHide(true)}
                 />
-                <label htmlFor="color-2">
+                <label htmlFor="color-2" className="radio-inline">
                   <span />
                 </label>
                 Asuransi / Jaminan
@@ -53,7 +53,7 @@ class TambahAntrianPelayanan extends Component {
           </div>
         </div>
         {this.state.showMe ? (
-          <div className="col-md-5 animated fadeInRight stylejaminan">
+          <div className="col-md-5 col-sm-6 col-xs-5 animated fadeInRight stylejaminan">
             <div className="form-style">
               <fieldset className="item3">
                 <legend>Asuransi / Jaminan</legend>

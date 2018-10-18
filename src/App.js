@@ -9,6 +9,7 @@ import Apotek from "./Component/JSX/Apotek/TimelineApotek";
 import KelolaApotek from "./Component/JSX/Apotek/KelolaApotek";
 import Pendaftaran from "./Component/JSX/Pendaftaran/Pendaftaran";
 import PendaftaranLayanan from "./Component/JSX/Pendaftaran/TambahPelayananAntrian";
+import PelayananMedisForm from "./Component/JSX/PelayananMedis/PelayananMedis";
 
 class App extends Component {
   render() {
@@ -24,6 +25,7 @@ class App extends Component {
             <Route path="/kelola_apotek" component={KelolaApotek} />
             <Route path="/pendaftaran" component={Pendaftaran} />
             <Route path="/tambahlayanan" component={PendaftaranLayanan} />
+            <Route path="/formpelayananmedis" component={PelayananMedisForm} />
           </Switch>
         </div>
       </div>

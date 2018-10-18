@@ -1,0 +1,184 @@
+.flexpelayanan {
+  display: flex;
+  padding: 2px;
+  flex-direction: row;
+  margin-left: -1em;
+  flex-wrap: wrap;
+}
+
+.flexpelayanan > div {
+  padding: 10px;
+  margin: 5px;
+  margin-left: -2px;
+}
+.flexpelayanan > .boxpelayanan {
+  background-color: rgb(238, 238, 238);
+  width: 99%;
+  margin-top: 3px;
+  border-radius: 30px;
+}
+
+.boxsurat {
+  border-radius: 4px;
+  text-align: center;
+  width: 10em;
+  margin-left: auto;
+  background-color: rgb(238, 238, 238);
+}
+.boxsurat1:hover {
+  background-color: #1976d2;
+  color: white;
+}
+.boxsurat:hover {
+  background-color: #1976d2;
+  color: white;
+}
+.boxsurat1 {
+  border-radius: 4px;
+  width: 10em;
+  text-align: center;
+  margin-left: auto;
+  background-color: rgb(238, 238, 238);
+}
+
+.boxriwayat {
+  border-radius: 4px;
+  background-color: rgb(238, 238, 238);
+  height: 8em;
+  width: 52em;
+}
+.boxriwayat > table > tbody > tr > td {
+  font-size: 15px;
+}
+.boxriwayat > table > tbody > tr > .datatable {
+  padding-left: 15px;
+  font-weight: 500;
+}
+
+/* TABULASI PELAYANAN MEDIS */
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
+
+.main {
+  min-width: 320px;
+  max-width: 100%;
+  background: #fff;
+  border-radius: 30px;
+}
+
+.main > section {
+  border-radius: 20px 20px 0 0;
+  display: none;
+  padding: 20px 10px 0;
+  margin: 10px;
+  height: 19em;
+}
+
+.main > input {
+  display: none;
+}
+
+.main label {
+  display: inline-block;
+  margin: 0 0 -1px;
+  padding: 15px 25px;
+  font-weight: 500;
+  text-align: center;
+  color: rgb(0, 0, 0);
+}
+
+.main label:hover {
+  color: rgb(0, 85, 255);
+  cursor: pointer;
+}
+
+.main input:checked + label {
+  color: rgb(0, 0, 0);
+  border-radius: 9px;
+  border-bottom: 3px solid rgb(0, 85, 255);
+}
+
+#tab1:checked ~ #content1,
+#tab2:checked ~ #content2,
+#tab3:checked ~ #content3,
+#tab4:checked ~ #content4 {
+  display: block;
+}
+
+/* SOAP */
+.soaps {
+  margin: 1px;
+}
+.boxsoap {
+  background-color: #1976d2;
+  text-align: center;
+  color: white;
+  border-radius: 15px 15px 0px 0px;
+}
+.isisoap {
+  background-color: rgb(231, 231, 231);
+  height: 15em;
+  padding: 5px;
+}
+.isisoap > table > tbody > tr > td {
+  font-size: 15px;
+  font-weight: 400;
+  padding: 4px;
+}
+td input[type="number"] {
+  width: 60px;
+  border-radius: 5px;
+}
+
+td input:focus[type="number"] {
+  background-color: rgb(107, 187, 245);
+  color: white;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+}
+
+.pencariansoap {
+  background-color: #1976d2;
+  border-radius: 10px;
+  width: 100%;
+  height: 45px;
+  line-height: 40px;
+  color: white;
+  padding: 2px;
+}
+
+.pencariansoap input[type="text"] {
+  height: 30px;
+  width: 80%;
+  border-radius: 3px;
+  margin-left: 10px;
+}
+.tombolsoap {
+  outline: none;
+  width: 6em;
+  line-height: 2em;
+  border-radius: 5px;
+  height: 40px;
+  margin-left: 10px;
+  background-color: rgb(250, 145, 75);
+  cursor: pointer;
+}
+/* @media screen and (max-width: 650px) {
+  label {
+    font-size: 0;
+    color: black;
+  }
+
+  label:before {
+    margin: 0;
+    font-size: 18px;
+    color: black;
+  }
+}
+@media screen and (max-width: 400px) {
+  label {
+    padding: 15px;
+    color: black;
+  }
+} */
