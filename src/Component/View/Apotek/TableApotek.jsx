@@ -1,19 +1,41 @@
 import React, { Component } from "react";
 import "../../CSS/Apotek.css";
+import obat from "../../../JSON/daftarObat.json";
 
 class TableApotek extends Component {
+  daftarObat() {
+    return obat.map((el, index) => (
+      <tr key={index}>
+        <td>{index + 1}</td>
+        <td>{el.nama}</td>
+        <td>{el.kategori}</td>
+        <td>{el.harga_beli}</td>
+        <td>{el.harga_jual}</td>
+        <td>
+          {el.persediaan} {el.satuan}
+        </td>
+        <td>{el.masa_berlaku}</td>
+      </tr>
+    ));
+  }
   render() {
     return (
       <table
         id="dtVerticalScrollExample"
-        className="table table-striped table-bordered table-sm mt-5"
-        cellspacing="0"
+        className="table table-hover table-bordered table-sm mt-5"
         width="100%"
       >
         <thead>
           <tr>
             <th className="th-sm">
+              #<i className="fa fa-sort float-right" aria-hidden="true" />
+            </th>
+            <th className="th-sm">
               Nama Obat
+              <i className="fa fa-sort float-right" aria-hidden="true" />
+            </th>
+            <th className="th-sm">
+              Kategori
               <i className="fa fa-sort float-right" aria-hidden="true" />
             </th>
             <th className="th-sm">
@@ -34,39 +56,12 @@ class TableApotek extends Component {
             </th>
           </tr>
         </thead>
-        <tbody className="table-body">
-          <tr>
-            <td>Jonas Alexander</td>
-            <td>Developer</td>
-            <td>San Francisco</td>
-            <td>30</td>
-            <td>2010/07/14</td>
-          </tr>
-          <tr>
-            <td>Shad Decker</td>
-            <td>Regional Director</td>
-            <td>Edinburgh</td>
-            <td>51</td>
-            <td>2008/11/13</td>
-          </tr>
-          <tr>
-            <td>Michael Bruce</td>
-            <td>Javascript Developer</td>
-            <td>Singapore</td>
-            <td>29</td>
-            <td>2011/06/27</td>
-          </tr>
-          <tr>
-            <td>Donna Snider</td>
-            <td>Customer Support</td>
-            <td>New York</td>
-            <td>27</td>
-            <td>2011/01/25</td>
-          </tr>
-        </tbody>
+        <tbody className="table-body">{this.daftarObat()}</tbody>
         <tfoot>
           <tr>
+            <th>#</th>
             <th>Nama Obat</th>
+            <th>Kategori</th>
             <th>Harga Beli</th>
             <th>Harga Jual</th>
             <th>Stok Gudang</th>

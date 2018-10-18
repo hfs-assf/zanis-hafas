@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../../CSS/Apotek.css";
 import TimelineAPotek from "../../View/Apotek/TimelineApotek";
+// import ResepObat from "../../View/Apotek/ResepObat";
 
 class Apotek extends Component {
   render() {
@@ -21,11 +22,7 @@ class Apotek extends Component {
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div className="row">
-          <div className="col-md-2">
-            <TimelineAPotek />
-          </div>
-        </div>
+        <TimelineAPotek />
       </div>
     );
   }

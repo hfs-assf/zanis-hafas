@@ -1,70 +1,82 @@
 import React, { Component } from "react";
 import SVGapotek from "../../svgfile/svgapotek";
+import "../../CSS/DashboardApotek.css";
 
 class DashboardApotek extends Component {
   render() {
     return (
-      <div class="row">
-        <div class="col-lg-4 col-md-12">
-          <div class="card card-inverse info-color">
-            <div class="card-body">
-              <div class="d-flex">
-                <div className="svg">
+      <div className="row">
+        <div className="col-lg-4 col-md-12">
+          <div className="card card-inverse info-color">
+            <div className="card-body" style={{ maxHeight: "140px" }}>
+              <div className="d-flex">
+                <div className="col-sm-3">
                   <SVGapotek />
                 </div>
-
-                <div>
-                  <h3 class="text-white">Jumlah Obat</h3>
-                  <h6 class="text-white">Oktober 2018</h6>{" "}
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-12 p-t-10 p-b-20 align-self-center">
-                  <h2 class="font-light text-white">1400</h2>
+                <div className="col-sm-9">
+                  <h4 className="text-white">Daftar Obat</h4>
+                  <h2 className="font-light text-white">1400</h2>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-12">
-          <div class="card  red lighten-1">
-            <div class="card-body">
-              <div class="d-flex">
-                <div className="svg">
-                  <SVGapotek />
-                </div>
-
-                <div>
-                  <h3 class="text-white">Obat Yang Akan Expired</h3>
-                  <h6 class="text-white">Oktober 2018</h6>{" "}
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-12 p-t-10 p-b-20 align-self-center">
-                  <h2 class="font-light text-white">20</h2>
-                </div>
-              </div>
+            <div className="card-footer">
+              <button
+                className="btn btn-info btn-sm waves-effect waves-light"
+                type="button"
+                data-toggle="modal"
+                data-target="#addmedicine"
+              >
+                Tambah Obat
+              </button>
             </div>
           </div>
         </div>
-        <div class="col-lg-4 col-md-12">
-          <div class="card mdb-color lighten-2">
-            <div class="card-body">
-              <div class="d-flex">
-                <div className="svg">
+        <div className="col-lg-4 col-md-12">
+          <div className="card card-inverse danger-color">
+            <div className="card-body" style={{ maxHeight: "140px" }}>
+              <div className="d-flex">
+                <div className="col-sm-3">
                   <SVGapotek />
                 </div>
-
-                <div>
-                  <h3 class="text-white">Total Pemasukan Obat</h3>
-                  <h6 class="text-white">Oktober 2018</h6>{" "}
+                <div className="col-sm-9">
+                  <h4 className="text-white">Obat yang akan expired</h4>
+                  <h6 className="text-white">Oktober 2018</h6>
+                  <h2 className="font-light text-white">1400</h2>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-12 p-t-10 p-b-20 align-self-center">
-                  <h2 class="font-light text-white">Rp. 1800</h2>
+            </div>
+            <div className="card-footer">
+              <button
+                className="btn btn-danger btn-sm"
+                data-toggle="modal"
+                data-target="#expDetail"
+              >
+                Detail
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="col-lg-4 col-md-12">
+          <div className="card card-inverse info-color">
+            <div className="card-body" style={{ maxHeight: "140px" }}>
+              <div className="d-flex">
+                <div className="col-sm-3">
+                  <SVGapotek />
+                </div>
+                <div className="col-sm-9">
+                  <h4 className="text-white">Persediaan obat yang menipis</h4>
+                  <h2 className="font-light text-white">1400</h2>
                 </div>
               </div>
+            </div>
+            <div className="card-footer">
+              <button
+                className="btn btn-info btn-sm"
+                data-toggle="modal"
+                data-target="#minStockDetail"
+              >
+                Detail
+              </button>
             </div>
           </div>
         </div>
