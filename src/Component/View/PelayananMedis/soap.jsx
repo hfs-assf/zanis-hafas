@@ -74,7 +74,7 @@ const SOAP = props => (
             <textarea
               placeholder="Isi Form Tindakan"
               name="textarea"
-              class="textarea"
+              className="textarea"
             />
           </div>
           <div className="col-md-6 rowsoap">
@@ -82,7 +82,7 @@ const SOAP = props => (
             <textarea
               placeholder="Isi Form Tindakan"
               name="textarea"
-              class="textarea"
+              className="textarea"
             />
           </div>
         </div>
@@ -92,7 +92,7 @@ const SOAP = props => (
             <textarea
               placeholder="Isi Form Tindakan"
               name="textarea"
-              class="textarea"
+              className="textarea"
             />
           </div>
           <div className="col-md-6 rowsoap">
@@ -100,7 +100,7 @@ const SOAP = props => (
             <textarea
               placeholder="Isi Form Tindakan"
               name="textarea"
-              class="textarea"
+              className="textarea"
             />
           </div>
         </div>
