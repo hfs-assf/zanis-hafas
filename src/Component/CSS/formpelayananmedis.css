@@ -2,7 +2,6 @@
   display: flex;
   padding: 2px;
   flex-direction: row;
-  margin-left: -1em;
   flex-wrap: wrap;
 }
 
@@ -13,53 +12,42 @@
 }
 .flexpelayanan > .boxpelayanan {
   background-color: rgb(238, 238, 238);
-  width: 99%;
+  width: 100%;
   margin-top: 3px;
   border-radius: 30px;
 }
 
-.boxsurat {
-  border-radius: 4px;
-  text-align: center;
-  width: 10em;
-  margin-left: auto;
-  background-color: rgb(238, 238, 238);
-}
-.boxsurat1:hover {
-  background-color: #1976d2;
-  color: white;
-}
-.boxsurat:hover {
-  background-color: #1976d2;
-  color: white;
-}
-.boxsurat1 {
-  border-radius: 4px;
-  width: 10em;
-  text-align: center;
-  margin-left: auto;
-  background-color: rgb(238, 238, 238);
-}
-
 .boxriwayat {
   border-radius: 4px;
+  padding: 10px;
   background-color: rgb(238, 238, 238);
-  height: 8em;
-  width: 52em;
+  margin: 4px 0px 4px 0px;
 }
 .boxriwayat > table > tbody > tr > td {
+  word-wrap: break-word;
   font-size: 15px;
 }
 .boxriwayat > table > tbody > tr > .datatable {
   padding-left: 15px;
   font-weight: 500;
 }
+.boxsurat {
+  padding: 10px;
+  border-radius: 4px;
+  text-align: center;
+  width: 48%;
+  margin: 4px 0px 4px 4px;
+  background-color: rgb(238, 238, 238);
+}
+.boxsurat:hover {
+  background-color: #1976d2;
+  color: white;
+}
 
 /* TABULASI PELAYANAN MEDIS */
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
 
 .main {
-  min-width: 320px;
   max-width: 100%;
   border: 1px dashed #1976d2;
   border-radius: 30px;
@@ -73,16 +61,19 @@
   height: auto;
 }
 
-.main > input {
+.main input[type="radio"] {
   display: none;
 }
 
 .main label {
   display: inline-block;
-  margin: 0 0 -1px;
-  padding: 15px 25px;
+  margin-top: 5px;
+  padding: 5px;
+  /* padding: 10px 50px 10px 50px; */
   font-weight: 500;
+  width: 25%;
   text-align: center;
+  /* text-align: center; */
   color: rgb(0, 0, 0);
 }
 
@@ -105,9 +96,6 @@
 }
 
 /* SOAP */
-.soaps {
-  margin: 1px;
-}
 .boxsoap {
   background-color: #1976d2;
   text-align: center;
@@ -141,27 +129,10 @@ td input:focus[type="number"] {
   -o-transition: all 0.3s ease-in-out;
 }
 
-.pencariansoap {
-  background-color: #1976d2;
-  width: 52em;
-  border-radius: 10px;
-  color: white;
-  padding: 2px;
-}
-
-.pencariansoap input[type="text"] {
-  height: 30px;
-  width: 80%;
-  border-radius: 3px;
-  margin-left: 10px;
-}
-
-/* SOAP TABLE RESPONSIVE */
-
 /* FLEX UNTUK SUBJEKTIF ANALISA OBJEKTIF DAN TINDAKAN */
 .rowsoap {
   height: 100px;
-  margin: 6px;
+  margin: 6px 0px 0px 0px;
   border-radius: 5px;
 }
 
@@ -173,8 +144,7 @@ td input:focus[type="number"] {
   text-align: center;
 }
 .textarea {
-  max-width: 25em;
-  width: 24.1em;
+  width: 100%;
   border-radius: 0 6px 6px 6px;
   border: 1px solid #1976d2;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12) inset;
@@ -193,27 +163,24 @@ td input:focus[type="number"] {
   outline-width: 0;
 }
 
-.diagnosa {
+.maxrow {
+  padding: 0.5em;
   background-color: #1976d2;
   color: white;
-  width: 94%;
+  width: 100%;
   border-radius: 10px;
-  padding: 0 10px;
-  height: 2.5em;
-  line-height: 2.5em;
+  min-height: 3em;
 }
 
-.diagnosa input[type="text"] {
-  max-width: 80%;
+.maxrow > .col-md-10 > input[type="text"] {
+  width: 100%;
   height: 30px;
-  width: 70%;
   border-radius: 3px;
-  margin-left: 10px;
 }
-.diagnosa input:focus[type="text"] {
+.maxrow div input:focus[type="text"] {
   border: 1px solid #ffffff;
-  width: 90%;
-  max-width: 90%;
+  width: 80%;
+  max-width: 80%;
   background: none repeat scroll 0 0 rgba(21, 120, 190, 0.748);
   color: white;
   -webkit-transition: all 0.3s ease-in-out;
@@ -222,27 +189,10 @@ td input:focus[type="number"] {
   -o-transition: all 0.3s ease-in-out;
 }
 
-.soaps > .float-right {
-  position: relative;
-  background-color: #1976d2;
-  width: 300px;
-  margin: 10px;
-  right: 0;
+.soap .float-right {
+  float: right;
 }
-@media only screen and (max-width: 670px) {
-  .pencariansoap {
-    margin-top: 12px;
-    width: 26em;
-    border-radius: 10px;
-  }
 
-  .pencariansoap input[type="text"] {
-    height: 30px;
-    width: 70%;
-    border-radius: 3px;
-    margin-left: 10px;
-  }
-}
 @media screen and (max-width: 400px) {
   .pencariansoap {
     width: 2em;

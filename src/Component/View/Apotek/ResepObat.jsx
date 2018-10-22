@@ -41,9 +41,6 @@ class ResepObat extends Component {
                 </tbody>
               </table>
             </div>
-            <button type="button" className="btn btn-info btn-md">
-              Selesai
-            </button>
           </div>
         </fieldset>
       </div>
