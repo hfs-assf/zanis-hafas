@@ -157,10 +157,76 @@ td input:focus[type="number"] {
 }
 
 /* SOAP TABLE RESPONSIVE */
+.cell input[type="number"] {
+  width: 80px;
+  border-radius: 2px;
+  border: 1px solid #1976d2;
+}
+.table {
+  width: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  display: table;
+}
+@media screen and (max-width: 580px) {
+  .table {
+    display: block;
+  }
+}
+
+.row1 {
+  display: table-row;
+  background: rgb(243, 243, 243);
+}
+.row1:nth-of-type(odd) {
+  background: #ffffff;
+}
+.row1.header {
+  font-weight: 00;
+  color: #000000;
+}
+.cell {
+  padding: 15px 20px;
+  display: table-cell;
+}
+
+@media screen and (max-width: 580px) {
+  .row1 {
+    /* padding: 14px 0 7px; */
+    display: block;
+  }
+
+  .row1.header {
+    padding: 0;
+    height: 6px;
+  }
+  .row1.header .cell {
+    display: none;
+  }
+  .row1 .cell {
+    margin-bottom: 10px;
+  }
+  .row1 .cell:before {
+    margin-bottom: 3px;
+    content: attr(data-title);
+    min-width: 90px;
+    font-size: 10px;
+    line-height: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #969696;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .cell {
+    padding: 2px 16px;
+    display: block;
+  }
+}
 
 /* FLEX UNTUK SUBJEKTIF ANALISA OBJEKTIF DAN TINDAKAN */
 .rowsoap {
-  height: 100px;
   margin: 6px;
   border-radius: 5px;
 }
@@ -170,6 +236,19 @@ td input:focus[type="number"] {
   color: white;
   border-radius: 10px 10px 0 0;
   max-width: 10em;
+  text-align: center;
+}
+
+.rowsoap > .legendtitle1 {
+  background-color: #1976d2;
+  color: white;
+  margin-left: -1px;
+  margin-top: 12px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 25px;
+  border-radius: 10px 10px 0 0;
+  /* max-width: 10em; */
   text-align: center;
 }
 .textarea {
@@ -212,8 +291,6 @@ td input:focus[type="number"] {
 }
 .diagnosa input:focus[type="text"] {
   border: 1px solid #ffffff;
-  width: 90%;
-  max-width: 90%;
   background: none repeat scroll 0 0 rgba(21, 120, 190, 0.748);
   color: white;
   -webkit-transition: all 0.3s ease-in-out;
@@ -222,14 +299,14 @@ td input:focus[type="number"] {
   -o-transition: all 0.3s ease-in-out;
 }
 
-.soaps > .float-right {
-  position: relative;
-  background-color: #1976d2;
+/* //TABULASI APOTEK */
+
+.float-right {
+  float: right;
   width: 300px;
-  margin: 10px;
-  right: 0;
+  margin-left: -200px;
 }
-@media only screen and (max-width: 670px) {
+@media screen and (min-width: 450px) and (max-width: 991px) {
   .pencariansoap {
     margin-top: 12px;
     width: 26em;
