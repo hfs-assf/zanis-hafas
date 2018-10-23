@@ -3,17 +3,11 @@ import DataTimeline from "../../../JSON/pasien.json";
 import { Link } from "react-router-dom";
 import "../../CSS/Timeline.css";
 
-class TimelineKasir extends Component {
-  constructor() {
-    super();
-    this.state = {
-      id: ""
-    };
-  }
-  renderTimelineKasir() {
+class TimelinePelayananMedis extends Component {
+  renderTimelinePelayananMedis() {
     return DataTimeline.map((item, index) => (
-      <li key={index} className="animated bounceIn" id="2">
-        <Link to="/form-pembayaran">
+      <li key={index} className="animated bounceIn">
+        <Link to="/formpelayananmedis">
           <span />
           <div className="number"> {item.id} </div>
           <div>
@@ -37,7 +31,7 @@ class TimelineKasir extends Component {
       <div className="row">
         <div className="col-md-4">
           <div className="container">
-            <ul>{this.renderTimelineKasir()}</ul>
+            <ul>{this.renderTimelinePelayananMedis()}</ul>
           </div>
         </div>
       </div>
@@ -45,4 +39,4 @@ class TimelineKasir extends Component {
   }
 }
 
-export default TimelineKasir;
+export default TimelinePelayananMedis;

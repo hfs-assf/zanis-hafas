@@ -49,7 +49,7 @@ export default class Header extends Component {
                   <i className="fa fa-user" /> Ubah Profile
                 </Link>
                 <Link to="/lagout" className="dropdown-item" href="#">
-                  <i class="fas fa-sign-out-alt" /> Keluar
+                  <i className="fas fa-sign-out-alt" /> Keluar
                 </Link>
               </div>
             </li>
