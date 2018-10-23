@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import FormPelayananMedis from "../../View/PelayananMedis/FormPelayananMedis";
-class PelayananMedis extends Component {
+import Form from "../../View/Kasir/FormPembayaran";
+class Pembayaran extends Component {
   render() {
     return (
       <div
@@ -10,7 +10,7 @@ class PelayananMedis extends Component {
         <div className="card-body">
           <div className="flex-container">
             <div className="box column1">
-              <h2 className="card-title text-left">Pelayanan Medis</h2>
+              <h2 className="card-title text-left">Kasir</h2>
             </div>
 
             <div className="box column2" />
@@ -20,8 +20,8 @@ class PelayananMedis extends Component {
             className="alert alert-warning alert-dismissible fade show"
             role="alert"
           >
-            <strong>Lengkapi Form Pelayanan dengan dengan mengklik </strong>{" "}
-            salah satu menu SOAP, Resep Obat, Tindakan dan Laboratorium dibawah.
+            <strong>Lengkapi Form Pembayaran </strong>
+            dibawah.
             <button
               type="button"
               className="close"
@@ -31,11 +31,11 @@ class PelayananMedis extends Component {
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <FormPelayananMedis />
+          <Form />
         </div>
       </div>
     );
   }
 }
 
-export default PelayananMedis;
+export default Pembayaran;

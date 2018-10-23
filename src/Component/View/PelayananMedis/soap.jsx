@@ -61,6 +61,7 @@ const SOAP = props => (
               type="text"
               refs="pencariansoap"
               placeholder="Cari Nama Template SOAP"
+              className="form-control"
             />
           </div>
           <div className="col-md-2">
@@ -109,7 +110,11 @@ const SOAP = props => (
       <div className="row maxrow" style={{ margin: "10px" }}>
         <div className="col-md-2">Diagnosa</div>
         <div className="col-md-10">
-          <input type="text" placeholder="isi diagnosa" />
+          <input
+            type="text"
+            placeholder="isi diagnosa"
+            className="form-control"
+          />
         </div>
       </div>
       <div className="col-md-12">

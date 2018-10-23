@@ -86,7 +86,7 @@
 }
 
 /* Form Pendaftaran */
-.item1 {
+/* .item1 {
   grid-area: item1;
 }
 .item2 {
@@ -94,7 +94,7 @@
 }
 .item3 {
   grid-area: item3;
-}
+} */
 
 /* form pendaftaran */
 .form-style {
@@ -144,7 +144,7 @@
 }
 .form-style textarea {
   width: 250px;
-  height: 100px;
+  height: 50px;
 }
 .form-style input[type="text"],
 .form-style select,

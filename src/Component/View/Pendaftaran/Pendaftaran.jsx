@@ -14,17 +14,17 @@ class ViewPendaftaran extends Component {
         <div className="form-style">
           <form>
             <div className="row">
-              <div className="col-md-5">
-                <fieldset className="item1">
+              <div className="col-md-6">
+                <fieldset>
                   <legend>Data Diri</legend>
-                  <label for="no_ktp">
+                  <label>
                     <span>
                       No KTP <span className="required">*</span>
                     </span>
                     <input type="text" className="form-control" name="no_ktp" />
                   </label>
 
-                  <label for="nama_pasien">
+                  <label>
                     <span>
                       Nama <span className="required">*</span>
                     </span>
@@ -37,7 +37,7 @@ class ViewPendaftaran extends Component {
                   <div className="row">
                     <div className="col-sm-6">
                       {" "}
-                      <label for="tempat_lahir">
+                      <label>
                         <span>
                           Tempat Lahir <span className="required">*</span>
                         </span>
@@ -49,7 +49,7 @@ class ViewPendaftaran extends Component {
                       </label>
                     </div>
                     <div className="col-sm-6">
-                      <label for="tempat_lahir">
+                      <label>
                         <span>
                           Tanggal Lahir <span className="required">*</span>
                         </span>
@@ -62,10 +62,10 @@ class ViewPendaftaran extends Component {
                     </div>
                   </div>
 
-                  <div class="row">
-                    <div class="col-sm-3">
+                  <div className="row">
+                    <div className="col-sm-3">
                       {" "}
-                      <label for="agama">
+                      <label>
                         <span>Agama</span>
                         <select name="agama" className="form-control">
                           <option value="Islam">Islam</option>
@@ -75,9 +75,9 @@ class ViewPendaftaran extends Component {
                         </select>
                       </label>
                     </div>
-                    <div class="col-sm-4">
+                    <div className="col-sm-4">
                       {" "}
-                      <label for="jenis_kelamin">
+                      <label>
                         <span>Jenis Kelamin</span>
                         <select name="jenis_kelamin" className="form-control">
                           <option value="P">Perempuan</option>
@@ -85,8 +85,8 @@ class ViewPendaftaran extends Component {
                         </select>
                       </label>
                     </div>
-                    <div class="col-sm-5">
-                      <label for="status">
+                    <div className="col-sm-5">
+                      <label>
                         <span>Status</span>
                         <select name="status" className="form-control">
                           <option value="Belum Menikah">Belum Menikah</option>
@@ -95,7 +95,7 @@ class ViewPendaftaran extends Component {
                       </label>
                     </div>
                   </div>
-                  <label for="alamat">
+                  <label>
                     <span>
                       Alamat <span className="required">*</span>
                     </span>
@@ -103,7 +103,7 @@ class ViewPendaftaran extends Component {
                   </label>
                   <div className="row">
                     <div className="col-sm-4">
-                      <label for="kelurahan">
+                      <label>
                         <span>Kelurahan</span>
                         <select name="kelurahan" className="form-control">
                           <option value="Tenayan Raya">Tenayan Raya</option>
@@ -112,7 +112,7 @@ class ViewPendaftaran extends Component {
                       </label>
                     </div>
                     <div className="col-sm-4">
-                      <label for="kecamatan">
+                      <label>
                         <span>Kecamatan</span>
                         <select name="kecamatan" className="form-control">
                           <option value="Sail">Sail</option>
@@ -121,7 +121,7 @@ class ViewPendaftaran extends Component {
                       </label>
                     </div>
                     <div className="col-sm-4">
-                      <label for="kode_pos">
+                      <label>
                         <span>
                           Kode Pos <span className="required">*</span>
                         </span>
@@ -134,7 +134,7 @@ class ViewPendaftaran extends Component {
                     </div>
                   </div>
 
-                  <label for="telpon">
+                  <label>
                     <span>
                       Telpon <span className="required">*</span>
                     </span>
@@ -147,12 +147,12 @@ class ViewPendaftaran extends Component {
                 </fieldset>
                 <br />
               </div>
-              <div className="col-sm-5">
-                <fieldset className="item2">
+              <div className="col-md-6">
+                <fieldset>
                   <legend>Pendidikan</legend>
                   <div className="row">
                     <div className="col-sm">
-                      <label for="pendidikan">
+                      <label>
                         <span>Pendidikan</span>
                         <input
                           type="text"
@@ -162,7 +162,7 @@ class ViewPendaftaran extends Component {
                       </label>
                     </div>
                     <div className="col-sm">
-                      <label for="kantor">
+                      <label>
                         <span>Kantor</span>
                         <input
                           type="text"
@@ -172,21 +172,24 @@ class ViewPendaftaran extends Component {
                       </label>
                     </div>
                   </div>
-
-                  <label for="nama_perusahaan">
+                  <label>
                     <span>
                       <span>Nama Perusahaan </span>
                     </span>
-                    <textarea name="nama_perusahaan" className="form-control" />
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="nama_perusahaan"
+                    />
                   </label>
                 </fieldset>
                 <br />
 
-                <fieldset className="item3">
+                <fieldset>
                   <legend>Penanggung Jawab</legend>
                   <div className="row">
                     <div className="col-sm">
-                      <label for="nama_penanggungjawab">
+                      <label>
                         <span>Nama</span>
                         <input
                           type="text"
@@ -196,7 +199,7 @@ class ViewPendaftaran extends Component {
                       </label>
                     </div>
                     <div className="col-sm">
-                      <label for="status_penanggungjawab">
+                      <label>
                         <span>Status</span>
                         <input
                           type="text"
@@ -206,7 +209,7 @@ class ViewPendaftaran extends Component {
                       </label>
                     </div>
                     <div className="col-sm">
-                      <label for="telpon_penanggungjawab">
+                      <label>
                         <span>Telpon</span>
                         <input
                           type="number"
@@ -217,7 +220,7 @@ class ViewPendaftaran extends Component {
                     </div>
                   </div>
 
-                  <label for="alamat_penanggungjawab">
+                  <label>
                     <span>
                       <span>Alamat </span>
                     </span>
@@ -226,11 +229,13 @@ class ViewPendaftaran extends Component {
                       className="form-control"
                     />
                   </label>
+                  <br />
                 </fieldset>
-                <button className="tombol btn-medium info mt-3">
-                  Simpan Data
-                </button>
               </div>
+            </div>
+            <div className="modal-footer justify-content-center">
+              <button className="btn btn-primary">Simpan</button>
+              <button className="btn btn-warning">Bersihkan</button>
             </div>
           </form>
         </div>

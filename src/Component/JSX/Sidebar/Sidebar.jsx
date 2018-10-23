@@ -6,6 +6,7 @@ import "../../CSS/Sidebar.css";
 import SVGApotek from "../../svgfile/svgapotek";
 import SVGPelayananMedis from "../../svgfile/SVGpelayananmedis";
 import SVGKasir from "../../svgfile/SVGkasir";
+import SVGAdmin from "../../svgfile/SVGAdmin";
 class Sidebar extends Component {
   render() {
     return (
@@ -48,7 +49,7 @@ class Sidebar extends Component {
               </li>
               <li>
                 {" "}
-                <Link to="/pasien" className="has-arrow" aria-expanded="false">
+                <Link to="/apotek" className="has-arrow" aria-expanded="false">
                   <SVGApotek size="20pt" />
                   <span className="hide-menu">Apotek</span>
                 </Link>
@@ -63,13 +64,43 @@ class Sidebar extends Component {
               </li>
               <li>
                 {" "}
-                <Link to="/pasien" className="has-arrow" aria-expanded="false">
+                <Link to="/kasir" className="has-arrow" aria-expanded="false">
                   <SVGKasir size="20pt" />
                   <span className="hide-menu">Kasir</span>
                 </Link>
                 <ul aria-expanded="false" className="collapse">
                   <li>
-                    <Link to="/apotek">Daftar Antrian</Link>
+                    <Link to="/kasir">Daftar Antrian</Link>
+                  </li>
+                  <li>
+                    <Link to="/kelola_biaya">Kelola Biaya</Link>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                {" "}
+                <Link to="/admin" className="has-arrow" aria-expanded="false">
+                  <SVGAdmin size="20pt" />
+                  <span className="hide-menu">Admin</span>
+                </Link>
+                <ul aria-expanded="false" className="collapse">
+                  <li>
+                    <Link to="/karyawan">Daftar Karyawan</Link>
+                  </li>
+                  <li>
+                    <Link to="/poliklinik">Daftar Poliklinik</Link>
+                  </li>
+                  <li>
+                    <Link to="/biaya">Daftar Biaya</Link>
+                  </li>
+                  <li>
+                    <Link to="/biaya">Daftar Tindakan</Link>
+                  </li>
+                  <li>
+                    <Link to="/biaya">Daftar Uji Lab</Link>
+                  </li>
+                  <li>
+                    <Link to="/biaya">Jadwal Dokter</Link>
                   </li>
                 </ul>
               </li>

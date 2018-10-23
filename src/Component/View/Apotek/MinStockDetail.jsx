@@ -30,11 +30,7 @@ class MinStockDetail extends Component {
       </li>
     ));
   }
-  checked() {
-    // this.setState({ id_obat: "checked" });
-    const x = this.refs.suci.value;
-    console.log(x);
-  }
+
   render() {
     return (
       <div

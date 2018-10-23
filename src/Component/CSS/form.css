@@ -21,7 +21,8 @@
   border-radius: 4px;
   padding: 10px;
   background-color: rgb(238, 238, 238);
-  margin: 4px 0px 4px 0px;
+  width: 100%;
+  margin: 4px 2px 0px -3px;
 }
 .boxriwayat > table > tbody > tr > td {
   word-wrap: break-word;
@@ -35,8 +36,8 @@
   padding: 10px;
   border-radius: 4px;
   text-align: center;
-  width: 48%;
-  margin: 4px 0px 4px 4px;
+  width: 188px;
+  margin: 4px 2px 0px 0px;
   background-color: rgb(238, 238, 238);
 }
 .boxsurat:hover {
@@ -105,6 +106,7 @@
 }
 .isisoap {
   background-color: rgb(231, 231, 231);
+  /* max-width: 10em; */
   max-width: 10em;
   height: auto;
   padding: 5px;
@@ -115,8 +117,7 @@
   padding: 4px;
 }
 td input[type="number"] {
-  width: 60px;
-  max-width: 60px;
+  max-width: 70px;
   border-radius: 5px;
 }
 
@@ -127,6 +128,9 @@ td input:focus[type="number"] {
   -moz-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
+}
+td select {
+  max-width: 150px;
 }
 
 /* FLEX UNTUK SUBJEKTIF ANALISA OBJEKTIF DAN TINDAKAN */

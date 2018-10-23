@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../../CSS/formpelayananmedis.css";
+import "../../CSS/form.css";
 import SVGSuratSakit from "../../svgfile/SVGSuratSakit";
 import TabulasiPelayananMedis from "./Tabulasi";
 

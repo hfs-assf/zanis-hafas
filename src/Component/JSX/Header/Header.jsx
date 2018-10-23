@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "../../CSS/TopHeader.css";
+// import Logo from "../../../img/zanis.png";
 // import NotifikasiHeaderPasien from "../../View/Header/Notifikasi_PasienHeader/Notifikasi_pasienHeader";
 // import NotifikasiHeaderPesan from "../../View/Header/Notifikasi_PesanHeader/Notifikasi_PesanHeader";
 
@@ -9,7 +10,11 @@ export default class Header extends Component {
     return (
       <nav className="mb-4 navbar navbar-expand-lg sticky-top navbar-dark warna1">
         <Link to="/" className="navbar-brand font-bold" href="#">
-          ZANIS
+          <img
+            src={require("../../../img/zanis.png")}
+            alt="zanis"
+            height="48px"
+          />
         </Link>
         <button
           className="navbar-toggler"
@@ -44,7 +49,7 @@ export default class Header extends Component {
                   <i className="fa fa-user" /> Ubah Profile
                 </Link>
                 <Link to="/lagout" className="dropdown-item" href="#">
-                  <i className="fa fa-user" /> Keluar
+                  <i class="fas fa-sign-out-alt" /> Keluar
                 </Link>
               </div>
             </li>

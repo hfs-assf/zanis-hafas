@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import DataTimeline from "../../../JSON/pasien.json";
+import "../../CSS/Timeline.css";
 
 class TimelineApotek extends Component {
   arrayTimeline = DataTimeline.map(item => item.id);
