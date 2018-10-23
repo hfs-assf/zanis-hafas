@@ -4,15 +4,9 @@ import { Link } from "react-router-dom";
 import "../../CSS/Timeline.css";
 
 class TimelineKasir extends Component {
-  constructor() {
-    super();
-    this.state = {
-      id: ""
-    };
-  }
   renderTimelineKasir() {
     return DataTimeline.map((item, index) => (
-      <li key={index} className="animated bounceIn" id="2">
+      <li key={index} className="animated bounceIn">
         <Link to="/form-pembayaran">
           <span />
           <div className="number"> {item.id} </div>

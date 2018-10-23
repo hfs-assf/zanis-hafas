@@ -4,7 +4,6 @@ import SVGBillInvoice from "../../svgfile/SVGBillInvoice";
 
 class PendaftaranPelayananMedis extends Component {
   render() {
-    console.log("siapa? " + this.state.id);
     return (
       <div className="container-fluid ">
         <div className="row" style={{ margin: "0.5em" }}>

@@ -135,7 +135,6 @@ td select {
 
 /* FLEX UNTUK SUBJEKTIF ANALISA OBJEKTIF DAN TINDAKAN */
 .rowsoap {
-  height: 100px;
   margin: 6px 0px 0px 0px;
   border-radius: 5px;
 }
@@ -155,7 +154,7 @@ td select {
   margin-top: 12px;
   height: 40px;
   line-height: 40px;
-  font-size: 25px;
+  font-: 25px;
   border-radius: 10px 10px 0 0;
   /* max-width: 10em; */
   text-align: center;
@@ -214,5 +213,75 @@ td select {
   .pencariansoap {
     width: 2em;
     border-radius: 10px;
+  }
+}
+
+/* TABEL RESEP OBAT */
+.cell input[type="number"] {
+  width: 50px;
+  background-color: #b2b6bb;
+  border-radius: 2px;
+  border: 1px solid #1976d2;
+}
+.table {
+  width: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  display: table;
+}
+@media screen and (max-width: 580px) {
+  .table {
+    display: block;
+  }
+}
+
+.row1 {
+  display: table-row;
+  background: rgb(211, 212, 212);
+}
+.row1:nth-of-type(odd) {
+  background: #ffffff;
+}
+.row1.header {
+  font-weight: 00;
+  color: #000000;
+}
+.cell {
+  padding: 15px 20px;
+  display: table-cell;
+}
+
+@media screen and (max-width: 580px) {
+  .row1 {
+    /* padding: 14px 0 7px; */
+    display: block;
+  }
+
+  .row1.header {
+    padding: 0;
+    height: 6px;
+  }
+  .row1.header .cell {
+    display: none;
+  }
+  .row1 .cell {
+    margin-bottom: 10px;
+  }
+  .row1 .cell:before {
+    margin-bottom: 3px;
+    content: attr(data-title);
+    min-width: 90px;
+    font-size: 10px;
+    line-height: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #969696;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .cell {
+    padding: 2px 16px;
+    display: block;
   }
 }

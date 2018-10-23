@@ -3,12 +3,12 @@ import CariObatform from "./CariObat";
 
 const ResepObatTabulasi = props => (
   <div className="container-fluid">
-    <div className="row soaps">
-      <div className="col-md-12">
-        <CariObatform />
-      </div>
+    <CariObatform />
+
+    <div className="row">
       <div className="col-md-12 rowsoap">
         <div className="legendtitle1">Resep Obat</div>
+
         <div className="table">
           <div className="row1 header">
             <div className="cell">Nama Obat</div>
