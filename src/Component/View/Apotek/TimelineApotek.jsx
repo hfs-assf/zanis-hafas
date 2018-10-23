@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import DataTimeline from "../../../JSON/pasien.json";
-// import ResepObat from "./ResepObat";
+import "../../CSS/Timeline.css";
 
 class TimelineApotek extends Component {
   arrayTimeline = DataTimeline.map(item => item.id);
@@ -94,9 +94,9 @@ class TimelineApotek extends Component {
                         </tr>
                       </tbody>
                     </table>
-                    <button type="button" className="btn btn-primary btn-md">
-                      Selesai
-                    </button>
+                    <div className="modal-footer justify-content-center">
+                      <button className="btn btn-primary">Selesai</button>
+                    </div>
                   </div>
                 </div>
               </fieldset>

@@ -19,7 +19,7 @@ class MinStockDetail extends Component {
             type="checkbox"
             name="id_obat"
             value="{el.id}"
-            checked={this.id_obat}
+            {...this.id_obat}
           />
           &nbsp;
           {el.nama}
@@ -30,19 +30,7 @@ class MinStockDetail extends Component {
       </li>
     ));
   }
-  checked() {
-    // this.setState({
-    //   id_obat: !value
-    // });
-    // return(
-    // if(this.id_obat===""){
-    this.setState({ id_obat: "checked" });
-    // } else {
-    // this.setState({id_obat:""});
-    // }
-    // );
-    // this.setState({ id_obat: !this.state.checked });
-  }
+
   render() {
     return (
       <div
@@ -80,7 +68,12 @@ class MinStockDetail extends Component {
               <div className="text-center">
                 <p>
                   <br />
-                  <input type="checkbox" />
+                  <input
+                    type="checkbox"
+                    name="suci"
+                    value="oke"
+                    onClick={() => this.checked()}
+                  />
                   Pilih semua
                 </p>
               </div>
