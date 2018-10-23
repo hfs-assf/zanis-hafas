@@ -8,7 +8,13 @@ class ViewLogin extends Component {
         <div className="window">
           <div className="overlay" />
           <div className="content">
-            <div className="welcome">LOGIN ZANIS</div>
+            <div className="welcome">
+              <img
+                src={require("../../../img/zanis.png")}
+                alt="zanis"
+                height="100px"
+              />
+            </div>
 
             <div className="input-fields">
               <input

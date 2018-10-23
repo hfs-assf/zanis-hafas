@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Timeline from "../../View/Kasir/TimelineKasir";
+import Timeline from "../../View/PelayananMedis/TimelinePelayananMedis";
 
-class TimelineKasir extends Component {
+class TimelinePelayananMedis extends Component {
   render() {
     return (
       <div className="container-fluid">
@@ -26,4 +26,4 @@ class TimelineKasir extends Component {
   }
 }
 
-export default TimelineKasir;
+export default TimelinePelayananMedis;

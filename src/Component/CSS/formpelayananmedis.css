@@ -159,6 +159,7 @@ td input:focus[type="number"] {
 /* SOAP TABLE RESPONSIVE */
 .cell input[type="number"] {
   width: 80px;
+  background-color: #b2b6bb;
   border-radius: 2px;
   border: 1px solid #1976d2;
 }
@@ -175,7 +176,7 @@ td input:focus[type="number"] {
 
 .row1 {
   display: table-row;
-  background: rgb(243, 243, 243);
+  background: rgb(211, 212, 212);
 }
 .row1:nth-of-type(odd) {
   background: #ffffff;

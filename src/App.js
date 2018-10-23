@@ -9,6 +9,7 @@ import Apotek from "./Component/JSX/Apotek/TimelineApotek";
 import KelolaApotek from "./Component/JSX/Apotek/KelolaApotek";
 import Pendaftaran from "./Component/JSX/Pendaftaran/Pendaftaran";
 import PendaftaranLayanan from "./Component/JSX/Pendaftaran/TambahPelayananAntrian";
+import TimelinePelayananMedis from "./Component/JSX/PelayananMedis/TimelinePelayananMedis";
 import PelayananMedisForm from "./Component/JSX/PelayananMedis/PelayananMedis";
 import Kasir from "./Component/JSX/Kasir/TimelineKasir";
 import Pembayaran from "./Component/JSX/Kasir/Pembayaran";
@@ -32,6 +33,7 @@ class App extends Component {
             <Route path="/pendaftaran" component={Pendaftaran} />
             <Route path="/tambahlayanan" component={PendaftaranLayanan} />
             <Route path="/formpelayananmedis" component={PelayananMedisForm} />
+            <Route path="/pelayanan-medis" component={TimelinePelayananMedis} />
           </Switch>
         </div>
       </div>

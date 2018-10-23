@@ -37,13 +37,20 @@ class Sidebar extends Component {
               </li>
               <li>
                 {" "}
-                <Link to="/pasien" className="has-arrow" aria-expanded="false">
+                <Link
+                  to="/pelayanan-medis"
+                  className="has-arrow"
+                  aria-expanded="false"
+                >
                   <SVGPelayananMedis size="200pt" />
                   <span className="hide-menu">Pelayanan Medis</span>
                 </Link>
                 <ul aria-expanded="false" className="collapse">
                   <li>
-                    <Link to="/pasien_igd">Daftar Antrian</Link>
+                    <Link to="/pelayanan-medis">Daftar Antrian</Link>
+                  </li>
+                  <li>
+                    <Link to="/pelayanan-medis">Rekam Medis Pasien</Link>
                   </li>
                 </ul>
               </li>

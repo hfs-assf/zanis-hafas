@@ -14,7 +14,7 @@ class ViewPendaftaran extends Component {
         <div className="form-style">
           <form>
             <div className="row">
-              <div className="col-md-6">
+              <div className="col-md-5">
                 <fieldset>
                   <legend>Data Diri</legend>
                   <label>
@@ -147,7 +147,7 @@ class ViewPendaftaran extends Component {
                 </fieldset>
                 <br />
               </div>
-              <div className="col-md-6">
+              <div className="col-md-5">
                 <fieldset>
                   <legend>Pendidikan</legend>
                   <div className="row">
@@ -233,9 +233,13 @@ class ViewPendaftaran extends Component {
                 </fieldset>
               </div>
             </div>
-            <div className="modal-footer justify-content-center">
-              <button className="btn btn-primary">Simpan</button>
-              <button className="btn btn-warning">Bersihkan</button>
+            <div className="row">
+              <div className="col-md-10">
+                <div className="modal-footer justify-content-center">
+                  <button className="btn btn-primary">Simpan</button>
+                  <button className="btn btn-warning">Bersihkan</button>
+                </div>
+              </div>
             </div>
           </form>
         </div>
