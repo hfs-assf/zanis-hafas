@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import SOAP from "./Soap/soap";
-import ResepObatTabulasi from "./ResepObat/ResepObatTabulasi";
-import TindakanSoap from "./Tindakan/Tindakan";
+import SOAP from "./Soap/SoapPasien";
+import ResepObat from "./ResepObat/ResepObatPasien";
+import Tindakan from "./Tindakan/TindakanPasien";
+import Laboratorium from "./Laboratorium/LaboratoriumPasien";
 
 class TabulasiPelayananMedis extends Component {
   render() {
@@ -20,16 +21,15 @@ class TabulasiPelayananMedis extends Component {
         </section>
 
         <section id="content2">
-          <ResepObatTabulasi />
+          <ResepObat />
         </section>
 
         <section id="content3">
-          <TindakanSoap />
+          <Tindakan />
         </section>
 
         <section id="content4">
-          <p>Ini Labora</p>
-          <p>Ini Labora</p>
+          <Laboratorium />
         </section>
       </div>
     );

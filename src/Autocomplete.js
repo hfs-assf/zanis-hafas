@@ -140,6 +140,7 @@ class Autocomplete extends Component {
           onChange={onChange}
           onKeyDown={onKeyDown}
           value={userInput}
+          style={{ width: "100%" }}
         />
         {suggestionsListComponent}
       </Fragment>

@@ -36,3 +36,12 @@
 .suggestions li:not(:last-of-type) {
   border-bottom: 1px solid #999;
 }
+
+.cari {
+  width: 100%;
+}
+input {
+  /* background-color: #b2b6bb; */
+  border-radius: 2px;
+  border: 1px solid #1976d2 !important;
+}
