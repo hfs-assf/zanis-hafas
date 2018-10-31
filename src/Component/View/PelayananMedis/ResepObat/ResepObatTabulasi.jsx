@@ -1,70 +1,95 @@
-import React from "react";
-import CariObatform from "./CariObat";
+import React, { Component } from "react";
+import Autocomplete from "../../../../Autocomplete";
+import obat from "../../../../JSON/daftarObat";
 
-const ResepObatTabulasi = props => (
-  <div className="container-fluid">
-    <CariObatform />
+class ResepObatTabulasi extends Component {
+  constructor() {
+    super();
+    this.state = {
+      selector: "",
+      nama_obat: []
+    };
+  }
 
-    <div className="row">
-      <div className="col-md-12 rowsoap">
-        <div className="legendtitle1">Resep Obat</div>
+  componentWillMount() {
+    this.setState({ selector: obat[0].nama });
+  }
 
-        <div className="table">
-          <div className="row1 header">
-            <div className="cell">Nama Obat</div>
-            <div className="cell">Jumlah</div>
-            <div className="cell">Satuan</div>
-            <div className="cell">Harga</div>
-            <div className="cell">Keterangan</div>
-            <div className="cell">Aksi</div>
+  tambah() {
+    var array = [...this.state.nama_obat];
+    array.push(this.state.selector);
+    this.setState({ nama_obat: array });
+  }
+
+  hapus() {
+    var array = [...this.state.nama_obat];
+    for (var i = 0; i < this.state.nama_obat.length; i++) {
+      if (this.state.nama_obat[i] === this.state.selector) {
+        array.splice(i, 1);
+      }
+    }
+    this.setState({ nama_obat: array });
+  }
+  daftarResep() {
+    return this.state.nama_obat.map((nama_obat, index) => (
+      <div className="row1" key={index}>
+        <div className="cell" data-title="Nama Obat">
+          {nama_obat}
+        </div>
+        <div className="cell" data-title="Jumlah">
+          <input type="number" refs="jumlahobat" min="1" max="10" required />
+        </div>
+        <div className="cell" data-title="Satuan">
+          {/* {satuan} */} kapsul
+        </div>
+        <div className="cell" data-title="Harga">
+          {/* {harga_jual} */} Rp. 240000
+        </div>
+        <div className="cell" data-title="Keterangan">
+          <input type="text" refs="keteranganobat" />
+        </div>
+      </div>
+    ));
+  }
+  render() {
+    return (
+      <div className="container-fluid">
+        <div className="row maxrow" style={{ margin: "0px" }}>
+          <div className="col-md-9">
+            <Autocomplete suggestions={obat.map(a => a.nama)} />
           </div>
-
-          <div className="row1">
-            <div className="cell" data-title="Nama Obat">
-              Panadol
-            </div>
-            <div className="cell" data-title="Jumlah">
-              <input type="number" refs="jumlahobat" required />
-            </div>
-            <div className="cell" data-title="Satuan">
-              Tablet
-            </div>
-            <div className="cell" data-title="Harga">
-              25000
-            </div>
-            <div className="cell" data-title="Keterangan">
-              2 x sehari
-            </div>
-            <div className="cell" data-title="Aksi">
-              <button className="btn btn-warning btn-sm">Hapus</button>
-              <button className="btn btn-success btn-sm">Edit</button>
-            </div>
+          <div className="col-md-3">
+            <button
+              className="btn btn-cyan btn-sm mt-0 mb-0"
+              onClick={() => {
+                this.tambah();
+              }}
+            >
+              Tambah
+            </button>
+            <button className="btn btn-primary btn-sm mt-0 mb-0">Hapus</button>
           </div>
-          <div className="row1">
-            <div className="cell" data-title="Nama Obat">
-              Pandaol
-            </div>
-            <div className="cell" data-title="JUmlah">
-              <input type="number" refs="jumlahobat" required />
-            </div>
-            <div className="cell" data-title="Satuan">
-              Pill
-            </div>
-            <div className="cell" data-title="Harga">
-              25000
-            </div>
-            <div className="cell" data-title="Keterangan">
-              2 x sehari sesudah makan
-            </div>
-            <div className="cell" data-title="Aksi">
-              <button className="btn btn-warning btn-sm">Hapus</button>
-              <button className="btn btn-success btn-sm">Edit</button>
+        </div>
+        <div className="row">
+          <div className="col-md-12 rowsoap">
+            <div className="legendtitle1">Resep Obat</div>
+
+            <div className="table">
+              <div className="row1 header">
+                <div className="cell">Nama Obat</div>
+                <div className="cell">Jumlah</div>
+                <div className="cell">Satuan</div>
+                <div className="cell">Harga</div>
+                <div className="cell">Keterangan</div>
+              </div>
+
+              {this.daftarResep()}
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-);
+    );
+  }
+}
 
 export default ResepObatTabulasi;
