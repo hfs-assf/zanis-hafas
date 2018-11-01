@@ -7,7 +7,7 @@ class TimelinePelayananMedis extends Component {
   renderTimelinePelayananMedis() {
     return DataTimeline.map((item, index) => (
       <li key={index} className="animated bounceIn">
-        <Link to="/formpelayananmedis">
+        <Link to="/formpelayananmedis/1">
           <span />
           <div className="number"> {item.id} </div>
           <div>

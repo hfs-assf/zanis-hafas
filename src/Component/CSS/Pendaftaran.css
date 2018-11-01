@@ -64,9 +64,10 @@
 
 /* CSS Pencarian Pasien  */
 .mainsearch {
-  width: 20rem;
-  margin-left: 180px;
+  max-width: 20rem;
+  /* margin-left: 180px; */
   position: relative;
+  float: right;
 }
 
 .has-search .form-control {

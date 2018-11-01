@@ -41,10 +41,7 @@ class MinStockDetail extends Component {
         aria-labelledby="myModalLabel"
         aria-hidden="true"
       >
-        <div
-          className="modal-dialog modal-notify modal-primary"
-          role="document"
-        >
+        <div className="modal-dialog modal-notify modal-info" role="document">
           <div className="modal-content">
             <div className="modal-header">
               <p className="heading lead">Obat yang akan habis</p>
@@ -79,8 +76,8 @@ class MinStockDetail extends Component {
               </div>
             </div>
             <div className="modal-footer justify-content-center">
-              <button className="btn btn-primary">Pesan</button>
-              <button className="btn btn-outline-primary" data-dismiss="modal">
+              <button className="btn btn-info">Pesan</button>
+              <button className="btn btn-outline-info" data-dismiss="modal">
                 Kembali
               </button>
             </div>

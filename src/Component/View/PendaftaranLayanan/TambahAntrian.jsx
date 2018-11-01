@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "../../CSS/TambahPelayananAntrian.css";
+import { Link } from "react-router-dom";
 
 class TambahAntrianPelayanan extends Component {
   constructor() {
@@ -138,7 +139,10 @@ class TambahAntrianPelayanan extends Component {
             />
           </div>
         </div>
-        <button className="btn btn-info">Simpan Data</button>
+        <button className="btn btn-info">Simpan</button>
+        <Link to="/pendaftaran">
+          <button className="btn btn-outline-info">Kembali</button>
+        </Link>
       </form>
     );
   }

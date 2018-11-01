@@ -5,6 +5,7 @@ import TabulasiPelayananMedis from "./Tabulasi";
 
 class PendaftaranPelayananMedis extends Component {
   render() {
+    // console.log(this.props);
     return (
       <div className="container-fluid ">
         <div className="row justify-content-center" style={{ margin: "0.5em" }}>
@@ -12,12 +13,15 @@ class PendaftaranPelayananMedis extends Component {
             <table>
               <tbody>
                 <tr>
-                  <td>Nomor RM</td>
+                  <td>Nomor RM </td>
                   <td className="datatable">:&ensp;10390193019</td>
                 </tr>
                 <tr>
                   <td>Nama</td>
-                  <td className="datatable">:&ensp;Kurnianto Syaputra</td>
+                  <td className="datatable">
+                    :&ensp;Kurnianto Syaputra
+                    {this.props.params}
+                  </td>
                 </tr>
                 <tr>
                   <td>Poli</td>

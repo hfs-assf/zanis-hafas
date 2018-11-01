@@ -23,10 +23,7 @@ class ExpiredDetail extends Component {
         aria-labelledby="myModalLabel"
         aria-hidden="true"
       >
-        <div
-          className="modal-dialog modal-notify modal-primary"
-          role="document"
-        >
+        <div className="modal-dialog modal-notify modal-info" role="document">
           <div className="modal-content">
             <div className="modal-header">
               <p className="heading lead">Obat yang akan expired</p>
@@ -49,8 +46,8 @@ class ExpiredDetail extends Component {
               <ul className="list-group z-depth-0">{this.daftarObatExp()}</ul>
             </div>
             <div className="modal-footer justify-content-center">
-              <button className="btn btn-primary">Detail</button>
-              <button className="btn btn-outline-primary" data-dismiss="modal">
+              <button className="btn btn-info">Detail</button>
+              <button className="btn btn-outline-info" data-dismiss="modal">
                 Kembali
               </button>
             </div>

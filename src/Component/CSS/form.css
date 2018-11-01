@@ -241,15 +241,24 @@ td select {
   background: rgb(211, 212, 212);
 }
 .row1:nth-of-type(odd) {
-  background: #ffffff;
+  background: rgb(233, 235, 235);
 }
 .row1.header {
+  background-color: #1976d2 !important;
   font-weight: 00;
-  color: #000000;
+  color: white;
+  text-align: center;
+  font-size: 15px;
 }
 .cell {
+  border: 1px solid white;
+  border-radius: 5px;
   padding: 15px 20px;
   display: table-cell;
+  font-size: 12px;
+}
+.row1:hover {
+  background-color: rgb(200, 212, 212);
 }
 
 @media screen and (max-width: 580px) {
