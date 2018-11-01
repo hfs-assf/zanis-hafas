@@ -14,6 +14,7 @@ import PelayananMedisForm from "./Component/JSX/PelayananMedis/PelayananMedis";
 import Kasir from "./Component/JSX/Kasir/TimelineKasir";
 import Pembayaran from "./Component/JSX/Kasir/Pembayaran";
 // import KelolaBiaya from "./Component/JSX/Kasir/KelolaBiaya";
+import FakeData from "./JSON/pasien.json";
 
 class App extends Component {
   render() {
@@ -27,7 +28,12 @@ class App extends Component {
             <Route path="/login" component={Login} />
             <Route path="/apotek" component={Apotek} />
             <Route path="/kasir" component={Kasir} />
-            <Route path="/form-pembayaran" component={Pembayaran} />
+            <Route
+              path="/form-pembayaran/:id"
+              render={({ match }) => (
+                <Pembayaran {...FakeData.find(x => x.id === match.params.id)} />
+              )}
+            />
             {/* <Route path="/kelola_biaya" component={KelolaApotek} /> */}
             <Route path="/kelola_apotek" component={KelolaApotek} />
             <Route path="/pendaftaran" component={Pendaftaran} />

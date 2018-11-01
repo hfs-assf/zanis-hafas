@@ -5,70 +5,53 @@ import obat from "../../../JSON/daftarObat.json";
 class TableApotek extends Component {
   daftarObat() {
     return obat.map((el, index) => (
-      <tr key={index}>
-        <td>{index + 1}</td>
-        <td>{el.nama}</td>
-        <td>{el.kategori}</td>
-        <td>{el.harga_beli}</td>
-        <td>{el.harga_jual}</td>
-        <td>
-          {el.persediaan} {el.satuan}
-        </td>
-        <td>{el.masa_berlaku}</td>
-      </tr>
+      <div className="row1" key={index}>
+        <div className="cell" data-title="Nama Obat">
+          {index + 1}
+        </div>
+        <div className="cell" data-title="Nama Obat">
+          {el.nama}
+        </div>
+
+        <div className="cell" data-title="Satuan">
+          {el.kategori}
+        </div>
+        <div className="cell" data-title="Harga">
+          {el.harga_beli}
+        </div>
+        <div className="cell" data-title="Keterangan">
+          {el.harga_jual}
+        </div>
+        <div className="cell" data-title="Keterangan">
+          {el.persediaan} / {el.satuan}
+        </div>
+        <div className="cell" data-title="Keterangan">
+          {el.masa_berlaku}
+        </div>
+        <div className="cell" data-title="Aksi">
+          <button className="btn btn-success btn-sm">Edit</button>
+        </div>
+      </div>
     ));
   }
   render() {
     return (
-      <table
-        id="dtVerticalScrollExample"
-        className="table table-hover table-bordered table-sm mt-5"
-        width="100%"
-      >
-        <thead>
-          <tr>
-            <th className="th-sm">
-              #<i className="fa fa-sort float-right" aria-hidden="true" />
-            </th>
-            <th className="th-sm">
-              Nama Obat
-              <i className="fa fa-sort float-right" aria-hidden="true" />
-            </th>
-            <th className="th-sm">
-              Kategori
-              <i className="fa fa-sort float-right" aria-hidden="true" />
-            </th>
-            <th className="th-sm">
-              Harga Beli
-              <i className="fa fa-sort float-right" aria-hidden="true" />
-            </th>
-            <th className="th-sm">
-              Harga Jual
-              <i className="fa fa-sort float-right" aria-hidden="true" />
-            </th>
-            <th className="th-sm">
-              Stok Gudang
-              <i className="fa fa-sort float-right" aria-hidden="true" />
-            </th>
-            <th className="th-sm">
-              Tanggal Expired
-              <i className="fa fa-sort float-right" aria-hidden="true" />
-            </th>
-          </tr>
-        </thead>
-        <tbody className="table-body">{this.daftarObat()}</tbody>
-        <tfoot>
-          <tr>
-            <th>#</th>
-            <th>Nama Obat</th>
-            <th>Kategori</th>
-            <th>Harga Beli</th>
-            <th>Harga Jual</th>
-            <th>Stok Gudang</th>
-            <th>Tanggal Expired</th>
-          </tr>
-        </tfoot>
-      </table>
+      <div className="rowsoap mt-5">
+        <div className="legendtitle1">Daftar Nama Obat</div>
+        <div className="table">
+          <div className="row1 header">
+            <div className="cell">No</div>
+            <div className="cell">Nama Obat</div>
+            <div className="cell">Kategori</div>
+            <div className="cell">Harga Beli</div>
+            <div className="cell">Harga Jual</div>
+            <div className="cell">Persediaan </div>
+            <div className="cell">Masa Berlaku</div>
+          </div>
+
+          {this.daftarObat()}
+        </div>
+      </div>
     );
   }
 }
