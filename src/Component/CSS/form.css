@@ -167,7 +167,7 @@ td select {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12) inset;
   color: #555555;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 2em;
+  line-height: 1.5em;
   padding: 5px 8px;
   resize: none;
   transition: background-color 0.2s ease 0s;
@@ -186,10 +186,13 @@ td select {
   color: white;
   width: 100%;
   border-radius: 10px;
-  min-height: 3em;
+  max-height: 3.4em;
+}
+.maxrow > div > span {
+  padding: 5px !important;
 }
 
-.maxrow > .col-md-10 > input[type="text"] {
+.maxrow > div > input[type="text"] {
   width: 100%;
   height: 30px;
   border-radius: 3px;
@@ -221,9 +224,22 @@ td select {
 /* TABEL RESEP OBAT */
 .cell input[type="number"] {
   width: 50px;
-  /* background-color: #b2b6bb; */
-  border-radius: 2px;
+  border-radius: 5px;
   border: 1px solid #1976d2;
+  line-height: 2.2em;
+}
+.cell input[type="text"] {
+  border-radius: 5px;
+  border: 1px solid #1976d2;
+  line-height: 2.2em;
+}
+.cell input:focus {
+  background-color: rgb(107, 187, 245);
+  color: white;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
 }
 .table {
   width: 100%;
@@ -260,10 +276,46 @@ td select {
 .row1:hover {
   background-color: rgb(200, 212, 212);
 }
+/* autocomplete */
+.no-suggestions {
+  background-color: #fff;
+  color: #1c70c8;
+}
+
+.suggestions {
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 0px 0px 10px 10px;
+  border-top-width: 0;
+  list-style: none;
+  margin-top: 0;
+  font-size: 12px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding-left: 0;
+  width: 20.5em;
+  background-color: #1c70c8;
+  color: #fff;
+  position: absolute;
+  z-index: 1;
+}
+
+.suggestions li {
+  padding: 0.5rem;
+}
+
+.suggestions li:hover {
+  background-color: #fff;
+  color: #1c70c8;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.suggestions li:not(:last-of-type) {
+  border-bottom: 1px solid #999;
+}
 
 @media screen and (max-width: 580px) {
   .row1 {
-    /* padding: 14px 0 7px; */
     display: block;
   }
 

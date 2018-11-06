@@ -1,14 +1,20 @@
 [
   {
     "id": "0",
-    "nama": "Suntik"
+    "nama": "Suntik",
+    "satuan": "unit",
+    "tarif": "10000"
   },
   {
     "id": "1",
-    "nama": "Bius"
+    "nama": "Bius",
+    "satuan": "unit",
+    "tarif": "11000"
   },
   {
     "id": "2",
-    "nama": "Ambil Darah"
+    "nama": "Ambil Darah",
+    "satuan": "unit",
+    "tarif": "8000"
   }
 ]

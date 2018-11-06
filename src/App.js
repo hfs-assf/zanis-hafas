@@ -32,7 +32,12 @@ class App extends Component {
             <Route path="/kelola_apotek" component={KelolaApotek} />
             <Route path="/pendaftaran" component={Pendaftaran} />
             <Route path="/tambahlayanan" component={PendaftaranLayanan} />
-            <Route path="/formpelayananmedis" component={PelayananMedisForm} />
+            <Route
+              path="/formpelayananmedis/:id"
+              render={({ match }) => (
+                <PelayananMedisForm antrian={match.params} />
+              )}
+            />
             <Route path="/pelayanan-medis" component={TimelinePelayananMedis} />
           </Switch>
         </div>

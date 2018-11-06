@@ -1,13 +1,78 @@
-import React from "react";
+import React, { Component } from "react";
 import "../../CSS/Pendaftaran.css";
+import pasienList from "../../../JSON/pasien";
 
-const Pencarianpasien = props => (
-  <div className="mainsearch">
-    <div className="form-group has-search">
-      <span className="fa fa-search form-control-feedback" />
-      <input type="text" className="form-control" placeholder="Cari Pasien" />
-    </div>
-  </div>
-);
+class CariPasien extends Component {
+  constructor() {
+    super();
+    this.state = {
+      textFilter: "",
+      showSuggestions: false
+    };
+  }
+  render() {
+    let suggestionsList;
+    const { textFilter, showSuggestions } = this.state;
+    const filteresPasien = pasienList.filter(pasien => {
+      return (
+        pasien.nama.toLowerCase().indexOf(textFilter.toLowerCase()) !== -1 ||
+        pasien.no_rm.indexOf(textFilter) !== -1
+      );
+    });
+    if (showSuggestions === true) {
+      if (filteresPasien.length !== 0 && textFilter !== "") {
+        suggestionsList = (
+          <ul className="suggestions">
+            {filteresPasien.map((pasien, index) => {
+              return (
+                <li
+                  key={index}
+                  className="suggestion-active"
+                  onClick={e =>
+                    this.setState({
+                      textFilter: pasien.no_rm,
+                      idFilter: pasien.id,
+                      showSuggestions: false
+                    })
+                  }
+                >
+                  {pasien.nama}
+                  <br />
+                  {pasien.no_rm}
+                </li>
+              );
+            })}
+          </ul>
+        );
+      } else if (filteresPasien.length === 0 && textFilter !== "") {
+        suggestionsList = (
+          <ul className="suggestions">
+            <li className="no-suggestion">Tidak tersedia</li>
+          </ul>
+        );
+      }
+    }
+    return (
+      <div className="mainsearch">
+        <div className="form-group has-search">
+          <span className="fa fa-search form-control-feedback" />
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Cari pasien"
+            value={textFilter}
+            onChange={e =>
+              this.setState({
+                textFilter: e.target.value,
+                showSuggestions: true
+              })
+            }
+          />
+          {suggestionsList}
+        </div>
+      </div>
+    );
+  }
+}
 
-export default Pencarianpasien;
+export default CariPasien;

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import FormPelayananMedis from "../../View/PelayananMedis/FormPelayananMedis";
+import "../../CSS/form.css";
 class PelayananMedis extends Component {
   render() {
     return (
@@ -10,7 +11,9 @@ class PelayananMedis extends Component {
         <div className="card-body">
           <div className="flex-container">
             <div className="box column1">
-              <h2 className="card-title text-left">Pelayanan Medis</h2>
+              <h2 className="card-title text-left">
+                Pelayanan Medis {this.props.antrian.id}
+              </h2>
             </div>
 
             <div className="box column2" />
@@ -31,7 +34,8 @@ class PelayananMedis extends Component {
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <FormPelayananMedis />
+
+          <FormPelayananMedis pasien={this.props.antrian.id} />
         </div>
       </div>
     );

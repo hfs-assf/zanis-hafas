@@ -1,42 +1,39 @@
 import React, { Component } from "react";
-import Autocomplete from "../../../../Autocomplete";
-import tindakan from "../../../../JSON/daftarTindakan";
+import tindakanList from "../../../../JSON/daftarTindakan";
 
-class TindakanSoap extends Component {
+class tindakanTabulasi extends Component {
   constructor() {
     super();
     this.state = {
-      selector: "",
-      nama_tindakan: []
+      doTindakan: [],
+      textFilter: "",
+      idFilter: "",
+      showSuggestions: false
     };
   }
 
-  componentWillMount() {
-    this.setState({ selector: tindakan[0].nama });
+  tambah(id) {
+    var array = [...this.state.doTindakan];
+    array.push(id);
+    this.setState({ doTindakan: array });
+    console.log(this.state.doTindakan);
   }
 
-  tambah() {
-    var array = [...this.state.nama_tindakan];
-    array.push(this.state.selector);
-    this.setState({ nama_tindakan: array });
-  }
-
-  hapus() {
-    var array = [...this.state.nama_tindakan];
-    for (var i = 0; i < this.state.nama_tindakan.length; i++) {
-      if (this.state.nama_tindakan[i] === this.state.selector) {
+  hapus(id) {
+    var array = [...this.state.doTindakan];
+    for (var i = 0; i < this.state.doTindakan.length; i++) {
+      if (this.state.doTindakan[i] === id) {
         array.splice(i, 1);
       }
     }
-    this.setState({ nama_tindakan: array });
+    this.setState({ doTindakan: array });
   }
-  daftarTindakan() {
-    return this.state.nama_tindakan.map((nama_tindakan, index) => (
+
+  daftardoTindakan() {
+    return this.state.doTindakan.map((id, index) => (
       <div className="row1" key={index}>
-        <div className="cell" data-title="Nama tindakan">
-          {nama_tindakan}
-        </div>
-        <div className="cell" data-title="Jumlah">
+        <div className="cell">{tindakanList[id].nama}</div>
+        <div className="cell text-center">
           <input
             type="number"
             refs="jumlahtindakan"
@@ -44,58 +41,111 @@ class TindakanSoap extends Component {
             max="10"
             required
           />
+          &nbsp;
+          {tindakanList[id].satuan}
         </div>
-        <div className="cell" data-title="Satuan">
-          {/* {satuan} */} unit
+        <div className="cell text-right">
+          Rp.
+          {tindakanList[id].tarif}
         </div>
-        <div className="cell" data-title="Harga">
-          {/* {harga_jual} */} Rp. 240000
-        </div>
-        <div className="cell" data-title="Keterangan">
+        <div className="cell text-center">
           <input type="text" refs="keterangantindakan" />
+        </div>
+        <div className="cell text-center">
+          <button
+            className="btn btn-outline-primary btn-sm mt-0 mb-0"
+            onClick={() => {
+              this.hapus(id);
+            }}
+          >
+            Hapus
+          </button>
         </div>
       </div>
     ));
   }
+
   render() {
-    return (
-      <div className="container-fluid">
-        <div className="row maxrow" style={{ margin: "0px" }}>
-          <div className="col-md-9">
-            <Autocomplete suggestions={tindakan.map(a => a.nama)} />
-          </div>
-          <div className="col-md-3">
-            <button
-              className="btn btn-cyan btn-sm mt-0 mb-0"
-              onClick={() => {
-                this.tambah();
-              }}
-            >
-              Tambah
-            </button>
-            <button className="btn btn-primary btn-sm mt-0 mb-0">Hapus</button>
-          </div>
-        </div>
+    let suggestionsList, daftarTindakan;
+    const { textFilter, showSuggestions, doTindakan } = this.state;
+    const filteredTindakan = tindakanList.filter(tindakan => {
+      return (
+        tindakan.nama.toLowerCase().indexOf(textFilter.toLowerCase()) !== -1
+      );
+    });
+    if (showSuggestions === true) {
+      if (filteredTindakan.length !== 0 && textFilter !== "") {
+        suggestionsList = (
+          <ul className="suggestions">
+            {filteredTindakan.map((tindakan, index) => {
+              return (
+                <li
+                  key={index}
+                  className="suggestion-active"
+                  onClick={() => {
+                    this.tambah(tindakan.id);
+                  }}
+                >
+                  {tindakan.nama}
+                </li>
+              );
+            })}
+          </ul>
+        );
+      } else if (filteredTindakan.length === 0 && textFilter !== "") {
+        suggestionsList = (
+          <ul className="suggestions">
+            <li className="no-suggestion">Tidak tersedia</li>
+          </ul>
+        );
+      }
+    }
+    if (doTindakan.length !== 0) {
+      daftarTindakan = (
         <div className="row">
           <div className="col-md-12 rowsoap">
             <div className="legendtitle1">Tindakan</div>
-
             <div className="table">
               <div className="row1 header">
                 <div className="cell">Nama Tindakan</div>
                 <div className="cell">Jumlah</div>
-                <div className="cell">Satuan</div>
                 <div className="cell">Harga</div>
                 <div className="cell">Keterangan</div>
+                <div className="cell">Detail</div>
               </div>
-              {this.state.unavailable}
-              {this.daftarTindakan()}
+              {this.daftardoTindakan()}
             </div>
           </div>
         </div>
+      );
+    }
+
+    return (
+      <div className="container-fluid">
+        <div className="row maxrow" style={{ margin: "0px" }}>
+          <div className="col-md-2">
+            <span>Tambah Tindakan</span>
+          </div>
+          <div className="col-md-10">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Cari Tindakan"
+              value={textFilter}
+              onChange={e =>
+                this.setState({
+                  textFilter: e.target.value,
+                  showSuggestions: true
+                })
+              }
+            />
+            {suggestionsList}
+          </div>
+        </div>
+        {daftarTindakan}
       </div>
     );
   }
 }
 
-export default TindakanSoap;
+export default tindakanTabulasi;

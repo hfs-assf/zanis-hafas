@@ -1,95 +1,136 @@
 import React, { Component } from "react";
-import Autocomplete from "../../../../Autocomplete";
-import obat from "../../../../JSON/daftarObat";
+import obatList from "../../../../JSON/daftarObat";
 
-class ResepObatTabulasi extends Component {
+class resepObatTabulasi extends Component {
   constructor() {
     super();
     this.state = {
-      selector: "",
-      nama_obat: []
+      doObat: [],
+      textFilter: "",
+      idFilter: "",
+      showSuggestions: false
     };
   }
 
-  componentWillMount() {
-    this.setState({ selector: obat[0].nama });
+  tambah(id) {
+    var array = [...this.state.doObat];
+    array.push(id);
+    this.setState({ doObat: array });
   }
 
-  tambah() {
-    var array = [...this.state.nama_obat];
-    array.push(this.state.selector);
-    this.setState({ nama_obat: array });
-  }
-
-  hapus() {
-    var array = [...this.state.nama_obat];
-    for (var i = 0; i < this.state.nama_obat.length; i++) {
-      if (this.state.nama_obat[i] === this.state.selector) {
+  hapus(id) {
+    var array = [...this.state.doObat];
+    for (var i = 0; i < this.state.doObat.length; i++) {
+      if (this.state.doObat[i] === id) {
         array.splice(i, 1);
       }
     }
-    this.setState({ nama_obat: array });
+    this.setState({ doObat: array });
   }
-  daftarResep() {
-    return this.state.nama_obat.map((nama_obat, index) => (
+
+  daftardoObat() {
+    return this.state.doObat.map((id, index) => (
       <div className="row1" key={index}>
-        <div className="cell" data-title="Nama Obat">
-          {nama_obat}
-        </div>
-        <div className="cell" data-title="Jumlah">
+        <div className="cell">{obatList[id].nama}</div>
+        <div className="cell text-center">
           <input type="number" refs="jumlahobat" min="1" max="10" required />
+          &nbsp;
+          {obatList[id].satuan}
         </div>
-        <div className="cell" data-title="Satuan">
-          {/* {satuan} */} kapsul
+        <div className="cell text-right">
+          Rp.
+          {obatList[id].harga_jual}
         </div>
-        <div className="cell" data-title="Harga">
-          {/* {harga_jual} */} Rp. 240000
-        </div>
-        <div className="cell" data-title="Keterangan">
+        <div className="cell text-center">
           <input type="text" refs="keteranganobat" />
+        </div>
+        <div className="cell text-center">
+          <button
+            className="btn btn-outline-primary btn-sm mt-0 mb-0"
+            onClick={() => {
+              this.hapus(id);
+            }}
+          >
+            Hapus
+          </button>
         </div>
       </div>
     ));
   }
+
   render() {
+    let suggestionsList, resep;
+    const { textFilter, showSuggestions, doObat } = this.state;
+    const filteredObat = obatList.filter(obat => {
+      return obat.nama.toLowerCase().indexOf(textFilter.toLowerCase()) !== -1;
+    });
+    if (showSuggestions === true) {
+      if (filteredObat.length !== 0 && textFilter !== "") {
+        suggestionsList = (
+          <ul className="suggestions">
+            {filteredObat.map((obat, index) => {
+              return (
+                <li
+                  key={index}
+                  className="suggestion-active"
+                  onClick={() => {
+                    this.tambah(obat.id);
+                  }}
+                >
+                  {obat.nama}
+                </li>
+              );
+            })}
+          </ul>
+        );
+      } else if (filteredObat.length === 0 && textFilter !== "") {
+        suggestionsList = (
+          <ul className="suggestions">
+            <li className="no-suggestion">Tidak tersedia</li>
+          </ul>
+        );
+      }
+    }
+    if (doObat.length !== 0) {
+      resep = (
+        <div className="table">
+          <div className="row1 header">
+            <div className="cell">Nama Obat</div>
+            <div className="cell">Jumlah</div>
+            <div className="cell">Harga</div>
+            <div className="cell">Keterangan</div>
+            <div className="cell">Detail</div>
+          </div>
+          {this.daftardoObat()}
+        </div>
+      );
+    }
+
     return (
       <div className="container-fluid">
         <div className="row maxrow" style={{ margin: "0px" }}>
-          <div className="col-md-9">
-            <Autocomplete suggestions={obat.map(a => a.nama)} />
+          <div className="col-md-2">
+            <span>Tambah Obat</span>
           </div>
-          <div className="col-md-3">
-            <button
-              className="btn btn-cyan btn-sm mt-0 mb-0"
-              onClick={() => {
-                this.tambah();
-              }}
-            >
-              Tambah
-            </button>
-            <button className="btn btn-primary btn-sm mt-0 mb-0">Hapus</button>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-12 rowsoap">
-            <div className="legendtitle1">Resep Obat</div>
-
-            <div className="table">
-              <div className="row1 header">
-                <div className="cell">Nama Obat</div>
-                <div className="cell">Jumlah</div>
-                <div className="cell">Satuan</div>
-                <div className="cell">Harga</div>
-                <div className="cell">Keterangan</div>
-              </div>
-
-              {this.daftarResep()}
-            </div>
+          <div className="col-md-10">
+            <input
+              type="text"
+              className="form-control"
+              value={textFilter}
+              onChange={e =>
+                this.setState({
+                  textFilter: e.target.value,
+                  showSuggestions: true
+                })
+              }
+            />
+            {suggestionsList}
           </div>
         </div>
+        {resep}
       </div>
     );
   }
 }
 
-export default ResepObatTabulasi;
+export default resepObatTabulasi;
