@@ -155,7 +155,7 @@ td select {
   margin-top: 12px;
   height: 40px;
   line-height: 40px;
-  font-: 25px;
+  font-size: 25px;
   border-radius: 10px 10px 0 0;
   /* max-width: 10em; */
   text-align: center;
@@ -181,15 +181,17 @@ td select {
 }
 
 .maxrow {
-  padding: 0.5em;
+  padding-top: 0.285em;
   background-color: #1976d2;
   color: white;
   width: 100%;
   border-radius: 10px;
-  max-height: 3.4em;
+  max-height: 4.5em;
+  margin: 0px;
 }
-.maxrow > div > span {
+.maxrow > .col-md-2 {
   padding: 5px !important;
+  text-align: center;
 }
 
 .maxrow > div > input[type="text"] {
@@ -277,13 +279,8 @@ td select {
   background-color: rgb(200, 212, 212);
 }
 /* autocomplete */
-.no-suggestions {
-  background-color: #fff;
-  color: #1c70c8;
-}
-
 .suggestions {
-  border: 1px solid rgb(255, 255, 255);
+  border: 1px solid #1c70c8;
   border-radius: 0px 0px 10px 10px;
   border-top-width: 0;
   list-style: none;
@@ -293,27 +290,31 @@ td select {
   overflow-y: auto;
   padding-left: 0;
   width: 20.5em;
-  background-color: #1c70c8;
-  color: #fff;
+  background-color: #fff;
+  color: #1c70c8;
   position: absolute;
   z-index: 1;
 }
 
-.suggestions li {
+.suggestions > li {
   padding: 0.5rem;
 }
 
-.suggestions li:hover {
+.suggestions > .suggestion-active:hover {
   background-color: #fff;
   color: #1c70c8;
   cursor: pointer;
   font-weight: 700;
 }
 
-.suggestions li:not(:last-of-type) {
-  border-bottom: 1px solid #999;
+.suggestions > .suggestion-active {
+  background-color: #1c70c8;
+  color: #fff;
 }
-
+.suggestions > .no-suggestion {
+  text-align: center;
+  font-weight: 700;
+}
 @media screen and (max-width: 580px) {
   .row1 {
     display: block;

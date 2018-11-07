@@ -55,7 +55,7 @@ const SOAP = props => (
         </div>
       </div>
       <div className="col-md-10">
-        <div className="maxrow row" style={{ margin: "1px" }}>
+        <div className="row maxrow">
           <div className="col-md-10">
             <input
               type="text"
@@ -64,7 +64,7 @@ const SOAP = props => (
               className="form-control"
             />
           </div>
-          <div className="col-md-2">
+          <div className="col-md-2" style={{ marginTop: "-5px" }}>
             <button className="btn btn-cyan mt-0 mb-0 btn-sm ">Salin</button>
           </div>
         </div>

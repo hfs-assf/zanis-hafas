@@ -15,7 +15,7 @@ class resepObatTabulasi extends Component {
   tambah(id) {
     var array = [...this.state.doObat];
     array.push(id);
-    this.setState({ doObat: array });
+    this.setState({ doObat: array, textFilter: "" });
   }
 
   hapus(id) {
@@ -28,6 +28,9 @@ class resepObatTabulasi extends Component {
     this.setState({ doObat: array });
   }
 
+  reset() {
+    this.setState({ doObat: [] });
+  }
   daftardoObat() {
     return this.state.doObat.map((id, index) => (
       <div className="row1" key={index}>
@@ -81,6 +84,7 @@ class resepObatTabulasi extends Component {
                 </li>
               );
             })}
+            <li className="no-suggestion">Klik untuk menambahkan</li>
           </ul>
         );
       } else if (filteredObat.length === 0 && textFilter !== "") {
@@ -93,15 +97,28 @@ class resepObatTabulasi extends Component {
     }
     if (doObat.length !== 0) {
       resep = (
-        <div className="table">
-          <div className="row1 header">
-            <div className="cell">Nama Obat</div>
-            <div className="cell">Jumlah</div>
-            <div className="cell">Harga</div>
-            <div className="cell">Keterangan</div>
-            <div className="cell">Detail</div>
+        <div className="row">
+          <div className="col-md-12 rowsoap">
+            <div className="legendtitle1">Resep Obat</div>
+            <div className="table">
+              <div className="row1 header">
+                <div className="cell">Nama Obat</div>
+                <div className="cell">Jumlah</div>
+                <div className="cell">Harga</div>
+                <div className="cell">Keterangan</div>
+                <div className="cell">Aksi</div>
+              </div>
+              {this.daftardoObat()}
+            </div>
           </div>
-          {this.daftardoObat()}
+          <div className="col-md-12">
+            <div className="modal-footer justify-content-center">
+              <button className="btn btn-primary">Simpan</button>
+              <button className="btn btn-warning" onClick={() => this.reset()}>
+                Bersihkan
+              </button>
+            </div>
+          </div>
         </div>
       );
     }

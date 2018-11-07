@@ -15,7 +15,7 @@ class LaboratoriumPasien extends Component {
   tambah(id) {
     var array = [...this.state.doPeralatan];
     array.push(id);
-    this.setState({ doPeralatan: array });
+    this.setState({ doPeralatan: array, textFilter: "" });
   }
 
   hapus(id) {
@@ -26,6 +26,9 @@ class LaboratoriumPasien extends Component {
       }
     }
     this.setState({ doPeralatan: array });
+  }
+  reset() {
+    this.setState({ doPeralatan: [] });
   }
 
   daftardoPeralatan() {
@@ -88,6 +91,7 @@ class LaboratoriumPasien extends Component {
                 </li>
               );
             })}
+            <li className="no-suggestion">Klik untuk menambahkan</li>
           </ul>
         );
       } else if (fiteredPeralatan.length === 0 && textFilter !== "") {
@@ -109,9 +113,27 @@ class LaboratoriumPasien extends Component {
                 <div className="cell">Jumlah</div>
                 <div className="cell">Harga</div>
                 <div className="cell">Keterangan</div>
-                <div className="cell">Detail</div>
+                <div className="cell">Aksi</div>
               </div>
               {doPeralatan.map(peralatan => this.daftardoPeralatan(peralatan))}
+            </div>
+          </div>
+          <div className="col-md-12 rowsoap text-right">
+            <button
+              className="btn btn-danger"
+              data-toggle="modal"
+              data-target="#formLab"
+            >
+              Hasil Laboratorium
+            </button>
+          </div>
+          <FormHasil />
+          <div className="col-md-12">
+            <div className="modal-footer justify-content-center">
+              <button className="btn btn-primary">Simpan</button>
+              <button className="btn btn-warning" onClick={() => this.reset()}>
+                Bersihkan
+              </button>
             </div>
           </div>
         </div>
@@ -140,18 +162,6 @@ class LaboratoriumPasien extends Component {
         </div>
 
         {daftarPeralatan}
-
-        <div className="rowsoap text-right">
-          <button
-            className="btn btn-danger"
-            data-toggle="modal"
-            data-target="#formLab"
-          >
-            Hasil Laboratorium
-          </button>
-        </div>
-
-        <FormHasil />
       </div>
     );
   }

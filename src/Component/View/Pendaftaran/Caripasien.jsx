@@ -10,6 +10,9 @@ class CariPasien extends Component {
       showSuggestions: false
     };
   }
+  tambahAntrian(id) {
+    window.location.assign("/tambahlayanan/" + id);
+  }
   render() {
     let suggestionsList;
     const { textFilter, showSuggestions } = this.state;
@@ -23,18 +26,12 @@ class CariPasien extends Component {
       if (filteresPasien.length !== 0 && textFilter !== "") {
         suggestionsList = (
           <ul className="suggestions">
-            {filteresPasien.map((pasien, index) => {
+            {filteresPasien.map(pasien => {
               return (
                 <li
-                  key={index}
+                  key={pasien.id}
                   className="suggestion-active"
-                  onClick={e =>
-                    this.setState({
-                      textFilter: pasien.no_rm,
-                      idFilter: pasien.id,
-                      showSuggestions: false
-                    })
-                  }
+                  onClick={() => this.tambahAntrian(pasien.id)}
                 >
                   {pasien.nama}
                   <br />

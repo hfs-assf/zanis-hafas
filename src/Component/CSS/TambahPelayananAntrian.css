@@ -58,11 +58,22 @@
 }
 
 .bottommenu ul .warnatab {
+  /* background-color: #007bff; */
+  padding: 5px;
+  text-align: center;
   background-color: rgb(250, 250, 250);
   border-radius: 4px;
+  z-index: 1;
 }
-
-.tab-content .warnacontent {
+.bottommenu ul .warnatab.active {
+  background-color: #007bff;
+  /* background-color: rgb(250, 250, 250); */
+  color: #fff;
+}
+.bottommenu ul .warnatab:hover {
+  background-color: #007bff;
+}
+.wa .tab-content .warnacontent {
   background-color: #e7e9eb;
   height: 23rem;
   overflow: hidden;
@@ -144,7 +155,7 @@
   vertical-align: middle;
   cursor: pointer;
   border-radius: 50%;
-  border: 2px solid #ffffff;
+  border: 2px solid #fff;
   background-repeat: no-repeat;
   background-position: center;
   text-align: center;

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "../../CSS/TambahPelayananAntrian.css";
-import { Link } from "react-router-dom";
 
 class TambahAntrianPelayanan extends Component {
   constructor() {
@@ -14,9 +13,20 @@ class TambahAntrianPelayanan extends Component {
     this.setState({ showMe: value });
   }
 
+  kembali() {
+    window.location.assign("/pendaftaran");
+  }
   render() {
     return (
       <form>
+        <div className="flex-container">
+          <div className="box column1">
+            <h2 className="card-title text-left">
+              Pendaftaran Pelayanan Medis
+            </h2>
+          </div>
+        </div>
+        <hr className="hr2" />
         <div className="form-group row">
           <label htmlFor="inputjenispasien" className="col-sm-2 col-form-label">
             Jenis Pasien
@@ -53,45 +63,6 @@ class TambahAntrianPelayanan extends Component {
             </div>
           </div>
         </div>
-        {this.state.showMe ? (
-          <div className="col-md-5 col-sm-6 col-xs-5 animated fadeInRight stylejaminan">
-            <div className="form-style">
-              <fieldset className="item3">
-                <legend>Asuransi / Jaminan</legend>
-                <label>
-                  <span>
-                    Kelas <span className="required">*</span>
-                  </span>
-                  <input type="text" name="kelas" className="form-control" />
-                </label>
-                <label>
-                  <span>
-                    Faskes
-                    <span className="required">*</span>
-                  </span>
-                  <input type="text" name="faskes" className="form-control" />
-                </label>
-                <label>
-                  <span>
-                    Nomor Kartu <span className="required">*</span>
-                  </span>
-                  <input type="text" name="no_kartu" className="form-control" />
-                </label>
-                <label>
-                  <span>
-                    Tanggal Valid
-                    <span className="required">*</span>
-                  </span>
-                  <input
-                    type="date"
-                    name="tanggal_valid"
-                    className="form-control"
-                  />
-                </label>
-              </fieldset>
-            </div>
-          </div>
-        ) : null}
         <div className="form-group row">
           <label htmlFor="LayananMedis" className="col-sm-2 col-form-label">
             Layanan Medis
@@ -139,10 +110,64 @@ class TambahAntrianPelayanan extends Component {
             />
           </div>
         </div>
-        <button className="btn btn-info">Simpan</button>
+        {this.state.showMe ? (
+          <div className="animated fadeInRight">
+            <h4>Asuransi / Jaminan</h4>
+            <div className="form-group row">
+              <label htmlFor="KelasFaskes" className="col-sm-2 col-form-label">
+                Kelas <span className="required">*</span>
+              </label>
+              <div className="col-sm-5">
+                <input type="text" name="kelas" className="form-control" />
+              </div>
+            </div>
+            <div className="form-group row">
+              <label htmlFor="KelasFaskes" className="col-sm-2 col-form-label">
+                Faskes
+                <span className="required">*</span>
+              </label>
+              <div className="col-sm-5">
+                <input type="text" name="faskes" className="form-control" />
+              </div>
+            </div>
+            <div className="form-group row">
+              <label htmlFor="KelasFaskes" className="col-sm-2 col-form-label">
+                Nomor Kartu <span className="required">*</span>
+              </label>
+              <div className="col-sm-5">
+                <input type="text" name="no_kartu" className="form-control" />
+              </div>
+            </div>
+            <div className="form-group row">
+              <label htmlFor="KelasFaskes" className="col-sm-2 col-form-label">
+                Tanggal Valid
+                <span className="required">*</span>
+              </label>
+              <div className="col-sm-5">
+                <input
+                  type="date"
+                  name="tanggal_valid"
+                  className="form-control"
+                />
+              </div>
+            </div>
+          </div>
+        ) : null}
+        <div className="col-md-12">
+          <div className="modal-footer justify-content-center">
+            <button className="btn btn-primary">Simpan</button>
+            <button
+              className="btn btn-outline-primary"
+              onClick={() => this.kembali()}
+            >
+              Kembali
+            </button>
+          </div>
+        </div>
+        {/* <button className="btn btn-info">Simpan</button>
         <Link to="/pendaftaran">
           <button className="btn btn-outline-info">Kembali</button>
-        </Link>
+        </Link> */}
       </form>
     );
   }

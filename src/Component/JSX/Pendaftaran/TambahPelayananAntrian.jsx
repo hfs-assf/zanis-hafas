@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import "../../CSS/TambahPelayananAntrian.css";
 import ProfileKiriPasien from "../../View/PendaftaranLayanan/ProfileKiriPasien";
-import TambahAntrianPelayanan from "../../View/PendaftaranLayanan/TambahAntrian";
-
-class Sidebar extends Component {
+import FormAntrianPelayanan from "../../View/PendaftaranLayanan/TambahAntrian";
+class TambahAntrianPelayanan extends Component {
   render() {
     return (
       <div className="container-fluid">
@@ -24,10 +23,10 @@ class Sidebar extends Component {
         </div>
         <div className="row">
           <div className="col-md-3 hidden-sm hidden-xs">
-            <ProfileKiriPasien />
+            <ProfileKiriPasien pasien={this.props.antrian.id} />
           </div>
           <div className="col-md-8 order-first order-md-2 card-box1">
-            <TambahAntrianPelayanan />
+            <FormAntrianPelayanan pasien={this.props.antrian.id} />
           </div>
         </div>
       </div>
@@ -35,4 +34,4 @@ class Sidebar extends Component {
   }
 }
 
-export default Sidebar;
+export default TambahAntrianPelayanan;

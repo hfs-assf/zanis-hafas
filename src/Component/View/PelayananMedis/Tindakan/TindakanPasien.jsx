@@ -15,8 +15,7 @@ class tindakanTabulasi extends Component {
   tambah(id) {
     var array = [...this.state.doTindakan];
     array.push(id);
-    this.setState({ doTindakan: array });
-    console.log(this.state.doTindakan);
+    this.setState({ doTindakan: array, textFilter: "" });
   }
 
   hapus(id) {
@@ -29,6 +28,9 @@ class tindakanTabulasi extends Component {
     this.setState({ doTindakan: array });
   }
 
+  reset() {
+    this.setState({ doTindakan: [] });
+  }
   daftardoTindakan() {
     return this.state.doTindakan.map((id, index) => (
       <div className="row1" key={index}>
@@ -90,6 +92,7 @@ class tindakanTabulasi extends Component {
                 </li>
               );
             })}
+            <li className="no-suggestion">Klik untuk menambahkan</li>
           </ul>
         );
       } else if (filteredTindakan.length === 0 && textFilter !== "") {
@@ -111,9 +114,17 @@ class tindakanTabulasi extends Component {
                 <div className="cell">Jumlah</div>
                 <div className="cell">Harga</div>
                 <div className="cell">Keterangan</div>
-                <div className="cell">Detail</div>
+                <div className="cell">Aksi</div>
               </div>
               {this.daftardoTindakan()}
+            </div>
+          </div>
+          <div className="col-md-12">
+            <div className="modal-footer justify-content-center">
+              <button className="btn btn-primary">Simpan</button>
+              <button className="btn btn-warning" onClick={() => this.reset()}>
+                Bersihkan
+              </button>
             </div>
           </div>
         </div>
@@ -123,14 +134,11 @@ class tindakanTabulasi extends Component {
     return (
       <div className="container-fluid">
         <div className="row maxrow" style={{ margin: "0px" }}>
-          <div className="col-md-2">
-            <span>Tambah Tindakan</span>
-          </div>
+          <div className="col-md-2">Tambah Tindakan</div>
           <div className="col-md-10">
             <input
               type="text"
               className="form-control"
-              placeholder="Cari Tindakan"
               value={textFilter}
               onChange={e =>
                 this.setState({

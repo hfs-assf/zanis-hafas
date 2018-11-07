@@ -11,9 +11,7 @@ class PelayananMedis extends Component {
         <div className="card-body">
           <div className="flex-container">
             <div className="box column1">
-              <h2 className="card-title text-left">
-                Pelayanan Medis {this.props.antrian.id}
-              </h2>
+              <h2 className="card-title text-left">Pelayanan Medis</h2>
             </div>
 
             <div className="box column2" />

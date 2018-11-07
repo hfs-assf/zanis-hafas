@@ -28,10 +28,14 @@ class App extends Component {
             <Route path="/apotek" component={Apotek} />
             <Route path="/kasir" component={Kasir} />
             <Route path="/form-pembayaran" component={Pembayaran} />
-            {/* <Route path="/kelola_biaya" component={KelolaApotek} /> */}
             <Route path="/kelola_apotek" component={KelolaApotek} />
             <Route path="/pendaftaran" component={Pendaftaran} />
-            <Route path="/tambahlayanan" component={PendaftaranLayanan} />
+            <Route
+              path="/tambahlayanan/:id"
+              render={({ match }) => (
+                <PendaftaranLayanan antrian={match.params} />
+              )}
+            />
             <Route
               path="/formpelayananmedis/:id"
               render={({ match }) => (
