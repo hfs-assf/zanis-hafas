@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import tindakanList from "../../../../JSON/daftarTindakan";
+import obatList from "../../../../JSON/daftarObat";
 
-class tindakanTabulasi extends Component {
+class resepObatTabulasi extends Component {
   constructor() {
     super();
     this.state = {
-      doTindakan: [],
+      doObat: [],
       textFilter: "",
       idFilter: "",
       showSuggestions: false
@@ -13,45 +13,39 @@ class tindakanTabulasi extends Component {
   }
 
   tambah(id) {
-    var array = [...this.state.doTindakan];
+    var array = [...this.state.doObat];
     array.push(id);
-    this.setState({ doTindakan: array, textFilter: "" });
+    this.setState({ doObat: array, textFilter: "" });
   }
 
   hapus(id) {
-    var array = [...this.state.doTindakan];
-    for (var i = 0; i < this.state.doTindakan.length; i++) {
-      if (this.state.doTindakan[i] === id) {
+    var array = [...this.state.doObat];
+    for (var i = 0; i < this.state.doObat.length; i++) {
+      if (this.state.doObat[i] === id) {
         array.splice(i, 1);
       }
     }
-    this.setState({ doTindakan: array });
+    this.setState({ doObat: array });
   }
 
   reset() {
-    this.setState({ doTindakan: [] });
+    this.setState({ doObat: [] });
   }
-  daftardoTindakan() {
-    return this.state.doTindakan.map((id, index) => (
+  daftardoObat() {
+    return this.state.doObat.map((id, index) => (
       <div className="row1" key={index}>
-        <div className="cell">{tindakanList[id].nama}</div>
+        <div className="cell">{obatList[id].nama}</div>
         <div className="cell text-center">
-          <input
-            type="number"
-            refs="jumlahtindakan"
-            min="1"
-            max="10"
-            required
-          />
+          <input type="number" refs="jumlahobat" min="1" max="10" required />
           &nbsp;
-          {tindakanList[id].satuan}
+          {obatList[id].satuan}
         </div>
         <div className="cell text-right">
           Rp.
-          {tindakanList[id].tarif}
+          {obatList[id].harga_jual}
         </div>
         <div className="cell text-center">
-          <input type="text" refs="keterangantindakan" />
+          <input type="text" refs="keteranganobat" />
         </div>
         <div className="cell text-center">
           <button
@@ -68,34 +62,32 @@ class tindakanTabulasi extends Component {
   }
 
   render() {
-    let suggestionsList, daftarTindakan;
-    const { textFilter, showSuggestions, doTindakan } = this.state;
-    const filteredTindakan = tindakanList.filter(tindakan => {
-      return (
-        tindakan.nama.toLowerCase().indexOf(textFilter.toLowerCase()) !== -1
-      );
+    let suggestionsList, resep;
+    const { textFilter, showSuggestions, doObat } = this.state;
+    const filteredObat = obatList.filter(obat => {
+      return obat.nama.toLowerCase().indexOf(textFilter.toLowerCase()) !== -1;
     });
     if (showSuggestions === true) {
-      if (filteredTindakan.length !== 0 && textFilter !== "") {
+      if (filteredObat.length !== 0 && textFilter !== "") {
         suggestionsList = (
           <ul className="suggestions">
-            {filteredTindakan.map((tindakan, index) => {
+            {filteredObat.map((obat, index) => {
               return (
                 <li
                   key={index}
                   className="suggestion-active"
                   onClick={() => {
-                    this.tambah(tindakan.id);
+                    this.tambah(obat.id);
                   }}
                 >
-                  {tindakan.nama}
+                  {obat.nama}
                 </li>
               );
             })}
             <li className="no-suggestion">Klik untuk menambahkan</li>
           </ul>
         );
-      } else if (filteredTindakan.length === 0 && textFilter !== "") {
+      } else if (filteredObat.length === 0 && textFilter !== "") {
         suggestionsList = (
           <ul className="suggestions">
             <li className="no-suggestion">Tidak tersedia</li>
@@ -103,20 +95,20 @@ class tindakanTabulasi extends Component {
         );
       }
     }
-    if (doTindakan.length !== 0) {
-      daftarTindakan = (
+    if (doObat.length !== 0) {
+      resep = (
         <div className="row">
           <div className="col-md-12 rowsoap">
-            <div className="legendtitle1">Tindakan</div>
+            <div className="legendtitle1">Resep Obat</div>
             <div className="table">
               <div className="row1 header">
-                <div className="cell">Nama Tindakan</div>
+                <div className="cell">Nama Obat</div>
                 <div className="cell">Jumlah</div>
                 <div className="cell">Harga</div>
                 <div className="cell">Keterangan</div>
                 <div className="cell">Aksi</div>
               </div>
-              {this.daftardoTindakan()}
+              {this.daftardoObat()}
             </div>
           </div>
           <div className="col-md-12">
@@ -134,7 +126,9 @@ class tindakanTabulasi extends Component {
     return (
       <div className="container-fluid">
         <div className="row maxrow" style={{ margin: "0px" }}>
-          <div className="col-md-2">Tambah Tindakan</div>
+          <div className="col-md-2">
+            <span>Tambah Obat</span>
+          </div>
           <div className="col-md-10">
             <input
               type="text"
@@ -150,10 +144,10 @@ class tindakanTabulasi extends Component {
             {suggestionsList}
           </div>
         </div>
-        {daftarTindakan}
+        {resep}
       </div>
     );
   }
 }
 
-export default tindakanTabulasi;
+export default resepObatTabulasi;

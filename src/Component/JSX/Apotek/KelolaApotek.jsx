@@ -10,6 +10,7 @@ class KelolaApotek extends Component {
     return (
       <div className="container-fluid">
         <DashboardApotek />
+        <br />
         <TableApotek />
         <FormObat />
         <ExpDetail />

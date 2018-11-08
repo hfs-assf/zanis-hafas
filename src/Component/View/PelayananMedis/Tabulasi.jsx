@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import SOAP from "./Soap/SoapPasien";
-import ResepObat from "./ResepObat/ResepObatPasien";
+import ResepObat from "./ResepObat/ResepObat";
 import Tindakan from "./Tindakan/TindakanPasien";
 import Laboratorium from "./Laboratorium/LaboratoriumPasien";
 

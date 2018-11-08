@@ -39,6 +39,7 @@ class App extends Component {
             <Route exact path="/" component={Dashboard} />
             <Route path="/apotek" component={Apotek} />
             <Route path="/kasir" component={Kasir} />
+<<<<<<< HEAD
             <Route
               path="/form-pembayaran/:id"
               render={({ match }) => (
@@ -46,10 +47,23 @@ class App extends Component {
               )}
             />
             {/* <Route path="/kelola_biaya" component={KelolaApotek} /> */}
+=======
+            <Route path="/form-pembayaran" component={Pembayaran} />
+>>>>>>> 370383111560c3aa21bbfb1eacb066421a793635
             <Route path="/kelola_apotek" component={KelolaApotek} />
             <Route path="/pendaftaran" component={Pendaftaran} />
-            <Route path="/tambahlayanan" component={PendaftaranLayanan} />
-            <Route path="/formpelayananmedis" component={PelayananMedisForm} />
+            <Route
+              path="/tambahlayanan/:id"
+              render={({ match }) => (
+                <PendaftaranLayanan antrian={match.params} />
+              )}
+            />
+            <Route
+              path="/formpelayananmedis/:id"
+              render={({ match }) => (
+                <PelayananMedisForm antrian={match.params} />
+              )}
+            />
             <Route path="/pelayanan-medis" component={TimelinePelayananMedis} />
             <Route path="/admin" component={Admin} />
             <Route path="/karyawan" component={KelolaKaryawan} />

@@ -1,14 +1,20 @@
 [
   {
     "id": "0",
-    "nama": "LED"
+    "nama": "LED",
+    "satuan": "unit",
+    "tarif": "10000"
   },
   {
     "id": "1",
-    "nama": "apa"
+    "nama": "apa",
+    "satuan": "unit",
+    "tarif": "10000"
   },
   {
     "id": "2",
-    "nama": "gaktau"
+    "nama": "gaktau",
+    "satuan": "unit",
+    "tarif": "10000"
   }
 ]

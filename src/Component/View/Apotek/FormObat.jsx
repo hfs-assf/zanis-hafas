@@ -16,7 +16,7 @@ class FormObat extends Component {
           role="document"
         >
           <div className="modal-content">
-            <div className="modal-header primary-color white-text text-center py-4">
+            <div className="modal-header info-color white-text text-center py-4">
               <h4 className="modal-title w-100" id="myModalLabel">
                 Tambah Daftar Obat
               </h4>
@@ -30,10 +30,19 @@ class FormObat extends Component {
               </button>
             </div>
             <div className="modal-body">
+<<<<<<< HEAD
               <form id="contact-form" name="contact-form" method="POST">
+=======
+              <form
+                id="contact-form"
+                name="contact-form"
+                action="mail"
+                method="POST"
+              >
+>>>>>>> 370383111560c3aa21bbfb1eacb066421a793635
                 <div className="row">
                   <div className="col-md-12">
-                    <div className="md-form mb-0">
+                    <div className="mb-3">
                       <input
                         type="text"
                         id="nama_obat"
@@ -46,7 +55,7 @@ class FormObat extends Component {
                 </div>
                 <div className="row">
                   <div className="col-md-6">
-                    <div className="md-form mb-0">
+                    <div className="mb-3">
                       <input
                         type="text"
                         id="jumlah"
@@ -57,7 +66,7 @@ class FormObat extends Component {
                     </div>
                   </div>
                   <div className="col-md-6">
-                    <div className="md-form mb-0">
+                    <div className="mb-3">
                       <input
                         type="text"
                         id="satuan"
@@ -70,7 +79,7 @@ class FormObat extends Component {
                 </div>
                 <div className="row">
                   <div className="col-md-6">
-                    <div className="md-form mb-0">
+                    <div className="mb-3">
                       <input
                         type="text"
                         id="harga_beli"
@@ -81,7 +90,7 @@ class FormObat extends Component {
                     </div>
                   </div>
                   <div className="col-md-6">
-                    <div className="md-form mb-0">
+                    <div className="mb-3">
                       <input
                         type="text"
                         id="harga_jual"
@@ -94,7 +103,7 @@ class FormObat extends Component {
                 </div>
                 <div className="row">
                   <div className="col-md-12">
-                    <div className="md-form mb-0">
+                    <div className="mb-3">
                       <span>Masa Berlaku</span>
 
                       <input
@@ -108,12 +117,9 @@ class FormObat extends Component {
                 </div>
                 <div className="row">
                   <div className="col-md-12">
-                    <div className="md-form mb-0">
+                    <div className="mb-3">
                       <span>Jenis Obat</span>
                       <select className="custom-select" name="jenis_obat">
-                        <option value="" disabled>
-                          Jenis Obat
-                        </option>
                         <option value="1">Minum</option>
                         <option value="2">Makan</option>
                       </select>
@@ -123,8 +129,8 @@ class FormObat extends Component {
               </form>
             </div>
             <div className="modal-footer justify-content-center">
-              <button className="btn btn-primary">Simpan</button>
-              <button className="btn btn-outline-primary" data-dismiss="modal">
+              <button className="btn btn-info">Simpan</button>
+              <button className="btn btn-outline-info" data-dismiss="modal">
                 Kembali
               </button>
             </div>

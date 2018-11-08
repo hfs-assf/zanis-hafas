@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import FormPelayananMedis from "../../View/PelayananMedis/FormPelayananMedis";
+import "../../CSS/form.css";
 class PelayananMedis extends Component {
   render() {
     return (
@@ -31,7 +32,8 @@ class PelayananMedis extends Component {
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <FormPelayananMedis />
+
+          <FormPelayananMedis pasien={this.props.antrian.id} />
         </div>
       </div>
     );

@@ -2,34 +2,53 @@ import React, { Component } from "react";
 import "../../CSS/form.css";
 import SVGSuratSakit from "../../svgfile/SVGSuratSakit";
 import TabulasiPelayananMedis from "./Tabulasi";
+import pasienList from "../../../JSON/pasien";
 
 class PendaftaranPelayananMedis extends Component {
   render() {
+    let deskripsiPasien;
+    const pasien = pasienList.filter(antrian => {
+      return antrian.id.toString().indexOf(this.props.pasien) !== -1;
+    });
+    if (pasien.length !== 0) {
+      deskripsiPasien = pasien.map(pasien => {
+        return (
+          <table key={pasien.id}>
+            <tbody>
+              <tr>
+                <td>Nomor RM </td>
+                <td className="datatable">
+                  :&ensp;
+                  {pasien.no_rm}
+                </td>
+              </tr>
+              <tr>
+                <td>Nama</td>
+                <td className="datatable">
+                  :&ensp;
+                  {pasien.nama}
+                </td>
+              </tr>
+              <tr>
+                <td>Poli</td>
+                <td className="datatable">
+                  :&ensp;
+                  {pasien.tujuan}
+                </td>
+              </tr>
+              <tr>
+                <td>Tanggal</td>
+                <td className="datatable">:&ensp;10 Oktober 1993</td>
+              </tr>
+            </tbody>
+          </table>
+        );
+      });
+    }
     return (
       <div className="container-fluid ">
         <div className="row justify-content-center" style={{ margin: "0.5em" }}>
-          <div className="col-md-8 boxriwayat">
-            <table>
-              <tbody>
-                <tr>
-                  <td>Nomor RM</td>
-                  <td className="datatable">:&ensp;10390193019</td>
-                </tr>
-                <tr>
-                  <td>Nama</td>
-                  <td className="datatable">:&ensp;Kurnianto Syaputra</td>
-                </tr>
-                <tr>
-                  <td>Poli</td>
-                  <td className="datatable">:&ensp;Poli Mata</td>
-                </tr>
-                <tr>
-                  <td>Tanggal</td>
-                  <td className="datatable">:&ensp;10 Oktober 1993</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <div className="col-md-8 boxriwayat">{deskripsiPasien}</div>
           <div className="col-md-4">
             <div className="row">
               <div className="boxsurat">

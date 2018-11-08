@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import DataTimeline from "../../../JSON/pasien.json";
+import Antrian from "../../../JSON/antrianPasien.json";
 import { Link } from "react-router-dom";
 import "../../CSS/Timeline.css";
 
 class TimelinePelayananMedis extends Component {
   renderTimelinePelayananMedis() {
-    return DataTimeline.map((item, index) => (
+    return Antrian.map((item, index) => (
       <li key={index} className="animated bounceIn">
-        <Link to="/formpelayananmedis">
+        <Link to={"/formpelayananmedis/" + item.id}>
           <span />
           <div className="number"> {item.id} </div>
           <div>
