@@ -9,26 +9,34 @@ class TabulasiPelayananMedis extends Component {
     return (
       <div className="main">
         <input id="tab1" type="radio" name="tabs" />
-        <label htmlFor="tab1">SOAP</label>
+        <label htmlFor="tab1" className="empat">
+          SOAP
+        </label>
         <input id="tab2" type="radio" name="tabs" />
-        <label htmlFor="tab2">Resep Obat</label>
+        <label htmlFor="tab2" className="empat">
+          Resep Obat
+        </label>
         <input id="tab3" type="radio" name="tabs" />
-        <label htmlFor="tab3">Tindakan</label>
+        <label htmlFor="tab3" className="empat">
+          Tindakan
+        </label>
         <input id="tab4" type="radio" name="tabs" />
-        <label htmlFor="tab4">Laboratorium</label>
-        <section id="content1">
+        <label htmlFor="tab4" className="empat">
+          Laboratorium
+        </label>
+        <section id="content1" className="empat">
           <SOAP />
         </section>
 
-        <section id="content2">
+        <section id="content2" className="empat">
           <ResepObat />
         </section>
 
-        <section id="content3">
+        <section id="content3" className="empat">
           <Tindakan />
         </section>
 
-        <section id="content4">
+        <section id="content4" className="empat">
           <Laboratorium />
         </section>
       </div>

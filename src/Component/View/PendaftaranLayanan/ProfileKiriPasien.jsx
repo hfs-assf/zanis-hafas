@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import SVGPencarianPasien from "../../svgfile/pencarianpasien";
-import SVGRiwayatPasien from "../../svgfile/SVGhistorypasien";
+// import SVGPencarianPasien from "../../svgfile/pencarianpasien";
+// import SVGRiwayatPasien from "../../svgfile/SVGhistorypasien";
 import RiwayatPasien from "./RiwayatKunjungan";
 import pasienList from "../../../JSON/pasien";
 
@@ -73,56 +73,21 @@ class ProfileKiriPasien extends Component {
         <div className="member-card">{namaPasien}</div>
         <div className="bottommenu">
           <div className="col-md-12">
-            <ul className="nav nav-pills" id="pills-tab" role="tablist">
-              <li className="nav-item warnatab active col-md-6">
-                <a
-                  id="pills-home-tab"
-                  data-toggle="pill"
-                  href="#pills-home"
-                  role="tab"
-                  aria-controls="pills-home"
-                  aria-selected="true"
-                >
-                  <div className="svg">
-                    <SVGPencarianPasien />
-                  </div>
-                  Biodata
-                </a>
-              </li>
-              <li className="nav-item warnatab col-md-6">
-                <a
-                  // className="nav-link"
-                  id="pills-profile-tab"
-                  data-toggle="pill"
-                  href="#pills-profile"
-                  role="tab"
-                  aria-controls="pills-profile"
-                  aria-selected="false"
-                >
-                  <div className="svg">
-                    <SVGRiwayatPasien />
-                  </div>
-                  Riwayat Berobat
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="tab-content" id="pills-tabContent">
-            <div
-              className="tab-pane warnacontent fade show active"
-              id="pills-home"
-              role="tabpanel"
-              aria-labelledby="pills-home-tab"
-            >
-              {deskripsiPasien}
-            </div>
-            <div
-              className="tab-pane warnacontent fade"
-              id="pills-profile"
-              role="tabpanel"
-              aria-labelledby="pills-profile-tab"
-            >
-              <RiwayatPasien />
+            <div className="main">
+              <input id="tab1" type="radio" name="tabs" />
+              <label htmlFor="tab1" className="dua">
+                Data Diri
+              </label>
+              <input id="tab2" type="radio" name="tabs" />
+              <label htmlFor="tab2" className="dua">
+                Rekam Medis
+              </label>
+              <section id="content1" className="dua">
+                {deskripsiPasien}
+              </section>
+              <section id="content2" className="dua">
+                <RiwayatPasien />
+              </section>
             </div>
           </div>
         </div>

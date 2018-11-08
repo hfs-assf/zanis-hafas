@@ -60,6 +60,13 @@
   border-radius: 10px;
   display: none;
   padding: 10px 0 10px;
+}
+.main > section.dua {
+  overflow: scroll;
+  max-height: 400px;
+  font-size: 15px;
+}
+.main > section.empat {
   height: auto;
 }
 
@@ -73,12 +80,18 @@
   padding: 5px;
   /* padding: 10px 50px 10px 50px; */
   font-weight: 500;
-  width: 25%;
+  /* width: 50%; */
   text-align: center;
   /* text-align: center; */
   color: rgb(0, 0, 0);
 }
+.main label.dua {
+  width: 50%;
+}
 
+.main label.empat {
+  width: 25%;
+}
 .main label:hover {
   color: rgb(0, 85, 255);
   cursor: pointer;

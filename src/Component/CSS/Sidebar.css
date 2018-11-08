@@ -181,16 +181,26 @@
 .mini-sidebar .sidebar-nav {
   background: transparent;
 }
+.mini-sidebar .sidebar-nav #sidebarnav > li {
+  padding: 2px;
+}
+.mini-sidebar .sidebar-nav #sidebarnav > li > a > svg {
+  background: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 18px;
+  padding: 2px;
+}
 .mini-sidebar .sidebar-nav #sidebarnav > li > a {
-  padding: 9px 18px;
+  padding: 9px 25px;
 }
 .mini-sidebar .sidebar-nav #sidebarnav > li:hover > a {
   width: 260px;
-  background: #f2f6f8;
+  background: #1976d2;
 }
 .mini-sidebar .sidebar-nav #sidebarnav > li:hover > a .hide-menu {
   display: inline;
-  color: blue;
+  color: #fff;
   margin-left: 5%;
   /* font-weight: bold; */
 }

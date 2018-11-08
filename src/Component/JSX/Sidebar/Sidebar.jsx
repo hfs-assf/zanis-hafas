@@ -42,7 +42,7 @@ class Sidebar extends Component {
                   className="has-arrow"
                   aria-expanded="false"
                 >
-                  <SVGPelayananMedis size="200pt" />
+                  <SVGPelayananMedis />
                   <span className="hide-menu">Pelayanan Medis</span>
                 </Link>
                 <ul aria-expanded="false" className="collapse">
@@ -87,7 +87,7 @@ class Sidebar extends Component {
               <li>
                 {" "}
                 <Link to="/admin" className="has-arrow" aria-expanded="false">
-                  <SVGAdmin size="20pt" />
+                  <SVGAdmin />
                   <span className="hide-menu">Admin</span>
                 </Link>
                 <ul aria-expanded="false" className="collapse">
