@@ -50,7 +50,7 @@ class Sidebar extends Component {
                     <Link to="/pelayanan-medis">Daftar Antrian</Link>
                   </li>
                   <li>
-                    <Link to="/pelayanan-medis">Rekam Medis Pasien</Link>
+                    <Link to="/rekam_medispasien">Rekam Medis Pasien</Link>
                   </li>
                 </ul>
               </li>
@@ -98,16 +98,10 @@ class Sidebar extends Component {
                     <Link to="/poliklinik">Daftar Poliklinik</Link>
                   </li>
                   <li>
-                    <Link to="/biaya">Daftar Biaya</Link>
+                    <Link to="/biayatindakan">Daftar Tindakan</Link>
                   </li>
                   <li>
-                    <Link to="/biaya">Daftar Tindakan</Link>
-                  </li>
-                  <li>
-                    <Link to="/biaya">Daftar Uji Lab</Link>
-                  </li>
-                  <li>
-                    <Link to="/biaya">Jadwal Dokter</Link>
+                    <Link to="/biayaujilab">Daftar Uji Lab</Link>
                   </li>
                 </ul>
               </li>

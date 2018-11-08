@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import DataTimeline from "../../../JSON/pasien.json";
-import { Link } from "react-router-dom";
 import "../../CSS/Timeline.css";
 
 class TimelineKasir extends Component {

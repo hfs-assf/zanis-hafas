@@ -1,55 +1,68 @@
 import React, { Component } from "react";
 import "../../CSS/Apotek.css";
-import obat from "../../../JSON/daftarObat.json";
+import "../../CSS/form.css";
+import obatList from "../../../JSON/daftarObat.json";
 
 class TableApotek extends Component {
-  daftarObat() {
-    return obat.map((el, index) => (
-      <div className="row1" key={index}>
-        <div className="cell" data-title="Nama Obat">
-          {index + 1}
-        </div>
-        <div className="cell" data-title="Nama Obat">
-          {el.nama}
-        </div>
+  state = {
+    filter: ""
+  };
 
-        <div className="cell" data-title="Satuan">
-          {el.kategori}
+  renderDaftarObat = obat => {
+    const { filter } = this.state;
+    if (filter !== "") {
+      return (
+        <div className="row1">
+          <div className="cell">{obat.nama}</div>
+          <div className="cell">{obat.nama}</div>
+          <div className="cell">{obat.nama}</div>
+          <div className="cell">{obat.nama}</div>
+          <div className="cell">{obat.nama}</div>
+          <div className="cell">{obat.nama}</div>
         </div>
-        <div className="cell" data-title="Harga">
-          {el.harga_beli}
-        </div>
-        <div className="cell" data-title="Keterangan">
-          {el.harga_jual}
-        </div>
-        <div className="cell" data-title="Keterangan">
-          {el.persediaan} / {el.satuan}
-        </div>
-        <div className="cell" data-title="Keterangan">
-          {el.masa_berlaku}
-        </div>
-        <div className="cell" data-title="Aksi">
-          <button className="btn btn-success btn-sm">Edit</button>
-        </div>
-      </div>
-    ));
-  }
+      );
+    }
+  };
+
   render() {
+    const { filter } = this.state;
+    const filteredObat = obatList.filter(obat => {
+      return obat.nama.toLowerCase().indexOf(filter.toLowerCase()) !== -1;
+    });
     return (
-      <div className="rowsoap mt-5">
-        <div className="legendtitle1">Daftar Nama Obat</div>
-        <div className="table">
-          <div className="row1 header">
-            <div className="cell">No</div>
-            <div className="cell">Nama Obat</div>
-            <div className="cell">Kategori</div>
-            <div className="cell">Harga Beli</div>
-            <div className="cell">Harga Jual</div>
-            <div className="cell">Persediaan </div>
-            <div className="cell">Masa Berlaku</div>
+      <div className="flexpelayanan" style={{ margin: "15px 0px 10px 0px" }}>
+        <div className="boxpelayanan">
+          <div className="main">
+            <div className="container-fluid">
+              <div className="row maxrow" style={{ margin: "0px" }}>
+                <div className="col-md-4"> Daftar Obat </div>
+                <div className="col-md-8">
+                  <input
+                    type="text"
+                    style={{ width: "100%" }}
+                    onChange={e => this.setState({ filter: e.target.value })}
+                  />
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-md-12 rowsoap">
+                  <div className="table">
+                    <div className="row1 header">
+                      <div className="cell">Nama Obat</div>
+                      <div className="cell">Jenis Obat</div>
+                      <div className="cell">Persediaan</div>
+                      <div className="cell">Masa Berlaku</div>
+                      <div className="cell">Harga Beli</div>
+                      <div className="cell">Harga Jual</div>
+                    </div>
+                    {filteredObat.map(obat => {
+                      return this.renderDaftarObat(obat);
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-
-          {this.daftarObat()}
         </div>
       </div>
     );

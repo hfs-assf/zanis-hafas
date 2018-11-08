@@ -1,0 +1,72 @@
+.garis {
+  position: relative;
+  border: 1px dashed rgb(180, 176, 176);
+  width: 99%;
+}
+.datadiri {
+  border-left: 1px solid rgb(180, 176, 176);
+}
+
+.logos img {
+  position: relative;
+  width: 330px;
+  height: 80px;
+  margin: 10px;
+}
+.judulrm {
+  font-size: 30px;
+  font-weight: 500;
+  width: 100%;
+  border-top: 1px dashed rgb(180, 176, 176);
+  margin-top: 10px;
+}
+
+/* //tabel di rekam medis */
+.Table {
+  display: table;
+  margin: 0px 0px -10px -10px;
+  font-weight: 500;
+}
+
+.Heading {
+  display: table-row;
+  font-weight: bold;
+  text-align: center;
+}
+.Row {
+  display: table-row;
+}
+
+.Cell {
+  display: table-cell;
+  border-width: thin;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.triase {
+  margin-top: 12px;
+  margin-left: -30px;
+  width: 99%;
+}
+
+.triase .datatriase > p {
+  font-size: 20px;
+  font-weight: 600;
+}
+.font {
+  margin-left: -12px;
+  margin-top: 12px;
+}
+.font p {
+  font-size: 15px;
+}
+.isitriase p {
+  margin-left: 6px;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.mtup {
+  margin-top: -12px;
+}

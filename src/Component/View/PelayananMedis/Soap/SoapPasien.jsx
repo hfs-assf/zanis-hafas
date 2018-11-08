@@ -118,11 +118,9 @@ const SOAP = props => (
         </div>
       </div>
       <div className="col-md-12">
-        <div className="row">
-          <div className="modal-footer justify-content-right">
-            <button className="btn btn-primary">Simpan</button>
-            <button className="btn btn-warning">Bersihkan</button>
-          </div>
+        <div className="modal-footer justify-content-center">
+          <button className="btn btn-primary">Simpan</button>
+          <button className="btn btn-warning">Bersihkan</button>
         </div>
       </div>
     </div>

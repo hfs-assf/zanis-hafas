@@ -19,7 +19,7 @@ const ProfileKiriPasien = props => (
       </div>
     </div>
     <div className="bottommenu">
-      <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
+      {/* <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
         <li className="nav-item warnatab col-sm-6">
           <a
             className="nav-link active"
@@ -30,9 +30,7 @@ const ProfileKiriPasien = props => (
             aria-controls="pills-home"
             aria-selected="true"
           >
-            <div className="svg">
-              <SVGPencarianPasien />
-            </div>
+            
             Biodata
           </a>
         </li>
@@ -46,9 +44,7 @@ const ProfileKiriPasien = props => (
             aria-controls="pills-profile"
             aria-selected="false"
           >
-            <div className="svg">
-              <SVGRiwayatPasien />
-            </div>
+           
             Riwayat Berobat
           </a>
         </li>
@@ -60,25 +56,7 @@ const ProfileKiriPasien = props => (
           role="tabpanel"
           aria-labelledby="pills-home-tab"
         >
-          <ul className="ul">
-            <li className="li">
-              Tanggal Lahir : <strong> 17 Oktober 1993 </strong>
-            </li>
-
-            <li className="li">
-              Umur : <strong>27 Tahun</strong>
-            </li>
-            <li className="li">
-              Jenis Kelamin : <strong>Laki-Laki</strong>
-            </li>
-
-            <li className="li">
-              Alamat : <strong>Jl. Kelapa Sawit</strong>
-            </li>
-            <li className="li">
-              Nomor Hp : <strong>085265234851</strong>
-            </li>
-          </ul>
+          
         </div>
         <div
           className="tab-pane warnacontent fade"
@@ -86,7 +64,31 @@ const ProfileKiriPasien = props => (
           role="tabpanel"
           aria-labelledby="pills-profile-tab"
         >
-          <RiwayatPasien />
+         
+        </div>
+      </div> */}
+      <div className="tabs">
+        <input type="radio" id="tab1" name="tab-control" checked />
+        <input type="radio" id="tab2" name="tab-control" />
+        <ul>
+          <li title="Features">
+            <label for="tab1" role="button">
+              <span>Data Diri</span>
+            </label>
+          </li>
+          <li title="Delivery Contents">
+            <label for="tab2" role="button">
+              <span>Riwayat</span>
+            </label>
+          </li>
+        </ul>
+
+        <div className="slider">
+          <div className="indicator" />
+        </div>
+        <div className="content">
+          <section>Data Diri</section>
+          <section>Riawayat</section>
         </div>
       </div>
     </div>

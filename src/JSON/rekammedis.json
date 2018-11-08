@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "no_rm": 1010102010,
+    "nama": "Kurnianto Syaputra",
+    "asuransi": "BPJS",
+    "tujuan": "Poli Gigi",
+    "tanggal_masuk": "17 Agustus 2018"
+  },
+  {
+    "id": 2,
+    "no_rm": 1010102011,
+    "nama": "Stevio Dorgi",
+    "asuransi": "Umum",
+    "tujuan": "Poli Umum",
+    "tanggal_masuk": "17 Agustus 2018"
+  },
+  {
+    "id": 3,
+    "no_rm": 1010102012,
+    "nama": "Suci Nascaisar",
+    "asuransi": "BPJS",
+    "tujuan": "Poli Kulit",
+    "tanggal_masuk": "17 Agustus 2018"
+  }
+]

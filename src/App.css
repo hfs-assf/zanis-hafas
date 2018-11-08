@@ -1,3 +1,47 @@
 .containercontent {
   margin-left: 100px;
 }
+.no-suggestions {
+  color: #fff;
+  padding: 0.5rem;
+}
+
+.suggestions {
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 0px 0px 10px 10px;
+  border-top-width: 0;
+  list-style: none;
+  margin-top: 0;
+  font-size: 12px;
+  max-height: 100px;
+  overflow-y: auto;
+  padding-left: 0;
+  width: calc(300px + 1rem);
+  background-color: #fff;
+  color: #1c70c8;
+}
+
+.suggestions li {
+  padding: 0.5rem;
+}
+
+.suggestion-active,
+.suggestions li:hover {
+  background-color: #1c70c8;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.suggestions li:not(:last-of-type) {
+  border-bottom: 1px solid #999;
+}
+
+.cari {
+  width: 100%;
+}
+input {
+  /* background-color: #b2b6bb; */
+  border-radius: 2px;
+  border: 1px solid #1976d2 !important;
+}

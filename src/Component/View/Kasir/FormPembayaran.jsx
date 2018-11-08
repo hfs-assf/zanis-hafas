@@ -78,7 +78,7 @@ class PendaftaranPelayananMedis extends Component {
                         type="number"
                         name="diskon"
                         className="form-control"
-                        width="100%"
+                        style={{ width: "150px" }}
                       />
                     </td>
                   </tr>

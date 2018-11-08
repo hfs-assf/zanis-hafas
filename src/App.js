@@ -2,6 +2,12 @@ import React, { Component } from "react";
 import "./App.css";
 import { Route, Switch } from "react-router-dom";
 import Dashboard from "./Component/JSX/DashboardHome/Dashboard";
+// Admin
+import Admin from "./Component/JSX/Admin/Dashboard";
+import KelolaKaryawan from "./Component/JSX/Admin/KelolaKaryawan";
+import KelolaPoliklinik from "./Component/JSX/Admin/KelolaPoliklinik";
+import KelolaAdminBiaya from "./Component/JSX/Admin/KelolaBiaya";
+// admin
 import Login from "./Component/JSX/Login/Login";
 import Header from "./Component/JSX/Header/Header";
 import Sidebar from "./Component/JSX/Sidebar/Sidebar";
@@ -13,6 +19,10 @@ import TimelinePelayananMedis from "./Component/JSX/PelayananMedis/TimelinePelay
 import PelayananMedisForm from "./Component/JSX/PelayananMedis/PelayananMedis";
 import Kasir from "./Component/JSX/Kasir/TimelineKasir";
 import Pembayaran from "./Component/JSX/Kasir/Pembayaran";
+// RekamMedisPasien
+import RekamMedisPasien from "./Component/JSX/PelayananMedis/RekamMedisPasien";
+import ListRekamMedis from "./Component/JSX/PelayananMedis/RekamMedislist";
+import DetailRekamMedis from "./Component/View/RekamMedis/DetailRekamMedis";
 // import KelolaBiaya from "./Component/JSX/Kasir/KelolaBiaya";
 import FakeData from "./JSON/pasien.json";
 
@@ -21,11 +31,12 @@ class App extends Component {
     return (
       <div>
         <Header />
+        <Route path="/login" component={Login} />
+
         <Sidebar />
         <div className="containercontent">
           <Switch>
             <Route exact path="/" component={Dashboard} />
-            <Route path="/login" component={Login} />
             <Route path="/apotek" component={Apotek} />
             <Route path="/kasir" component={Kasir} />
             <Route
@@ -40,6 +51,13 @@ class App extends Component {
             <Route path="/tambahlayanan" component={PendaftaranLayanan} />
             <Route path="/formpelayananmedis" component={PelayananMedisForm} />
             <Route path="/pelayanan-medis" component={TimelinePelayananMedis} />
+            <Route path="/admin" component={Admin} />
+            <Route path="/karyawan" component={KelolaKaryawan} />
+            <Route path="/poliklinik" component={KelolaPoliklinik} />
+            <Route path="/biayatindakan" component={KelolaAdminBiaya} />
+            <Route path="/rekam_medispasien" component={RekamMedisPasien} />
+            <Route path="/lisrm" component={ListRekamMedis} />
+            <Route path="/detailrekammedis" component={DetailRekamMedis} />
           </Switch>
         </div>
       </div>

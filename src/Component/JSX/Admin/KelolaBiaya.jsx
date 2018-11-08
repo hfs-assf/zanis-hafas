@@ -1,8 +1,8 @@
 import React, { Component } from "react";
+import TambahBiayaTindakan from "../../View/Admin/TambahDaftarTindakan";
 import obatList from "../../../JSON/daftarObat.json";
-import TambahPegawai from "../../View/Admin/TambahPegawai";
 
-class KelolaKaryawan extends Component {
+class KelolaBiaya extends Component {
   state = {
     filter: ""
   };
@@ -12,9 +12,6 @@ class KelolaKaryawan extends Component {
     if (filter !== "") {
       return (
         <div className="row1">
-          <div className="cell">{obat.nama}</div>
-          <div className="cell">{obat.nama}</div>
-          <div className="cell">{obat.nama}</div>
           <div className="cell">{obat.nama}</div>
           <div className="cell">{obat.nama}</div>
           <div className="cell">
@@ -42,35 +39,36 @@ class KelolaKaryawan extends Component {
             style={{ margin: "15px 0px 10px 0px" }}
           >
             <div className="judulhalaman">
-              Kelola Karyawan
+              Kelola Biaya Tindakan Poliklinik
               <hr className="hr3" />
             </div>
             <div className="boxpelayanan">
               <div className="main">
-                <div className="row maxrow" style={{ margin: "0px" }}>
-                  <div className="col-md-8">
-                    <input
-                      type="text"
-                      style={{ width: "100%" }}
-                      onChange={e => this.setState({ filter: e.target.value })}
-                      placeholder="Cari Karyawan"
-                    />
+                <div className="container-fluid">
+                  <div className="row maxrow" style={{ margin: "0px" }}>
+                    <div className="col-md-8">
+                      <input
+                        type="text"
+                        style={{ width: "100%" }}
+                        onChange={e =>
+                          this.setState({ filter: e.target.value })
+                        }
+                        placeholder="Cari Detail Biaya"
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className="row">
-                  <div className="col-md-12 rowsoap">
-                    <div className="table">
-                      <div className="row1 header">
-                        <div className="cell">NIK</div>
-                        <div className="cell">Nama Karyawan</div>
-                        <div className="cell">Bagian / Divisi</div>
-                        <div className="cell">User Name</div>
-                        <div className="cell">Password</div>
-                        <div className="cell">Aksi</div>
+                  <div className="row">
+                    <div className="col-md-12 rowsoap">
+                      <div className="table">
+                        <div className="row1 header">
+                          <div className="cell">Nama Tindakan</div>
+                          <div className="cell">Tarif Tindakan</div>
+                          <div className="cell">Aksi</div>
+                        </div>
+                        {filteredObat.map(obat => {
+                          return this.renderDaftarObat(obat);
+                        })}
                       </div>
-                      {filteredObat.map(obat => {
-                        return this.renderDaftarObat(obat);
-                      })}
                     </div>
                   </div>
                 </div>
@@ -79,11 +77,11 @@ class KelolaKaryawan extends Component {
             <button
               className="btn btn-indigo"
               data-toggle="modal"
-              data-target="#tambahPegawai"
+              data-target="#tambahBiayaTindakan"
             >
-              Tambah Karyawan
+              Tambah Biaya Tindakan{" "}
             </button>
-            <TambahPegawai />
+            <TambahBiayaTindakan />
           </div>
         </div>
       </div>
@@ -91,4 +89,4 @@ class KelolaKaryawan extends Component {
   }
 }
 
-export default KelolaKaryawan;
+export default KelolaBiaya;

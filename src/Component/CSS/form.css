@@ -52,6 +52,7 @@
   max-width: 100%;
   border: 1px dashed #1976d2;
   border-radius: 30px;
+  padding: 15px;
 }
 
 .main > section {
@@ -117,7 +118,7 @@
   padding: 4px;
 }
 td input[type="number"] {
-  max-width: 70px;
+  width: 100%;
   border-radius: 5px;
 }
 
@@ -166,7 +167,7 @@ td select {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12) inset;
   color: #555555;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 1.4em;
+  line-height: 2em;
   padding: 5px 8px;
   resize: none;
   transition: background-color 0.2s ease 0s;
@@ -194,7 +195,8 @@ td select {
   border-radius: 3px;
 }
 .maxrow div input:focus[type="text"] {
-  border: 1px solid #ffffff;
+  border-radius: 3px;
+  border: 1px solid #ffffff !important;
   width: 80%;
   max-width: 80%;
   background: none repeat scroll 0 0 rgba(21, 120, 190, 0.748);
@@ -219,7 +221,7 @@ td select {
 /* TABEL RESEP OBAT */
 .cell input[type="number"] {
   width: 50px;
-  background-color: #b2b6bb;
+  /* background-color: #b2b6bb; */
   border-radius: 2px;
   border: 1px solid #1976d2;
 }
