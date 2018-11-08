@@ -40,9 +40,6 @@
 .hr1 {
   border: 1pt dashed #1976d2;
 }
-.well {
-  background-color: antiquewhite;
-}
 
 .bottommenu ul li a svg {
   width: 30px;
@@ -65,6 +62,10 @@
   border-radius: 4px;
   z-index: 1;
 }
+<<<<<<< HEAD
+
+.tabs .warnacontent {
+=======
 .bottommenu ul .warnatab.active {
   background-color: #007bff;
   /* background-color: rgb(250, 250, 250); */
@@ -74,13 +75,14 @@
   background-color: #007bff;
 }
 .wa .tab-content .warnacontent {
+>>>>>>> 370383111560c3aa21bbfb1eacb066421a793635
   background-color: #e7e9eb;
-  height: 23rem;
+  height: 22rem;
   overflow: hidden;
   border-radius: 5px;
-  margin-top: -10px;
+  margin-top: 20px;
 }
-.tab-content .warnacontent:hover {
+.tabs .warnacontent:hover {
   overflow-y: scroll;
 }
 
@@ -192,6 +194,157 @@
   position: relative;
   margin-left: 8.5rem;
   padding-bottom: 12px;
+}
+
+/* Tab Konten Pill */
+.tabs {
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  position: relative;
+  padding-bottom: 80px;
+  width: 100%;
+  min-width: 240px;
+}
+/* Menghilangkan Radio Button */
+.tabs input[name="tab-control"] {
+  display: none;
+}
+/* Tutup */
+.tabs .content section h2,
+.tabs ul li label {
+  font-weight: 500;
+  font-size: 16px;
+  color: #428bff;
+}
+.tabs ul {
+  list-style-type: none;
+  padding-left: 0;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+.tabs ul li {
+  box-sizing: border-box;
+  flex: 1;
+  width: 50%;
+  text-align: center;
+}
+.tabs ul li label {
+  transition: all 0.3s ease-in-out;
+  color: #8d939e;
+  padding: 5px auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  white-space: nowrap;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.tabs ul li label svg {
+  fill: #929daf;
+  height: 1.2em;
+  vertical-align: bottom;
+  margin-right: 0.2em;
+  transition: all 0.2s ease-in-out;
+}
+
+.tabs .content section {
+  display: none;
+  -webkit-animation-name: content;
+  animation-name: content;
+  -webkit-animation-direction: normal;
+  animation-direction: normal;
+  -webkit-animation-duration: 0.3s;
+  animation-duration: 0.3s;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+  line-height: 1.4;
+}
+
+/* Css untuk Tabulasi Pertama */
+.tabs
+  input[name="tab-control"]:nth-of-type(1):checked
+  ~ ul
+  > li:nth-child(1)
+  > label {
+  cursor: default;
+  color: #3746f1;
+  border: 1px dashed #3746f1;
+  border-radius: 2px;
+}
+
+.tabs
+  input[name="tab-control"]:nth-of-type(1):checked
+  ~ .content
+  > section:nth-child(1) {
+  display: block;
+}
+/* Tutup */
+/* Css untuk Tabulasi Ke-2 */
+.tabs
+  input[name="tab-control"]:nth-of-type(2):checked
+  ~ ul
+  > li:nth-child(2)
+  > label {
+  cursor: default;
+  color: #3746f1;
+  border: 1px dashed #3746f1;
+  border-radius: 2px;
+}
+
+.tabs
+  input[name="tab-control"]:nth-of-type(2):checked
+  ~ .content
+  > section:nth-child(2) {
+  display: block;
+}
+/* Tutup */
+
+@media (max-width: 600px) {
+  .tabs
+    input[name="tab-control"]:nth-of-type(3):checked
+    ~ ul
+    > li:nth-child(3)
+    > label {
+    background: rgba(0, 0, 0, 0.08);
+  }
+}
+
+@-webkit-keyframes content {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(5%);
+    transform: translateY(5%);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateY(0%);
+    transform: translateY(0%);
+  }
+}
+@keyframes content {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(5%);
+    transform: translateY(5%);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateY(0%);
+    transform: translateY(0%);
+  }
 }
 
 @media all and (max-width: 750px) {

@@ -30,12 +30,16 @@ class FormObat extends Component {
               </button>
             </div>
             <div className="modal-body">
+<<<<<<< HEAD
+              <form id="contact-form" name="contact-form" method="POST">
+=======
               <form
                 id="contact-form"
                 name="contact-form"
                 action="mail"
                 method="POST"
               >
+>>>>>>> 370383111560c3aa21bbfb1eacb066421a793635
                 <div className="row">
                   <div className="col-md-12">
                     <div className="mb-3">

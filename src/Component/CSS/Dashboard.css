@@ -20,3 +20,14 @@
   font-size: 1.2em;
   color: white;
 }
+
+.flexpelayanan > .judulhalaman {
+  margin-top: -2.2rem;
+  font-size: 2rem;
+  width: 100%;
+  margin-bottom: 2px;
+}
+.hr3 {
+  border: 2px dashed rgb(216, 216, 251);
+  margin-top: 2px;
+}
