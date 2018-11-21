@@ -1,0 +1,320 @@
+.card-box {
+  padding: 20px;
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.06), 0 2px 0 0 rgba(0, 0, 0, 0.02);
+  -webkit-border-radius: 5px;
+  border-radius: 9px;
+  -moz-border-radius: 5px;
+  height: 800px;
+  background-clip: padding-box;
+  margin-bottom: 20px;
+  background-color: #f6f6f6;
+  border-top: 2pt solid #1976d2;
+}
+
+.card-box1 {
+  padding: 20px;
+  -webkit-border-radius: 5px;
+  border-radius: 9px;
+  margin-left: 3rem;
+  -moz-border-radius: 5px;
+  background-clip: padding-box;
+  margin-bottom: 20px;
+  background-color: #f6f6f6;
+  border-top: 2pt solid #1976d2;
+}
+
+.card-box .member-card {
+  align-self: center;
+  text-align: center;
+}
+.header-title {
+  text-transform: uppercase;
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 16px;
+  margin-bottom: 8px;
+}
+
+.hr1 {
+  border: 1pt dashed #1976d2;
+}
+
+/* list  */
+.ul {
+  list-style: none;
+  margin: 1em;
+  padding: 0;
+}
+.ul .li {
+  margin: 0;
+  margin-bottom: 1em;
+  padding-left: 1.1em;
+  position: relative;
+}
+.ul .li:after {
+  content: "";
+  height: 0.4em;
+  width: 0.4em;
+  background: #3746f1;
+  display: block;
+  position: absolute;
+  transform: rotate(45deg);
+  top: 0.5em;
+  left: 0;
+}
+
+/* mengubah scroll */
+
+.warnacontent::-webkit-scrollbar-track {
+  background-color: #f5f5f5;
+}
+
+.warnacontent::-webkit-scrollbar {
+  width: 5px;
+  background-color: #140303;
+  border-radius: 2px;
+}
+
+.warnacontent::-webkit-scrollbar-thumb {
+  background-color: #f90;
+  background-image: -webkit-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.2) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.2) 75%,
+    transparent 75%,
+    transparent
+  );
+}
+
+/* checkbox */
+
+.custom-radios div {
+  display: inline-block;
+}
+.custom-radios input[type="radio"] {
+  display: none;
+}
+.custom-radios input[type="radio"] + label {
+  color: #333;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+.custom-radios input[type="radio"] + label span {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: -1px 4px 0 0;
+  vertical-align: middle;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  background-repeat: no-repeat;
+  background-position: center;
+  text-align: center;
+  line-height: 44px;
+}
+.custom-radios input[type="radio"] + label span img {
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+.custom-radios input[type="radio"]#color-1 + label span {
+  background-color: #2ecc71;
+}
+.custom-radios input[type="radio"]#color-2 + label span {
+  background-color: #3498db;
+}
+
+.custom-radios input[type="radio"]:checked + label span {
+  opacity: 1;
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg)
+    center center no-repeat;
+  color: white;
+
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+}
+
+.col-form-label {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.stylejaminan {
+  position: relative;
+  margin-left: 8.5rem;
+  padding-bottom: 12px;
+}
+
+/* Tab Konten Pill */
+.tabs {
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  position: relative;
+  padding-bottom: 80px;
+  width: 100%;
+  min-width: 240px;
+}
+/* Menghilangkan Radio Button */
+.tabs input[name="tab-control"] {
+  display: none;
+}
+/* Tutup */
+.tabs .content section h2,
+.tabs ul li label {
+  font-weight: 500;
+  font-size: 16px;
+  color: #428bff;
+}
+.tabs ul {
+  list-style-type: none;
+  padding-left: 0;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+.tabs ul li {
+  box-sizing: border-box;
+  flex: 1;
+  width: 50%;
+  text-align: center;
+}
+.tabs ul li label {
+  transition: all 0.3s ease-in-out;
+  color: #8d939e;
+  padding: 5px auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  white-space: nowrap;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.tabs ul li label svg {
+  fill: #929daf;
+  height: 1.2em;
+  vertical-align: bottom;
+  margin-right: 0.2em;
+  transition: all 0.2s ease-in-out;
+}
+
+.tabs .content section {
+  display: none;
+  -webkit-animation-name: content;
+  animation-name: content;
+  -webkit-animation-direction: normal;
+  animation-direction: normal;
+  -webkit-animation-duration: 0.3s;
+  animation-duration: 0.3s;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+  line-height: 1.4;
+}
+
+/* Css untuk Tabulasi Pertama */
+.tabs
+  input[name="tab-control"]:nth-of-type(1):checked
+  ~ ul
+  > li:nth-child(1)
+  > label {
+  cursor: default;
+  color: #3746f1;
+  border: 1px dashed #3746f1;
+  border-radius: 2px;
+}
+
+.tabs
+  input[name="tab-control"]:nth-of-type(1):checked
+  ~ .content
+  > section:nth-child(1) {
+  display: block;
+}
+/* Tutup */
+/* Css untuk Tabulasi Ke-2 */
+.tabs
+  input[name="tab-control"]:nth-of-type(2):checked
+  ~ ul
+  > li:nth-child(2)
+  > label {
+  cursor: default;
+  color: #3746f1;
+  border: 1px dashed #3746f1;
+  border-radius: 2px;
+}
+
+.tabs
+  input[name="tab-control"]:nth-of-type(2):checked
+  ~ .content
+  > section:nth-child(2) {
+  display: block;
+}
+/* Tutup */
+
+@media (max-width: 600px) {
+  .tabs
+    input[name="tab-control"]:nth-of-type(3):checked
+    ~ ul
+    > li:nth-child(3)
+    > label {
+    background: rgba(0, 0, 0, 0.08);
+  }
+}
+
+@-webkit-keyframes content {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(5%);
+    transform: translateY(5%);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateY(0%);
+    transform: translateY(0%);
+  }
+}
+@keyframes content {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(5%);
+    transform: translateY(5%);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateY(0%);
+    transform: translateY(0%);
+  }
+}
+
+@media all and (max-width: 750px) {
+  .card-box1 {
+    margin-left: -10px;
+    border-radius: 9px;
+    -moz-border-radius: 5px;
+    background-clip: padding-box;
+    margin-bottom: 20px;
+    background-color: #f6f6f6;
+    border-top: 2pt solid #1976d2;
+  }
+  .stylejaminan {
+    position: relative;
+    margin-left: -10px;
+    padding-bottom: 12px;
+  }
+}

@@ -1,0 +1,87 @@
+.left-sidebar {
+  position: fixed;
+  width: 240px;
+  height: 100%;
+  top: 0px;
+  z-index: 20;
+  padding-top: 60px;
+  background: rgba(238, 236, 236, 0.666);
+  -webkit-box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 1px 0px 20px rgba(56, 39, 185, 0.08);
+}
+
+.fix-sidebar .left-sidebar {
+  position: fixed;
+}
+.sidebar-nav ul {
+  margin: 0px;
+  padding: 0px;
+}
+.sidebar-nav ul li {
+  list-style: none;
+}
+.sidebar-nav ul li a {
+  color: #607d8b;
+  padding: 8px 35px 8px 15px;
+  display: block;
+  font-size: 14px;
+}
+.sidebar-nav > ul > li > a svg {
+  width: 35px;
+  height: 35px;
+  margin-left: -10px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.sidebar-nav > ul > li {
+  margin-bottom: 15px;
+}
+.mini-sidebar .sidebar-nav #sidebarnav li {
+  position: relative;
+}
+.mini-sidebar .sidebar-nav #sidebarnav > li > ul {
+  position: absolute;
+  left: 60px;
+  top: 53px;
+  width: 200px;
+  z-index: 1001;
+  background: #f2f6f8;
+  display: none;
+  padding-left: 1px;
+}
+.mini-sidebar .sidebar-nav #sidebarnav > li:hover > ul,
+.mini-sidebar .sidebar-nav #sidebarnav > li:hover > ul.collapse {
+  display: block;
+}
+.mini-sidebar .sidebar-nav #sidebarnav > li > a.has-arrow:after {
+  display: none;
+}
+.mini-sidebar .left-sidebar {
+  width: 60px;
+}
+.mini-sidebar .scroll-sidebar {
+  height: 1000vh;
+  padding-bottom: 0px;
+  position: absolute;
+  overflow-x: hidden !important;
+}
+.mini-sidebar .hide-menu,
+.mini-sidebar > .label {
+  display: none;
+}
+.mini-sidebar .sidebar-nav {
+  background: transparent;
+}
+.mini-sidebar .sidebar-nav #sidebarnav > li > a {
+  padding: 9px 25px;
+}
+.mini-sidebar .sidebar-nav #sidebarnav > li:hover > a {
+  width: 260px;
+  background: #1976d2;
+}
+.mini-sidebar .sidebar-nav #sidebarnav > li:hover > a .hide-menu {
+  display: inline;
+  color: #fff;
+  margin-left: 5%;
+  font-weight: 700;
+}

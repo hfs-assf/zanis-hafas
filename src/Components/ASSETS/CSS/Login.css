@@ -1,0 +1,10 @@
+/* @import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"); */
+.login-block {
+  background: url(../../../Components/ASSETS/IMG/bg-pattern.png),
+    -webkit-gradient(linear, right top, left top, from(#6ecf64), to(#86d856));
+  background: url(../../../Components/ASSETS/IMG/bg-pattern.png),
+    linear-gradient(to left, #95db8d, #1976d2);
+  padding: 50px 0;
+  height: 100vh;
+  margin-top: -25px;
+}
