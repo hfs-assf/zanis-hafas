@@ -1,0 +1,32 @@
+[
+  {
+    "id": "0",
+    "nama": "Abbocath 18",
+    "kategori": "Minum",
+    "persediaan": "10",
+    "satuan": "pcs",
+    "harga_beli": "10950",
+    "harga_jual": "13950",
+    "masa_berlaku": "29 Januari 2019"
+  },
+  {
+    "id": "1",
+    "nama": "Abbocath 20",
+    "kategori": "Minum",
+    "persediaan": "10",
+    "satuan": "pcs",
+    "harga_beli": "11950",
+    "harga_jual": "14950",
+    "masa_berlaku": "29 Januari 2019"
+  },
+  {
+    "id": "2",
+    "nama": "Asolute",
+    "kategori": "Minum",
+    "persediaan": "10",
+    "satuan": "pcs",
+    "harga_beli": "14950",
+    "harga_jual": "16950",
+    "masa_berlaku": "2 Februari 2019"
+  }
+]

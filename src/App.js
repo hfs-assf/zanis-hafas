@@ -6,7 +6,7 @@ import Login from "./Views/JSX/Login/Login";
 import Header from "./Views/JSX/Header/Header";
 import Sidebar from "./Views/JSX/Sidebar/Sidebar";
 import Dashboard from "./Views/JSX/DashboardUser/Dashboard";
-
+import TampilanTV from "./Views/JSX/TampilanTV/Antrian"
 // Admin
 import Admin from "./Views/JSX/Admin/Dashboard";
 import KelolaItemLaboratorium from "./Views/JSX/Admin/KelolaItemLaboratorium";

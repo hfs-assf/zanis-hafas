@@ -1,21 +1,21 @@
 import React, { Component } from "react";
-import obatList from "../../../../JSON/rekammedis.json";
 import { Link } from "react-router-dom";
+import rekamMedis from "../../../../JSON/rekammedis.json";
 
 class DaftarRekamMedis extends Component {
   state = {
     filter: ""
   };
 
-  renderDaftarObat = obat => {
+  renderDaftarrm = rm => {
     const { filter } = this.state;
     if (filter !== "") {
       return (
         <div className="row1">
-          <div className="cell">{obat.tanggal_masuk}</div>
-          <div className="cell">{obat.no_rm}</div>
-          <div className="cell">{obat.nama}</div>
-          <div className="cell">{obat.asuransi}</div>
+          <div className="cell">{rm.tanggal_masuk}</div>
+          <div className="cell">{rm.no_rm}</div>
+          <div className="cell">{rm.nama}</div>
+          <div className="cell">{rm.asuransi}</div>
           <div className="cell">
             <Link
               to="/detail_rekam_medis"
@@ -33,10 +33,15 @@ class DaftarRekamMedis extends Component {
   render() {
     let header;
     const { filter } = this.state;
-    const filteredObat = obatList.filter(obat => {
-      return obat.nama.toLowerCase().indexOf(filter.toLowerCase()) !== -1;
+    const filteredRM = rekamMedis.filter(rm => {
+      return (
+        rm.tanggal_masuk.toLowerCase().indexOf(filter.toLowerCase()) !== -1 ||
+        rm.nama.toLowerCase().indexOf(filter.toLowerCase()) !== -1 ||
+        rm.asuransi.toLowerCase().indexOf(filter.toLowerCase()) !== -1 ||
+        rm.no_rm.toString().indexOf(filter) !== -1
+      );
     });
-    if (filteredObat.length !== 0 && filter !== "") {
+    if (filteredRM.length !== 0 && filter !== "") {
       header = (
         <div className="table">
           <div className="row1 header">
@@ -46,12 +51,12 @@ class DaftarRekamMedis extends Component {
             <div className="cell">Jenis Asuransi</div>
             <div className="cell">Aksi</div>
           </div>
-          {filteredObat.map(obat => {
-            return this.renderDaftarObat(obat);
+          {filteredRM.map(rm => {
+            return this.renderDaftarrm(rm);
           })}
         </div>
       );
-    } else if (filteredObat.length === 0 && filter !== "") {
+    } else if (filteredRM.length === 0 && filter !== "") {
       header = (
         <div className="table">
           <div className="row1">
@@ -66,7 +71,8 @@ class DaftarRekamMedis extends Component {
           role="alert"
         >
           Untuk <strong> melihat rekam medis pasien </strong> lakukan dengan
-          pencarian berdasarkan nama pasien. Kemudian klik{" "}
+          pencarian berdasarkan tanggal pelayanan, nomor RM, nama, dan jenis
+          ansuransi yang pasien gunakan. Kemudian klik{" "}
           <strong>lihat detail </strong>
           pada data pasien yang diinginkan.
         </div>
@@ -87,7 +93,7 @@ class DaftarRekamMedis extends Component {
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Cari Pasien"
+                    placeholder="Cari Rekam Medis"
                     onChange={e => this.setState({ filter: e.target.value })}
                   />
                 </div>

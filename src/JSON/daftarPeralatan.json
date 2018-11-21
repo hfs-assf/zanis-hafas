@@ -1,0 +1,20 @@
+[
+  {
+    "id": "0",
+    "nama": "LED",
+    "satuan": "unit",
+    "tarif": "10000"
+  },
+  {
+    "id": "1",
+    "nama": "apa",
+    "satuan": "unit",
+    "tarif": "10000"
+  },
+  {
+    "id": "2",
+    "nama": "gaktau",
+    "satuan": "unit",
+    "tarif": "10000"
+  }
+]

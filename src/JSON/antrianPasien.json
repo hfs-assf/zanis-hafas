@@ -19,5 +19,53 @@
     "asuransi": "BPJS",
     "tujuan": "Poli Kulit",
     "jam_masuk": "13.28"
+  },
+  {
+    "id": 4,
+    "no_rm": "1010102010",
+    "nama": "Kurnianto Syaputra",
+    "asuransi": "BPJS",
+    "tujuan": "Poli Gigi",
+    "jam_masuk": "10.00"
+  },
+  {
+    "id": 5,
+    "no_rm": "1010102011",
+    "nama": "Stevio Dorgi",
+    "asuransi": "Umum",
+    "tujuan": "Poli Umum",
+    "jam_masuk": "10.43"
+  },
+  {
+    "id": 6,
+    "no_rm": "1010102012",
+    "nama": "Suci Nascaisar",
+    "asuransi": "BPJS",
+    "tujuan": "Poli Kulit",
+    "jam_masuk": "13.28"
+  },
+  {
+    "id": 7,
+    "no_rm": "1010102010",
+    "nama": "Kurnianto Syaputra",
+    "asuransi": "BPJS",
+    "tujuan": "Poli Gigi",
+    "jam_masuk": "10.00"
+  },
+  {
+    "id": 8,
+    "no_rm": "1010102011",
+    "nama": "Stevio Dorgi",
+    "asuransi": "Umum",
+    "tujuan": "Poli Umum",
+    "jam_masuk": "10.43"
+  },
+  {
+    "id": 9,
+    "no_rm": "1010102012",
+    "nama": "Suci Nascaisar",
+    "asuransi": "BPJS",
+    "tujuan": "Poli Kulit",
+    "jam_masuk": "13.28"
   }
 ]

@@ -1,0 +1,63 @@
+.televisi {
+  width: 92%;
+}
+.antrianselanjutnya > .card {
+  margin-left: 120px;
+}
+.object > ul {
+  animation: MoveUpDown 30s linear infinite;
+  position: relative;
+  margin-top: 100px;
+  height: 300px;
+  margin-left: -30px;
+}
+
+.object1 > ul {
+  animation: MoveUpDown 30s linear infinite;
+  position: relative;
+  margin-top: 100px;
+  height: 300px;
+}
+
+.kotak1 .object {
+  width: 600px;
+  height: 500px;
+  overflow: hidden;
+}
+
+@keyframes MoveUpDown {
+  0% {
+    bottom: -1000px;
+  }
+  100% {
+    bottom: 1900px;
+  }
+}
+
+.kanan {
+  margin-left: 14rem;
+}
+
+.ruqyah {
+  margin-top: -1.5rem;
+  background-color: rgb(29, 173, 48);
+  color: white;
+  font-weight: 600;
+  font-size: 20px;
+  text-align: center;
+  line-height: 50px;
+  height: 50px;
+  width: 25rem;
+}
+.bekam {
+  margin-top: -25px;
+  background-color: rgb(29, 173, 48);
+  color: white;
+  font-weight: 600;
+  font-size: 20px;
+
+  text-align: center;
+  line-height: 50px;
+  height: 50px;
+  width: 25rem;
+}
