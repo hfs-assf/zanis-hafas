@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class Pendaftaran extends Component {
+class FormPendaftaran extends Component {
   render() {
     return (
       <div>
@@ -248,4 +248,4 @@ class Pendaftaran extends Component {
   }
 }
 
-export default Pendaftaran;
+export default FormPendaftaran;

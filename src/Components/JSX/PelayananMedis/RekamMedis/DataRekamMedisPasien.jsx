@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import LogosZainab from "../../../img/zainablogos.png";
-import "../../ASSETS/CSS/DetailRekamMedis.css";
+import LogoZanis from "../../../ASSETS/IMG/zanis.png";
+import "../../../ASSETS/CSS/DetailRekamMedis.css";
 
 class DetailRekamMedis extends Component {
   render() {
@@ -8,7 +8,7 @@ class DetailRekamMedis extends Component {
       <div className="container-fluid">
         <div className="row garis">
           <div className="col-md-6 logos">
-            <img className="img-fluid" src={LogosZainab} alt="logo zainab" />
+            <img className="img-fluid" src={LogoZanis} alt="logo zainab" />
             <div className="judulrm">ASESMEN REKAM MEDIS</div>
           </div>
           <div className="col-md-5 datadiri">

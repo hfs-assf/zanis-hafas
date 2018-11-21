@@ -1,5 +1,5 @@
 import React from "react";
-import "../../ASSETS/CSS/RiwayatPasien.css";
+import "../../../ASSETS/CSS/RiwayatPasien.css";
 
 const RiwayatKunjunganProfile = props => (
   <div className="listflex">

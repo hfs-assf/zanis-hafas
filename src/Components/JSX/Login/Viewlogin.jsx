@@ -10,7 +10,7 @@ class ViewLogin extends Component {
           <div className="content">
             <div className="welcome">
               <img
-                src={require("../../../img/zanis.png")}
+                src={require("../../ASSETS/IMG/zanis.png")}
                 alt="zanis"
                 height="100px"
               />

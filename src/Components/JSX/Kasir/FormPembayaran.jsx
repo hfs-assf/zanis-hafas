@@ -1,53 +1,15 @@
 import React, { Component } from "react";
 import "../../ASSETS/CSS/form.css";
 import SVGBillInvoice from "../../ASSETS/SVG/SVGBillInvoice";
-import pasienList from "../../../JSON/pasien";
-
+import DetailPasien from "../DetailPasien";
 class FormPembayaran extends Component {
   render() {
-    let deskripsiPasien;
-    const pasien = pasienList.filter(antrian => {
-      return antrian.id.toString().indexOf(this.props.pasien) !== -1;
-    });
-    if (pasien.length !== 0) {
-      deskripsiPasien = pasien.map(pasien => {
-        return (
-          <table key={pasien.id}>
-            <tbody>
-              <tr>
-                <td>Nomor RM </td>
-                <td className="datatable">
-                  :&ensp;
-                  {pasien.no_rm}
-                </td>
-              </tr>
-              <tr>
-                <td>Nama</td>
-                <td className="datatable">
-                  :&ensp;
-                  {pasien.nama}
-                </td>
-              </tr>
-              <tr>
-                <td>Poli</td>
-                <td className="datatable">
-                  :&ensp;
-                  {pasien.tujuan}
-                </td>
-              </tr>
-              <tr>
-                <td>Tanggal</td>
-                <td className="datatable">:&ensp;10 Oktober 1993</td>
-              </tr>
-            </tbody>
-          </table>
-        );
-      });
-    }
     return (
       <div className="container-fluid ">
         <div className="row" style={{ margin: "0.5em" }}>
-          <div className="col-md-10 boxriwayat">{deskripsiPasien}</div>
+          <div className="col-md-10 boxriwayat">
+            <DetailPasien id={this.props.pasien} />
+          </div>
           <div className="col-md-2">
             <div className="row">
               <div className="boxsurat">

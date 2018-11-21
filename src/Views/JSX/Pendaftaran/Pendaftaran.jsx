@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../../../Components/ASSETS/CSS/Pendaftaran.css";
 import ViewPencarian from "../../../Components/JSX/Pendaftaran/CariPasien";
-import FormTambah from "../../../Components/JSX/Pendaftaran/Pendaftaran";
+import FormTambah from "../../../Components/JSX/Pendaftaran/FormPendaftaran";
 
 class Pendaftaran extends Component {
   render() {

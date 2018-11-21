@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import "../../ASSETS/CSS/Apotek.css";
-import "../../ASSETS/CSS/form.css";
-import obatList from "../../../JSON/daftarObat.json";
+import obatList from "../../../../JSON/rekammedis.json";
+import { Link } from "react-router-dom";
 
-class TableApotek extends Component {
+class DaftarRekamMedis extends Component {
   state = {
     filter: ""
   };
@@ -13,17 +12,18 @@ class TableApotek extends Component {
     if (filter !== "") {
       return (
         <div className="row1">
+          <div className="cell">{obat.tanggal_masuk}</div>
+          <div className="cell">{obat.no_rm}</div>
           <div className="cell">{obat.nama}</div>
-          <div className="cell">{obat.kategori}</div>
-          <div className="cell">{obat.persediaan + " " + obat.satuan}</div>
-          <div className="cell">{obat.masa_berlaku}</div>
+          <div className="cell">{obat.asuransi}</div>
           <div className="cell">
-            Rp.
-            {obat.harga_beli}
-          </div>
-          <div className="cell">
-            Rp.
-            {obat.harga_jual}
+            <Link
+              to="/detail_rekam_medis"
+              target="_blank"
+              className="btn btn-primary btn-sm"
+            >
+              Lihat Detail
+            </Link>
           </div>
         </div>
       );
@@ -40,12 +40,11 @@ class TableApotek extends Component {
       header = (
         <div className="table">
           <div className="row1 header">
-            <div className="cell">Nama Obat</div>
-            <div className="cell">Jenis Obat</div>
-            <div className="cell">Persediaan</div>
-            <div className="cell">Masa Berlaku</div>
-            <div className="cell">Harga Beli</div>
-            <div className="cell">Harga Jual</div>
+            <div className="cell">Tanggal </div>
+            <div className="cell">No. RM</div>
+            <div className="cell">Nama</div>
+            <div className="cell">Jenis Asuransi</div>
+            <div className="cell">Aksi</div>
           </div>
           {filteredObat.map(obat => {
             return this.renderDaftarObat(obat);
@@ -56,7 +55,7 @@ class TableApotek extends Component {
       header = (
         <div className="table">
           <div className="row1">
-            <div className="cell">Obat tidak tersedia</div>
+            <div className="cell">Pasien tidak ditemukan </div>
           </div>
         </div>
       );
@@ -66,7 +65,10 @@ class TableApotek extends Component {
           className="alert alert-warning alert-dismissible fade show"
           role="alert"
         >
-          <strong>Untuk melihat data obat</strong> klik menu pencarian.
+          Untuk <strong> melihat rekam medis pasien </strong> lakukan dengan
+          pencarian berdasarkan nama pasien. Kemudian klik{" "}
+          <strong>lihat detail </strong>
+          pada data pasien yang diinginkan.
         </div>
       );
     }
@@ -75,7 +77,7 @@ class TableApotek extends Component {
         <div className="card-body">
           <div className="flex-container">
             <div className="box column1">
-              <h2 className="card-title text-left">Daftar Obat</h2>
+              <h2 className="card-title text-left">Daftar Rekam Medis</h2>
             </div>
 
             <div className="box column2">
@@ -85,7 +87,7 @@ class TableApotek extends Component {
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Cari Obat"
+                    placeholder="Cari Pasien"
                     onChange={e => this.setState({ filter: e.target.value })}
                   />
                 </div>
@@ -102,4 +104,4 @@ class TableApotek extends Component {
   }
 }
 
-export default TableApotek;
+export default DaftarRekamMedis;

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ViewRekamMedisList from "../../../Components/JSX/RekamMedis/ViewRekamMedislist";
+import ViewRekamMedisList from "../../../../Components/JSX/PelayananMedis/RekamMedis/ViewRekamMedislist";
 class RekamMedisList extends Component {
   render() {
     return (

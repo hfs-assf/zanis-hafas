@@ -1,21 +1,22 @@
 import React, { Component } from "react";
 
-class TambahDaftarTindakan extends Component {
+class TambahLaboratorium extends Component {
   render() {
     return (
       <div
-        className="modal fade"
-        id="tambahBiayaTindakan"
-        tabindex="-1"
+        className="modal fade right"
+        id="tambahItemLaboratorium"
+        tabIndex="-1"
         role="dialog"
         aria-labelledby="myModalLabel"
         aria-hidden="true"
       >
         <div className="modal-dialog modal-notify modal-info" role="document">
           <div className="modal-content">
-            <div className="modal-header">
-              <p className="heading lead">Form Tambah Pegawai</p>
-
+            <div className="modal-header info-color text-white text-center ">
+              <h4 className="modal-title w-100" id="myModalLabel">
+                Tambah Peralatan Laboratorium
+              </h4>
               <button
                 type="button"
                 className="close"
@@ -35,10 +36,10 @@ class TambahDaftarTindakan extends Component {
                     <div className="md-form mb-0">
                       <input
                         type="text"
-                        id="nama_tindakan"
-                        name="nama_tindakan"
+                        id="nama_item"
+                        name="nama_item"
                         className="form-control"
-                        placeholder="Nama Tindakan"
+                        placeholder="Nama Peralatan"
                       />
                     </div>
                   </div>
@@ -48,10 +49,10 @@ class TambahDaftarTindakan extends Component {
                     <div className="md-form mb-0">
                       <input
                         type="number"
-                        id="harga_tindakan"
-                        name="harga_tindakan"
+                        id="tarif"
+                        name="tarif"
                         className="form-control"
-                        placeholder="Harga Tindakan"
+                        placeholder="Tarif"
                       />
                     </div>
                   </div>
@@ -75,4 +76,4 @@ class TambahDaftarTindakan extends Component {
   }
 }
 
-export default TambahDaftarTindakan;
+export default TambahLaboratorium;

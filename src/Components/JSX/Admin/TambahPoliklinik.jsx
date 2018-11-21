@@ -1,20 +1,22 @@
 import React, { Component } from "react";
 
-class TambahDataPoliklinik extends Component {
+class TambahPoliklinik extends Component {
   render() {
     return (
       <div
-        className="modal fade"
+        className="modal fade right"
         id="tambahPoliklinik"
-        tabindex="-1"
+        tabIndex="-1"
         role="dialog"
         aria-labelledby="myModalLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog modal-notify modal-info" role="document">
+        <div className="modal-dialog modal-right" role="document">
           <div className="modal-content">
-            <div className="modal-header">
-              <p className="heading lead">Form Tambah Poliklinik</p>
+            <div className="modal-header info-color text-white text-center ">
+              <h4 className="modal-title w-100" id="myModalLabel">
+                Tambah Poliklinik
+              </h4>
 
               <button
                 type="button"
@@ -34,11 +36,11 @@ class TambahDataPoliklinik extends Component {
                   <div className="col-md-12">
                     <div className="md-form mb-0">
                       <input
-                        type="text"
-                        id="nama_poliklinik"
-                        name="nama_poliklinik"
+                        type="number"
+                        id="nama_poli"
+                        name="nama_poli"
                         className="form-control"
-                        placeholder="Masukkan Nama PoliKlinik"
+                        placeholder="Masukkan Nama Poliklinik"
                       />
                     </div>
                   </div>
@@ -62,4 +64,4 @@ class TambahDataPoliklinik extends Component {
   }
 }
 
-export default TambahDataPoliklinik;
+export default TambahPoliklinik;

@@ -168,7 +168,7 @@ td select {
   margin-top: 12px;
   height: 40px;
   line-height: 40px;
-  font-size: 25px;
+  font-size: 18px;
   border-radius: 10px 10px 0 0;
   /* max-width: 10em; */
   text-align: center;
@@ -256,6 +256,7 @@ td select {
   -ms-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
 }
+
 .table {
   width: 100%;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
@@ -277,17 +278,22 @@ td select {
 .row1.header {
   background-color: #1976d2 !important;
   font-weight: 00;
-  color: white;
   text-align: center;
   font-size: 15px;
 }
-.cell {
+.row1.header .cell {
+  color: white !important;
+}
+
+.row .cell {
   border: 1px solid white;
   border-radius: 5px;
   padding: 15px 20px;
   display: table-cell;
   font-size: 12px;
+  color: rgb(0, 0, 0);
 }
+
 .row1:hover {
   background-color: rgb(200, 212, 212);
 }

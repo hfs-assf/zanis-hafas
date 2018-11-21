@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import "../../ASSETS/CSS/TambahPelayananAntrian.css";
 
-class TambahAntrianPelayanan extends Component {
+class TambahAntrian extends Component {
   constructor() {
     super();
     this.state = {
@@ -164,12 +163,8 @@ class TambahAntrianPelayanan extends Component {
             </button>
           </div>
         </div>
-        {/* <button className="btn btn-info">Simpan</button>
-        <Link to="/pendaftaran">
-          <button className="btn btn-outline-info">Kembali</button>
-        </Link> */}
       </form>
     );
   }
 }
-export default TambahAntrianPelayanan;
+export default TambahAntrian;

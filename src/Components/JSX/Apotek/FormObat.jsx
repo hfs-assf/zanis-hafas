@@ -11,10 +11,7 @@ class FormObat extends Component {
         aria-labelledby="myModalLabel"
         aria-hidden="true"
       >
-        <div
-          className="modal-dialog modal-full-height modal-right"
-          role="document"
-        >
+        <div className="modal-dialog modal-right" role="document">
           <div className="modal-content">
             <div className="modal-header info-color white-text text-center py-4">
               <h4 className="modal-title w-100" id="myModalLabel">
@@ -26,14 +23,16 @@ class FormObat extends Component {
                 data-dismiss="modal"
                 aria-label="Close"
               >
-                <span aria-hidden="true">&times;</span>
+                <span aria-hidden="true" className="white-text">
+                  &times;
+                </span>
               </button>
             </div>
             <div className="modal-body">
               <form id="contact-form" name="contact-form" method="POST">
                 <div className="row">
                   <div className="col-md-12">
-                    <div className="mb-3">
+                    <div className="md-form mb-0">
                       <input
                         type="text"
                         id="nama_obat"
@@ -46,7 +45,7 @@ class FormObat extends Component {
                 </div>
                 <div className="row">
                   <div className="col-md-6">
-                    <div className="mb-3">
+                    <div className="md-form mb-0">
                       <input
                         type="text"
                         id="jumlah"
@@ -57,7 +56,7 @@ class FormObat extends Component {
                     </div>
                   </div>
                   <div className="col-md-6">
-                    <div className="mb-3">
+                    <div className="md-form mb-0">
                       <input
                         type="text"
                         id="satuan"
@@ -70,7 +69,7 @@ class FormObat extends Component {
                 </div>
                 <div className="row">
                   <div className="col-md-6">
-                    <div className="mb-3">
+                    <div className="md-form mb-0">
                       <input
                         type="text"
                         id="harga_beli"
@@ -81,7 +80,7 @@ class FormObat extends Component {
                     </div>
                   </div>
                   <div className="col-md-6">
-                    <div className="mb-3">
+                    <div className="md-form mb-0">
                       <input
                         type="text"
                         id="harga_jual"
@@ -94,7 +93,7 @@ class FormObat extends Component {
                 </div>
                 <div className="row">
                   <div className="col-md-12">
-                    <div className="mb-3">
+                    <div className="md-form mb-0">
                       <span>Masa Berlaku</span>
 
                       <input
@@ -108,7 +107,7 @@ class FormObat extends Component {
                 </div>
                 <div className="row">
                   <div className="col-md-12">
-                    <div className="mb-3">
+                    <div className="md-form mb-0">
                       <span>Jenis Obat</span>
                       <select className="custom-select" name="jenis_obat">
                         <option value="1">Minum</option>

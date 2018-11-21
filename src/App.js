@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import "./App.css";
 import { Route, Switch } from "react-router-dom";
-import Dashboard from "./Component/JSX/DashboardHome/Dashboard";
+
+import Login from "./Views/JSX/Login/Login";
+import Header from "./Views/JSX/Header/Header";
+import Sidebar from "./Views/JSX/Sidebar/Sidebar";
+import Dashboard from "./Views/JSX/DashboardUser/Dashboard";
+
 // Admin
 import Admin from "./Views/JSX/Admin/Dashboard";
 import KelolaItemLaboratorium from "./Views/JSX/Admin/KelolaItemLaboratorium";

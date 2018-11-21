@@ -1,37 +1,39 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Antrian from "../../../JSON/antrianPasien.json";
+import antrian from "../../../JSON/antrianPasien.json";
+import pasien from "../../../JSON/pasien.json";
 import "../../ASSETS/CSS/Timeline.css";
 
 class TimelinePelayananMedis extends Component {
-  renderTimelinePelayananMedis() {
-    return Antrian.map((item, index) => (
-      <li key={index} className="animated bounceIn">
-        <Link to={"/formpelayananmedis/" + item.id}>
-          <span />
-          <div className="number"> {item.id} </div>
-          <div>
-            <div className="title">{item.no_rm}</div>
-            <div className="tefalsext-white">{item.nama}</div>
-            <div className="type">
-              {item.asuransi} - {item.tujuan}
-            </div>
-          </div>
-        </Link>
-        <span className="number">
-          <span>{item.jam_masuk}</span>
-          <span />
-        </span>
-      </li>
-    ));
-  }
-
   render() {
+    let deskripsiPasien, ket;
+
+    deskripsiPasien = antrian.map(e => {
+      ket = pasien.find(pasien => pasien.no_rm === e.no_rm);
+
+      return <li key={e.id} className="animated bounceIn">
+          <Link to={"/pelayanan-medis/" + e.id}>
+            <span />
+            <div className="number"> {e.id} </div>
+            <div>
+              <div className="title">{e.no_rm}</div>
+              <div className="tefalsext-white">{ket.nama}</div>
+              <div className="type">
+                {e.asuransi} - {e.tujuan}
+              </div>
+            </div>
+          </Link>
+          <span className="number">
+            <span>{e.jam_masuk}</span>
+            <span />
+          </span>
+        </li>;
+    });
     return (
       <div className="row">
         <div className="col-md-4">
           <div className="container">
-            <ul>{this.renderTimelinePelayananMedis()}</ul>
+            <ul>{deskripsiPasien}</ul>
           </div>
         </div>
       </div>

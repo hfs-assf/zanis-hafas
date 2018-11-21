@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import "../../ASSETS/CSS/Apotek.css";
-import "../../ASSETS/CSS/form.css";
 import obatList from "../../../JSON/daftarObat.json";
+import TambahDaftarUjiLabroratorium from "../../../Components/JSX/Admin/TambahItemLaboratorium";
 
-class TableApotek extends Component {
+class KelolaItemLaboratorium extends Component {
   state = {
     filter: ""
   };
@@ -14,16 +13,11 @@ class TableApotek extends Component {
       return (
         <div className="row1">
           <div className="cell">{obat.nama}</div>
-          <div className="cell">{obat.kategori}</div>
-          <div className="cell">{obat.persediaan + " " + obat.satuan}</div>
-          <div className="cell">{obat.masa_berlaku}</div>
+          <div className="cell">{obat.nama}</div>
+
           <div className="cell">
-            Rp.
-            {obat.harga_beli}
-          </div>
-          <div className="cell">
-            Rp.
-            {obat.harga_jual}
+            <button className="btn btn-success btn-sm">Ubah</button>
+            <button className="btn btn-warning btn-sm">Hapus</button>
           </div>
         </div>
       );
@@ -40,12 +34,9 @@ class TableApotek extends Component {
       header = (
         <div className="table">
           <div className="row1 header">
-            <div className="cell">Nama Obat</div>
-            <div className="cell">Jenis Obat</div>
-            <div className="cell">Persediaan</div>
-            <div className="cell">Masa Berlaku</div>
-            <div className="cell">Harga Beli</div>
-            <div className="cell">Harga Jual</div>
+            <div className="cell">Peralatan</div>
+            <div className="cell">Biaya</div>
+            <div className="cell">Aksi</div>
           </div>
           {filteredObat.map(obat => {
             return this.renderDaftarObat(obat);
@@ -56,7 +47,7 @@ class TableApotek extends Component {
       header = (
         <div className="table">
           <div className="row1">
-            <div className="cell">Obat tidak tersedia</div>
+            <div className="cell">Peralatan tidak tersedia</div>
           </div>
         </div>
       );
@@ -66,7 +57,8 @@ class TableApotek extends Component {
           className="alert alert-warning alert-dismissible fade show"
           role="alert"
         >
-          <strong>Untuk melihat data obat</strong> klik menu pencarian.
+          <strong>Untuk melihat daftar peralatan laboratorium</strong> klik menu
+          pencarian.
         </div>
       );
     }
@@ -75,7 +67,16 @@ class TableApotek extends Component {
         <div className="card-body">
           <div className="flex-container">
             <div className="box column1">
-              <h2 className="card-title text-left">Daftar Obat</h2>
+              <h2 className="card-title text-left">
+                Daftar Peralatan Laboratorium{" "}
+                <button
+                  className="btn btn-sm btn-primary"
+                  data-toggle="modal"
+                  data-target="#tambahItemLaboratorium"
+                >
+                  Tambah Peralatan{" "}
+                </button>
+              </h2>
             </div>
 
             <div className="box column2">
@@ -85,7 +86,7 @@ class TableApotek extends Component {
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Cari Obat"
+                    placeholder="Cari Peralatan Laboratorium"
                     onChange={e => this.setState({ filter: e.target.value })}
                   />
                 </div>
@@ -96,10 +97,11 @@ class TableApotek extends Component {
           <div className="row">
             <div className="col-md-12 rowsoap">{header}</div>
           </div>
+          <TambahDaftarUjiLabroratorium />
         </div>
       </div>
     );
   }
 }
 
-export default TableApotek;
+export default KelolaItemLaboratorium;

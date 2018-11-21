@@ -1,21 +1,22 @@
 import React, { Component } from "react";
 
-class TambahDataPegawai extends Component {
+class TambahTindakan extends Component {
   render() {
     return (
       <div
-        className="modal fade"
-        id="tambahPegawai"
-        tabindex="-1"
+        className="modal fade right"
+        id="tambahTindakan"
+        tabIndex="-1"
         role="dialog"
         aria-labelledby="myModalLabel"
         aria-hidden="true"
       >
         <div className="modal-dialog modal-notify modal-info" role="document">
           <div className="modal-content">
-            <div className="modal-header">
-              <p className="heading lead">Form Tambah Pegawai</p>
-
+            <div className="modal-header info-color text-white text-center ">
+              <h4 className="modal-title w-100" id="myModalLabel">
+                Tambah Tindakan
+              </h4>
               <button
                 type="button"
                 className="close"
@@ -34,46 +35,25 @@ class TambahDataPegawai extends Component {
                   <div className="col-md-12">
                     <div className="md-form mb-0">
                       <input
-                        type="number"
-                        id="nik_pegawai"
-                        name="nik_pegawai"
-                        className="form-control"
-                        placeholder="Masukkan Nomor Induk Kepegawaian"
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-12">
-                    <div className="md-form mb-0">
-                      <input
                         type="text"
-                        id="nama_pegawai"
-                        name="nama_pegawai"
+                        id="nama_tindakan"
+                        name="nama_tindakan"
                         className="form-control"
-                        placeholder="Nama Pegawai"
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-12">
-                    <div className="md-form mb-0">
-                      <input
-                        type="text"
-                        id="password"
-                        name="password"
-                        className="form-control"
-                        placeholder="Password"
+                        placeholder="Nama Tindakan"
                       />
                     </div>
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col-md-6">
+                  <div className="col-md-12">
                     <div className="md-form mb-0">
-                      <span>Divisi</span>
-                      <select className="custom-select" name="divisi_pegawai">
-                        <option value="1">IT</option>
-                        <option value="2">Terapis</option>
-                        <option value="2">Ruqyah</option>
-                      </select>
+                      <input
+                        type="number"
+                        id="tarif_tindakan"
+                        name="tarif_tindakan"
+                        className="form-control"
+                        placeholder="Tarif"
+                      />
                     </div>
                   </div>
                 </div>
@@ -96,4 +76,4 @@ class TambahDataPegawai extends Component {
   }
 }
 
-export default TambahDataPegawai;
+export default TambahTindakan;

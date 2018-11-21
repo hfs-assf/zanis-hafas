@@ -11,7 +11,7 @@ class CariPasien extends Component {
     };
   }
   tambahAntrian(id) {
-    window.location.assign("/tambahlayanan/" + id);
+    window.location.assign("/tambah-layanan/" + id);
   }
   render() {
     let suggestionsList;

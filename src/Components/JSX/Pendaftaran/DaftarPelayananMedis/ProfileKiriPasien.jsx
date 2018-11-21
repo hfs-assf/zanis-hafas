@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-// import SVGPencarianPasien from "../../SVG/pencarianpasien";
-// import SVGRiwayatPasien from "../../SVG/SVGhistorypasien";
 import RiwayatPasien from "./RiwayatKunjungan";
-import pasienList from "../../../JSON/pasien";
+import pasienList from "../../../../JSON/pasien";
 
 class ProfileKiriPasien extends Component {
   calculateAge(date) {

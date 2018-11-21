@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import SVGKalender from "../../ASSETS/SVG/Kalender";
-import "../../ASSETS/CSS/option.css";
+import SVGKalender from "../../../ASSETS/SVG/Kalender";
+import "../../../ASSETS/CSS/option.css";
 
 class ViewRekamMedisList extends Component {
   render() {

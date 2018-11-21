@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "../../../Components/ASSETS/CSS/TambahPelayananAntrian.css";
-import ProfileKiriPasien from "../../../Components/JSX/PendaftaranLayanan/ProfileKiriPasien";
-import FormAntrianPelayanan from "../../../Components/JSX/PendaftaranLayanan/TambahAntrian";
+import ProfileKiriPasien from "../../../Components/JSX/Pendaftaran/DaftarPelayananMedis/ProfileKiriPasien";
+import FormAntrianPelayanan from "../../../Components/JSX/Pendaftaran/DaftarPelayananMedis/TambahAntrian";
+
 class TambahAntrianPelayanan extends Component {
   render() {
     return (
