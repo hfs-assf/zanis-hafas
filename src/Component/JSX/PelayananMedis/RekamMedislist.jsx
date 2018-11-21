@@ -34,7 +34,7 @@ class RekamMedisList extends Component {
                     <hr className="hr1" />
                   </div>
                 </div>
-                <div className="tab-content">
+                <div>
                   <ul className="ul">
                     <li className="li">
                       Tanggal Lahir : <strong> 17 Oktober 1993 </strong>

@@ -1,6 +1,27 @@
+.pencarianmr {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+.pencarianmr .pencarian2 {
+  /* background-color: black; */
+  margin-left: auto;
+  width: 9rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .pencarianmr .pencarian2 {
+    margin-top: 12px;
+    margin-bottom: 1rem;
+    margin-right: auto;
+  }
+}
+
 .garis {
   position: relative;
-  border: 1px dashed rgb(180, 176, 176);
+  border: 1px solid rgb(180, 176, 176);
   width: 99%;
 }
 .datadiri {
@@ -17,7 +38,7 @@
   font-size: 30px;
   font-weight: 500;
   width: 100%;
-  border-top: 1px dashed rgb(180, 176, 176);
+  border-top: 1px solid rgb(180, 176, 176);
   margin-top: 10px;
 }
 
@@ -47,7 +68,8 @@
 .triase {
   margin-top: 12px;
   margin-left: -30px;
-  width: 99%;
+  width: 100%;
+  background-color: rgb(243, 239, 234);
 }
 
 .triase .datatriase > p {

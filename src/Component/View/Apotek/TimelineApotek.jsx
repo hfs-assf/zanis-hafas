@@ -29,8 +29,10 @@ class TimelineApotek extends Component {
         className="animated bounceIn"
         onClick={() => this.showHide(true, { index })}
       >
-        <span />
+        <input id="obat1" type="radio" name="obataktif" />
+
         <div className="number"> {item.id} </div>
+
         <div>
           <div className="title">{item.no_rm}</div>
           <div className="tefalsext-white">{item.nama}</div>

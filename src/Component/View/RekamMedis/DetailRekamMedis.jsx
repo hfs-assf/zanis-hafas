@@ -8,7 +8,7 @@ class DetailRekamMedis extends Component {
       <div className="container-fluid">
         <div className="row garis">
           <div className="col-md-6 logos">
-            <img className="img-fluid" src={LogosZainab} />
+            <img className="img-fluid" src={LogosZainab} alt="Logo zainab" />
             <div className="judulrm">ASESMEN REKAM MEDIS</div>
           </div>
           <div className="col-md-5 datadiri">
@@ -82,12 +82,8 @@ class DetailRekamMedis extends Component {
                 <div className="Cell">
                   <p>Tanda - Tanda Vital</p>
                 </div>
-                <div className="Cell">
-                  <p>: GCS </p>
-                </div>
-                <div className="Cell">
-                  <p>: Eye </p>
-                </div>
+                <div className="Cell">: GCS : Eye</div>
+                <div className="Cell" />
                 <div className="Cell">
                   <p>: 12 </p>
                 </div>

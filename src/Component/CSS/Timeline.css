@@ -1,8 +1,9 @@
 .container ul {
   list-style: none;
   position: absolute;
-  color: #fff;
-  font-size: 13px;
+  color: rgb(211, 9, 9);
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .container ul:before {
@@ -67,7 +68,7 @@
 .container div .title,
 .container div .type {
   font-weight: 600;
-  font-size: 12px;
+  font-size: 18px;
   color: white;
 }
 
@@ -109,4 +110,15 @@
   height: 20px;
   line-height: 20px;
   text-align: center;
+}
+
+li input[type="radio"]:checked ~ .number {
+  background-color: #f53e3e;
+  width: 16px;
+  border-radius: 0px 5px 5px 0px;
+  color: #ffffff;
+}
+
+li > input[type="radio"] {
+  /* display: none; */
 }

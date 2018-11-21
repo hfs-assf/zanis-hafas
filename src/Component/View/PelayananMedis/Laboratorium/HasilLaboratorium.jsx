@@ -5,9 +5,7 @@ class HasilLaboratorium extends Component {
   daftarItemPemeriksaan() {
     return ItemPemeriksaan.map((el, index) => (
       <div className="row1" key={index}>
-        <div className="cell" style={{ paddingLeft: 5 + 25 * el.level + "px" }}>
-          {el.item}
-        </div>
+        <div className="cell">{el.item}</div>
         <div className="cell">
           <input type="number" refs="{el.item}" />
         </div>

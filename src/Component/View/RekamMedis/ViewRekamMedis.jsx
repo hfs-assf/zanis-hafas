@@ -5,9 +5,13 @@ import "../../CSS/option.css";
 
 class ViewRekamMedis extends Component {
   state = {
-    filter: ""
+    filter: "",
+    showMe: false
   };
 
+  showHide(value) {
+    this.setState({ showMe: value });
+  }
   renderDaftarObat = obat => {
     const { filter } = this.state;
     if (filter !== "") {
@@ -39,17 +43,63 @@ class ViewRekamMedis extends Component {
     });
     return (
       <div className="boxpelayanan">
-        <div className="main">
-          <div className="row maxrow" style={{ margin: "0px" }}>
-            <div className="col-md-5">
-              <input
-                type="text"
-                style={{ width: "100%" }}
-                onChange={e => this.setState({ filter: e.target.value })}
-                placeholder="Cari Nama Pasien"
-              />
+        <div className="pencarianmr">
+          <div className="pencarian1">
+            <div className="custom-radios">
+              <div>
+                <input
+                  type="radio"
+                  id="color-1"
+                  name="janispasien"
+                  value="color-1"
+                  onClick={() => this.showHide(false)}
+                />
+                <label htmlFor="color-1" className="radio-inline">
+                  <span />
+                </label>
+                Pencarian Berdasarkan Nama
+              </div>
+
+              <div className="ml-4">
+                <input
+                  type="radio"
+                  id="color-2"
+                  name="janispasien"
+                  value="color-2"
+                  onClick={() => this.showHide(true)}
+                />
+                <label htmlFor="color-2" className="radio-inline">
+                  <span />
+                </label>
+                Berdasarkan Tanggal
+              </div>
             </div>
           </div>
+          {this.state.showMe ? (
+            <div className="pencarian2">
+              <select name="pencariantanggal" className="form-control">
+                <option value="hariini">Hari Ini</option>
+                <option value="bulanini">Bulan Ini</option>
+              </select>
+            </div>
+          ) : (
+            <div className="pencarian2">
+              <div style={{ margin: "0px" }}>
+                <input
+                  type="text"
+                  style={{
+                    width: "100%",
+                    border: "2px solid blue",
+                    borderRadius: "5px"
+                  }}
+                  onChange={e => this.setState({ filter: e.target.value })}
+                  placeholder="Cari Nama Pasien"
+                />
+              </div>
+            </div>
+          )}
+        </div>
+        <div className="main">
           <div className="row">
             <div className="col-md-12 rowsoap">
               <div className="table">
