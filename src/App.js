@@ -37,6 +37,7 @@ class App extends Component {
     return (
       <div>
         <Header />
+        <Route path="/tampilantv" component={TampilanTV} />
         <Route path="/login" component={Login} />
 
         <Sidebar />
