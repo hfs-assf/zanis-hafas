@@ -92,6 +92,10 @@ class Sidebar extends Component {
                 </Link>
                 <ul aria-expanded="false" className="collapse">
                   <li>
+                    <Link to="/profil-klinik">Profil Klinik</Link>
+                  </li>
+
+                  <li>
                     <Link to="/karyawan">Daftar Karyawan</Link>
                   </li>
                   <li>

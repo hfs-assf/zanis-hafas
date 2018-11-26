@@ -1,3 +1,12 @@
 .containercontent {
   margin-left: 100px;
 }
+.desc-column {
+  font-size: 12px;
+  margin-top: -20px !important;
+  color: #4285f4;
+  font-weight: 700;
+}
+.desc-column.invalid {
+  color: red;
+}

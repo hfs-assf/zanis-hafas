@@ -2,17 +2,17 @@ import React, { Component } from "react";
 import "../../../ASSETS/CSS/TambahPelayananAntrian.css";
 
 class SoapPasien extends Component {
-  constructor() {
-    super();
-    this.state = {
-      showMe: false
-    };
+  state = {
+    showMe: false
+  };
+  showHide(e) {
+    var hasil = e.target.value;
+    if (hasil === "false") {
+      this.setState({ showMe: true });
+    } else {
+      this.setState({ showMe: false });
+    }
   }
-
-  showHide(value) {
-    this.setState({ showMe: value });
-  }
-
   render() {
     return (
       <div className="container-fluid">
@@ -87,61 +87,48 @@ class SoapPasien extends Component {
             <div className="row">
               <div className="col-md-6 rowsoap">
                 <div className="legendtitle">Subjektif</div>
-                <textarea
-                  placeholder="Isi Form Tindakan"
-                  name="textarea"
-                  className="textarea"
-                />
+                <textarea name="textarea" className="textarea" />
               </div>
               <div className="col-md-6 rowsoap">
                 <div className="legendtitle">Analisa</div>
-                <textarea
-                  placeholder="Isi Form Tindakan"
-                  name="textarea"
-                  className="textarea"
-                />
+                <textarea name="textarea" className="textarea" />
               </div>
             </div>
             <div className="row">
               <div className="col-md-6 rowsoap">
                 <div className="legendtitle">Objektif</div>
-                <textarea
-                  placeholder="Isi Form Tindakan"
-                  name="textarea"
-                  className="textarea"
-                />
+                <textarea name="textarea" className="textarea" />
               </div>
               <div className="col-md-6 rowsoap">
                 <div className="legendtitle">Tindakan</div>
-                <textarea
-                  placeholder="Isi Form Tindakan"
-                  name="textarea"
-                  className="textarea"
-                />
+                <textarea name="textarea" className="textarea" />
               </div>
             </div>
             <div className="row">
-              <div className="col-md-6 rowsoap">
-                <div className="custom-radios">
-                  <div>
-                    <input
-                      type="radio"
-                      id="color-2"
-                      name="janispasien"
-                      value="color-2"
-                      onClick={() => this.showHide(true)}
-                    />
-                    <label htmlFor="color-2" className="radio-inline">
-                      <span />
-                    </label>
-                    Simpan Template SOAP
-                  </div>
+              <div className="col-md-4 rowsoap">
+                <div className="custom-checkbox">
+                  <input
+                    type="checkbox"
+                    id="color-2"
+                    name="janispasien"
+                    value={this.state.showMe}
+                    onClick={e => this.showHide(e)}
+                  />
+                  <label htmlFor="color-2" className="radio-inline">
+                    <span />
+                  </label>
+                  Simpan Template SOAP
                 </div>
               </div>
 
-              <div className="col-md-6 rowsoap">
+              <div className="col-md-8 rowsoap">
                 {this.state.showMe ? (
-                  <input type="text" name="nama_soap" />
+                  <input
+                    type="text"
+                    name="nama_soap"
+                    className="input-template"
+                    placeholder="Nama Template"
+                  />
                 ) : null}
               </div>
             </div>
@@ -150,11 +137,7 @@ class SoapPasien extends Component {
           <div className="row maxrow" style={{ margin: "10px" }}>
             <div className="col-md-2">Diagnosa</div>
             <div className="col-md-10">
-              <input
-                type="text"
-                placeholder="isi diagnosa"
-                className="form-control"
-              />
+              <input type="text" className="form-control" />
             </div>
           </div>
           <div className="col-md-12">

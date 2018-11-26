@@ -4,7 +4,7 @@
   -webkit-border-radius: 5px;
   border-radius: 9px;
   -moz-border-radius: 5px;
-  height: 800px;
+  min-height: 400px;
   background-clip: padding-box;
   margin-bottom: 20px;
   background-color: #f6f6f6;
@@ -91,7 +91,7 @@
   );
 }
 
-/* checkbox */
+/* radio */
 
 .custom-radios div {
   display: inline-block;
@@ -134,7 +134,47 @@
   background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg)
     center center no-repeat;
   color: white;
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+}
 
+/* checkbox */
+.custom-checkbox {
+  display: inline-block;
+  margin-top: -10px;
+}
+
+.custom-checkbox input[type="checkbox"] {
+  display: none;
+}
+
+.custom-checkbox input[type="checkbox"] + label span {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.custom-checkbox input[type="checkbox"] + label span img {
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.custom-checkbox input[type="checkbox"]#color-2 + label span {
+  background-color: #3498db;
+}
+
+.custom-checkbox input[type="checkbox"]:checked + label span {
+  opacity: 1;
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg)
+    center center no-repeat;
+  color: white;
   width: 30px;
   height: 30px;
   display: inline-block;

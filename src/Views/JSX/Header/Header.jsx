@@ -16,6 +16,7 @@ export default class Header extends Component {
             height="48px"
           />
         </Link>
+
         <button
           className="navbar-toggler"
           type="button"
@@ -45,12 +46,16 @@ export default class Header extends Component {
                 className="dropdown-menu dropdown-menu-right"
                 aria-labelledby="navbarDropdownMenuLink-4"
               >
-                <Link to="/ubah_profile" className="dropdown-item" href="#">
-                  <i className="fa fa-user" /> Ubah Profile
-                </Link>
-                <Link to="/lagout" className="dropdown-item" href="#">
+                <button
+                  className="dropdown-item"
+                  data-toggle="modal"
+                  data-target="#ubahProfil"
+                >
+                  <i className="fa fa-user" /> Ubah Profil
+                </button>
+                <div className="dropdown-item">
                   <i className="fas fa-sign-out-alt" /> Keluar
-                </Link>
+                </div>
               </div>
             </li>
           </ul>

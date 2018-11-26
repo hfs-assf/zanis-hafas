@@ -6,13 +6,15 @@ import Login from "./Views/JSX/Login/Login";
 import Header from "./Views/JSX/Header/Header";
 import Sidebar from "./Views/JSX/Sidebar/Sidebar";
 import Dashboard from "./Views/JSX/DashboardUser/Dashboard";
-import TampilanTV from "./Views/JSX/TampilanTV/Antrian"
+import Profil from "./Components/JSX/UbahProfil";
+import TampilanTV from "./Views/JSX/TampilanTV/Antrian";
 // Admin
 import Admin from "./Views/JSX/Admin/Dashboard";
 import KelolaItemLaboratorium from "./Views/JSX/Admin/KelolaItemLaboratorium";
 import KelolaKaryawan from "./Views/JSX/Admin/KelolaKaryawan";
 import KelolaPoliklinik from "./Views/JSX/Admin/KelolaPoliklinik";
 import KelolaTindakan from "./Views/JSX/Admin/KelolaTindakan";
+import ProfilKlinik from "./Views/JSX/Admin/ProfilKlinik";
 
 // Apotek
 import KelolaApotek from "./Views/JSX/Apotek/KelolaApotek";
@@ -37,6 +39,7 @@ class App extends Component {
     return (
       <div>
         <Header />
+        <Profil />
         <Route path="/tampilantv" component={TampilanTV} />
         <Route path="/login" component={Login} />
 
@@ -68,6 +71,7 @@ class App extends Component {
             <Route path="/karyawan" component={KelolaKaryawan} />
             <Route path="/poliklinik" component={KelolaPoliklinik} />
             <Route path="/tindakan" component={KelolaTindakan} />
+            <Route path="/profil-klinik" component={ProfilKlinik} />
             <Route
               path="/peralatan-laboratorium"
               component={KelolaItemLaboratorium}
