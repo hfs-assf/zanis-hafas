@@ -1,6 +1,35 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 class UbahProfilKlinik extends Component {
+  state = {
+    selectedFile: null,
+    judul: ""
+  };
+
+  fileChangedHandler = event => {
+    // const file = event.target.files[0];
+    // console.log(event.target.files[0]);
+    this.setState({
+      selectedFile: event.target.files[0],
+      judul: event.target.files[0].name
+    });
+  };
+  uploadHandler = () => {
+    // const formData = new FormData();
+    // formData.append(
+    //   "image",
+    //   this.state.selectedFile,
+    //   this.state.selectedFile.name
+    // );
+    // axios.post("https://zanis-786d9.firebaseio.com/", formData, {
+    //   onUploadProgress: progressEvent => {
+    //     console.log(progressEvent.loaded / progressEvent.total);
+    //   }
+    // });
+    // axios.post("https://zanis-786d9.firebaseio.com/", this.state.selectedFile);
+    console.log(this.state.judul);
+  };
   render() {
     return (
       <div className="row">
@@ -13,8 +42,18 @@ class UbahProfilKlinik extends Component {
                 className="img-fluid"
                 alt="pasien"
                 style={{ width: "200px", height: "200px" }}
+                onClick={() => this.fileInput.click()}
               />
-              <h5 className="header-title indigo-text">Ubah Logo Klinik</h5>
+              <input
+                style={{ display: "none" }}
+                type="file"
+                onChange={e => this.fileChangedHandler(e)}
+                ref={fileInput => (this.fileInput = fileInput)}
+              />
+              <label>{this.state.judul}</label>
+              <h5 onClick={() => this.fileInput.click()}>
+                Ubah Foto Profil Klinik
+              </h5>
             </div>
           </div>
         </div>
@@ -94,6 +133,19 @@ class UbahProfilKlinik extends Component {
                   name="website_klinik"
                   className="form-control"
                 />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-12">
+                <div className="modal-footer justify-content-center">
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => this.uploadHandler()}
+                  >
+                    Simpan
+                  </button>
+                  <button className="btn btn-warning">Bersihkan</button>
+                </div>
               </div>
             </div>
           </form>

@@ -93,6 +93,7 @@ class UbahProfil extends Component {
                         name="nama_karyawan"
                         className="form-control"
                         value="Tuti Triastuti"
+                        disabled
                       />
                     </div>
                   </div>

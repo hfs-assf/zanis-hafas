@@ -31,14 +31,7 @@ class ProfilKlinik extends Component {
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            {/* <div className="row"> */}
-            {/* <div className="col-md-3 hidden-sm hidden-xs">
-            <ProfileKiriPasien pasien={this.props.antrian.id} />
-          </div> */}
-            {/* <div className="col-md-8  "> */}
             <FormProfil />
-            {/* </div> */}
-            {/* </div> */}
           </div>
         </div>
       </div>
