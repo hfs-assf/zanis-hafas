@@ -1,6 +1,78 @@
 import React, { Component } from "react";
+import tambahPasien from "../../../Methods/RekamMedis/Pasien/tambahPasien";
 
 class FormPendaftaran extends Component {
+  state = {
+    // nomor_rekam_medis: "",
+    nomor_pengenal: "4124121241",
+    jenis_nomor_pengenal: "ktp",
+    email: "",
+    nama_pasien: "",
+    tempat_lahir: "",
+    tanggal_lahir: "",
+    jenis_kelamin: "P",
+    status: "Belum Menikah",
+    agama: "Islam",
+    alamat: "",
+    kecamatan: "Sail",
+    kelurahan: "Tenayan Raya",
+    kode_pos: "",
+    telepon: "",
+    handphone: "",
+    pendidikan: "",
+    pekerjaan: "",
+    kantor: "",
+    catatan: ""
+  };
+
+  tambahPasienBaru = event => {
+    event.preventDefault();
+    tambahPasien({
+      // nomor_rekam_medis: this.state.nomor_rekam_medis,
+      nomor_pengenal: this.state.nomor_pengenal,
+      jenis_nomor_pengenal: "ktp",
+      email: this.state.email,
+      nama_pasien: this.state.nama_pasien,
+      tempat_lahir: this.state.tempat_lahir,
+      tanggal_lahir: this.state.tanggal_lahir,
+      jenis_kelamin: this.state.jenis_kelamin,
+      status: this.state.status,
+      agama: this.state.agama,
+      alamat: this.state.alamat,
+      kecamatan: this.state.kecamatan,
+      kelurahan: this.state.kelurahan,
+      kode_pos: this.state.kode_pos,
+      telepon: this.state.telepon,
+      handphone: this.state.handphone,
+      pendidikan: this.state.pendidikan,
+      pekerjaan: this.state.pekerjaan,
+      kantor: this.state.kantor,
+      catatan: this.state.catatan
+    });
+  };
+  cleanAll() {
+    this.setState({
+      nomor_pengenal: "4124121241",
+      jenis_nomor_pengenal: "ktp",
+      email: "",
+      nama_pasien: "",
+      tempat_lahir: "",
+      tanggal_lahir: "",
+      jenis_kelamin: "P",
+      status: "Belum Menikah",
+      agama: "Islam",
+      alamat: "",
+      kecamatan: "Sail",
+      kelurahan: "Tenayan Raya",
+      kode_pos: "",
+      telepon: "",
+      handphone: "",
+      pendidikan: "",
+      pekerjaan: "",
+      kantor: "",
+      catatan: ""
+    });
+  }
   render() {
     return (
       <div>
@@ -21,7 +93,17 @@ class FormPendaftaran extends Component {
                     <span>
                       No KTP <span className="required">*</span>
                     </span>
-                    <input type="text" className="form-control" name="no_ktp" />
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="no_ktp"
+                      onChange={event =>
+                        this.setState({
+                          nomor_pengenal: event.target.value
+                        })
+                      }
+                      required
+                    />
                   </label>
 
                   <label>
@@ -32,6 +114,12 @@ class FormPendaftaran extends Component {
                       type="text"
                       className="form-control"
                       name="nama_pasien"
+                      onChange={event =>
+                        this.setState({
+                          nama_pasien: event.target.value
+                        })
+                      }
+                      required
                     />
                   </label>
                   <div className="row">
@@ -45,6 +133,12 @@ class FormPendaftaran extends Component {
                           type="text"
                           className="form-control"
                           name="tempat_lahir"
+                          onChange={event =>
+                            this.setState({
+                              tempat_lahir: event.target.value
+                            })
+                          }
+                          required
                         />
                       </label>
                     </div>
@@ -57,6 +151,12 @@ class FormPendaftaran extends Component {
                           type="date"
                           className="form-control"
                           name="tanggal_lahir"
+                          onChange={event =>
+                            this.setState({
+                              tanggal_lahir: event.target.value
+                            })
+                          }
+                          required
                         />
                       </label>
                     </div>
@@ -67,7 +167,16 @@ class FormPendaftaran extends Component {
                       {" "}
                       <label>
                         <span>Agama</span>
-                        <select name="agama" className="form-control">
+                        <select
+                          name="agama"
+                          className="form-control"
+                          onChange={event =>
+                            this.setState({
+                              agama: event.target.value
+                            })
+                          }
+                          required
+                        >
                           <option value="Islam">Islam</option>
                           <option value="Kristen">Kristen</option>
                           <option value="Budha">Budha</option>
@@ -79,7 +188,16 @@ class FormPendaftaran extends Component {
                       {" "}
                       <label>
                         <span>Jenis Kelamin</span>
-                        <select name="jenis_kelamin" className="form-control">
+                        <select
+                          name="jenis_kelamin"
+                          className="form-control"
+                          onChange={event =>
+                            this.setState({
+                              jenis_kelamin: event.target.value
+                            })
+                          }
+                          required
+                        >
                           <option value="P">Perempuan</option>
                           <option value="L">Laki-laki</option>
                         </select>
@@ -88,7 +206,16 @@ class FormPendaftaran extends Component {
                     <div className="col-sm-5">
                       <label>
                         <span>Status</span>
-                        <select name="status" className="form-control">
+                        <select
+                          name="status"
+                          className="form-control"
+                          onChange={event =>
+                            this.setState({
+                              status: event.target.value
+                            })
+                          }
+                          required
+                        >
                           <option value="Belum Menikah">Belum Menikah</option>
                           <option value="Sudah Menikah">Sudah Menikah</option>
                         </select>
@@ -99,13 +226,31 @@ class FormPendaftaran extends Component {
                     <span>
                       Alamat <span className="required">*</span>
                     </span>
-                    <textarea name="alamat" className="form-control" />
+                    <textarea
+                      name="alamat"
+                      className="form-control"
+                      onChange={event =>
+                        this.setState({
+                          alamat: event.target.value
+                        })
+                      }
+                      required
+                    />
                   </label>
                   <div className="row">
                     <div className="col-sm-4">
                       <label>
                         <span>Kelurahan</span>
-                        <select name="kelurahan" className="form-control">
+                        <select
+                          name="kelurahan"
+                          className="form-control"
+                          onChange={event =>
+                            this.setState({
+                              kelurahan: event.target.value
+                            })
+                          }
+                          required
+                        >
                           <option value="Tenayan Raya">Tenayan Raya</option>
                           <option value="...">...</option>
                         </select>
@@ -114,7 +259,16 @@ class FormPendaftaran extends Component {
                     <div className="col-sm-4">
                       <label>
                         <span>Kecamatan</span>
-                        <select name="kecamatan" className="form-control">
+                        <select
+                          name="kecamatan"
+                          className="form-control"
+                          onChange={event =>
+                            this.setState({
+                              kecamatan: event.target.value
+                            })
+                          }
+                          required
+                        >
                           <option value="Sail">Sail</option>
                           <option value="Rumbai">Rumbai</option>
                         </select>
@@ -129,19 +283,68 @@ class FormPendaftaran extends Component {
                           type="number"
                           className="form-control"
                           name="kode_pos"
+                          onChange={event =>
+                            this.setState({
+                              kode_pos: event.target.value
+                            })
+                          }
+                          required
                         />
                       </label>
                     </div>
                   </div>
-
+                  <div className="row">
+                    <div className="col-sm-6">
+                      <label>
+                        <span>
+                          Telpon <span className="required">*</span>
+                        </span>
+                        <input
+                          type="number"
+                          className="form-control"
+                          name="telpon"
+                          onChange={event =>
+                            this.setState({
+                              telepon: event.target.value
+                            })
+                          }
+                          required
+                        />
+                      </label>
+                    </div>
+                    <div className="col-sm-6">
+                      <label>
+                        <span>
+                          Handphone <span className="required">*</span>
+                        </span>
+                        <input
+                          type="number"
+                          className="form-control"
+                          name="telpon"
+                          onChange={event =>
+                            this.setState({
+                              handphone: event.target.value
+                            })
+                          }
+                          required
+                        />
+                      </label>
+                    </div>
+                  </div>
                   <label>
                     <span>
-                      Telpon <span className="required">*</span>
+                      Email <span className="required">*</span>
                     </span>
                     <input
-                      type="number"
+                      type="email"
                       className="form-control"
-                      name="telpon"
+                      name="email"
+                      onChange={event =>
+                        this.setState({
+                          email: event.target.value
+                        })
+                      }
+                      required
                     />
                   </label>
                 </fieldset>
@@ -158,28 +361,45 @@ class FormPendaftaran extends Component {
                           type="text"
                           className="form-control"
                           name="pendidikan"
+                          onChange={event =>
+                            this.setState({
+                              pendidikan: event.target.value
+                            })
+                          }
+                          required
                         />
                       </label>
                     </div>
                     <div className="col-sm">
                       <label>
-                        <span>Kantor</span>
+                        <span>Pekerjaan</span>
                         <input
                           type="text"
                           className="form-control"
-                          name="kantor"
+                          name="pekerjaan"
+                          onChange={event =>
+                            this.setState({
+                              pekerjaan: event.target.value
+                            })
+                          }
+                          required
                         />
                       </label>
                     </div>
                   </div>
                   <label>
                     <span>
-                      <span>Nama Perusahaan </span>
+                      <span>Alamat Kantor </span>
                     </span>
-                    <input
-                      type="text"
+                    <textarea
+                      name="kantor"
                       className="form-control"
-                      name="nama_perusahaan"
+                      onChange={event =>
+                        this.setState({
+                          kantor: event.target.value
+                        })
+                      }
+                      required
                     />
                   </label>
                 </fieldset>
@@ -236,8 +456,18 @@ class FormPendaftaran extends Component {
             <div className="row">
               <div className="col-md-10">
                 <div className="modal-footer justify-content-center">
-                  <button className="btn btn-primary">Simpan</button>
-                  <button className="btn btn-warning">Bersihkan</button>
+                  <button
+                    className="btn btn-primary"
+                    onClick={event => this.tambahPasienBaru(event)}
+                  >
+                    Simpan
+                  </button>
+                  <button
+                    className="btn btn-warning"
+                    onClick={() => this.cleanAll()}
+                  >
+                    Bersihkan
+                  </button>
                 </div>
               </div>
             </div>

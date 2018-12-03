@@ -1,25 +1,35 @@
 import React, { Component } from "react";
 import "../../ASSETS/CSS/Pendaftaran.css";
-import pasienList from "../../../JSON/pasien";
+import listPasien from "../../../Methods/RekamMedis/Pasien/listPasien";
 
 class CariPasien extends Component {
   constructor() {
     super();
     this.state = {
       textFilter: "",
-      showSuggestions: false
+      showSuggestions: false,
+      pasien: []
     };
   }
+
+  componentWillMount() {
+    listPasien().then(({ data }) => {
+      this.setState({
+        pasien: this.state.pasien.concat(data)
+      });
+    });
+  }
+
   tambahAntrian(id) {
     window.location.assign("/tambah-layanan/" + id);
   }
   render() {
     let suggestionsList;
-    const { textFilter, showSuggestions } = this.state;
-    const filteresPasien = pasienList.filter(pasien => {
+    const { textFilter, showSuggestions, pasien } = this.state;
+    const filteresPasien = pasien.filter(pasien => {
       return (
-        pasien.nama.toLowerCase().indexOf(textFilter.toLowerCase()) !== -1 ||
-        pasien.no_rm.indexOf(textFilter) !== -1
+        pasien.nama_pasien.toLowerCase().indexOf(textFilter.toLowerCase()) !==
+          -1 || pasien.nomor_rekam_medis.indexOf(textFilter) !== -1
       );
     });
     if (showSuggestions === true) {
@@ -29,13 +39,13 @@ class CariPasien extends Component {
             {filteresPasien.map(pasien => {
               return (
                 <li
-                  key={pasien.id}
+                  key={pasien.nomor_rekam_medis}
                   className="suggestion-active"
-                  onClick={() => this.tambahAntrian(pasien.id)}
+                  onClick={() => this.tambahAntrian(pasien.nomor_rekam_medis)}
                 >
-                  {pasien.nama}
+                  {pasien.nama_pasien}
                   <br />
-                  {pasien.no_rm}
+                  {pasien.nomor_rekam_medis}
                 </li>
               );
             })}

@@ -1,19 +1,28 @@
 import React, { Component } from "react";
-import obatList from "../../../JSON/daftarObat.json";
 import TambahDaftarTindakan from "../../../Components/JSX/Admin/TambahTindakan";
+import listTindakan from "../../../Methods/Poli/Tindakan/listTindakan";
 
 class KelolaTindakan extends Component {
   state = {
-    filter: ""
+    filter: "",
+    tindakan: []
   };
 
-  renderDaftarObat = obat => {
+  componentWillMount() {
+    listTindakan().then(({ data }) => {
+      this.setState({
+        tindakan: this.state.tindakan.concat(data)
+      });
+    });
+  }
+
+  renderDaftarTindakan = tindakan => {
     const { filter } = this.state;
     if (filter !== "") {
       return (
-        <div className="row1">
-          <div className="cell">{obat.nama}</div>
-          <div className="cell">{obat.nama}</div>
+        <div className="row1" keys={tindakan.uid}>
+          <div className="cell">{tindakan.nama_tindakan}</div>
+          <div className="cell">{tindakan.biaya_tindakan}</div>
 
           <div className="cell">
             <button className="btn btn-success btn-sm">Ubah</button>
@@ -26,11 +35,14 @@ class KelolaTindakan extends Component {
 
   render() {
     let header;
-    const { filter } = this.state;
-    const filteredObat = obatList.filter(obat => {
-      return obat.nama.toLowerCase().indexOf(filter.toLowerCase()) !== -1;
+    const { filter, tindakan } = this.state;
+    const filteredTindakan = tindakan.filter(tindakan => {
+      return (
+        tindakan.nama_tindakan.toLowerCase().indexOf(filter.toLowerCase()) !==
+        -1
+      );
     });
-    if (filteredObat.length !== 0 && filter !== "") {
+    if (filteredTindakan.length !== 0 && filter !== "") {
       header = (
         <div className="table">
           <div className="row1 header">
@@ -38,12 +50,12 @@ class KelolaTindakan extends Component {
             <div className="cell">Biaya</div>
             <div className="cell">Aksi</div>
           </div>
-          {filteredObat.map(obat => {
-            return this.renderDaftarObat(obat);
+          {filteredTindakan.map(tindakan => {
+            return this.renderDaftarTindakan(tindakan);
           })}
         </div>
       );
-    } else if (filteredObat.length === 0 && filter !== "") {
+    } else if (filteredTindakan.length === 0 && filter !== "") {
       header = (
         <div className="table">
           <div className="row1">

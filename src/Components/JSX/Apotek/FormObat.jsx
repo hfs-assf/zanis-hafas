@@ -29,7 +29,7 @@ class FormObat extends Component {
               </button>
             </div>
             <div className="modal-body">
-              <form id="contact-form" name="contact-form" method="POST">
+              <form method="POST">
                 <div className="row">
                   <div className="col-md-12">
                     <div className="md-form mb-0">

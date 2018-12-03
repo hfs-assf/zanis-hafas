@@ -1,24 +1,39 @@
 import React, { Component } from "react";
-import obatList from "../../../JSON/daftarObat.json";
+import listUser from "../../../Methods/User/Akun/listUser";
 import TambahKaryawan from "../../../Components/JSX/Admin/TambahKaryawan";
 
 class KelolaKaryawan extends Component {
   state = {
-    filter: ""
+    filter: "",
+    user: []
   };
 
-  renderDaftarObat = obat => {
+  componentWillMount() {
+    listUser().then(({ data }) => {
+      this.setState({
+        user: this.state.user.concat(data)
+      });
+    });
+  }
+
+  rendereDaftarUser = karyawan => {
     const { filter } = this.state;
     if (filter !== "") {
       return (
-        <div className="row1">
-          <div className="cell">{obat.nama}</div>
-          <div className="cell">{obat.kategori}</div>
-          <div className="cell">{obat.persediaan + " " + obat.satuan}</div>
-          <div className="cell">{obat.masa_berlaku}</div>
-
+        <div className="row1" key={karyawan.uid}>
+          {" "}
+          <div className="cell">{karyawan.nik}</div>
+          <div className="cell">{karyawan.nama}</div>
+          <div className="cell">{karyawan.email}</div>
+          <div className="cell">{karyawan.role}</div>
           <div className="cell">
-            <button className="btn btn-success btn-sm">Ubah</button>
+            <button
+              className="btn btn-success btn-sm"
+              data-toggle="modal"
+              data-target="#tambahKaryawan"
+            >
+              Ubah
+            </button>
             <button className="btn btn-warning btn-sm">Hapus</button>
           </div>
         </div>
@@ -28,11 +43,11 @@ class KelolaKaryawan extends Component {
 
   render() {
     let header;
-    const { filter } = this.state;
-    const filteredObat = obatList.filter(obat => {
-      return obat.nama.toLowerCase().indexOf(filter.toLowerCase()) !== -1;
+    const { filter, user } = this.state;
+    const filteredUser = user.filter(user => {
+      return user.nama.toLowerCase().indexOf(filter.toLowerCase()) !== -1;
     });
-    if (filteredObat.length !== 0 && filter !== "") {
+    if (filteredUser.length !== 0 && filter !== "") {
       header = (
         <div className="table">
           <div className="row1 header">
@@ -42,12 +57,12 @@ class KelolaKaryawan extends Component {
             <div className="cell">Username</div>
             <div className="cell">Aksi</div>
           </div>
-          {filteredObat.map(obat => {
-            return this.renderDaftarObat(obat);
+          {filteredUser.map(user => {
+            return this.rendereDaftarUser(user);
           })}
         </div>
       );
-    } else if (filteredObat.length === 0 && filter !== "") {
+    } else if (filteredUser.length === 0 && filter !== "") {
       header = (
         <div className="table">
           <div className="row1">
