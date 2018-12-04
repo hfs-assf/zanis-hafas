@@ -113,7 +113,13 @@ class resepObatTabulasi extends Component {
           </div>
           <div className="col-md-12">
             <div className="modal-footer justify-content-center">
-              <button className="btn btn-primary">Simpan</button>
+              <button
+                className="btn btn-primary"
+                data-placement="bottom"
+                title="Simpan Data Obat "
+              >
+                Simpan
+              </button>
               <button className="btn btn-warning" onClick={() => this.reset()}>
                 Bersihkan
               </button>

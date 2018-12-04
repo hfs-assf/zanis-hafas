@@ -9,12 +9,15 @@ import {
   Legend,
   ResponsiveContainer
 } from "recharts";
-import DataDaerah from "../../../JSON/PasienPerkecamatan.json";
+import DataPasien from "../../../JSON/jumlahpasien.json";
 
-class DashboarPasienP extends Component {
+class IndikatorAreaSasaran extends Component {
   render() {
     return (
-      <div className="card">
+      <div
+        className="card mt-1 mb-2"
+        style={{ backgroundColor: "#231b69 ", color: "white" }}
+      >
         <div className="card-body">
           <div className="d-flex no-block">
             <h4 className="card-title">Data Pasien Per Wilayah</h4>
@@ -27,24 +30,34 @@ class DashboarPasienP extends Component {
               </select>
             </div>
           </div>
+
           <div id="Container">
             <ResponsiveContainer width="100%">
               <LineChart
                 width={1000}
-                height={500}
-                data={DataDaerah}
+                data={DataPasien}
                 margin={{ top: 15, right: 30, left: 20, bottom: 5 }}
               >
-                <XAxis dataKey="name" padding={{ left: 30, right: 30 }} />
-                <YAxis />
+                <XAxis
+                  dataKey="name"
+                  padding={{ left: 30, right: 30 }}
+                  stroke="white"
+                />
+                <YAxis stroke="white" />
                 <CartesianGrid strokeDasharray="3 3" />
-                <Tooltip />
+                <Tooltip style={{ backgroundColor: "#4A4A4A" }} />
                 <Legend />
                 <Line
                   type="monotone"
-                  name="Jumlah"
-                  dataKey="berkunjung"
-                  stroke="#8884d8"
+                  name="Pasien Umum"
+                  dataKey="Umum"
+                  stroke="white"
+                />
+                <Line
+                  type="monotone"
+                  name="Pasien BPJS"
+                  dataKey="BPJS"
+                  stroke="#ff0000"
                 />
               </LineChart>
             </ResponsiveContainer>
@@ -54,5 +67,4 @@ class DashboarPasienP extends Component {
     );
   }
 }
-
-export default DashboarPasienP;
+export default IndikatorAreaSasaran;

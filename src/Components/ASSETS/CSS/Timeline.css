@@ -1,6 +1,63 @@
+/* Kalender */
+.calender > svg {
+  position: relative;
+  width: 39px;
+  height: 30px;
+  margin: 3px;
+}
+.form-group > span {
+  font-size: 13pt;
+  font-weight: 600;
+  color: #1976d2;
+}
+
+input[type="date"] {
+  height: 35px;
+  margin: 0 auto;
+  width: 100%;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: #1976d2;
+  outline: none;
+  border: 0;
+  border-radius: 3px;
+  padding: 0 3px;
+  color: #fff;
+}
+
+/* Tutup Kalender */
+/* Pemberitahuan Jumlah Pasien Dengan Badge */
+.banyakpasien {
+  position: absolute;
+  top: 110px;
+  right: 0;
+}
+.badge {
+  box-sizing: border-box;
+  display: inline-block;
+  background-color: #1976d2;
+  color: #ffffff;
+  border-radius: 0.4rem;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 400;
+  padding: 0.6rem;
+}
+
+/* Tutup Badge */
+.row .tglpasien {
+  position: fixed;
+  border: 1px dashed #1976d2;
+  padding: 10px;
+  border-radius: 10px;
+  height: 140px;
+  width: 18rem;
+  right: 12px;
+}
 .container ul {
   list-style: none;
-  position: absolute;
+  /* position: absolute; */
   color: #fff;
   font-size: 13px;
 }

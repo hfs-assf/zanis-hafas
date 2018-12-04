@@ -9,8 +9,8 @@ class TimelineKasir extends Component {
           className="alert alert-danger alert-dismissible fade show"
           role="alert"
         >
-          <strong>Lakukan metode FIFO pada Timeline : </strong> Arahkan kursor
-          untuk melanjutkan perintah
+          <strong>Arahkan kursor untuk melanjutkan perintah.</strong> Untuk
+          melihat data sebelumnya silahkan pilih tanggal di pojok kanan.
           <button
             type="button"
             className="close"
@@ -20,6 +20,7 @@ class TimelineKasir extends Component {
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+
         <Timeline />
       </div>
     );

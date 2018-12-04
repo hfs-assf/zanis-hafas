@@ -236,7 +236,13 @@ class FormPendaftaran extends Component {
             <div className="row">
               <div className="col-md-10">
                 <div className="modal-footer justify-content-center">
-                  <button className="btn btn-primary">Simpan</button>
+                  <button
+                    className="btn btn-primary"
+                    data-placement="bottom"
+                    title="Tambah Data Pasien"
+                  >
+                    Simpan
+                  </button>
                   <button className="btn btn-warning">Bersihkan</button>
                 </div>
               </div>

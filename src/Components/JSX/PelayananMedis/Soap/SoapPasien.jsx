@@ -142,8 +142,20 @@ class SoapPasien extends Component {
           </div>
           <div className="col-md-12">
             <div className="modal-footer justify-content-center">
-              <button className="btn btn-primary">Simpan</button>
-              <button className="btn btn-warning">Bersihkan</button>
+              <button
+                className="btn btn-primary"
+                data-placement="bottom"
+                title="Simpan Data Soap Pasien"
+              >
+                Simpan
+              </button>
+              <button
+                className="btn btn-warning"
+                data-placement="bottom"
+                title="Bersihkan Data"
+              >
+                Bersihkan
+              </button>
             </div>
           </div>
         </div>
