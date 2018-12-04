@@ -1,22 +1,31 @@
 import React, { Component } from "react";
 import "../../ASSETS/CSS/Apotek.css";
 import "../../ASSETS/CSS/form.css";
-import obatList from "../../../JSON/daftarObat.json";
+// import obatList from "../../../JSON/daftarObat.json";
+import obatList from "../../../Methods/Apotik/Obat/listObat";
 
-class TableApotek extends Component {
+class TableObat extends Component {
   state = {
-    filter: ""
+    filter: "",
+    obat: []
   };
 
+  componentWillMount() {
+    obatList().then(({ data }) => {
+      this.setState({
+        obat: this.state.obat.concat(data)
+      });
+    });
+  }
   renderDaftarObat = obat => {
     const { filter } = this.state;
     if (filter !== "") {
       return (
-        <div className="row1">
-          <div className="cell">{obat.nama}</div>
-          <div className="cell">{obat.kategori}</div>
-          <div className="cell">{obat.persediaan + " " + obat.satuan}</div>
-          <div className="cell">{obat.masa_berlaku}</div>
+        <div className="row1" key={obat.uid}>
+          <div className="cell">{obat.nama_obat}</div>
+          {/* <div className="cell">{obat.kategori}</div> */}
+          {/* <div className="cell">{obat.persediaan + " " + obat.satuan}</div> */}
+          {/* <div className="cell">{obat.masa_berlaku}</div> */}
           <div className="cell">
             Rp.
             {obat.harga_beli}
@@ -32,9 +41,9 @@ class TableApotek extends Component {
 
   render() {
     let header;
-    const { filter } = this.state;
-    const filteredObat = obatList.filter(obat => {
-      return obat.nama.toLowerCase().indexOf(filter.toLowerCase()) !== -1;
+    const { filter, obat } = this.state;
+    const filteredObat = obat.filter(obat => {
+      return obat.nama_obat.toLowerCase().indexOf(filter.toLowerCase()) !== -1;
     });
     if (filteredObat.length !== 0 && filter !== "") {
       header = (
@@ -102,4 +111,4 @@ class TableApotek extends Component {
   }
 }
 
-export default TableApotek;
+export default TableObat;

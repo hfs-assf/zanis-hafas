@@ -27,8 +27,9 @@ class TambahAntrian extends Component {
         </div>
         <hr className="hr2" />
         <div className="form-group row">
-          <label htmlFor="inputjenispasien" className="col-sm-2 col-form-label">
+          <label htmlFor="inputjenispasien" className="col-sm-4 col-form-label">
             Jenis Pasien
+            <span className="required">*</span>
           </label>
           <div className="col-sm-5 mt-1">
             <div className="custom-radios">
@@ -46,7 +47,7 @@ class TambahAntrian extends Component {
                 Umum
               </div>
 
-              <div className="ml-4">
+              <div className="ml-2">
                 <input
                   type="radio"
                   id="color-2"
@@ -63,8 +64,9 @@ class TambahAntrian extends Component {
           </div>
         </div>
         <div className="form-group row">
-          <label htmlFor="LayananMedis" className="col-sm-2 col-form-label">
+          <label htmlFor="LayananMedis" className="col-sm-4 col-form-label">
             Layanan Medis
+            <span className="required">*</span>
           </label>
           <div className="col-sm-5">
             <select className="form-control">
@@ -74,8 +76,9 @@ class TambahAntrian extends Component {
           </div>
         </div>
         <div className="form-group row">
-          <label htmlFor="NamaDokter" className="col-sm-2 col-form-label">
+          <label htmlFor="NamaDokter" className="col-sm-4 col-form-label">
             Nama Dokter
+            <span className="required">*</span>
           </label>
           <div className="col-sm-5">
             <select className="form-control">
@@ -86,8 +89,9 @@ class TambahAntrian extends Component {
           </div>
         </div>
         <div className="form-group row">
-          <label htmlFor="Poliklinik" className="col-sm-2 col-form-label">
+          <label htmlFor="Poliklinik" className="col-sm-4 col-form-label">
             Poliklinik
+            <span className="required">*</span>
           </label>
           <div className="col-sm-5">
             <select className="form-control">
@@ -97,8 +101,9 @@ class TambahAntrian extends Component {
           </div>
         </div>
         <div className="form-group row">
-          <label htmlFor="TanggalMasuk" className="col-sm-2 col-form-label">
+          <label htmlFor="TanggalMasuk" className="col-sm-4 col-form-label">
             Tanggal Masuk
+            <span className="required">*</span>
           </label>
           <div className="col-sm-5">
             <input
@@ -113,7 +118,7 @@ class TambahAntrian extends Component {
           <div className="animated fadeInRight">
             <h4>Asuransi / Jaminan</h4>
             <div className="form-group row">
-              <label htmlFor="KelasFaskes" className="col-sm-2 col-form-label">
+              <label htmlFor="KelasFaskes" className="col-sm-4 col-form-label">
                 Kelas <span className="required">*</span>
               </label>
               <div className="col-sm-5">
@@ -121,7 +126,7 @@ class TambahAntrian extends Component {
               </div>
             </div>
             <div className="form-group row">
-              <label htmlFor="KelasFaskes" className="col-sm-2 col-form-label">
+              <label htmlFor="KelasFaskes" className="col-sm-4 col-form-label">
                 Faskes
                 <span className="required">*</span>
               </label>
@@ -130,7 +135,7 @@ class TambahAntrian extends Component {
               </div>
             </div>
             <div className="form-group row">
-              <label htmlFor="KelasFaskes" className="col-sm-2 col-form-label">
+              <label htmlFor="KelasFaskes" className="col-sm-4 col-form-label">
                 Nomor Kartu <span className="required">*</span>
               </label>
               <div className="col-sm-5">
@@ -138,7 +143,7 @@ class TambahAntrian extends Component {
               </div>
             </div>
             <div className="form-group row">
-              <label htmlFor="KelasFaskes" className="col-sm-2 col-form-label">
+              <label htmlFor="KelasFaskes" className="col-sm-4 col-form-label">
                 Tanggal Valid
                 <span className="required">*</span>
               </label>

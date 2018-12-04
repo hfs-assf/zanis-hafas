@@ -1,21 +1,30 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import rekamMedis from "../../../../JSON/rekammedis.json";
+import listPasien from "../../../../Methods/RekamMedis/Pasien/listPasien";
 
 class DaftarRekamMedis extends Component {
   state = {
-    filter: ""
+    filter: "",
+    rmPasien: []
   };
 
-  renderDaftarrm = rm => {
+  componentWillMount() {
+    listPasien().then(({ data }) => {
+      this.setState({
+        rmPasien: this.state.rmPasien.concat(data)
+      });
+    });
+  }
+
+  renderDaftarRM = rm => {
     const { filter } = this.state;
     if (filter !== "") {
       return (
         <div className="row1">
-          <div className="cell">{rm.tanggal_masuk}</div>
-          <div className="cell">{rm.no_rm}</div>
-          <div className="cell">{rm.nama}</div>
-          <div className="cell">{rm.asuransi}</div>
+          <div className="cell">{rm.nomor_rekam_medis}</div>
+          <div className="cell">{rm.nama_pasien}</div>
+          <div className="cell">{rm.jenis_kelamin}</div>
+          <div className="cell">{rm.status}</div>
           <div className="cell">
             <Link
               to="/detail_rekam_medis"
@@ -32,13 +41,13 @@ class DaftarRekamMedis extends Component {
 
   render() {
     let header;
-    const { filter } = this.state;
-    const filteredRM = rekamMedis.filter(rm => {
+    const { filter, rmPasien } = this.state;
+    const filteredRM = rmPasien.filter(rm => {
       return (
-        rm.tanggal_masuk.toLowerCase().indexOf(filter.toLowerCase()) !== -1 ||
-        rm.nama.toLowerCase().indexOf(filter.toLowerCase()) !== -1 ||
-        rm.asuransi.toLowerCase().indexOf(filter.toLowerCase()) !== -1 ||
-        rm.no_rm.toString().indexOf(filter) !== -1
+        // rm.tanggal_masuk.toLowerCase().indexOf(filter.toLowerCase()) !== -1 ||
+        // rm.nama_pasien.toLowerCase().indexOf(filter.toLowerCase()) !== -1 ||
+        // rm.asuransi.toLowerCase().indexOf(filter.toLowerCase()) !== -1 ||
+        rm.nomor_rekam_medis.toString().indexOf(filter) !== -1
       );
     });
     if (filteredRM.length !== 0 && filter !== "") {
@@ -52,7 +61,7 @@ class DaftarRekamMedis extends Component {
             <div className="cell">Aksi</div>
           </div>
           {filteredRM.map(rm => {
-            return this.renderDaftarrm(rm);
+            return this.renderDaftarRM(rm);
           })}
         </div>
       );
@@ -78,6 +87,7 @@ class DaftarRekamMedis extends Component {
         </div>
       );
     }
+    console.log(rmPasien);
     return (
       <div className="card" style={{ borderTop: "2px solid #1976d2" }}>
         <div className="card-body">

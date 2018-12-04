@@ -115,7 +115,7 @@ class LaboratoriumPasien extends Component {
                 <div className="cell">Keterangan</div>
                 <div className="cell">Aksi</div>
               </div>
-              {doPeralatan.map(peralatan => this.daftardoPeralatan(peralatan))}
+              {this.daftardoPeralatan()}
             </div>
           </div>
           <div className="col-md-12 rowsoap text-right">

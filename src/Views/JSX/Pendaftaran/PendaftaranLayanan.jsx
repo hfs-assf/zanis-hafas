@@ -23,10 +23,10 @@ class TambahAntrianPelayanan extends Component {
           </button>
         </div>
         <div className="row">
-          <div className="col-md-3 hidden-sm hidden-xs">
+          <div className="col-md-4 hidden-sm hidden-xs">
             <ProfileKiriPasien pasien={this.props.antrian.id} />
           </div>
-          <div className="col-md-8 order-first order-md-2 card-box1">
+          <div className="col-md-7 card-box1">
             <FormAntrianPelayanan pasien={this.props.antrian.id} />
           </div>
         </div>

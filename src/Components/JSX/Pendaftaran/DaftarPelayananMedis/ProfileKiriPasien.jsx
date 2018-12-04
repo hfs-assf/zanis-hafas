@@ -1,8 +1,19 @@
 import React, { Component } from "react";
 import RiwayatPasien from "./RiwayatKunjungan";
-import pasienList from "../../../../JSON/pasien";
+import detailPasien from "../../../../Methods/RekamMedis/Pasien/detailPasien";
 
 class ProfileKiriPasien extends Component {
+  state = {
+    pasien: []
+  };
+
+  componentWillMount() {
+    detailPasien(this.props.pasien).then(({ data }) => {
+      this.setState({ pasien: this.state.pasien.concat(data) });
+      console.log(data);
+    });
+  }
+
   calculateAge(date) {
     var today = new Date();
     var birthDate = new Date(date);
@@ -15,16 +26,19 @@ class ProfileKiriPasien extends Component {
   }
 
   render() {
+    const { pasien } = this.state;
     let namaPasien, deskripsiPasien;
-    const pasien = pasienList.filter(antrian => {
-      return antrian.id.toString().indexOf(this.props.pasien) !== -1;
+    const detailPasien = pasien.filter(antrian => {
+      return (
+        antrian.nomor_rekam_medis.toString().indexOf(this.props.pasien) !== -1
+      );
     });
-    if (pasien.length !== 0) {
-      namaPasien = pasien.map(pasien => {
+    if (detailPasien.length !== 0) {
+      namaPasien = detailPasien.map(e => {
         return (
           <div
             className="thumb-xl member-thumb m-b-10 center-block"
-            key={pasien.id}
+            key={e.nomor_rekam_medis}
           >
             <img
               src="https://image.flaticon.com/icons/svg/149/149071.svg"
@@ -32,35 +46,34 @@ class ProfileKiriPasien extends Component {
               alt="pasien"
               style={{ width: "200px", height: "200px" }}
             />
-            <h5 className="header-title">{pasien.nama}</h5>
-            <h5 className="header-title indigo-text">{pasien.no_rm}</h5>
+            <h5 className="header-title">{e.nama_pasien}</h5>
+            <h5 className="header-title indigo-text">{e.nomor_rekam_medis}</h5>
             <hr className="hr1" />
           </div>
         );
       });
-      deskripsiPasien = pasien.map(pasien => {
+      deskripsiPasien = detailPasien.map(e => {
         return (
-          <ul className="ul" key={pasien.id}>
+          <ul className="ul" key={e.nomor_rekam_medis}>
             <li className="li">
               Tanggal Lahir :{" "}
               <strong>
-                {new Date(pasien.tanggal_lahir).toLocaleDateString("en-GB")}
+                {new Date(e.tanggal_lahir).toLocaleDateString("en-GB")}
               </strong>
             </li>
 
             <li className="li">
-              Umur :{" "}
-              <strong>{this.calculateAge(pasien.tanggal_lahir)} tahun</strong>
+              Umur : <strong>{this.calculateAge(e.tanggal_lahir)} tahun</strong>
             </li>
             <li className="li">
-              Jenis Kelamin : <strong>{pasien.jenis_kelamin}</strong>
+              Jenis Kelamin : <strong>{e.jenis_kelamin}</strong>
             </li>
 
             <li className="li">
-              Alamat : <strong>{pasien.alamat}</strong>
+              Alamat : <strong>{e.alamat}</strong>
             </li>
             <li className="li">
-              Nomor Hp : <strong>{pasien.no_hp}</strong>
+              Nomor Hp : <strong>{e.handphone}</strong>
             </li>
           </ul>
         );
