@@ -31,3 +31,16 @@
   border: 2px dashed rgb(216, 216, 251);
   margin-top: 2px;
 }
+
+#Container {
+  width: 100%;
+  height: 30em;
+}
+
+@media all and (max-width: 400px) {
+  #Container {
+    width: 400px;
+    height: 15em;
+    margin-left: -50px;
+  }
+}

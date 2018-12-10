@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Januari",
+    "BPJS": 80,
+    "Umum": 88
+  },
+  {
+    "name": "Februari",
+    "BPJS": 90,
+    "Umum": 82
+  },
+  {
+    "name": "Maret",
+    "BPJS": 50,
+    "Umum": 62
+  }
+]

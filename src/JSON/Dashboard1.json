@@ -6,12 +6,6 @@
     "photo": "https://image.flaticon.com/icons/svg/754/754554.svg"
   },
   {
-    "id": 2,
-    "judul": "Pasien Dilayani",
-    "jumlah": 20,
-    "photo": "https://image.flaticon.com/icons/svg/753/753210.svg"
-  },
-  {
     "id": 3,
     "judul": "Total Pendapatan",
     "jumlah": 365000,

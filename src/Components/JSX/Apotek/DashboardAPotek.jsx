@@ -25,6 +25,8 @@ class DashboardApotek extends Component {
                 type="button"
                 data-toggle="modal"
                 data-target="#addmedicine"
+                data-placement="bottom"
+                title="Tambah Obat"
               >
                 Tambah Obat
               </button>
@@ -50,6 +52,8 @@ class DashboardApotek extends Component {
                 className="btn btn-danger btn-sm"
                 data-toggle="modal"
                 data-target="#expDetail"
+                data-placement="bottom"
+                title="Lihat Detail Obat Expired"
               >
                 Detail
               </button>
@@ -74,6 +78,8 @@ class DashboardApotek extends Component {
                 className="btn btn-info btn-sm"
                 data-toggle="modal"
                 data-target="#minStockDetail"
+                data-placement="bottom"
+                title="Lihat Detail Persediaan Obat"
               >
                 Detail
               </button>

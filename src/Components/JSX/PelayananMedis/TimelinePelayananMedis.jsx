@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import antrian from "../../../JSON/antrianPasien.json";
 import pasien from "../../../JSON/pasien.json";
 import "../../ASSETS/CSS/Timeline.css";
+import Calender from "../../../Components/ASSETS/SVG/Kalender1";
 
 class TimelinePelayananMedis extends Component {
   render() {
@@ -11,7 +12,8 @@ class TimelinePelayananMedis extends Component {
     deskripsiPasien = antrian.map(e => {
       ket = pasien.find(pasien => pasien.no_rm === e.no_rm);
 
-      return <li key={e.id} className="animated bounceIn">
+      return (
+        <li key={e.id} className="animated bounceIn">
           <Link to={"/pelayanan-medis/" + e.id}>
             <span />
             <div className="number"> {e.id} </div>
@@ -27,13 +29,34 @@ class TimelinePelayananMedis extends Component {
             <span>{e.jam_masuk}</span>
             <span />
           </span>
-        </li>;
+        </li>
+      );
     });
     return (
       <div className="row">
-        <div className="col-md-4">
+        <div className="col-md-7">
           <div className="container">
             <ul>{deskripsiPasien}</ul>
+          </div>
+        </div>
+        <div className="col-md-4 tglpasien">
+          <div class="form-group" style={{ width: "250px" }}>
+            <span>Silahkan Pilih Tanggal :</span>
+            <div class="input-group date">
+              <input
+                type="date"
+                class="form-control"
+                style={{ borderRadius: "5px" }}
+              />
+
+              <div className="calender">
+                <Calender />
+              </div>
+              <hr />
+            </div>
+          </div>
+          <div className="banyakpasien">
+            <span class="badge">Jumlah Antrian : 8</span>
           </div>
         </div>
       </div>

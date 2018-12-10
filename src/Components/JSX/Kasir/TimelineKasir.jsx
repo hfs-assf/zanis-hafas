@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Calender from "../../../Components/ASSETS/SVG/Kalender1";
+
 import antrian from "../../../JSON/antrianPasien.json";
 import pasien from "../../../JSON/pasien.json";
 import "../../ASSETS/CSS/Timeline.css";
@@ -33,9 +35,29 @@ class TimelineKasir extends Component {
 
     return (
       <div className="row">
-        <div className="col-md-4">
+        <div className="col-md-7">
           <div className="container">
             <ul>{deskripsiPasien}</ul>
+          </div>
+        </div>
+        <div className="col-md-4 tglpasien">
+          <div class="form-group" style={{ width: "250px" }}>
+            <span>Silahkan Pilih Tanggal :</span>
+            <div class="input-group date">
+              <input
+                type="date"
+                class="form-control"
+                style={{ borderRadius: "5px" }}
+              />
+
+              <div className="calender">
+                <Calender />
+              </div>
+              <hr />
+            </div>
+          </div>
+          <div className="banyakpasien">
+            <span class="badge">Jumlah Antrian : 8</span>
           </div>
         </div>
       </div>
