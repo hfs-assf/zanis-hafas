@@ -1,27 +1,35 @@
 import React, { Component } from "react";
-import tindakanList from "../../../../JSON/daftarTindakan";
+import listTindakan from "../../../../Methods/Poli/Tindakan/listTindakan";
 
 class tindakanTabulasi extends Component {
   constructor() {
     super();
     this.state = {
       doTindakan: [],
-      textFilter: "",
-      idFilter: "",
-      showSuggestions: false
+      filter: "",
+      tindakan: []
     };
   }
 
-  tambah(id) {
-    var array = [...this.state.doTindakan];
-    array.push(id);
-    this.setState({ doTindakan: array, textFilter: "" });
+  componentWillMount() {
+    listTindakan().then(({ data }) => {
+      this.setState({
+        tindakan: this.state.tindakan.concat(data)
+      });
+    });
+  }
+
+  tambah(tindakan) {
+    this.setState({
+      doTindakan: this.state.doTindakan.concat(tindakan),
+      filter: ""
+    });
   }
 
   hapus(id) {
     var array = [...this.state.doTindakan];
     for (var i = 0; i < this.state.doTindakan.length; i++) {
-      if (this.state.doTindakan[i] === id) {
+      if (this.state.doTindakan[i].uid === id) {
         array.splice(i, 1);
       }
     }
@@ -32,9 +40,9 @@ class tindakanTabulasi extends Component {
     this.setState({ doTindakan: [] });
   }
   daftardoTindakan() {
-    return this.state.doTindakan.map((id, index) => (
-      <div className="row1" key={index}>
-        <div className="cell">{tindakanList[id].nama}</div>
+    return this.state.doTindakan.map(tindakan => (
+      <div className="row1" key={tindakan.uid}>
+        <div className="cell">{tindakan.nama_tindakan}</div>
         <div className="cell text-center">
           <input
             type="number"
@@ -44,11 +52,11 @@ class tindakanTabulasi extends Component {
             required
           />
           &nbsp;
-          {tindakanList[id].satuan}
+          {tindakan.satuan}
         </div>
         <div className="cell text-right">
-          Rp.
-          {tindakanList[id].tarif}
+           Rp.
+          {tindakan.biaya_tindakan}
         </div>
         <div className="cell text-center">
           <input type="text" refs="keterangantindakan" />
@@ -57,7 +65,7 @@ class tindakanTabulasi extends Component {
           <button
             className="btn btn-outline-primary btn-sm mt-0 mb-0"
             onClick={() => {
-              this.hapus(id);
+              this.hapus(tindakan.uid);
             }}
           >
             Hapus
@@ -69,39 +77,36 @@ class tindakanTabulasi extends Component {
 
   render() {
     let suggestionsList, daftarTindakan;
-    const { textFilter, showSuggestions, doTindakan } = this.state;
-    const filteredTindakan = tindakanList.filter(tindakan => {
+    const { filter, doTindakan, tindakan } = this.state;
+    const filteredTindakan = tindakan.filter(tindakan => {
       return (
-        tindakan.nama.toLowerCase().indexOf(textFilter.toLowerCase()) !== -1
+        tindakan.nama_tindakan.toLowerCase().indexOf(filter.toLowerCase()) !==
+        -1
       );
     });
-    if (showSuggestions === true) {
-      if (filteredTindakan.length !== 0 && textFilter !== "") {
-        suggestionsList = (
-          <ul className="suggestions">
-            {filteredTindakan.map((tindakan, index) => {
-              return (
-                <li
-                  key={index}
-                  className="suggestion-active"
-                  onClick={() => {
-                    this.tambah(tindakan.id);
-                  }}
-                >
-                  {tindakan.nama}
-                </li>
-              );
-            })}
-            <li className="no-suggestion">Klik untuk menambahkan</li>
-          </ul>
-        );
-      } else if (filteredTindakan.length === 0 && textFilter !== "") {
-        suggestionsList = (
-          <ul className="suggestions">
-            <li className="no-suggestion">Tidak tersedia</li>
-          </ul>
-        );
-      }
+    if (filteredTindakan.length !== 0 && filter !== "") {
+      suggestionsList = (
+        <ul className="suggestions">
+          {filteredTindakan.map((tindakan, index) => {
+            return (
+              <li
+                key={index}
+                className="suggestion-active"
+                onClick={() => this.tambah(tindakan)}
+              >
+                {tindakan.nama_tindakan}
+              </li>
+            );
+          })}
+          <li className="no-suggestion">Klik untuk menambahkan</li>
+        </ul>
+      );
+    } else if (filteredTindakan.length === 0 && filter !== "") {
+      suggestionsList = (
+        <ul className="suggestions">
+          <li className="no-suggestion">Tidak tersedia</li>
+        </ul>
+      );
     }
     if (doTindakan.length !== 0) {
       daftarTindakan = (
@@ -139,11 +144,10 @@ class tindakanTabulasi extends Component {
             <input
               type="text"
               className="form-control"
-              value={textFilter}
+              value={filter}
               onChange={e =>
                 this.setState({
-                  textFilter: e.target.value,
-                  showSuggestions: true
+                  filter: e.target.value
                 })
               }
             />

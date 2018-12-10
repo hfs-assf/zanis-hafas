@@ -22,11 +22,11 @@ class KelolaKaryawan extends Component {
       return (
         <div className="row1" key={karyawan.uid}>
           {" "}
-          <div className="cell">{karyawan.nik}</div>
+          <div className="cell text-center">{karyawan.nik}</div>
           <div className="cell">{karyawan.nama}</div>
-          <div className="cell">{karyawan.email}</div>
-          <div className="cell">{karyawan.role}</div>
-          <div className="cell">
+          <div className="cell text-center">{karyawan.role}</div>
+          <div className="cell text-center">{karyawan.email}</div>
+          <div className="cell text-center">
             <button
               className="btn btn-success btn-sm"
               data-toggle="modal"

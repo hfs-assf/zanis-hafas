@@ -1,48 +1,57 @@
 import React, { Component } from "react";
-import obatList from "../../../../JSON/daftarObat";
+// import obatList from "../../../../JSON/daftarObat";
+import obatList from "../../../../Methods/Apotik/Obat/listObat";
 
 class resepObatTabulasi extends Component {
   constructor() {
     super();
     this.state = {
-      doObat: [],
-      textFilter: "",
-      idFilter: "",
-      showSuggestions: false
+      doResep: [],
+      filter: "",
+      resep: []
     };
   }
 
-  tambah(id) {
-    var array = [...this.state.doObat];
-    array.push(id);
-    this.setState({ doObat: array, textFilter: "" });
+  componentWillMount() {
+    obatList().then(({ data }) => {
+      this.setState({
+        resep: this.state.resep.concat(data)
+      });
+    });
+  }
+
+  tambah(resep) {
+    this.setState({
+      doResep: this.state.doResep.concat(resep),
+      filter: ""
+    });
   }
 
   hapus(id) {
-    var array = [...this.state.doObat];
-    for (var i = 0; i < this.state.doObat.length; i++) {
-      if (this.state.doObat[i] === id) {
+    var array = [...this.state.doResep];
+    for (var i = 0; i < this.state.doResep.length; i++) {
+      if (this.state.doResep[i].uid === id) {
         array.splice(i, 1);
       }
     }
-    this.setState({ doObat: array });
+    this.setState({ doResep: array });
   }
 
   reset() {
-    this.setState({ doObat: [] });
+    this.setState({ doResep: [] });
   }
-  daftardoObat() {
-    return this.state.doObat.map((id, index) => (
-      <div className="row1" key={index}>
-        <div className="cell">{obatList[id].nama}</div>
+  daftardoResep() {
+    return this.state.doResep.map(resep => (
+      <div className="row1" key={resep.uid}>
+        <div className="cell">{resep.nama_obat}</div>
         <div className="cell text-center">
           <input type="number" refs="jumlahobat" min="1" max="10" required />
           &nbsp;
-          {obatList[id].satuan}
+          {resep.satuan}
         </div>
         <div className="cell text-right">
           Rp.
-          {obatList[id].harga_jual}
+          {resep.harga_jual}
         </div>
         <div className="cell text-center">
           <input type="text" refs="keteranganobat" />
@@ -51,7 +60,7 @@ class resepObatTabulasi extends Component {
           <button
             className="btn btn-outline-primary btn-sm mt-0 mb-0"
             onClick={() => {
-              this.hapus(id);
+              this.hapus(resep.uid);
             }}
           >
             Hapus
@@ -62,41 +71,37 @@ class resepObatTabulasi extends Component {
   }
 
   render() {
-    let suggestionsList, resep;
-    const { textFilter, showSuggestions, doObat } = this.state;
-    const filteredObat = obatList.filter(obat => {
-      return obat.nama.toLowerCase().indexOf(textFilter.toLowerCase()) !== -1;
+    let suggestionsList, daftarResep;
+    const { filter, doResep, resep } = this.state;
+    const filteredResep = resep.filter(resep => {
+      return resep.nama_obat.toLowerCase().indexOf(filter.toLowerCase()) !== -1;
     });
-    if (showSuggestions === true) {
-      if (filteredObat.length !== 0 && textFilter !== "") {
-        suggestionsList = (
-          <ul className="suggestions">
-            {filteredObat.map((obat, index) => {
-              return (
-                <li
-                  key={index}
-                  className="suggestion-active"
-                  onClick={() => {
-                    this.tambah(obat.id);
-                  }}
-                >
-                  {obat.nama}
-                </li>
-              );
-            })}
-            <li className="no-suggestion">Klik untuk menambahkan</li>
-          </ul>
-        );
-      } else if (filteredObat.length === 0 && textFilter !== "") {
-        suggestionsList = (
-          <ul className="suggestions">
-            <li className="no-suggestion">Tidak tersedia</li>
-          </ul>
-        );
-      }
+    if (filteredResep.length !== 0 && filter !== "") {
+      suggestionsList = (
+        <ul className="suggestions">
+          {filteredResep.map((resep, index) => {
+            return (
+              <li
+                key={index}
+                className="suggestion-active"
+                onClick={() => this.tambah(resep)}
+              >
+                {resep.nama_obat}
+              </li>
+            );
+          })}
+          <li className="no-suggestion">Klik untuk menambahkan</li>
+        </ul>
+      );
+    } else if (filteredResep.length === 0 && filter !== "") {
+      suggestionsList = (
+        <ul className="suggestions">
+          <li className="no-suggestion">Tidak tersedia</li>
+        </ul>
+      );
     }
-    if (doObat.length !== 0) {
-      resep = (
+    if (doResep.length !== 0) {
+      daftarResep = (
         <div className="row">
           <div className="col-md-12 rowsoap">
             <div className="legendtitle1">Resep Obat</div>
@@ -108,7 +113,7 @@ class resepObatTabulasi extends Component {
                 <div className="cell">Keterangan</div>
                 <div className="cell">Aksi</div>
               </div>
-              {this.daftardoObat()}
+              {this.daftardoResep()}
             </div>
           </div>
           <div className="col-md-12">
@@ -133,18 +138,17 @@ class resepObatTabulasi extends Component {
             <input
               type="text"
               className="form-control"
-              value={textFilter}
+              value={filter}
               onChange={e =>
                 this.setState({
-                  textFilter: e.target.value,
-                  showSuggestions: true
+                  filter: e.target.value
                 })
               }
             />
             {suggestionsList}
           </div>
         </div>
-        {resep}
+        {daftarResep}
       </div>
     );
   }

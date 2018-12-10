@@ -9,7 +9,7 @@ class DashboarPasienP extends Component {
             <h4 className="card-title">Data Pasien Per Wilayah</h4>
             <div className="ml-auto">
               <select className="custom-select">
-                <option selected="">January</option>
+                <option value="1">January</option>
                 <option value="1">February</option>
                 <option value="2">March</option>
                 <option value="3">April</option>

@@ -25,8 +25,8 @@ class KelolaTindakan extends Component {
           <div className="cell">{tindakan.biaya_tindakan}</div>
 
           <div className="cell">
-            <button className="btn btn-success btn-sm">Ubah</button>
-            <button className="btn btn-warning btn-sm">Hapus</button>
+            <button className="btn btn-primary btn-sm">Ubah</button>
+            <button className="btn btn-outline-primary btn-sm">Hapus</button>
           </div>
         </div>
       );
