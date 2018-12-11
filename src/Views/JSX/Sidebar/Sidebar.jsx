@@ -7,6 +7,7 @@ import SVGApotek from "../../../Components/ASSETS/SVG/svgapotek";
 import SVGPelayananMedis from "../../../Components/ASSETS/SVG/SVGpelayananmedis";
 import SVGKasir from "../../../Components/ASSETS/SVG/SVGkasir";
 import SVGAdmin from "../../../Components/ASSETS/SVG/SVGAdmin";
+import SVGAkunting from "../../../Components/ASSETS/SVG/Akunting";
 class Sidebar extends Component {
   render() {
     return (
@@ -108,6 +109,22 @@ class Sidebar extends Component {
                     <Link to="/peralatan-laboratorium">
                       Daftar Peralatan Laboratorium
                     </Link>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                {" "}
+                <Link
+                  to="/akunting"
+                  className="has-arrow"
+                  aria-expanded="false"
+                >
+                  <SVGAkunting />
+                  <span className="hide-menu">Jurnal Akunting</span>
+                </Link>
+                <ul aria-expanded="false" className="collapse">
+                  <li>
+                    <Link to="/neraca-lajur">Neraca Lajur</Link>
                   </li>
                 </ul>
               </li>

@@ -34,6 +34,9 @@ import TimelinePelayananMedis from "./Views/JSX/PelayananMedis/TimelinePelayanan
 import Pendaftaran from "./Views/JSX/Pendaftaran/Pendaftaran";
 import PendaftaranLayanan from "./Views/JSX/Pendaftaran/PendaftaranLayanan";
 
+//Akunting
+import Akunting from "./Views/JSX/Akunting/ViewJurnal";
+
 class App extends Component {
   render() {
     return (
@@ -82,6 +85,7 @@ class App extends Component {
               path="/data_rekam_medis_pasien"
               component={DataRekamMedisPasien}
             /> */}
+            <Route path="/akunting" component={Akunting} />
           </Switch>
         </div>
       </div>

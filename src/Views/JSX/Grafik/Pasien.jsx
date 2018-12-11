@@ -16,7 +16,7 @@ class IndikatorAreaSasaran extends Component {
     return (
       <div
         className="card mt-1 mb-2"
-        style={{ backgroundColor: "#231b69 ", color: "white" }}
+        style={{ backgroundColor: "#1976d2 ", color: "white" }}
       >
         <div className="card-body">
           <div className="d-flex no-block">
@@ -51,7 +51,7 @@ class IndikatorAreaSasaran extends Component {
                   type="monotone"
                   name="Pasien Umum"
                   dataKey="Umum"
-                  stroke="white"
+                  stroke="#0e772d"
                 />
                 <Line
                   type="monotone"

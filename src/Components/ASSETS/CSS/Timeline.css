@@ -11,10 +11,9 @@
   color: #1976d2;
 }
 
-input[type="date"] {
+.date input[type="date"] {
   height: 35px;
   margin: 0 auto;
-  width: 100%;
   font-size: 18px;
   font-weight: bold;
   text-transform: uppercase;
@@ -33,7 +32,7 @@ input[type="date"] {
   top: 110px;
   right: 0;
 }
-.badge {
+.banyakpasien > .badge {
   box-sizing: border-box;
   display: inline-block;
   background-color: #1976d2;
