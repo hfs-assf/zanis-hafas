@@ -17,6 +17,7 @@ import KelolaTindakan from "./Views/JSX/Admin/KelolaTindakan";
 import ProfilKlinik from "./Views/JSX/Admin/ProfilKlinik";
 
 // Apotek
+import DetailObat from "./Views/JSX/Apotek/DetailObat";
 import KelolaApotek from "./Views/JSX/Apotek/KelolaApotek";
 import Apotek from "./Views/JSX/Apotek/TimelineApotek";
 
@@ -56,7 +57,10 @@ class App extends Component {
               path="/form-pembayaran/:id"
               render={({ match }) => <Pembayaran antrian={match.params} />}
             />
-            {/* <Route path="/kelola_biaya" component={KelolaApotek} /> */}
+            <Route
+              path="/detail-obat/:id"
+              render={({ match }) => <DetailObat uid={match.params} />}
+            />
             <Route path="/kelola_apotek" component={KelolaApotek} />
             <Route path="/pendaftaran" component={Pendaftaran} />
             <Route

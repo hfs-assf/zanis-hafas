@@ -74,7 +74,7 @@ class TableObat extends Component {
           })}
         </div>
       );
-    } else if (filteredObat.length === 0 && filter !== "") {
+    } else {
       header = (
         <div className="table">
           <div className="row1">
@@ -82,36 +82,22 @@ class TableObat extends Component {
           </div>
         </div>
       );
-    } else {
-      header = (
-        <div
-          className="alert alert-warning alert-dismissible fade show"
-          role="alert"
-        >
-          <strong>Untuk melihat data obat</strong> klik menu pencarian.
-        </div>
-      );
     }
     return (
-      <div className="card" style={{ borderTop: "2px solid #1976d2" }}>
+      <div className="card col-md-7" style={{ borderTop: "2px solid #1976d2" }}>
         <div className="card-body">
           <div className="flex-container">
             <div className="box column1">
-              <h2 className="card-title text-left">Daftar Obat</h2>
-            </div>
-
-            <div className="box column2">
-              <div className="mainsearch">
-                <div className="form-group has-search">
-                  <span className="fa fa-search form-control-feedback" />
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Cari Obat"
-                    onChange={e => this.setState({ filter: e.target.value })}
-                  />
-                </div>
-              </div>
+              <h2 className="card-title text-left">
+                Obat Masuk{" "}
+                <button
+                  className="btn btn-sm btn-primary"
+                  data-toggle="modal"
+                  data-target="#tambahObatMasuk"
+                >
+                  Tambah Obat Masuk
+                </button>
+              </h2>
             </div>
           </div>
           <hr className="hr2" />

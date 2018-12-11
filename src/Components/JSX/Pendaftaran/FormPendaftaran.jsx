@@ -3,7 +3,6 @@ import tambahPasien from "../../../Methods/RekamMedis/Pasien/tambahPasien";
 
 class FormPendaftaran extends Component {
   state = {
-    // nomor_rekam_medis: "",
     nomor_pengenal: "4124121241",
     jenis_nomor_pengenal: "ktp",
     email: "",
@@ -28,7 +27,6 @@ class FormPendaftaran extends Component {
   tambahPasienBaru = event => {
     event.preventDefault();
     tambahPasien({
-      // nomor_rekam_medis: this.state.nomor_rekam_medis,
       nomor_pengenal: this.state.nomor_pengenal,
       jenis_nomor_pengenal: "ktp",
       email: this.state.email,

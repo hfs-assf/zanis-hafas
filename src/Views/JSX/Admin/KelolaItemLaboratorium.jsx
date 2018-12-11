@@ -15,7 +15,7 @@ class KelolaItemLaboratorium extends Component {
           <div className="cell">{obat.nama}</div>
           <div className="cell">{obat.nama}</div>
 
-          <div className="cell">
+          <div className="cell text-center">
             <button className="btn btn-success btn-sm">Ubah</button>
             <button className="btn btn-warning btn-sm">Hapus</button>
           </div>

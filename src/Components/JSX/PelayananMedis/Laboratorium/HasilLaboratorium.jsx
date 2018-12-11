@@ -8,7 +8,7 @@ class HasilLaboratorium extends Component {
         <div className="cell" style={{ paddingLeft: 5 + 25 * el.level + "px" }}>
           {el.item}
         </div>
-        <div className="cell">
+        <div className="cell text-center">
           <input type="number" refs="{el.item}" />
         </div>
         <div className="cell">{el.nilai_normal}</div>
