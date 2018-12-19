@@ -1,0 +1,38 @@
+[
+  {
+    "kode": "1-0000",
+    "nama_akun": " aset lancar",
+    "keterangan": "header",
+    "saldo_awal": "Rp.-",
+    "saldo_awal_p": "-",
+    "identitas": 0,
+    "layout": "aset"
+  },
+  {
+    "kode": "1-1000",
+    "nama_akun": " aset lancar",
+    "keterangan": "header",
+    "saldo_awal": "Rp.-",
+    "saldo_awal_p": "-",
+    "identitas": 0,
+    "layout": "Aset Lancar"
+  },
+  {
+    "kode": "1-1100",
+    "nama_akun": " aset lancar",
+    "keterangan": "header",
+    "saldo_awal": "Rp.-",
+    "saldo_awal_p": "-",
+    "identitas": 0,
+    "layout": "Persedian Obat"
+  },
+  {
+    "kode": "1-2100",
+    "nama_akun": " aset lancar",
+    "keterangan": "header",
+    "saldo_awal": "Rp.-",
+    "saldo_awal_p": "-",
+    "identitas": 2,
+    "layout": "Piutang TNC"
+  }
+]

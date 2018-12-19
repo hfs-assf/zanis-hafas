@@ -11,7 +11,6 @@ class TimelinePelayananMedis extends Component {
 
     deskripsiPasien = antrian.map(e => {
       ket = pasien.find(pasien => pasien.no_rm === e.no_rm);
-
       return (
         <li key={e.id} className="animated bounceIn">
           <Link to={"/pelayanan-medis/" + e.id}>

@@ -1,9 +1,8 @@
 import axios from "axios";
-
-const apiURL = "http://localhost:8005";
+import { baseUrl } from "../../api";
 
 let tambahObat = ({ nama_obat, batas_minimum, satuan }) => {
-  return axios.post(apiURL + "/api/v1/obat", {
+  return axios.post(baseUrl + "/api/v1/obat", {
     nama_obat,
     batas_minimum,
     satuan

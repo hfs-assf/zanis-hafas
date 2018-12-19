@@ -1,9 +1,8 @@
 import axios from "axios";
-
-const apiURL = "http://localhost:8005";
+import { baseUrl } from "../../api";
 
 let editObat = ({ uid, nama_obat, batas_minimum, satuan }) => {
-  return axios.put(apiURL + "/api/v1/obat/" + uid, {
+  return axios.put(baseUrl + "/api/v1/obat/" + uid, {
     nama_obat,
     batas_minimum,
     satuan

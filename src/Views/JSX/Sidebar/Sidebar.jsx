@@ -19,7 +19,7 @@ class Sidebar extends Component {
 
               <li>
                 {" "}
-                <Link to="/login" className="has-arrow" aria-expanded="false">
+                <Link to="/" className="has-arrow" aria-expanded="false">
                   <SVGdashboard />
                   <span className="hide-menu">Dashboard</span>
                 </Link>

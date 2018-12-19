@@ -1,9 +1,7 @@
 import axios from "axios";
-
-const apiURL = "http://localhost:8002";
+import { baseUrl } from "../../api";
 
 let tambahPasien = ({
-  // nomor_rekam_medis,
   nomor_pengenal,
   jenis_nomor_pengenal,
   email,
@@ -24,8 +22,7 @@ let tambahPasien = ({
   kantor,
   catatan
 }) => {
-  return axios.post(apiURL + "/api/v1/pasien", {
-    // nomor_rekam_medis,
+  return axios.post(baseUrl + "/api/v1/pasien", {
     nomor_pengenal,
     jenis_nomor_pengenal,
     email,

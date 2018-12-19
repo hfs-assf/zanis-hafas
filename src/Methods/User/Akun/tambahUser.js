@@ -1,9 +1,8 @@
 import axios from "axios";
-
-const apiURL = "http://localhost:8000";
+import { baseUrl } from "../../api";
 
 let tambahUser = ({ nik, password, nama, email, akses }) => {
-  return axios.post(apiURL + "/api/v1/akun-user", {
+  return axios.post(baseUrl + "/api/v1/akun-user", {
     nik,
     password,
     nama,

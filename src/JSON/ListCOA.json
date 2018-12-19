@@ -1,0 +1,26 @@
+[
+  {
+    "id": 0,
+    "saldo_normal": "Akun, Debit",
+    "identasi": 1,
+    "saldo_normal1": "Baru"
+  },
+  {
+    "id": 1,
+    "saldo_normal": "Akun, Kredit",
+    "identasi": 2,
+    "saldo_normal1": "Peutupuan"
+  },
+  {
+    "id": 2,
+    "saldo_normal": "Header",
+    "identasi": 3,
+    "saldo_normal1": "-"
+  },
+  {
+    "id": 3,
+    "saldo_normal": "Sub Jumlah",
+    "identasi": 0,
+    "saldo_normal1": "-"
+  }
+]
