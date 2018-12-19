@@ -7,7 +7,7 @@ class FormTambahDetailObat extends Component {
     uid: "",
     stok: "",
     kadaluarsa: "",
-    nik_penerima: "",
+    nik_penerima: "12121",
     harga_modal: ""
   };
 
@@ -17,7 +17,7 @@ class FormTambahDetailObat extends Component {
       uid: this.props.uid,
       stok: this.state.stok,
       kadaluarsa: this.state.kadaluarsa,
-      nik_penerima: this.nik_penerima,
+      nik_penerima: this.state.nik_penerima,
       harga_modal: this.state.harga_modal
     });
   };

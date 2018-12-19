@@ -3,7 +3,15 @@ import React, { Component } from "react";
 class UbahProfilKlinik extends Component {
   state = {
     selectedFile: null,
-    judul: ""
+    judul: "",
+    profil: {
+      nama_klinik: "z",
+      alamat_klinik: "z",
+      telpon_klinik: "z",
+      email_klinik: "z",
+      website_klinik: "z",
+      foto_klinik: "z"
+    }
   };
 
   fileChangedHandler = event => {
@@ -70,6 +78,11 @@ class UbahProfilKlinik extends Component {
                   type="text"
                   name="nama_klinik"
                   className="form-control"
+                  onChange={event =>
+                    this.setState({
+                      nama_klinik: { nama_klinik: event.target.value }
+                    })
+                  }
                 />
               </div>
             </div>
@@ -86,6 +99,11 @@ class UbahProfilKlinik extends Component {
                   type="text"
                   name="alamat_klinik"
                   className="form-control"
+                  onChange={event =>
+                    this.setState({
+                      alamat_klinik: { alamat_klinik: event.target.value }
+                    })
+                  }
                 />
               </div>
             </div>
@@ -102,6 +120,11 @@ class UbahProfilKlinik extends Component {
                   type="text"
                   name="telpon_klinik"
                   className="form-control"
+                  onChange={event =>
+                    this.setState({
+                      telpon_klinik: { telpon_klinik: event.target.value }
+                    })
+                  }
                 />
               </div>
             </div>
@@ -115,6 +138,11 @@ class UbahProfilKlinik extends Component {
                   type="text"
                   name="email_klinik"
                   className="form-control"
+                  onChange={event =>
+                    this.setState({
+                      email_klinik: { email_klinik: event.target.value }
+                    })
+                  }
                 />
               </div>
             </div>
@@ -131,6 +159,11 @@ class UbahProfilKlinik extends Component {
                   type="text"
                   name="website_klinik"
                   className="form-control"
+                  onChange={event =>
+                    this.setState({
+                      website_klinik: { website_klinik: event.target.value }
+                    })
+                  }
                 />
               </div>
             </div>
@@ -146,7 +179,7 @@ class UbahProfilKlinik extends Component {
                   <button className="btn btn-warning">Bersihkan</button>
                 </div>
               </div>
-            </div>
+            </div>  
           </form>
         </div>
       </div>

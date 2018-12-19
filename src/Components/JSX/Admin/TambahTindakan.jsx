@@ -1,20 +1,43 @@
 import React, { Component } from "react";
 import tambahTindakan from "../../../Methods/Poli/Tindakan/tambahTindakan";
+import editTindakan from "../../../Methods/Poli/Tindakan/editTindakan";
+// import detailTindakan from "../../../Methods/Poli/Tindakan/detailTindakan";
 
 class TambahTindakan extends Component {
-  state = {
-    showMe: false,
-    nama_tindakan: "",
-    biaya_tindakan: ""
-  };
+  constructor(props) {
+    super(props);
+    this.handleSave = this.handleSave.bind(this);
+    this.state = {
+      showMe: false,
+      nama_tindakan: "",
+      biaya_tindakan: ""
+    };
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.action === "edit") {
+      this.setState({
+        uid: nextProps.selected.uid,
+        nama_tindakan: nextProps.selected.nama_tindakan,
+        biaya_tindakan: nextProps.selected.biaya_tindakan
+      });
+    }
+  }
 
-  tambahTindakan = event => {
-    event.preventDefault();
-    tambahTindakan({
-      nama_tindakan: this.state.nama_tindakan,
-      biaya_tindakan: this.state.biaya_tindakan
-    });
-  };
+  handleSave() {
+    if (this.props.action === "add") {
+      tambahTindakan({
+        nama_tindakan: this.state.nama_tindakan,
+        biaya_tindakan: this.state.biaya_tindakan
+      });
+    } else {
+      editTindakan({
+        uid: this.state.uid,
+        nama_tindakan: this.state.nama_tindakan,
+        biaya_tindakan: this.state.biaya_tindakan
+      });
+    }
+  }
+
   render() {
     return (
       <div
@@ -51,6 +74,7 @@ class TambahTindakan extends Component {
                       <input
                         type="text"
                         name="nama_tindakan"
+                        value={this.state.nama_tindakan}
                         className="form-control"
                         placeholder="Nama Tindakan"
                         onChange={event =>
@@ -58,7 +82,6 @@ class TambahTindakan extends Component {
                             nama_tindakan: event.target.value
                           })
                         }
-                        required
                       />
                     </div>
                   </div>
@@ -68,7 +91,8 @@ class TambahTindakan extends Component {
                     <div className="md-form mb-0">
                       <input
                         type="number"
-                        name="tarif_tindakan"
+                        name="biaya_tindakan"
+                        value={this.state.biaya_tindakan}
                         className="form-control"
                         placeholder="Tarif"
                         onChange={event =>
@@ -76,7 +100,6 @@ class TambahTindakan extends Component {
                             biaya_tindakan: event.target.value
                           })
                         }
-                        required
                       />
                     </div>
                   </div>
@@ -85,10 +108,7 @@ class TambahTindakan extends Component {
             </div>
 
             <div className="modal-footer justify-content-center">
-              <button
-                className="btn btn-info"
-                onClick={event => this.tambahTindakan(event)}
-              >
+              <button className="btn btn-info" onClick={this.handleSave}>
                 Simpan
               </button>
               <button

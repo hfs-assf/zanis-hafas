@@ -3,7 +3,21 @@ import "../../../ASSETS/CSS/TambahPelayananAntrian.css";
 
 class SoapPasien extends Component {
   state = {
-    showMe: false
+    showMe: false,
+    vital_sign: {
+      sistole: "z",
+      diastole: "z",
+      suhu: "z",
+      pulse: "z",
+      respirasi: "z",
+      tinggi: "z",
+      berat: "z",
+      subjektif: "z",
+      objektif: "z",
+      analisa: "z",
+      tindakan: "z",
+      diagnosa: "z"
+    }
   };
   showHide(e) {
     var hasil = e.target.value;
@@ -25,43 +39,99 @@ class SoapPasien extends Component {
                   <tr>
                     <td>Sistole</td>
                     <td>
-                      <input type="number" refs="sistole" />
+                      <input
+                        type="number"
+                        refs="sistole"
+                        onChange={event =>
+                          this.setState({
+                            sistole: { sistole: event.target.value }
+                          })
+                        }
+                      />
                     </td>
                   </tr>
                   <tr>
                     <td>Diastole</td>
                     <td>
-                      <input type="number" refs="disatole" />
+                      <input
+                        type="number"
+                        refs="disatole"
+                        onChange={event =>
+                          this.setState({
+                            diastole: { diastole: event.target.value }
+                          })
+                        }
+                      />
                     </td>
                   </tr>
                   <tr>
                     <td>Suhu</td>
                     <td>
-                      <input type="number" refs="suhu" />
+                      <input
+                        type="number"
+                        refs="suhu"
+                        onChange={event =>
+                          this.setState({
+                            suhu: { suhu: event.target.value }
+                          })
+                        }
+                      />
                     </td>
                   </tr>
                   <tr>
                     <td>Pulse</td>
                     <td>
-                      <input type="number" refs="pulse" />
+                      <input
+                        type="number"
+                        refs="pulse"
+                        onChange={event =>
+                          this.setState({
+                            pulse: { pulse: event.target.value }
+                          })
+                        }
+                      />
                     </td>
                   </tr>
                   <tr>
                     <td>Respirasi</td>
                     <td>
-                      <input type="number" refs="respirasi" />
+                      <input
+                        type="number"
+                        refs="respirasi"
+                        onChange={event =>
+                          this.setState({
+                            respirasi: { respirasi: event.target.value }
+                          })
+                        }
+                      />
                     </td>
                   </tr>
                   <tr>
                     <td>Tinggi</td>
                     <td>
-                      <input type="number" refs="tinggi" />
+                      <input
+                        type="number"
+                        refs="tinggi"
+                        onChange={event =>
+                          this.setState({
+                            tinggi: { tinggi: event.target.value }
+                          })
+                        }
+                      />
                     </td>
                   </tr>
                   <tr>
                     <td>Berat</td>
                     <td>
-                      <input type="number" refs="berat" />
+                      <input
+                        type="number"
+                        refs="berat"
+                        onChange={event =>
+                          this.setState({
+                            berat: { berat: event.target.value }
+                          })
+                        }
+                      />
                     </td>
                   </tr>
                 </tbody>
@@ -87,21 +157,53 @@ class SoapPasien extends Component {
             <div className="row">
               <div className="col-md-6 rowsoap">
                 <div className="legendtitle">Subjektif</div>
-                <textarea name="textarea" className="textarea" />
+                <textarea
+                  name="textarea"
+                  className="textarea"
+                  onChange={event =>
+                    this.setState({
+                      subjektif: { subjektif: event.target.value }
+                    })
+                  }
+                />
               </div>
               <div className="col-md-6 rowsoap">
                 <div className="legendtitle">Analisa</div>
-                <textarea name="textarea" className="textarea" />
+                <textarea
+                  name="textarea"
+                  className="textarea"
+                  onChange={event =>
+                    this.setState({
+                      analisa: { analisa: event.target.value }
+                    })
+                  }
+                />
               </div>
             </div>
             <div className="row">
               <div className="col-md-6 rowsoap">
                 <div className="legendtitle">Objektif</div>
-                <textarea name="textarea" className="textarea" />
+                <textarea
+                  name="textarea"
+                  className="textarea"
+                  onChange={event =>
+                    this.setState({
+                      objektif: { objektif: event.target.value }
+                    })
+                  }
+                />
               </div>
               <div className="col-md-6 rowsoap">
                 <div className="legendtitle">Tindakan</div>
-                <textarea name="textarea" className="textarea" />
+                <textarea
+                  name="textarea"
+                  className="textarea"
+                  onChange={event =>
+                    this.setState({
+                      tindakan: { tindakan: event.target.value }
+                    })
+                  }
+                />
               </div>
             </div>
             <div className="row">
@@ -137,7 +239,15 @@ class SoapPasien extends Component {
           <div className="row maxrow" style={{ margin: "10px" }}>
             <div className="col-md-2">Diagnosa</div>
             <div className="col-md-10">
-              <input type="text" className="form-control" />
+              <input
+                type="text"
+                className="form-control"
+                onChange={event =>
+                  this.setState({
+                    diagnosa: { diagnosa: event.target.value }
+                  })
+                }
+              />
             </div>
           </div>
           <div className="col-md-12">

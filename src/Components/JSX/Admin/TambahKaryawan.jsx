@@ -1,17 +1,57 @@
 import React, { Component } from "react";
 import tambahUser from "../../../Methods/User/Akun/tambahUser";
+import editUser from "../../../Methods/User/Akun/editUser";
 
 class TambahKaryawan extends Component {
-  state = {
-    showMe: false,
-    nik: "",
-    nama_karyawan: "",
-    peran: "Dokter",
-    email: "",
-    username: "",
-    password: "",
-    modul: "Pendaftaran"
-  };
+  constructor(props) {
+    super(props);
+    this.handleSave = this.handleSave.bind(this);
+    this.state = {
+      showMe: false,
+      uid: "",
+      nik: "",
+      nama: "",
+      role: "Dokter",
+      email: "",
+      password: "",
+      akses: "Pendaftaran"
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.action === "edit") {
+      this.setState({
+        uid: nextProps.selected.uid,
+        nik: nextProps.selected.nik,
+        nama: nextProps.selected.nama,
+        role: nextProps.selected.role,
+        email: nextProps.selected.email,
+        password: nextProps.selected.password,
+        akses: nextProps.selected.akses
+      });
+    }
+  }
+
+  handleSave() {
+    if (this.props.action === "add") {
+      tambahUser({
+        nik: this.state.nik,
+        password: this.state.password,
+        nama: this.state.nama,
+        email: this.state.email,
+        akses: this.state.akses
+      });
+    } else {
+      editUser({
+        uid: this.state.uid,
+        nik: this.state.nik,
+        password: this.state.password,
+        nama: this.state.nama,
+        email: this.state.email,
+        akses: this.state.akses
+      });
+    }
+  }
 
   showHide(e) {
     var hasil = e.target.value;
@@ -21,17 +61,6 @@ class TambahKaryawan extends Component {
       this.setState({ showMe: false });
     }
   }
-
-  tambahUser = event => {
-    event.preventDefault();
-    tambahUser({
-      nik: this.state.nik,
-      password: this.state.password,
-      nama: this.state.nama_karyawan,
-      email: this.state.email,
-      akses: this.state.modul
-    });
-  };
 
   render() {
     return (
@@ -71,13 +100,13 @@ class TambahKaryawan extends Component {
                         type="number"
                         name="nik_karyawan"
                         className="form-control"
+                        value={this.state.nik}
                         placeholder="Masukkan Nomor Induk Kepegawaian"
                         onChange={event =>
                           this.setState({
                             nik: event.target.value
                           })
                         }
-                        required
                       />
                     </div>
                   </div>
@@ -85,12 +114,13 @@ class TambahKaryawan extends Component {
                     <div className="md-form mb-0">
                       <input
                         type="text"
-                        name="nama_karyawan"
+                        name="nama"
                         className="form-control"
+                        value={this.state.nama}
                         placeholder="Nama Karyawan"
                         onChange={event =>
                           this.setState({
-                            nama_karyawan: event.target.value
+                            nama: event.target.value
                           })
                         }
                         required
@@ -101,13 +131,14 @@ class TambahKaryawan extends Component {
                 <div className="row">
                   <div className="col-md-12">
                     <div className="md-form mb-0">
-                      <span>Peran</span>
+                      <span>role</span>
                       <select
                         className="custom-select"
-                        name="peran_karyawan"
+                        name="role_karyawan"
+                        value={this.state.role}
                         onChange={event =>
                           this.setState({
-                            peran: event.target.value
+                            role: event.target.value
                           })
                         }
                         required
@@ -138,13 +169,13 @@ class TambahKaryawan extends Component {
                 {this.state.showMe ? (
                   <div>
                     <div className="row">
-                      <div className="col-md-12">
+                      <div className="col-md-8">
                         <div className="md-form mb-0">
-                          <span>Modul</span>
                           <input
                             type="email"
                             name="email"
                             className="form-control"
+                            value={this.state.email}
                             placeholder="Email"
                             onChange={event =>
                               this.setState({
@@ -154,24 +185,7 @@ class TambahKaryawan extends Component {
                           />
                         </div>
                       </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-md-6">
-                        <div className="md-form mb-0">
-                          <input
-                            type="text"
-                            name="username"
-                            className="form-control"
-                            placeholder="Username"
-                            onChange={event =>
-                              this.setState({
-                                username: event.target.value
-                              })
-                            }
-                          />
-                        </div>
-                      </div>
-                      <div className="col-md-6">
+                      <div className="col-md-4">
                         <div className="md-form mb-0">
                           <input
                             type="password"
@@ -190,13 +204,14 @@ class TambahKaryawan extends Component {
                     <div className="row">
                       <div className="col-md-12">
                         <div className="md-form mb-0">
-                          <span>Modul</span>
+                          <span>akses</span>
                           <select
                             className="custom-select"
-                            name="modul"
+                            name="akses"
+                            value={this.state.akses}
                             onChange={event =>
                               this.setState({
-                                modul: event.target.value
+                                akses: event.target.value
                               })
                             }
                           >
@@ -215,10 +230,7 @@ class TambahKaryawan extends Component {
             </div>
 
             <div className="modal-footer justify-content-center">
-              <button
-                className="btn btn-primary"
-                onClick={event => this.tambahUser(event)}
-              >
+              <button className="btn btn-primary" onClick={this.handleSave}>
                 Simpan
               </button>
               <button

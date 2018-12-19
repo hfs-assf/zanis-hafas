@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import "../../ASSETS/CSS/Apotek.css";
 import "../../ASSETS/CSS/form.css";
-import obatList from "../../../Methods/Apotik/Obat/listObat";
-import hapusObat from "../../../Methods/Apotik/Obat/hapusObat";
+import listStokObat from "../../../Methods/Apotik/StokObat/listStokObat";
 
 class TableObat extends Component {
   state = {
@@ -11,65 +10,61 @@ class TableObat extends Component {
   };
 
   componentWillMount() {
-    obatList().then(({ data }) => {
+    listStokObat(this.props.uid).then(({ data }) => {
       this.setState({
         obat: this.state.obat.concat(data)
       });
     });
   }
-  detailObat(uid) {
-    window.location.assign("/detail-obat/" + uid);
-  }
+
   renderDaftarObat = obat => {
-    const { filter } = this.state;
-    if (filter !== "") {
-      return (
-        <div className="row1" key={obat.uid}>
-          <div className="cell">{obat.nama_obat}</div>
-          <div className="cell text-center">Minum</div>
-          <div className="cell text-center">0 {obat.satuan}</div>
-          <div className="cell text-right">
-            Rp.0
-            {obat.harga_jual}
-          </div>
-          <div className="cell text-center">
-            <button
-              className="btn btn-primary btn-sm "
-              onClick={() => this.detailObat(obat.uid)}
-            >
-              Detail
-            </button>
-            <button
-              className="btn btn-outline-primary btn-sm"
-              onClick={() => this.hapusObatByID(obat.uid)}
-            >
-              Hapus
-            </button>
-          </div>
+    // const { filter } = this.state;
+    // if (filter !== "") {
+    return (
+      <div className="row1" key={obat.uid}>
+        <div className="cell text-center">
+          {new Date(obat.waktu_masuk).toLocaleDateString("en-GB")}
         </div>
-      );
-    }
+        <div className="cell text-center">{obat.stok}</div>
+        <div className="cell text-center">
+          {new Date(obat.kadaluarsa).toLocaleDateString("en-GB")}
+        </div>
+
+        <div className="cell text-center">
+          <button
+            className="btn btn-primary btn-sm "
+            onClick={() => this.detailObat(obat.uid)}
+          >
+            Detail
+          </button>{" "}
+        </div>
+      </div>
+    );
+    // }
   };
-  hapusObatByID = uid => {
-    hapusObat(uid);
-  };
+
   render() {
     let header;
-    const { filter, obat } = this.state;
-    const filteredObat = obat.filter(obat => {
-      return obat.nama_obat.toLowerCase().indexOf(filter.toLowerCase()) !== -1;
-    });
-    if (filteredObat.length !== 0 && filter !== "") {
+    const { obat } = this.state;
+    // const filteredObat = obat.filter(obat => {
+    //   return obat.nama_obat.toLowerCase().indexOf(filter.toLowerCase()) !== -1;
+    // });
+    const filteredObat = obat.length;
+    console.log("f" + filteredObat);
+
+    if (
+      filteredObat !== 0
+      // && filter !== ""
+    ) {
       header = (
         <div className="table">
           <div className="row1 header">
-            <div className="cell">Nama Obat</div>
-            <div className="cell">Jenis Obat</div>
-            <div className="cell">Persediaan</div>
-            <div className="cell">Harga Jual</div>
+            <div className="cell">Waktu Masuk</div>
+            <div className="cell">Jumlah</div>
+            <div className="cell">Kadaluarsa</div>
             <div className="cell">Aksi</div>
           </div>
-          {filteredObat.map(obat => {
+          {obat.map(obat => {
             return this.renderDaftarObat(obat);
           })}
         </div>
@@ -89,7 +84,7 @@ class TableObat extends Component {
           <div className="flex-container">
             <div className="box column1">
               <h2 className="card-title text-left">
-                Obat Masuk{" "}
+                Obat Masuk
                 <button
                   className="btn btn-sm btn-primary"
                   data-toggle="modal"
