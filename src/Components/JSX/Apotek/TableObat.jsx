@@ -21,8 +21,7 @@ class TableObat extends Component {
     window.location.assign("/detail-obat/" + uid);
   }
   renderDaftarObat = obat => {
-    const { filter } = this.state;
-    if (filter !== "") {
+    if (this.state.filter !== "") {
       return (
         <div className="row1" key={obat.uid}>
           <div className="cell">{obat.nama_obat}</div>

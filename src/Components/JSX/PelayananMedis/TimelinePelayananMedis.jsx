@@ -40,12 +40,12 @@ class TimelinePelayananMedis extends Component {
           </div>
         </div>
         <div className="col-md-4 tglpasien">
-          <div class="form-group" style={{ width: "250px" }}>
+          <div className="form-group" style={{ width: "250px" }}>
             <span>Silahkan Pilih Tanggal :</span>
-            <div class="input-group date">
+            <div className="input-group date">
               <input
                 type="date"
-                class="form-control"
+                className="form-control"
                 style={{ borderRadius: "5px" }}
               />
 
@@ -56,7 +56,7 @@ class TimelinePelayananMedis extends Component {
             </div>
           </div>
           <div className="banyakpasien">
-            <span class="badge">Jumlah Antrian : 8</span>
+            <span className="badge">Jumlah Antrian : 8</span>
           </div>
         </div>
       </div>

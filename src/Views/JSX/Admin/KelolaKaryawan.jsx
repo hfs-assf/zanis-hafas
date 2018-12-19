@@ -3,10 +3,13 @@ import listUser from "../../../Methods/User/Akun/listUser";
 import TambahKaryawan from "../../../Components/JSX/Admin/TambahKaryawan";
 
 class KelolaKaryawan extends Component {
-  state = {
-    filter: "",
-    user: []
-  };
+  constructor(props) {
+    super(props);
+    this.addModal = this.addModal.bind(this);
+    this.editModal = this.editModal.bind(this);
+    // this.deleteItem = this.deleteItem.bind(this);
+    this.state = { filter: "", user: [], selected: {}, action: "" };
+  }
 
   componentWillMount() {
     listUser().then(({ data }) => {
@@ -16,19 +19,45 @@ class KelolaKaryawan extends Component {
     });
   }
 
-  rendereDaftarUser = karyawan => {
+  addModal() {
+    this.setState({ selected: {}, action: "add" });
+  }
+
+  editModal({ uid, nik, nama, role, email, password, akses }) {
+    this.setState({
+      selected: {
+        uid,
+        nik,
+        nama,
+        role,
+        email,
+        password,
+        akses
+      },
+      action: "edit"
+    });
+  }
+
+  // deleteItem = uid => {
+  //   hapusKaryawan(uid);
+  // };
+
+  rendereDaftarUser = ({ uid, nik, nama, role, email, password, akses }) => {
     const { filter } = this.state;
     if (filter !== "") {
       return (
-        <div className="row1" key={karyawan.uid}>
+        <div className="row1" key={uid}>
           {" "}
-          <div className="cell text-center">{karyawan.nik}</div>
-          <div className="cell">{karyawan.nama}</div>
-          <div className="cell text-center">{karyawan.role}</div>
-          <div className="cell text-center">{karyawan.email}</div>
+          <div className="cell text-center">{nik}</div>
+          <div className="cell">{nama}</div>
+          <div className="cell text-center">{role}</div>
+          <div className="cell text-center">{email}</div>
           <div className="cell text-center">
             <button
               className="btn btn-success btn-sm"
+              onClick={() =>
+                this.editModal({ uid, nik, nama, email, password, akses })
+              }
               data-toggle="modal"
               data-target="#tambahKaryawan"
             >
@@ -47,6 +76,7 @@ class KelolaKaryawan extends Component {
     const filteredUser = user.filter(user => {
       return user.nama.toLowerCase().indexOf(filter.toLowerCase()) !== -1;
     });
+
     if (filteredUser.length !== 0 && filter !== "") {
       header = (
         <div className="table">
@@ -54,7 +84,7 @@ class KelolaKaryawan extends Component {
             <div className="cell">NIK</div>
             <div className="cell">Nama Karyawan</div>
             <div className="cell">Peran</div>
-            <div className="cell">Username</div>
+            <div className="cell">Email</div>
             <div className="cell">Aksi</div>
           </div>
           {filteredUser.map(user => {
@@ -91,6 +121,7 @@ class KelolaKaryawan extends Component {
                   className="btn btn-sm btn-primary"
                   data-toggle="modal"
                   data-target="#tambahKaryawan"
+                  onClick={() => this.addModal()}
                 >
                   Tambah Karyawan
                 </button>
@@ -115,7 +146,10 @@ class KelolaKaryawan extends Component {
           <div className="row">
             <div className="col-md-12 rowsoap">{header}</div>
           </div>
-          <TambahKaryawan />
+          <TambahKaryawan
+            selected={this.state.selected}
+            action={this.state.action}
+          />
         </div>
       </div>
     );

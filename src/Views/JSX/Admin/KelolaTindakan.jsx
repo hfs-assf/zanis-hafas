@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import TambahDaftarTindakan from "../../../Components/JSX/Admin/TambahTindakan";
 import listTindakan from "../../../Methods/Poli/Tindakan/listTindakan";
+import hapusTindakan from "../../../Methods/Poli/Tindakan/hapusTindakan";
 
 class KelolaTindakan extends Component {
-  state = {
-    filter: "",
-    tindakan: []
-  };
-
+  constructor(props) {
+    super(props);
+    this.addModal = this.addModal.bind(this);
+    this.editModal = this.editModal.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
+    this.state = { filter: "", tindakan: [], selected: {}, action: "" };
+  }
   componentWillMount() {
     listTindakan().then(({ data }) => {
       this.setState({
@@ -16,17 +19,48 @@ class KelolaTindakan extends Component {
     });
   }
 
-  renderDaftarTindakan = tindakan => {
-    const { filter } = this.state;
-    if (filter !== "") {
-      return (
-        <div className="row1" keys={tindakan.uid}>
-          <div className="cell">{tindakan.nama_tindakan}</div>
-          <div className="cell">{tindakan.biaya_tindakan}</div>
+  addModal() {
+    this.setState({ selected: {}, action: "add" });
+  }
 
-          <div className="cell">
-            <button className="btn btn-primary btn-sm">Ubah</button>
-            <button className="btn btn-outline-primary btn-sm">Hapus</button>
+  editModal({ uid, nama_tindakan, biaya_tindakan }) {
+    this.setState({
+      selected: {
+        uid,
+        nama_tindakan,
+        biaya_tindakan
+      },
+      action: "edit"
+    });
+  }
+
+  deleteItem = uid => {
+    hapusTindakan(uid);
+  };
+  renderDaftarTindakan = ({ uid, nama_tindakan, biaya_tindakan }) => {
+    if (this.state.filter !== "") {
+      return (
+        <div className="row1" key={uid}>
+          <div className="cell">{nama_tindakan}</div>
+          <div className="cell text-right">Rp. {biaya_tindakan}</div>
+
+          <div className="cell text-center">
+            <button
+              className="btn btn-primary btn-sm"
+              onClick={() =>
+                this.editModal({ uid, nama_tindakan, biaya_tindakan })
+              }
+              data-toggle="modal"
+              data-target="#tambahTindakan"
+            >
+              Ubah
+            </button>
+            <button
+              className="btn btn-outline-primary btn-sm"
+              onClick={() => this.deleteItem(uid)}
+            >
+              Hapus
+            </button>
           </div>
         </div>
       );
@@ -36,6 +70,7 @@ class KelolaTindakan extends Component {
   render() {
     let header;
     const { filter, tindakan } = this.state;
+
     const filteredTindakan = tindakan.filter(tindakan => {
       return (
         tindakan.nama_tindakan.toLowerCase().indexOf(filter.toLowerCase()) !==
@@ -73,6 +108,7 @@ class KelolaTindakan extends Component {
         </div>
       );
     }
+
     return (
       <div className="card" style={{ borderTop: "2px solid #1976d2" }}>
         <div className="card-body">
@@ -84,6 +120,7 @@ class KelolaTindakan extends Component {
                   className="btn btn-sm btn-primary"
                   data-toggle="modal"
                   data-target="#tambahTindakan"
+                  onClick={() => this.addModal()}
                 >
                   Tambah Tindakan{" "}
                 </button>
@@ -108,7 +145,10 @@ class KelolaTindakan extends Component {
           <div className="row">
             <div className="col-md-12 rowsoap">{header}</div>
           </div>
-          <TambahDaftarTindakan />
+          <TambahDaftarTindakan
+            selected={this.state.selected}
+            action={this.state.action}
+          />
         </div>
       </div>
     );
