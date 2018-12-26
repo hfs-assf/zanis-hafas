@@ -85,7 +85,7 @@ class ProfileKiriPasien extends Component {
         <div className="bottommenu">
           <div className="col-md-12">
             <div className="main">
-              <input id="tab1" type="radio" name="tabs" />
+              <input id="tab1" type="radio" name="tabs" defaultChecked />
               <label htmlFor="tab1" className="dua">
                 Data Diri
               </label>

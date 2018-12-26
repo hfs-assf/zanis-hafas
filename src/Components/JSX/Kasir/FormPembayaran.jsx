@@ -7,8 +7,16 @@ class FormPembayaran extends Component {
     return (
       <div className="container-fluid ">
         <div className="row" style={{ margin: "0.5em" }}>
-          <div className="col-md-10 boxriwayat">
+          <div className="col-md-8 boxriwayat">
             <DetailPasien id={this.props.pasien} />
+          </div>
+          <div className="col-md-2">
+            <div className="row">
+              <div className="boxsurat">
+                <SVGBillInvoice />
+                <h5 className="h5-responsive"> Tambah </h5>
+              </div>
+            </div>
           </div>
           <div className="col-md-2">
             <div className="row">
@@ -27,7 +35,7 @@ class FormPembayaran extends Component {
                   <tr>
                     <th>#</th>
                     <th>Transaksi</th>
-                    <th>Julmah</th>
+                    <th>Jumlah</th>
                     <th>Harga</th>
                     <th>Total Harga</th>
                   </tr>

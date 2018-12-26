@@ -1,32 +1,72 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import antrian from "../../../JSON/antrianPasien.json";
-import pasien from "../../../JSON/pasien.json";
 import "../../ASSETS/CSS/Timeline.css";
 import Calender from "../../../Components/ASSETS/SVG/Kalender1";
+import listAntrian from "../../../Methods/Pendaftaran/Antrian/listAntrian";
+import detailPasien from "../../../Methods/RekamMedis/Pasien/detailPasien";
 
 class TimelinePelayananMedis extends Component {
+  constructor(props) {
+    super(props);
+    this.searchName = this.searchName.bind(this);
+    this.state = {
+      antrian: [],
+      nama: []
+    };
+  }
+
+  componentWillMount() {
+    listAntrian().then(({ data }) => {
+      // this.setState({
+      //   antrian: this.state.antrian.concat(data)
+      // });
+      // console.log(data);
+      for (var i = 0; i < data.length; i++) {
+        console.log(this.searchName(data[i].nomor_rekam_medis));
+        this.setState({
+          antrian: this.state.antrian.concat(data[i]),
+          nama: this.state.nama.concat()
+        });
+      }
+    });
+  }
+
+  searchName(nomor_rekam_medis) {
+    return detailPasien(nomor_rekam_medis).then(({ data }) => {
+      // this.setState({ nama: data[0].nama_pasien });
+      return data[0].nama_pasien;
+    });
+  }
+
+  dateFormat(x) {
+    var date = new Date(x);
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    var strTime = hours + ":" + minutes;
+    return strTime;
+  }
+
   render() {
-    let deskripsiPasien, ket;
-
+    let deskripsiPasien;
+    const { antrian } = this.state;
     deskripsiPasien = antrian.map(e => {
-      ket = pasien.find(pasien => pasien.no_rm === e.no_rm);
-
       return (
-        <li key={e.id} className="animated bounceIn">
-          <Link to={"/pelayanan-medis/" + e.id}>
+        <li key={e.uid} className="animated bounceIn">
+          <Link to={"/pelayanan-medis/" + e.nomor_rekam_medis}>
             <span />
-            <div className="number"> {e.id} </div>
+            <div className="number"> {e.nomor_antrian} </div>
             <div>
-              <div className="title">{e.no_rm}</div>
-              <div className="tefalsext-white">{ket.nama}</div>
+              <div className="title">{e.nomor_rekam_medis}</div>
+
+              <div className="tefalsext-white">Suci</div>
               <div className="type">
-                {e.asuransi} - {e.tujuan}
+                {e.asuransi} - {e.poli}
               </div>
             </div>
           </Link>
           <span className="number">
-            <span>{e.jam_masuk}</span>
+            <span>{this.dateFormat(e.waktu_daftar)}</span>
             <span />
           </span>
         </li>

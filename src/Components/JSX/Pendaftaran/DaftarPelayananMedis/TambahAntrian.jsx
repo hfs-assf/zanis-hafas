@@ -1,52 +1,38 @@
 import React, { Component } from "react";
-import tambahAntrian from "../../../../Methods/Pendaftaran/tambahAntrian";
+import tambahAntrian from "../../../../Methods/Pendaftaran/Antrian/tambahAntrian";
 
 class TambahAntrian extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.handleSave = this.handleSave.bind(this);
+
     this.state = {
       showMe: false,
       antrian: {
-        no_rm: "z",
-        layanan_medis: "z",
-        nama_dokter: "z",
-        poliklinik: "z",
-        tanggal_masuk: "z",
-        asuransi_kelas: "z",
-        asuransi_faskes: "z",
-        asuransi_no_kartu: "z",
-        asuransi_tanggal_valid: "z"
+        nomor_rekam_medis: "",
+        nama_dokter: "",
+        poli: "",
+        jenis_asuransi: "",
+        asuransi_no_kartu: ""
       }
     };
-  }
-  componentWillMount() {
-    this.setState({
-      no_rm: this.props.antrian
-    });
-    // console.log("obj antrian :" + this.state.antrian);
   }
 
   showHide(value) {
     this.setState({ showMe: value });
   }
-  simpan() {
-    // alert("obj antrian :" + this.state.antrian);
-
+  handleSave() {
     tambahAntrian({
-      no_rm: this.state.antrian.no_rm,
-      layanan_medis: this.state.antrian.layanan_medis,
-      nama_dokter: this.state.antrian.nama_dokter,
-      poliklinik: this.state.antrian.poliklinik,
-      tanggal_masuk: this.state.antrian.tanggal_masuk,
-      asuransi_faskes: this.state.antrian.asuransi_faskes,
-      asuransi_kelas: this.state.antrian.asuransi_kelas,
-      asuransi_no_kartu: this.state.antrian.asuransi_no_kartu,
-      asuransi_tanggal_valid: this.state.antrian.asuransi_tanggal_valid
-    });
+      nomor_rekam_medis: this.props.pasien,
+      // nama_dokter: this.state.antrian.nama_dokter,
+      poli: this.state.antrian.poli
+      // jenis_asuransi: this.state.antrian.jenis_asuransi,
+      // asuransi_no_kartu: this.state.antrian.asuransi_no_kartu
+    })
+      .then(() => this.props.alert.show("Antrian berhasil ditambah"))
+      .catch(() => this.props.alert.error("Input salah"));
   }
-  kembali() {
-    window.location.assign("/pendaftaran");
-  }
+
   render() {
     return (
       <form>
@@ -72,6 +58,7 @@ class TambahAntrian extends Component {
                   name="janispasien"
                   value="color-1"
                   onClick={() => this.showHide(false)}
+                  defaultChecked
                 />
                 <label htmlFor="color-1" className="radio-inline">
                   <span />
@@ -96,26 +83,6 @@ class TambahAntrian extends Component {
           </div>
         </div>
         <div className="form-group row">
-          <label htmlFor="LayananMedis" className="col-sm-4 col-form-label">
-            Layanan Medis
-            <span className="required">*</span>
-          </label>
-          <div className="col-sm-5">
-            <select
-              className="form-control"
-              onChange={event =>
-                this.setState({
-                  antrian: { layanan_medis: event.target.value }
-                })
-              }
-              required
-            >
-              <option>Rawat Jalan</option>
-              <option>Laboratorium</option>
-            </select>
-          </div>
-        </div>
-        <div className="form-group row">
           <label htmlFor="NamaDokter" className="col-sm-4 col-form-label">
             Nama Dokter
             <span className="required">*</span>
@@ -130,9 +97,9 @@ class TambahAntrian extends Component {
               }
               required
             >
-              <option>dr. Miaw</option>
-              <option>dr. Kucing</option>
-              <option>dr. Suci</option>
+              <option value="Miaw">dr. Miaw</option>
+              <option value="Kucing">dr. Kucing</option>
+              <option value="suci">dr. Suci</option>
             </select>
           </div>
         </div>
@@ -146,7 +113,7 @@ class TambahAntrian extends Component {
               className="form-control"
               onChange={event =>
                 this.setState({
-                  antrian: { poliklinik: event.target.value }
+                  antrian: { poli: event.target.value }
                 })
               }
               required
@@ -156,61 +123,29 @@ class TambahAntrian extends Component {
             </select>
           </div>
         </div>
-        <div className="form-group row">
-          <label htmlFor="TanggalMasuk" className="col-sm-4 col-form-label">
-            Tanggal Masuk
-            <span className="required">*</span>
-          </label>
-          <div className="col-sm-5">
-            <input
-              type="date"
-              className="form-control"
-              placeholder="L"
-              onChange={event =>
-                this.setState({
-                  antrian: { tanggal_masuk: event.target.value }
-                })
-              }
-              required
-            />
-          </div>
-        </div>
         {this.state.showMe ? (
           <div className="animated fadeInRight">
             <h4>Asuransi / Jaminan</h4>
             <div className="form-group row">
-              <label htmlFor="KelasFaskes" className="col-sm-4 col-form-label">
-                Kelas <span className="required">*</span>
+              <label
+                htmlFor="JenisAsuransi"
+                className="col-sm-4 col-form-label"
+              >
+                Jenis Asuransi <span className="required">*</span>
               </label>
               <div className="col-sm-5">
-                <input
-                  type="text"
-                  name="kelas"
+                <select
                   className="form-control"
                   onChange={event =>
                     this.setState({
-                      antrian: { asuransi_kelas: event.target.value }
+                      antrian: { jenis_asuransi: event.target.value }
                     })
                   }
-                />
-              </div>
-            </div>
-            <div className="form-group row">
-              <label htmlFor="KelasFaskes" className="col-sm-4 col-form-label">
-                Faskes
-                <span className="required">*</span>
-              </label>
-              <div className="col-sm-5">
-                <input
-                  type="text"
-                  name="faskes"
-                  className="form-control"
-                  onChange={event =>
-                    this.setState({
-                      antrian: { asuransi_faskes: event.target.value }
-                    })
-                  }
-                />
+                  required
+                >
+                  <option value="BRJS">BPJS</option>
+                  <option value="Jamkesda">Jamkesda</option>
+                </select>
               </div>
             </div>
             <div className="form-group row">
@@ -230,36 +165,15 @@ class TambahAntrian extends Component {
                 />
               </div>
             </div>
-            <div className="form-group row">
-              <label htmlFor="KelasFaskes" className="col-sm-4 col-form-label">
-                Tanggal Valid
-                <span className="required">*</span>
-              </label>
-              <div className="col-sm-5">
-                <input
-                  type="date"
-                  name="tanggal_valid"
-                  className="form-control"
-                  onChange={event =>
-                    this.setState({
-                      antrian: { asuransi_tanggal_valid: event.target.value }
-                    })
-                  }
-                />
-              </div>
-            </div>
           </div>
         ) : null}
         <div className="col-md-12">
           <div className="modal-footer justify-content-center">
-            <button className="btn btn-primary" onClick={() => this.simpan()}>
-              Simpan
-            </button>
             <button
-              className="btn btn-outline-primary"
-              onClick={() => this.kembali()}
+              className="btn btn-primary"
+              onClick={() => this.handleSave()}
             >
-              Kembali
+              Simpan
             </button>
           </div>
         </div>

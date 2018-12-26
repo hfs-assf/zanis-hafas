@@ -1,23 +1,45 @@
 import React, { Component } from "react";
-// import obatList from "../../../../JSON/daftarObat";
 import obatList from "../../../../Methods/Apotik/Obat/listObat";
+import kurangStokObat from "../../../../Methods/Apotik/StokObat/kurangStokObat";
 
 class resepObatTabulasi extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.cariObat = this.cariObat.bind(this);
+    this.ubahJumlahObat = this.ubahJumlahObat.bind(this);
+    this.ubahKeteranganObat = this.ubahKeteranganObat.bind(this);
+    this.handleSave = this.handleSave.bind(this);
     this.state = {
       doResep: [],
+      jumlah_obat: [],
+      keterangan_obat: [],
       filter: "",
-      resep: []
+      resep: [],
+      nik_dokter: ""
     };
   }
 
-  componentWillMount() {
-    obatList().then(({ data }) => {
+  cariObat(e) {
+    e.preventDefault();
+    var filter = e.target.value;
+    obatList(filter).then(({ data }) => {
       this.setState({
-        resep: this.state.resep.concat(data)
+        resep: data,
+        filter: filter
       });
     });
+  }
+
+  ubahJumlahObat(e, i) {
+    let jumlah_obat = [...this.state.jumlah_obat];
+    jumlah_obat[i] = e.target.value;
+    this.setState({ jumlah_obat });
+  }
+
+  ubahKeteranganObat(e, i) {
+    let keterangan_obat = [...this.state.keterangan_obat];
+    keterangan_obat[i] = e.target.value;
+    this.setState({ keterangan_obat });
   }
 
   tambah(resep) {
@@ -40,12 +62,31 @@ class resepObatTabulasi extends Component {
   reset() {
     this.setState({ doResep: [] });
   }
+
+  handleSave() {
+    for (let i = 0; i < this.state.doResep.length; i++) {
+      kurangStokObat({
+        uid: this.state.doResep[i].uid,
+        jumlah_obat: this.state.jumlah_obat[i],
+        nik_dokter: this.props.dokter
+      });
+    }
+    // console.log(this.state.doResep);
+  }
+
   daftardoResep() {
-    return this.state.doResep.map(resep => (
+    return this.state.doResep.map((resep, index) => (
       <div className="row1" key={resep.uid}>
         <div className="cell">{resep.nama_obat}</div>
         <div className="cell text-center">
-          <input type="number" refs="jumlahobat" min="1" max="10" required />
+          <input
+            type="number"
+            refs="jumlahobat"
+            min="1"
+            max="10"
+            onChange={e => this.ubahJumlahObat(e, index)}
+            required
+          />
           &nbsp;
           {resep.satuan}
         </div>
@@ -54,7 +95,11 @@ class resepObatTabulasi extends Component {
           {resep.harga_jual}
         </div>
         <div className="cell text-center">
-          <input type="text" refs="keteranganobat" />
+          <input
+            type="text"
+            refs="keteranganobat"
+            onChange={e => this.ubahKeteranganObat(e, index)}
+          />
         </div>
         <div className="cell text-center">
           <button
@@ -73,9 +118,8 @@ class resepObatTabulasi extends Component {
   render() {
     let suggestionsList, daftarResep;
     const { filter, doResep, resep } = this.state;
-    const filteredResep = resep.filter(resep => {
-      return resep.nama_obat.toLowerCase().indexOf(filter.toLowerCase()) !== -1;
-    });
+    const filteredResep = resep;
+
     if (filteredResep.length !== 0 && filter !== "") {
       suggestionsList = (
         <ul className="suggestions">
@@ -122,6 +166,7 @@ class resepObatTabulasi extends Component {
                 className="btn btn-primary"
                 data-placement="bottom"
                 title="Simpan Data Obat "
+                onClick={() => this.handleSave()}
               >
                 Simpan
               </button>
@@ -145,10 +190,11 @@ class resepObatTabulasi extends Component {
               type="text"
               className="form-control"
               value={filter}
-              onChange={e =>
-                this.setState({
-                  filter: e.target.value
-                })
+              onChange={
+                e => this.cariObat(e)
+                // this.setState({
+                //   filter: e.target.value
+                // })
               }
             />
             {suggestionsList}

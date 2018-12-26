@@ -13,6 +13,7 @@ class TambahTindakan extends Component {
       biaya_tindakan: ""
     };
   }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.action === "edit") {
       this.setState({

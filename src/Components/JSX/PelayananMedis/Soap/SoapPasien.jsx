@@ -1,24 +1,46 @@
 import React, { Component } from "react";
 import "../../../ASSETS/CSS/TambahPelayananAntrian.css";
+import tambahHistoriMedis from "../../../../Methods/RekamMedis/HistorisMedis/tambahHistoriMedis";
 
 class SoapPasien extends Component {
-  state = {
-    showMe: false,
-    vital_sign: {
-      sistole: "z",
-      diastole: "z",
-      suhu: "z",
-      pulse: "z",
-      respirasi: "z",
-      tinggi: "z",
-      berat: "z",
-      subjektif: "z",
-      objektif: "z",
-      analisa: "z",
-      tindakan: "z",
-      diagnosa: "z"
-    }
-  };
+  constructor(props) {
+    super(props);
+    this.handleSave = this.handleSave.bind(this);
+    this.state = {
+      showMe: false,
+      nomor_rekam_medis: "",
+      nik_dokter: "121212",
+      jenis_perawatan: "Rawat Jalan",
+      penjamin: "Umum",
+      sistole: "",
+      diastole: "",
+      suhu: "",
+      pulse: "",
+      respirasi: "",
+      tinggi: "",
+      berat: "",
+      subjektif: "",
+      objektif: "",
+      analisa: "",
+      tindakan: "",
+      diagnosa: ""
+    };
+  }
+
+  handleSave() {
+    tambahHistoriMedis({
+      nomor_rekam_medis: this.props.id,
+      nik_dokter: this.state.nik_dokter,
+      subjektif: this.state.subjektif,
+      objektif: this.state.objektif,
+      analisa: this.state.analisa,
+      diagnosa: this.state.diagnosa,
+      jenis_perawatan: this.state.jenis_perawatan,
+      penjamin: this.state.penjamin,
+      tindakan: this.state.tindakan
+    });
+  }
+
   showHide(e) {
     var hasil = e.target.value;
     if (hasil === "false") {
@@ -212,7 +234,7 @@ class SoapPasien extends Component {
                   <input
                     type="checkbox"
                     id="color-2"
-                    name="janispasien"
+                    name="template_soap"
                     value={this.state.showMe}
                     onClick={e => this.showHide(e)}
                   />
@@ -256,6 +278,7 @@ class SoapPasien extends Component {
                 className="btn btn-primary"
                 data-placement="bottom"
                 title="Simpan Data Soap Pasien"
+                onClick={this.handleSave}
               >
                 Simpan
               </button>

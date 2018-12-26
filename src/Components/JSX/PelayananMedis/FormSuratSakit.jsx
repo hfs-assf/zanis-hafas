@@ -1,17 +1,32 @@
 import React, { Component } from "react";
 import jsPDF from "jspdf";
-import pasienList from "../../../JSON/pasien";
+import detailPasien from "../../../Methods/RekamMedis/Pasien/detailPasien";
 
 class FormObat extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      no_rm: "",
+      nama_pasien: "",
+      tanggal_lahir: "",
+      alamat: ""
+    };
+  }
+
+  componentWillMount() {
+    detailPasien(this.props.id).then(({ data }) => {
+      this.setState({
+        nama_pasien: data[0].nama_pasien,
+        tanggal_lahir: data[0].tanggal_lahir,
+        alamat: data[0].alamat
+      });
+    });
   }
 
   handleSubmit(event) {
     event.preventDefault();
     const form = event.target;
-
     var doc = new jsPDF({
       orientation: "l",
       unit: "cm",
@@ -47,18 +62,6 @@ class FormObat extends Component {
     doc.text("Diagnosis :  " + form.elements["diagnosis"].value, 1, 10);
     doc.text("Harap yang berkepentingan maklum.", 1, 11);
     doc.save(form.elements["nama"].value + ".pdf");
-
-    // var source = window.document.getElementsByTagName("p")[0];
-    // var elementHandler = {
-    //   "#ignorePDF": function(element, renderer) {
-    //     return true;
-    //   }
-    // };
-    // doc.fromHTML(source, 15, 15, {
-    //   width: 180,
-    //   elementHandlers: elementHandler
-    // });
-    // doc.save(form.elements["nama"].value + ".pdf");
   }
 
   calculateAge(date) {
@@ -73,101 +76,6 @@ class FormObat extends Component {
   }
 
   render() {
-    let formSuratSakit;
-    const pasien = pasienList.filter(antrian => {
-      return antrian.id.toString().indexOf(this.props.id) !== -1;
-    });
-
-    if (pasien.length !== 0) {
-      formSuratSakit = pasien.map(pasien => {
-        return (
-          <form
-            className="modal-body"
-            onSubmit={this.handleSubmit}
-            key={pasien.id}
-          >
-            <div className="row">
-              <div className="col-md-12">
-                <div className="md-form mb-0">
-                  <input
-                    type="text"
-                    name="nama"
-                    value={pasien.nama}
-                    className="form-control"
-                    readOnly
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-12">
-                <div className="md-form mb-0">
-                  <input
-                    type="text"
-                    name="umur"
-                    className="form-control"
-                    value={this.calculateAge(pasien.tanggal_lahir) + " tahun"}
-                    readOnly
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-12">
-                <div className="md-form mb-0">
-                  <input
-                    type="text"
-                    name="alamat"
-                    className="form-control"
-                    value={pasien.alamat}
-                    readOnly
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-6">
-                <div className="md-form mb-0">
-                  <span>Dari Tanggal </span>
-
-                  <input
-                    type="date"
-                    name="dari_tanggal"
-                    className="form-control"
-                  />
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="md-form mb-0">
-                  <span>Hingga Tanggal</span>
-
-                  <input
-                    type="date"
-                    name="hingga_tanggal"
-                    className="form-control"
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-12">
-                <div className="md-form mb-0">
-                  <span>Diagnosis</span>
-                  <input
-                    type="text"
-                    name="diagnosis"
-                    className="form-control"
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="modal-footer justify-content-center">
-              <button className="btn btn-info">Cetak</button>
-            </div>
-          </form>
-        );
-      });
-    }
     return (
       <div
         className="modal fade right"
@@ -197,11 +105,93 @@ class FormObat extends Component {
                 </span>
               </button>
             </div>
-            {formSuratSakit}
+            <form className="modal-body" onSubmit={this.handleSubmit}>
+              <div className="row">
+                <div className="col-md-12">
+                  <div className="md-form mb-0">
+                    <input
+                      type="text"
+                      name="nama"
+                      value={this.state.nama_pasien}
+                      className="form-control"
+                      readOnly
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-md-12">
+                  <div className="md-form mb-0">
+                    <input
+                      type="text"
+                      name="umur"
+                      className="form-control"
+                      value={
+                        this.calculateAge(this.state.tanggal_lahir) + " tahun"
+                      }
+                      readOnly
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-md-12">
+                  <div className="md-form mb-0">
+                    <input
+                      type="text"
+                      name="alamat"
+                      className="form-control"
+                      value={this.state.alamat}
+                      readOnly
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-md-6">
+                  <div className="md-form mb-0">
+                    <span>Dari Tanggal </span>
+
+                    <input
+                      type="date"
+                      name="dari_tanggal"
+                      className="form-control"
+                    />
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div className="md-form mb-0">
+                    <span>Hingga Tanggal</span>
+
+                    <input
+                      type="date"
+                      name="hingga_tanggal"
+                      className="form-control"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-md-12">
+                  <div className="md-form mb-0">
+                    <span>Diagnosis</span>
+                    <input
+                      type="text"
+                      name="diagnosis"
+                      className="form-control"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="modal-footer justify-content-center">
+                <button className="btn btn-info">Cetak</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
     );
   }
 }
+
 export default FormObat;

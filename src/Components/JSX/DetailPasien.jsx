@@ -1,8 +1,29 @@
 import React, { Component } from "react";
-import pasienList from "../../JSON/pasien";
-import keteranganPasien from "../../JSON/antrianPasien";
+import detailPasien from "../../Methods/RekamMedis/Pasien/detailPasien";
 
 class DetailPasien extends Component {
+  constructor(props) {
+    super(props);
+    this.calculateAge = this.calculateAge.bind(this);
+    this.state = {
+      no_rm: "",
+      nama_pasien: "",
+      tanggal_lahir: "",
+      poli: "",
+      jaminan: ""
+    };
+  }
+
+  componentWillMount() {
+    detailPasien(this.props.id).then(({ data }) => {
+      this.setState({
+        no_rm: data[0].nomor_rekam_medis,
+        nama: data[0].nama_pasien,
+        tanggal_lahir: data[0].tanggal_lahir
+      });
+    });
+  }
+
   calculateAge(date) {
     var today = new Date();
     var birthDate = new Date(date);
@@ -13,52 +34,45 @@ class DetailPasien extends Component {
     }
     return age;
   }
+
   render() {
-    let deskripsiPasien, ket;
-    const pasien = pasienList.filter(antrian => {
-      return antrian.id.toString().indexOf(this.props.id) !== -1;
-    });
-    if (pasien.length !== 0) {
-      deskripsiPasien = pasien.map(pasien => {
-        ket = keteranganPasien.find(e => e.no_rm === pasien.no_rm);
-        return (
-          <table key={pasien.id}>
-            <tbody>
-              <tr>
-                <td>Nomor RM </td>
-                <td className="datatable">
-                  :&ensp;
-                  {pasien.no_rm}
-                </td>
-              </tr>
-              <tr>
-                <td>Nama</td>
-                <td className="datatable">
-                  :&ensp;
-                  {pasien.nama} ({this.calculateAge(pasien.tanggal_lahir)}{" "}
-                  tahun)
-                </td>
-              </tr>
-              <tr>
-                <td>Poli</td>
-                <td className="datatable">
-                  :&ensp;
-                  {ket.tujuan}
-                </td>
-              </tr>
-              <tr>
-                <td>Asuransi</td>
-                <td className="datatable">
-                  :&ensp;
-                  {ket.asuransi}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        );
-      });
-    }
-    return <div>{deskripsiPasien}</div>;
+    return (
+      <div>
+        <table>
+          <tbody>
+            <tr>
+              <td>Nomor RM </td>
+              <td className="datatable">
+                :&ensp;
+                {this.state.no_rm}
+              </td>
+            </tr>
+            <tr>
+              <td>Nama</td>
+              <td className="datatable">
+                :&ensp;
+                {this.state.nama} ({this.calculateAge(this.state.tanggal_lahir)}{" "}
+                tahun)
+              </td>
+            </tr>
+            <tr>
+              <td>Poli</td>
+              <td className="datatable">
+                :&ensp;
+                {this.state.poli}
+              </td>
+            </tr>
+            <tr>
+              <td>Jaminan</td>
+              <td className="datatable">
+                :&ensp;
+                {this.state.jaminan}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    );
   }
 }
 
