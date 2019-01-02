@@ -13,6 +13,7 @@ class TambahTindakan extends Component {
       biaya_tindakan: ""
     };
   }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.action === "edit") {
       this.setState({
@@ -28,7 +29,7 @@ class TambahTindakan extends Component {
       tambahTindakan({
         nama_tindakan: this.state.nama_tindakan,
         biaya_tindakan: this.state.biaya_tindakan
-      });
+      }).then(() => alert("Berhasil Disimpan"));
     } else {
       editTindakan({
         uid: this.state.uid,

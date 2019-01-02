@@ -1,15 +1,29 @@
 import React, { Component } from "react";
+import listPasien from "../../../Methods/Admin/getDataLabor";
 
 class DashboarJenisPasien extends Component {
+  constructor(props) {
+    super();
+    this.state = {
+      pasien: []
+    };
+  }
+
+  componentDidMount() {
+    listPasien().then(({ data }) => {
+      this.setState({
+        pasien: this.state.pasien.concat(data)
+      });
+      console.log(this.state.pasien);
+    });
+  }
+
   render() {
     return (
-      <div
-        className="card"
-        style={{ backgroundColor: "#0097a7 ", color: "white" }}
-      >
+      <div className="card gradient">
         <div className="card-body">
           <div className="d-flex no-block">
-            <h4 className="card-title">Data Pasien Per Wilayah</h4>
+            <h4 className="card-title text-white">Data Pasien Per Wilayah</h4>
             <div className="ml-auto">
               <select className="custom-select">
                 <option selected="">January</option>
@@ -31,7 +45,9 @@ class DashboarJenisPasien extends Component {
                 </td>
                 <td>Perempuan</td>
                 <td className="text-right">
-                  <span className="label label-light-info">23%</span>
+                  <span className="label label-light-info">
+                    {(this.state.pasien.length / 50) * 100}%
+                  </span>
                 </td>
               </tr>
               <tr>
@@ -43,7 +59,9 @@ class DashboarJenisPasien extends Component {
                 </td>
                 <td>Laki - Laki </td>
                 <td className="text-right">
-                  <span className="label label-light-success">15%</span>
+                  <span className="label label-light-success">
+                    {this.state.pasien.length}
+                  </span>
                 </td>
               </tr>
             </tbody>

@@ -1,6 +1,15 @@
 import React, { Component } from "react";
+import tambahPoliklinik from "../../../Methods/Admin/tambahPoliknliki";
 
 class TambahPoliklinik extends Component {
+  tambahPoli = event => {
+    event.preventDefault();
+    let { nama_poli } = this.refs;
+    tambahPoliklinik({ nama_poli: nama_poli.value })
+      .then(response => console.log(response))
+      .catch(() => alert("error"));
+  };
+
   render() {
     return (
       <div
@@ -37,8 +46,7 @@ class TambahPoliklinik extends Component {
                     <div className="md-form mb-0">
                       <input
                         type="number"
-                        id="nama_poli"
-                        name="nama_poli"
+                        ref="nama_poli"
                         className="form-control"
                         placeholder="Masukkan Nama Poliklinik"
                       />
@@ -49,7 +57,9 @@ class TambahPoliklinik extends Component {
             </div>
 
             <div className="modal-footer justify-content-center">
-              <button className="btn btn-primary">Simpan</button>
+              <button className="btn btn-primary" onClick={this.tambahPoli}>
+                Simpan
+              </button>
               <button
                 className="btn btn-outline-primary waves-effect"
                 data-dismiss="modal"

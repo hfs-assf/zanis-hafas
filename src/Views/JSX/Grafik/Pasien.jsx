@@ -16,7 +16,7 @@ class IndikatorAreaSasaran extends Component {
     return (
       <div
         className="card mt-1 mb-2"
-        style={{ backgroundColor: "#1976d2 ", color: "white" }}
+        style={{ backgroundColor: "#f75727 ", color: "white" }}
       >
         <div className="card-body">
           <div className="d-flex no-block">

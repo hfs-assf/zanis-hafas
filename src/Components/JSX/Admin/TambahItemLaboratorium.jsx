@@ -1,11 +1,54 @@
 import React, { Component } from "react";
+import tambahItemLaboratorium from "../../../Methods/Admin/tambahItemLabor";
+import editItemLabor from "../../../Methods/Admin/editItemLabor";
+import SuksesModal from "../../../Views/JSX/Animasi/Sukses";
 
 class TambahLaboratorium extends Component {
+  constructor(props) {
+    super(props);
+    this.tambahItem = this.tambahItem.bind(this);
+    this.state = {
+      body: "",
+      title: "",
+      id: "",
+      pesan: false
+    };
+  }
+
+  componentWillReceiveProps(nexProps) {
+    if (nexProps.action === "edit") {
+      this.setState({
+        id: nexProps.selected.id,
+        title: nexProps.selected.title,
+        body: nexProps.selected.body
+      });
+    }
+  }
+
+  tambahItem() {
+    if (this.props.action === "add") {
+      tambahItemLaboratorium({
+        title: this.state.title,
+        body: this.state.body
+      })
+        .then(response => console.log(response))
+        .then(() => this.setState({ pesan: true }));
+    } else {
+      editItemLabor({
+        id: this.state.id,
+        title: this.state.title,
+        body: this.state.body
+      })
+        .then(response => console.log(response))
+        .then(() => alert("Edit Data Berhasil"));
+    }
+  }
+
   render() {
     return (
       <div
         className="modal fade right"
-        id="tambahItemLaboratorium"
+        id="tambahItem"
         tabIndex="-1"
         role="dialog"
         aria-labelledby="myModalLabel"
@@ -30,16 +73,21 @@ class TambahLaboratorium extends Component {
             </div>
 
             <div className="modal-body">
-              <form id="contact-form" name="contact-form" method="POST">
+              <form method="POST">
                 <div className="row">
                   <div className="col-md-12">
                     <div className="md-form mb-0">
                       <input
                         type="text"
-                        id="nama_item"
-                        name="nama_item"
+                        value={this.state.title}
                         className="form-control"
                         placeholder="Nama Peralatan"
+                        onChange={event =>
+                          this.setState({
+                            title: event.target.value
+                          })
+                        }
+                        required
                       />
                     </div>
                   </div>
@@ -48,20 +96,27 @@ class TambahLaboratorium extends Component {
                   <div className="col-md-12">
                     <div className="md-form mb-0">
                       <input
-                        type="number"
-                        id="tarif"
-                        name="tarif"
+                        type="text"
+                        value={this.state.body}
                         className="form-control"
                         placeholder="Tarif"
+                        onChange={event =>
+                          this.setState({
+                            body: event.target.value
+                          })
+                        }
+                        required
                       />
                     </div>
                   </div>
                 </div>
               </form>
             </div>
-
+            {this.state.pesan ? <SuksesModal /> : null}
             <div className="modal-footer justify-content-center">
-              <button className="btn btn-primary">Simpan</button>
+              <button className="btn btn-primary" onClick={this.tambahItem}>
+                Simpan
+              </button>
               <button
                 className="btn btn-outline-primary waves-effect"
                 data-dismiss="modal"
