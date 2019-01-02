@@ -1,36 +1,74 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import antrian from "../../../JSON/antrianPasien.json";
-import pasien from "../../../JSON/pasien.json";
 import "../../ASSETS/CSS/Timeline.css";
 import Calender from "../../../Components/ASSETS/SVG/Kalender1";
+import listAntrian from "../../../Methods/Pendaftaran/Antrian/listAntrian";
+import detailPasien from "../../../Methods/RekamMedis/Pasien/detailPasien";
 
 class TimelinePelayananMedis extends Component {
-  render() {
-    let deskripsiPasien, ket;
+  constructor(props) {
+    super(props);
+    this.searchName = this.searchName.bind(this);
+    this.state = { antrian: [], nama: [], tanggal: new Date("mm/dd/YYYY") };
+  }
 
-    deskripsiPasien = antrian.map(e => {
-      ket = pasien.find(pasien => pasien.no_rm === e.no_rm);
+  componentWillMount() {
+    var array = [...this.state.nama];
+    listAntrian().then(({ data }) => {
+      for (var i = 0; i < data.length; i++) {
+        this.searchName(data[i].nomor_rekam_medis).then(data => {
+          array.push(data);
+        });
+
+        this.setState({
+          antrian: this.state.antrian.concat(data[i]),
+          nama: array
+        });
+      }
+    });
+  }
+
+  searchName(nomor_rekam_medis) {
+    return detailPasien(nomor_rekam_medis).then(({ data }) => {
+      return data[0].nama_pasien;
+    });
+  }
+
+  dateFormat(x) {
+    var date = new Date(x);
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    var strTime = hours + ":" + minutes;
+    return strTime;
+  }
+
+  render() {
+    let deskripsiPasien, jumlahAntrian;
+    const { antrian, nama } = this.state;
+    deskripsiPasien = antrian.map((e, index) => {
       return (
-        <li key={e.id} className="animated bounceIn">
-          <Link to={"/pelayanan-medis/" + e.id}>
+        <li key={e.uid} className="animated bounceIn">
+          <Link to={"/pelayanan-medis/" + e.nomor_rekam_medis}>
             <span />
-            <div className="number"> {e.id} </div>
+            <div className="number"> {e.nomor_antrian} </div>
             <div>
-              <div className="title">{e.no_rm}</div>
-              <div className="tefalsext-white">{ket.nama}</div>
+              <div className="title">{e.nomor_rekam_medis}</div>
+
+              <div className="tefalsext-white">{nama[index]}</div>
               <div className="type">
-                {e.asuransi} - {e.tujuan}
+                {e.asuransi} - {e.poli}
               </div>
             </div>
           </Link>
           <span className="number">
-            <span>{e.jam_masuk}</span>
+            <span>{this.dateFormat(e.waktu_daftar)}</span>
             <span />
           </span>
         </li>
       );
     });
+    jumlahAntrian = antrian.length;
     return (
       <div className="row">
         <div className="col-md-7">
@@ -45,6 +83,7 @@ class TimelinePelayananMedis extends Component {
               <input
                 type="date"
                 className="form-control"
+                // value={this.state.tanggal}
                 style={{ borderRadius: "5px" }}
               />
 
@@ -55,7 +94,7 @@ class TimelinePelayananMedis extends Component {
             </div>
           </div>
           <div className="banyakpasien">
-            <span className="badge">Jumlah Antrian : 8</span>
+            <span className="badge">Jumlah Antrian : {jumlahAntrian}</span>
           </div>
         </div>
       </div>

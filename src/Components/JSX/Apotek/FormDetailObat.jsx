@@ -1,21 +1,36 @@
 import React, { Component } from "react";
 import detailObat from "../../../Methods/Apotik/Obat/detailObat";
+import editObat from "../../../Methods/Apotik/Obat/editObat";
 
 class FormDetailObat extends Component {
-  state = {
-    nama_obat: "",
-    jumlah_minimum: "",
-    satuan: ""
-  };
+  constructor(props) {
+    super(props);
+    this.handleSave = this.handleSave.bind(this);
+    this.state = {
+      nama_obat: "",
+      minimal_stok: "",
+      satuan: "",
+      kategori: ""
+    };
+  }
   componentWillMount() {
     detailObat(this.props.uid).then(({ data }) => {
-      // let { nama_obat, jumlah_minimum, satuan } = data.data;
-      // this.setState({
-      //   nama_obat: nama_obat,
-      //   jumlah_minimum: jumlah_minimum,
-      //   satuan: satuan
-      // });
-      console.log(data);
+      let { nama_obat, minimal_stok, satuan, kategori } = data[0];
+      this.setState({
+        nama_obat: nama_obat,
+        minimal_stok: minimal_stok,
+        satuan: satuan,
+        kategori: kategori
+      });
+    });
+  }
+  handleSave() {
+    editObat({
+      uid: this.props.uid,
+      nama_obat: this.state.nama_obat,
+      minimal_stok: this.state.minimal_stok,
+      satuan: this.state.satuan,
+      kategori: this.state.kategori
     });
   }
 
@@ -49,7 +64,7 @@ class FormDetailObat extends Component {
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col-sm-6">
+                  <div className="col-sm-12">
                     <label>
                       <span>
                         Jumlah Minimum <span className="required">*</span>
@@ -57,19 +72,20 @@ class FormDetailObat extends Component {
                       <input
                         type="text"
                         className="form-control"
-                        name="jumlah_minimum"
-                        value={this.state.jumlah_minimum}
+                        name="minimal_stok"
+                        value={this.state.minimal_stok}
                         onChange={event =>
                           this.setState({
-                            jumlah_minimum: event.target.value
+                            minimal_stok: event.target.value
                           })
                         }
                         required
                       />
                     </label>
                   </div>
-                  <div className="col-sm-6">
-                    {" "}
+                </div>
+                <div className="row">
+                  <div className="col-sm-12">
                     <label>
                       <span>
                         Satuan <span className="required">*</span>
@@ -89,6 +105,29 @@ class FormDetailObat extends Component {
                     </label>
                   </div>
                 </div>
+                <div className="row">
+                  <div className="col-sm-12">
+                    <label>
+                      <span>
+                        Kategori <span className="required">*</span>
+                      </span>
+                      <select
+                        onChange={event =>
+                          this.setState({
+                            kategori: event.target.value
+                          })
+                        }
+                        className="form-control"
+                      >
+                        <option value={this.state.kategori}>
+                          {this.state.kategori}
+                        </option>
+                        <option value="Minum">Minum</option>
+                        <option value="Makan">Makan</option>
+                      </select>
+                    </label>
+                  </div>
+                </div>
                 <br />
               </fieldset>
             </div>
@@ -96,7 +135,9 @@ class FormDetailObat extends Component {
             <div className="row">
               <div className="col-md-12">
                 <div className="modal-footer justify-content-center">
-                  <button className="btn btn-primary">Simpan</button>
+                  <button className="btn btn-primary" onClick={this.handleSave}>
+                    Simpan
+                  </button>
                 </div>
               </div>
             </div>

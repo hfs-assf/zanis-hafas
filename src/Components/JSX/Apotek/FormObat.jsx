@@ -4,18 +4,19 @@ import tambahObat from "../../../Methods/Apotik/Obat/tambahObat";
 class FormObat extends Component {
   state = {
     nama_obat: "",
-    batas_minimum: "10",
-    satuan: ""
+    minimal_stok: "10",
+    satuan: "",
+    kategori: "Minum"
   };
+
   tambahObat = event => {
     event.preventDefault();
     tambahObat({
       nama_obat: this.state.nama_obat,
-      batas_minimum: this.state.batas_minimum,
-      satuan: this.state.satuan
-    })
-      .then(() => this.props.alert.show("Obat berhasil ditambah"))
-      .catch(() => this.props.alert.error("Input salah"));
+      minimal_stok: this.state.minimal_stok,
+      satuan: this.state.satuan,
+      kategori: this.state.kategori
+    });
   };
   render() {
     return (
@@ -69,12 +70,12 @@ class FormObat extends Component {
                     <div className="md-form mb-0">
                       <input
                         type="text"
-                        name="batas_minimum"
+                        name="minimal_stok"
                         className="form-control"
                         placeholder="Batas Minimum"
                         onChange={event =>
                           this.setState({
-                            batas_minimum: event.target.value
+                            minimal_stok: event.target.value
                           })
                         }
                         required
@@ -95,6 +96,22 @@ class FormObat extends Component {
                         }
                         required
                       />
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-12">
+                    <div className="md-form mb-0">
+                      <span>Kategori</span>
+                      <select
+                        onChange={e =>
+                          this.setState({ kategori: e.target.value })
+                        }
+                        className="form-control"
+                      >
+                        <option value="Minum">Minum</option>
+                        <option value="Makan">Makan</option>
+                      </select>
                     </div>
                   </div>
                 </div>

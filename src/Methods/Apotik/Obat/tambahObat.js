@@ -1,11 +1,12 @@
 import axios from "axios";
-import { baseUrl } from "../../api";
+let apiURL = "www.a.com";
 
-let tambahObat = ({ nama_obat, batas_minimum, satuan }) => {
-  return axios.post(baseUrl + "/api/v1/obat", {
+let tambahObat = ({ nama_obat, minimal_stok, satuan, kategori }) => {
+  return axios.post(apiURL + "/api/v1/obat", {
     nama_obat,
-    batas_minimum,
-    satuan
+    minimal_stok,
+    satuan,
+    kategori
   });
 };
 

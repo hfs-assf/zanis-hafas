@@ -18,8 +18,6 @@ class TableObat extends Component {
   }
 
   renderDaftarObat = obat => {
-    // const { filter } = this.state;
-    // if (filter !== "") {
     return (
       <div className="row1" key={obat.uid}>
         <div className="cell text-center">
@@ -29,13 +27,14 @@ class TableObat extends Component {
         <div className="cell text-center">
           {new Date(obat.kadaluarsa).toLocaleDateString("en-GB")}
         </div>
+        <div className="cell text-left">Rp. {obat.harga_modal}</div>
 
         <div className="cell text-center">
           <button
             className="btn btn-primary btn-sm "
-            onClick={() => this.detailObat(obat.uid)}
+            onClick={() => this.ubahStok(obat.uid)}
           >
-            Detail
+            Ubah
           </button>{" "}
         </div>
       </div>
@@ -46,22 +45,17 @@ class TableObat extends Component {
   render() {
     let header;
     const { obat } = this.state;
-    // const filteredObat = obat.filter(obat => {
-    //   return obat.nama_obat.toLowerCase().indexOf(filter.toLowerCase()) !== -1;
-    // });
-    const filteredObat = obat.length;
-    console.log("f" + filteredObat);
 
-    if (
-      filteredObat !== 0
-      // && filter !== ""
-    ) {
+    const filteredObat = obat.length;
+
+    if (filteredObat !== 0) {
       header = (
         <div className="table">
           <div className="row1 header">
             <div className="cell">Waktu Masuk</div>
             <div className="cell">Jumlah</div>
             <div className="cell">Kadaluarsa</div>
+            <div className="cell">Harga Modal</div>
             <div className="cell">Aksi</div>
           </div>
           {obat.map(obat => {
@@ -84,13 +78,13 @@ class TableObat extends Component {
           <div className="flex-container">
             <div className="box column1">
               <h2 className="card-title text-left">
-                Obat Masuk
+                Persediaan
                 <button
                   className="btn btn-sm btn-primary"
                   data-toggle="modal"
                   data-target="#tambahObatMasuk"
                 >
-                  Tambah Obat Masuk
+                  Tambah Persediaan Obat
                 </button>
               </h2>
             </div>

@@ -2,45 +2,65 @@ import React, { Component } from "react";
 import "../../ASSETS/CSS/Apotek.css";
 import "../../ASSETS/CSS/form.css";
 import obatList from "../../../Methods/Apotik/Obat/listObat";
-import hapusObat from "../../../Methods/Apotik/Obat/hapusObat";
+import HapusModal from "../hapusModal";
+// import hapusObat from "../../../Methods/Apotik/Obat/hapusObat";
 
 class TableObat extends Component {
-  state = {
-    filter: "",
-    obat: []
-  };
+  constructor() {
+    super();
+    this.onChange = this.onChange.bind(this);
+    this.state = {
+      filter: "",
+      obat: [],
+      selected: {
+        uid: ""
+      },
+      field: ""
+    };
+  }
 
-  componentWillMount() {
-    obatList().then(({ data }) => {
+  onChange(e) {
+    e.preventDefault();
+    var filter = e.target.value;
+    obatList(filter).then(({ data }) => {
       this.setState({
-        obat: this.state.obat.concat(data)
+        obat: data,
+        filter: filter
       });
     });
   }
-  detailObat(uid) {
+
+  detailObat({ uid }) {
     window.location.assign("/detail-obat/" + uid);
   }
-  renderDaftarObat = obat => {
+
+  deleteModal({ uid }) {
+    this.setState({ selected: { uid }, field: "obat" });
+  }
+
+  renderDaftarObat = ({ uid, nama_obat, stok_total, satuan, harga_jual }) => {
     if (this.state.filter !== "") {
       return (
-        <div className="row1" key={obat.uid}>
-          <div className="cell">{obat.nama_obat}</div>
+        <div className="row1" key={uid}>
+          <div className="cell">{nama_obat}</div>
           <div className="cell text-center">Minum</div>
-          <div className="cell text-center">0 {obat.satuan}</div>
+          <div className="cell text-center"> {stok_total + " " + satuan}</div>
           <div className="cell text-right">
             Rp.0
-            {obat.harga_jual}
+            {harga_jual}
           </div>
           <div className="cell text-center">
             <button
               className="btn btn-primary btn-sm "
-              onClick={() => this.detailObat(obat.uid)}
+              onClick={() => this.detailObat({ uid })}
             >
               Detail
             </button>
             <button
               className="btn btn-outline-primary btn-sm"
-              onClick={() => this.hapusObatByID(obat.uid)}
+              onClick={() => this.deleteModal({ uid })}
+              data-toggle="modal"
+              data-target="#hapus"
             >
               Hapus
             </button>
@@ -49,15 +69,11 @@ class TableObat extends Component {
       );
     }
   };
-  hapusObatByID = uid => {
-    hapusObat(uid);
-  };
+
   render() {
     let header;
     const { filter, obat } = this.state;
-    const filteredObat = obat.filter(obat => {
-      return obat.nama_obat.toLowerCase().indexOf(filter.toLowerCase()) !== -1;
-    });
+    const filteredObat = obat;
     if (filteredObat.length !== 0 && filter !== "") {
       header = (
         <div className="table">
@@ -107,7 +123,7 @@ class TableObat extends Component {
                     type="text"
                     className="form-control"
                     placeholder="Cari Obat"
-                    onChange={e => this.setState({ filter: e.target.value })}
+                    onChange={e => this.onChange(e)}
                   />
                 </div>
               </div>
@@ -117,6 +133,7 @@ class TableObat extends Component {
           <div className="row">
             <div className="col-md-12 rowsoap">{header}</div>
           </div>
+          <HapusModal selected={this.state.selected} field={this.state.field} />
         </div>
       </div>
     );

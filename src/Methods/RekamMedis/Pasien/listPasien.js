@@ -1,8 +1,13 @@
 import axios from "axios";
-import { baseUrl } from "../../api";
+// import { baseUrl } from "../../api";
+let apiURL = "www.a.com";
 
-let listPasien = () => {
-  return axios.get(baseUrl + "/api/v1/pasien");
+let listPasien = pencarian => {
+  var filter = "";
+  if (pencarian !== "") {
+    filter = "?cari=" + pencarian;
+  }
+  return axios.get(apiURL + "/api/v1/pasien" + filter);
 };
 
 export default listPasien;

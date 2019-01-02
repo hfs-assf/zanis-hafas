@@ -1,15 +1,21 @@
 import React, { Component } from "react";
 import TambahDaftarTindakan from "../../../Components/JSX/Admin/TambahTindakan";
+import HapusDaftarTindakan from "../../../Components/JSX/hapusModal";
 import listTindakan from "../../../Methods/Poli/Tindakan/listTindakan";
-import hapusTindakan from "../../../Methods/Poli/Tindakan/hapusTindakan";
 
 class KelolaTindakan extends Component {
   constructor(props) {
     super(props);
     this.addModal = this.addModal.bind(this);
     this.editModal = this.editModal.bind(this);
-    this.deleteItem = this.deleteItem.bind(this);
-    this.state = { filter: "", tindakan: [], selected: {}, action: "" };
+    // this.deleteItem = this.deleteItem.bind(this);
+    this.state = {
+      filter: "",
+      tindakan: [],
+      selected: {},
+      action: "",
+      field: ""
+    };
   }
   componentWillMount() {
     listTindakan().then(({ data }) => {
@@ -34,9 +40,15 @@ class KelolaTindakan extends Component {
     });
   }
 
-  deleteItem = uid => {
-    hapusTindakan(uid);
-  };
+  deleteModal({ uid }) {
+    this.setState({
+      selected: {
+        uid
+      },
+      field: "tindakan"
+    });
+  }
+
   renderDaftarTindakan = ({ uid, nama_tindakan, biaya_tindakan }) => {
     if (this.state.filter !== "") {
       return (
@@ -57,7 +69,9 @@ class KelolaTindakan extends Component {
             </button>
             <button
               className="btn btn-outline-primary btn-sm"
-              onClick={() => this.deleteItem(uid)}
+              onClick={() => this.deleteModal({ uid })}
+              data-toggle="modal"
+              data-target="#hapus"
             >
               Hapus
             </button>
@@ -148,6 +162,10 @@ class KelolaTindakan extends Component {
           <TambahDaftarTindakan
             selected={this.state.selected}
             action={this.state.action}
+          />
+          <HapusDaftarTindakan
+            selected={this.state.selected}
+            field={this.state.field}
           />
         </div>
       </div>
