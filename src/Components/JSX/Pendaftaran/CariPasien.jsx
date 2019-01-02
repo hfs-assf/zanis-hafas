@@ -12,10 +12,13 @@ class CariPasien extends Component {
     };
   }
 
-  componentWillMount() {
-    listPasien().then(({ data }) => {
+  onChange(e) {
+    var filter = e.target.value;
+    listPasien(filter).then(({ data }) => {
       this.setState({
-        pasien: this.state.pasien.concat(data)
+        pasien: data,
+        textFilter: filter,
+        showSuggestions: true
       });
     });
   }
@@ -23,15 +26,11 @@ class CariPasien extends Component {
   tambahAntrian(id) {
     window.location.assign("/tambah-layanan/" + id);
   }
+
   render() {
     let suggestionsList;
     const { textFilter, showSuggestions, pasien } = this.state;
-    const filteresPasien = pasien.filter(pasien => {
-      return (
-        pasien.nama_pasien.toLowerCase().indexOf(textFilter.toLowerCase()) !==
-          -1 || pasien.nomor_rekam_medis.indexOf(textFilter) !== -1
-      );
-    });
+    const filteresPasien = pasien;
     if (showSuggestions === true) {
       if (filteresPasien.length !== 0 && textFilter !== "") {
         suggestionsList = (
@@ -68,12 +67,7 @@ class CariPasien extends Component {
             className="form-control"
             placeholder="Cari pasien"
             value={textFilter}
-            onChange={e =>
-              this.setState({
-                textFilter: e.target.value,
-                showSuggestions: true
-              })
-            }
+            onChange={e => this.onChange(e)}
           />
           {suggestionsList}
         </div>

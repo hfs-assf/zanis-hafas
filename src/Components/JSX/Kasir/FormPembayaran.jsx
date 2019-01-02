@@ -2,23 +2,28 @@ import React, { Component } from "react";
 import "../../ASSETS/CSS/form.css";
 import SVGBillInvoice from "../../ASSETS/SVG/SVGBillInvoice";
 import DetailPasien from "../DetailPasien";
+import FormTambahTransaksi from "./FormTambahTransksi";
 class FormPembayaran extends Component {
   render() {
     return (
       <div className="container-fluid ">
         <div className="row" style={{ margin: "0.5em" }}>
-          <div className="col-md-8 boxriwayat">
+          <div className="col-md-8 mr-0 boxriwayat">
             <DetailPasien id={this.props.pasien} />
           </div>
-          <div className="col-md-2">
+          <div className="col-md-2 mr-0">
             <div className="row">
-              <div className="boxsurat">
+              <div
+                className="boxsurat"
+                data-toggle="modal"
+                data-target="#addtransaction"
+              >
                 <SVGBillInvoice />
-                <h5 className="h5-responsive"> Tambah </h5>
+                <h5 className="h5-responsive"> Transaksi </h5>
               </div>
             </div>
           </div>
-          <div className="col-md-2">
+          <div className="col-md-2 ml-0 mr-0">
             <div className="row">
               <div className="boxsurat">
                 <SVGBillInvoice />
@@ -95,6 +100,7 @@ class FormPembayaran extends Component {
             </div>
           </div>
         </div>
+        <FormTambahTransaksi id={this.props.pasien} />
       </div>
     );
   }

@@ -3,19 +3,24 @@ import { Link } from "react-router-dom";
 import listPasien from "../../../../Methods/RekamMedis/Pasien/listPasien";
 
 class DaftarRekamMedis extends Component {
-  state = {
-    filter: "",
-    rmPasien: []
-  };
+  constructor() {
+    super();
+    this.state = {
+      textFilter: "",
+      showSuggestions: false,
+      pasien: []
+    };
+  }
 
-  componentWillMount() {
-    listPasien().then(({ data }) => {
+  onChange(e) {
+    var filter = e.target.value;
+    listPasien(filter).then(({ data }) => {
       this.setState({
-        rmPasien: this.state.rmPasien.concat(data)
+        pasien: data,
+        textFilter: filter
       });
     });
   }
-
   renderDaftarRM = rm => {
     const { filter } = this.state;
     if (filter !== "") {
@@ -41,16 +46,10 @@ class DaftarRekamMedis extends Component {
 
   render() {
     let header;
-    const { filter, rmPasien } = this.state;
-    const filteredRM = rmPasien.filter(rm => {
-      return (
-        // rm.tanggal_masuk.toLowerCase().indexOf(filter.toLowerCase()) !== -1 ||
-        // rm.nama_pasien.toLowerCase().indexOf(filter.toLowerCase()) !== -1 ||
-        // rm.asuransi.toLowerCase().indexOf(filter.toLowerCase()) !== -1 ||
-        rm.nomor_rekam_medis.toString().indexOf(filter) !== -1
-      );
-    });
-    if (filteredRM.length !== 0 && filter !== "") {
+    const { textFilter, pasien } = this.state;
+    const filteresPasien = pasien;
+
+    if (filteresPasien.length !== 0 && textFilter !== "") {
       header = (
         <div className="table">
           <div className="row1 header">
@@ -60,12 +59,12 @@ class DaftarRekamMedis extends Component {
             <div className="cell">Jenis Asuransi</div>
             <div className="cell">Aksi</div>
           </div>
-          {filteredRM.map(rm => {
+          {filteresPasien.map(rm => {
             return this.renderDaftarRM(rm);
           })}
         </div>
       );
-    } else if (filteredRM.length === 0 && filter !== "") {
+    } else if (filteresPasien.length === 0 && textFilter !== "") {
       header = (
         <div className="table">
           <div className="row1">
@@ -87,7 +86,6 @@ class DaftarRekamMedis extends Component {
         </div>
       );
     }
-    console.log(rmPasien);
     return (
       <div className="card" style={{ borderTop: "2px solid #1976d2" }}>
         <div className="card-body">
@@ -104,7 +102,8 @@ class DaftarRekamMedis extends Component {
                     type="text"
                     className="form-control"
                     placeholder="Cari Rekam Medis"
-                    onChange={e => this.setState({ filter: e.target.value })}
+                    value={textFilter}
+                    onChange={e => this.onChange(e)}
                   />
                 </div>
               </div>

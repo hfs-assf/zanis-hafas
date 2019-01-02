@@ -11,7 +11,7 @@ class TambahAntrian extends Component {
       antrian: {
         nomor_rekam_medis: "",
         nama_dokter: "",
-        poli: "",
+        poli: "Umum",
         jenis_asuransi: "",
         asuransi_no_kartu: ""
       }

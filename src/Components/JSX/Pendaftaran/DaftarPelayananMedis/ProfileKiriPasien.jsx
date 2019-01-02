@@ -97,7 +97,7 @@ class ProfileKiriPasien extends Component {
                 {deskripsiPasien}
               </section>
               <section id="content2" className="dua">
-                <RiwayatPasien />
+                <RiwayatPasien id={this.props.pasien} />
               </section>
             </div>
           </div>

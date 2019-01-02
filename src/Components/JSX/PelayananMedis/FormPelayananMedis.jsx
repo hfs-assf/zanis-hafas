@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "../../ASSETS/CSS/form.css";
 import SVGSuratSakit from "../../ASSETS/SVG/SVGSuratSakit";
-// import TabulasiPelayananMedis from "./Tabulasi";
 import DetailPasien from "../DetailPasien";
 import SuratSakit from "./FormSuratSakit";
 

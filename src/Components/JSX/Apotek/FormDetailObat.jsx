@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import detailObat from "../../../Methods/Apotik/Obat/detailObat";
 import editObat from "../../../Methods/Apotik/Obat/editObat";
+
 class FormDetailObat extends Component {
   constructor(props) {
     super(props);

@@ -33,9 +33,11 @@ class TableObat extends Component {
   detailObat({ uid }) {
     window.location.assign("/detail-obat/" + uid);
   }
+
   deleteModal({ uid }) {
     this.setState({ selected: { uid }, field: "obat" });
   }
+
   renderDaftarObat = ({ uid, nama_obat, stok_total, satuan, harga_jual }) => {
     if (this.state.filter !== "") {
       return (

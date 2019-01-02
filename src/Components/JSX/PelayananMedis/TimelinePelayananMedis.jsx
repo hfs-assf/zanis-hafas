@@ -9,23 +9,20 @@ class TimelinePelayananMedis extends Component {
   constructor(props) {
     super(props);
     this.searchName = this.searchName.bind(this);
-    this.state = {
-      antrian: [],
-      nama: []
-    };
+    this.state = { antrian: [], nama: [], tanggal: new Date("mm/dd/YYYY") };
   }
 
   componentWillMount() {
+    var array = [...this.state.nama];
     listAntrian().then(({ data }) => {
-      // this.setState({
-      //   antrian: this.state.antrian.concat(data)
-      // });
-      // console.log(data);
       for (var i = 0; i < data.length; i++) {
-        console.log(this.searchName(data[i].nomor_rekam_medis));
+        this.searchName(data[i].nomor_rekam_medis).then(data => {
+          array.push(data);
+        });
+
         this.setState({
           antrian: this.state.antrian.concat(data[i]),
-          nama: this.state.nama.concat()
+          nama: array
         });
       }
     });
@@ -33,7 +30,6 @@ class TimelinePelayananMedis extends Component {
 
   searchName(nomor_rekam_medis) {
     return detailPasien(nomor_rekam_medis).then(({ data }) => {
-      // this.setState({ nama: data[0].nama_pasien });
       return data[0].nama_pasien;
     });
   }
@@ -48,9 +44,9 @@ class TimelinePelayananMedis extends Component {
   }
 
   render() {
-    let deskripsiPasien;
-    const { antrian } = this.state;
-    deskripsiPasien = antrian.map(e => {
+    let deskripsiPasien, jumlahAntrian;
+    const { antrian, nama } = this.state;
+    deskripsiPasien = antrian.map((e, index) => {
       return (
         <li key={e.uid} className="animated bounceIn">
           <Link to={"/pelayanan-medis/" + e.nomor_rekam_medis}>
@@ -59,7 +55,7 @@ class TimelinePelayananMedis extends Component {
             <div>
               <div className="title">{e.nomor_rekam_medis}</div>
 
-              <div className="tefalsext-white">Suci</div>
+              <div className="tefalsext-white">{nama[index]}</div>
               <div className="type">
                 {e.asuransi} - {e.poli}
               </div>
@@ -72,6 +68,7 @@ class TimelinePelayananMedis extends Component {
         </li>
       );
     });
+    jumlahAntrian = antrian.length;
     return (
       <div className="row">
         <div className="col-md-7">
@@ -86,6 +83,7 @@ class TimelinePelayananMedis extends Component {
               <input
                 type="date"
                 className="form-control"
+                // value={this.state.tanggal}
                 style={{ borderRadius: "5px" }}
               />
 
@@ -96,7 +94,7 @@ class TimelinePelayananMedis extends Component {
             </div>
           </div>
           <div className="banyakpasien">
-            <span className="badge">Jumlah Antrian : 8</span>
+            <span className="badge">Jumlah Antrian : {jumlahAntrian}</span>
           </div>
         </div>
       </div>
