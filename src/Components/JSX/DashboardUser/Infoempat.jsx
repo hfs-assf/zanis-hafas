@@ -19,7 +19,8 @@ class IndikatorAreaSasaran extends Component {
     super();
     this.state = {
       dataPasien: [],
-      loading: <Preloader />
+      loading: <Preloader />,
+      listHari: ["senin", "selasa", "rabu", "kamis", "jumat", "sabtu", "minggu"]
     };
   }
   componentDidMount() {
@@ -49,8 +50,6 @@ class IndikatorAreaSasaran extends Component {
   };
 
   render() {
-    console.log(this.state.dataPasien);
-
     return (
       <div
         className="card mt-1 mb-2"
@@ -58,7 +57,7 @@ class IndikatorAreaSasaran extends Component {
       >
         <div className="card-body">
           <div className="d-flex no-block">
-            <h4 className="card-title">Grafik Data Pasien</h4>
+            <h4 className="card-title">Grafik Data Pasien Berobat</h4>
             <div className="ml-auto">
               <select
                 className="custom-select"
@@ -82,7 +81,8 @@ class IndikatorAreaSasaran extends Component {
                 margin={{ top: 15, right: 30, left: 20, bottom: 5 }}
               >
                 <XAxis
-                  dataKey="name"
+                  dataKey="age"
+                  name="umur"
                   padding={{ left: 30, right: 30 }}
                   stroke="white"
                 />
