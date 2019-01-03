@@ -3,11 +3,13 @@ import "../../../Components/ASSETS/CSS/Dashboard.css";
 import Dashboard1 from "../../../Components/JSX/DashboardUser/Infosatu";
 import Dashboard3 from "../../../Components/JSX/DashboardUser/Infotiga";
 import Dashboard4 from "../../../Components/JSX/DashboardUser/Infoempat";
+import Gagal from "../Animasi/gagal";
 
 class Dashboard extends Component {
   render() {
     return (
       <div className="container-fluid">
+        <Gagal />
         <Dashboard1 />
         <div className="row">
           <div className="col-lg-12 col-xlg-9 mt-2">
