@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../../../Components/ASSETS/CSS/animasi.css";
+import "../../ASSETS/CSS/animasi.css";
 class AnimasiSukses extends Component {
   render() {
     return (

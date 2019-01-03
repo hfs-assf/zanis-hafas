@@ -16,7 +16,6 @@ class KelolaPoliklinik extends Component {
       .catch(() => alert("Data Tidak Ditemukan"));
 
   render() {
-    console.log("Ini Loh Datanya", this.state.data);
     let header;
     if (this.state.data == null) {
       header = <div className="cell">Data Tidak Ditemukan</div>;

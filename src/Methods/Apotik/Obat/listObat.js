@@ -1,7 +1,6 @@
 import axios from "axios";
-// import { baseUrl } from "../../api";
+const apiURL = "http://localhost:8005";
 
-let apiURL = "www.a.com";
 let obatList = nama_obat => {
   var filter = "";
   if (nama_obat !== "") {

@@ -5,7 +5,8 @@ class DashboarJenisPasien extends Component {
   constructor(props) {
     super();
     this.state = {
-      pasien: []
+      pasien: [],
+      selected: "1"
     };
   }
 
@@ -14,7 +15,6 @@ class DashboarJenisPasien extends Component {
       this.setState({
         pasien: this.state.pasien.concat(data)
       });
-      console.log(this.state.pasien);
     });
   }
 
@@ -26,10 +26,10 @@ class DashboarJenisPasien extends Component {
             <h4 className="card-title text-white">Data Pasien Per Wilayah</h4>
             <div className="ml-auto">
               <select className="custom-select">
-                <option selected="">January</option>
-                <option value="1">February</option>
-                <option value="2">March</option>
-                <option value="3">April</option>
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
               </select>
             </div>
           </div>

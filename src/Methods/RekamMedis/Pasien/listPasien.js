@@ -1,6 +1,5 @@
 import axios from "axios";
-// import { baseUrl } from "../../api";
-let apiURL = "www.a.com";
+const apiURL = "http://localhost:8002";
 
 let listPasien = pencarian => {
   var filter = "";

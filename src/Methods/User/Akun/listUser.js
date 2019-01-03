@@ -1,8 +1,8 @@
 import axios from "axios";
-import { baseUrl } from "../../api";
+const apiURL = "http://localhost:8000";
 
 let listUser = () => {
-  return axios.get(baseUrl + "/api/v1/akun-user");
+  return axios.get(apiURL + "/api/v1/akun-user");
 };
 
 export default listUser;

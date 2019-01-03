@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import listLabora from "../../../Methods/Admin/getDataLabor";
+import listLaboran from "../../../Methods/Admin/getDataLabor";
 import TambahDaftarUjiLabroratorium from "../../../Components/JSX/Admin/TambahItemLaboratorium";
 import HapusItem from "../../../Methods/Admin/HapusItemLabor";
 import Preloader from "../Preloader/Preloader";
@@ -18,7 +18,7 @@ class KelolaItemLaboratorium extends Component {
   }
 
   componentDidMount() {
-    listLabora().then(({ data }) => {
+    listLaboran().then(({ data }) => {
       this.setState({
         loading: "",
         itemLabor: this.state.itemLabor.concat(data)

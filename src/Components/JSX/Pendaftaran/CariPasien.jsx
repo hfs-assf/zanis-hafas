@@ -20,6 +20,7 @@ class CariPasien extends Component {
         textFilter: filter,
         showSuggestions: true
       });
+      console.log(data);
     });
   }
 

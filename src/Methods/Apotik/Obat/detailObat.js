@@ -1,8 +1,8 @@
 import axios from "axios";
-import { baseUrl } from "../../api";
+const apiURL = "http://localhost:8005";
 
 let detailObat = uid => {
-  return axios.get(baseUrl + "/api/v1/obat/" + uid);
+  return axios.get(apiURL + "/api/v1/obat/" + uid);
 };
 
 export default detailObat;

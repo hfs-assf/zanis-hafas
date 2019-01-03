@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import tambahItemLaboratorium from "../../../Methods/Admin/tambahItemLabor";
 import editItemLabor from "../../../Methods/Admin/editItemLabor";
-import SuksesModal from "../../../Views/JSX/Animasi/Sukses";
+import SuksesModal from "../Animasi/Sukses";
 
 class TambahLaboratorium extends Component {
   constructor(props) {
@@ -32,7 +32,8 @@ class TambahLaboratorium extends Component {
         body: this.state.body
       })
         .then(response => console.log(response))
-        .then(() => this.setState({ pesan: true }));
+        .then(() => this.setState({ pesan: true }))
+        .catch(err => console.log(err));
     } else {
       editItemLabor({
         id: this.state.id,
