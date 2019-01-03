@@ -15,7 +15,6 @@ class Infosatu extends Component {
       this.setState({
         pasien: this.state.pasien.concat(data)
       });
-      console.log(this.state.pasien);
     });
   }
 

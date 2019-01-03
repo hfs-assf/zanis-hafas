@@ -66,7 +66,7 @@ class CariPasien extends Component {
             type="text"
             className="form-control"
             placeholder="Cari pasien"
-            value={textFilter}
+            // value={textFilter}
             onChange={e => this.onChange(e)}
           />
           {suggestionsList}

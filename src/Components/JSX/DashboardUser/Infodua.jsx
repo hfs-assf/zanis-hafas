@@ -23,7 +23,9 @@ class DashboarJenisPasien extends Component {
       <div className="card gradient">
         <div className="card-body">
           <div className="d-flex no-block">
-            <h4 className="card-title text-white">Data Pasien Per Wilayah</h4>
+            <h4 className="card-title text-white">
+              Data Pasien Berdasarkan Kelamin
+            </h4>
             <div className="ml-auto">
               <select className="custom-select">
                 <option selected="">January</option>

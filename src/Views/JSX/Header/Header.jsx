@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "../../../Components/ASSETS/CSS/TopHeader.css";
-// import Logo from "../../../img/zanis.png";
 // import NotifikasiHeaderPasien from "../../View/Header/Notifikasi_PasienHeader/Notifikasi_pasienHeader";
 // import NotifikasiHeaderPesan from "../../View/Header/Notifikasi_PesanHeader/Notifikasi_PesanHeader";
 

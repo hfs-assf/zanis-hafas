@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import tambahPasien from "../../../Methods/RekamMedis/Pasien/tambahPasien";
-import Preloader from "../../../Views/JSX/Preloader/Preloader";
 
 class FormPendaftaran extends Component {
   state = {
@@ -75,10 +74,6 @@ class FormPendaftaran extends Component {
   render() {
     return (
       <div>
-        <div className="loading1">
-          <Preloader />
-        </div>
-
         <div className="watermark">
           <img
             className="img-fluid"

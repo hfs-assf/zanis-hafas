@@ -3,7 +3,7 @@ import "../../../Components/ASSETS/CSS/Dashboard.css";
 import Dashboard1 from "../../../Components/JSX/DashboardUser/Infosatu";
 import Dashboard2 from "../../../Components/JSX/DashboardUser/Infodua";
 import Dashboard3 from "../../../Components/JSX/DashboardUser/Infotiga";
-import GrafikPasien from "../Grafik/Pasien";
+import Dashboard4 from "../../../Components/JSX/DashboardUser/Infoempat";
 
 class Dashboard extends Component {
   render() {
@@ -12,7 +12,7 @@ class Dashboard extends Component {
         <Dashboard1 />
         <div className="row">
           <div className="col-md-12">
-            <GrafikPasien />
+            <Dashboard4 />
           </div>
           <div className="col-lg-4 col-xlg-3 mt-2">
             <Dashboard2 />
