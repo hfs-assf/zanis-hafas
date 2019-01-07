@@ -1,7 +1,13 @@
 .sukses > svg {
   width: 60px;
   display: block;
-  margin: 40px auto 0;
+  margin: 5px auto 0;
+}
+
+.gagal > svg {
+  width: 60px;
+  display: block;
+  margin: 5px auto 0;
 }
 .path {
   stroke-dasharray: 1000;
@@ -23,15 +29,10 @@
 }
 p {
   text-align: center;
-  margin: 20px 0 60px;
+  margin: 10px 0 10px;
   font-size: 1.25em;
 }
-p.success {
-  color: #73af55;
-}
-p.error {
-  color: #d06079;
-}
+
 @-webkit-keyframes dash {
   0% {
     stroke-dashoffset: 1000;

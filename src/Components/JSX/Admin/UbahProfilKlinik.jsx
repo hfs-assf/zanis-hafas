@@ -4,24 +4,32 @@ class UbahProfilKlinik extends Component {
   state = {
     selectedFile: null,
     judul: "",
-    profil: {
-      nama_klinik: "z",
-      alamat_klinik: "z",
-      telpon_klinik: "z",
-      email_klinik: "z",
-      website_klinik: "z",
-      foto_klinik: "z"
-    }
+    nama_klinik: "z",
+    alamat_klinik: "z",
+    telpon_klinik: "z",
+    email_klinik: "z",
+    website_klinik: "z",
+    foto_klinik: "z"
   };
 
+  handleInputChange(event) {
+    const target = event.target;
+    // const value = target.type === "checkbox" ? target.checked : target.value;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
   fileChangedHandler = event => {
-    // const file = event.target.files[0];
-    // console.log(event.target.files[0]);
     this.setState({
       selectedFile: event.target.files[0],
       judul: event.target.files[0].name
     });
   };
+
   uploadHandler = () => {
     // const formData = new FormData();
     // formData.append(
@@ -54,6 +62,7 @@ class UbahProfilKlinik extends Component {
               <input
                 style={{ display: "none" }}
                 type="file"
+                name="selectedFile"
                 onChange={e => this.fileChangedHandler(e)}
                 ref={fileInput => (this.fileInput = fileInput)}
               />
@@ -78,11 +87,7 @@ class UbahProfilKlinik extends Component {
                   type="text"
                   name="nama_klinik"
                   className="form-control"
-                  onChange={event =>
-                    this.setState({
-                      nama_klinik: { nama_klinik: event.target.value }
-                    })
-                  }
+                  onChange={e => this.handleInputChange(e)}
                 />
               </div>
             </div>
@@ -99,11 +104,7 @@ class UbahProfilKlinik extends Component {
                   type="text"
                   name="alamat_klinik"
                   className="form-control"
-                  onChange={event =>
-                    this.setState({
-                      alamat_klinik: { alamat_klinik: event.target.value }
-                    })
-                  }
+                  onChange={e => this.handleInputChange(e)}
                 />
               </div>
             </div>
@@ -120,11 +121,7 @@ class UbahProfilKlinik extends Component {
                   type="text"
                   name="telpon_klinik"
                   className="form-control"
-                  onChange={event =>
-                    this.setState({
-                      telpon_klinik: { telpon_klinik: event.target.value }
-                    })
-                  }
+                  onChange={e => this.handleInputChange(e)}
                 />
               </div>
             </div>
@@ -138,11 +135,7 @@ class UbahProfilKlinik extends Component {
                   type="text"
                   name="email_klinik"
                   className="form-control"
-                  onChange={event =>
-                    this.setState({
-                      email_klinik: { email_klinik: event.target.value }
-                    })
-                  }
+                  onChange={e => this.handleInputChange(e)}
                 />
               </div>
             </div>
@@ -159,11 +152,7 @@ class UbahProfilKlinik extends Component {
                   type="text"
                   name="website_klinik"
                   className="form-control"
-                  onChange={event =>
-                    this.setState({
-                      website_klinik: { website_klinik: event.target.value }
-                    })
-                  }
+                  onChange={e => this.handleInputChange(e)}
                 />
               </div>
             </div>
@@ -179,7 +168,7 @@ class UbahProfilKlinik extends Component {
                   <button className="btn btn-warning">Bersihkan</button>
                 </div>
               </div>
-            </div>  
+            </div>
           </form>
         </div>
       </div>

@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import "../../../Components/ASSETS/CSS/Dashboard.css";
 import Dashboard1 from "../../../Components/JSX/DashboardUser/Infosatu";
-import Dashboard2 from "../../../Components/JSX/DashboardUser/Infodua";
 import Dashboard3 from "../../../Components/JSX/DashboardUser/Infotiga";
-import GrafikPasien from "../Grafik/Pasien";
+import Dashboard4 from "../../../Components/JSX/DashboardUser/Infoempat";
 
 class Dashboard extends Component {
   render() {
@@ -11,13 +10,10 @@ class Dashboard extends Component {
       <div className="container-fluid">
         <Dashboard1 />
         <div className="row">
-          <div className="col-md-12">
-            <GrafikPasien />
+          <div className="col-lg-12 col-xlg-9 mt-2">
+            <Dashboard4 />
           </div>
-          <div className="col-lg-4 col-xlg-3 mt-2">
-            <Dashboard2 />
-          </div>
-          <div className="col-lg-8 col-xlg-9 mt-2">
+          <div className="col-lg-12 col-xlg-9 mt-2">
             <Dashboard3 />
           </div>
         </div>

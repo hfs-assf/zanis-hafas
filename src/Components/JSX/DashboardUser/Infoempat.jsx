@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import axios from "axios";
+import Preloader from "../../../Views/JSX/Preloader/Preloader";
+
 import {
   LineChart,
   Line,
@@ -9,18 +12,17 @@ import {
   Legend,
   ResponsiveContainer
 } from "recharts";
-import axios from "axios";
-import Preloader from "../../../Views/JSX/Preloader/Preloader";
+// import DataPasien from "../../../JSON/jumlahpasien.json";
 
-class DashboarPasienP extends Component {
+class IndikatorAreaSasaran extends Component {
   constructor() {
     super();
     this.state = {
       dataPasien: [],
-      loading: <Preloader />
+      loading: <Preloader />,
+      listHari: ["senin", "selasa", "rabu", "kamis", "jumat", "sabtu", "minggu"]
     };
   }
-
   componentDidMount() {
     axios
       .get("http://api.population.io/1.0/population/1980/Brazil")
@@ -49,10 +51,13 @@ class DashboarPasienP extends Component {
 
   render() {
     return (
-      <div className="card">
+      <div
+        className="card mt-1 mb-2"
+        style={{ backgroundColor: "#f75727 ", color: "white" }}
+      >
         <div className="card-body">
           <div className="d-flex no-block">
-            <h4 className="card-title">Data Pasien Per Wilayah</h4>
+            <h4 className="card-title">Grafik Data Pasien Berobat</h4>
             <div className="ml-auto">
               <select
                 className="custom-select"
@@ -68,23 +73,40 @@ class DashboarPasienP extends Component {
           </div>
           <div id="Container">
             {this.state.loading}
+
             <ResponsiveContainer width="100%">
               <LineChart
                 width={1000}
-                height={500}
                 data={this.state.dataPasien}
                 margin={{ top: 15, right: 30, left: 20, bottom: 5 }}
               >
-                <XAxis dataKey="age" padding={{ left: 30, right: 30 }} />
-                <YAxis />
+                <XAxis
+                  dataKey="age"
+                  name="umur"
+                  padding={{ left: 30, right: 30 }}
+                  stroke="white"
+                />
+                <YAxis stroke="white" />
                 <CartesianGrid strokeDasharray="3 3" />
-                <Tooltip />
+                <Tooltip style={{ backgroundColor: "#4A4A4A" }} />
                 <Legend />
                 <Line
                   type="monotone"
                   name="Jumlah Perempuan"
                   dataKey="females"
-                  stroke="#8884d8"
+                  stroke="black"
+                />
+                <Line
+                  type="monotone"
+                  name="Jumlah Lelaki"
+                  dataKey="males"
+                  stroke="red"
+                />
+                <Line
+                  type="monotone"
+                  name="Total Penduduk"
+                  dataKey="total"
+                  stroke="#ff0000"
                 />
               </LineChart>
             </ResponsiveContainer>
@@ -94,5 +116,4 @@ class DashboarPasienP extends Component {
     );
   }
 }
-
-export default DashboarPasienP;
+export default IndikatorAreaSasaran;

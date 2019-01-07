@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import "../../ASSETS/CSS/animasi.css";
+
 class AnimasiSukses extends Component {
   render() {
     return (
-      <div className="container-fluid sukses">
+      <div className="sukses">
         <svg
+          height="100"
+          width="100"
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 130.2 130.2"

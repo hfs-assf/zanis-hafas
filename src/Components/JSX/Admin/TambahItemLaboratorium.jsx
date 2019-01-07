@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import tambahItemLaboratorium from "../../../Methods/Admin/tambahItemLabor";
 import editItemLabor from "../../../Methods/Admin/editItemLabor";
-import SuksesModal from "../Animasi/Sukses";
+// import SuksesModal from "../Animasi/Sukses";
 
 class TambahLaboratorium extends Component {
   constructor(props) {
@@ -113,7 +113,7 @@ class TambahLaboratorium extends Component {
                 </div>
               </form>
             </div>
-            {this.state.pesan ? <SuksesModal /> : null}
+            {/* {this.state.pesan ? <SuksesModal /> : null} */}
             <div className="modal-footer justify-content-center">
               <button className="btn btn-primary" onClick={this.tambahItem}>
                 Simpan

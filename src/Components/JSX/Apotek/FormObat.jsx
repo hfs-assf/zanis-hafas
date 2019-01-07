@@ -1,14 +1,25 @@
 import React, { Component } from "react";
 import tambahObat from "../../../Methods/Apotik/Obat/tambahObat";
+import Sukses from "../Animasi/Sukses";
+import Gagal from "../Animasi/Gagal";
 
 class FormObat extends Component {
   state = {
     nama_obat: "",
-    minimal_stok: "10",
+    minimal_stok: "",
     satuan: "",
-    kategori: "Minum"
+    kategori: "Minum",
+    notification: ""
   };
 
+  componentWillMount() {
+    this.setState({
+      nama_obat: "",
+      minimal_stok: "",
+      satuan: "",
+      notification: ""
+    });
+  }
   tambahObat = event => {
     event.preventDefault();
     tambahObat({
@@ -16,8 +27,13 @@ class FormObat extends Component {
       minimal_stok: this.state.minimal_stok,
       satuan: this.state.satuan,
       kategori: this.state.kategori
-    });
+    })
+      .then(() => {
+        this.setState({ notification: <Sukses /> });
+      })
+      .catch(() => this.setState({ notification: <Gagal /> }));
   };
+
   render() {
     return (
       <div
@@ -105,7 +121,9 @@ class FormObat extends Component {
                       <span>Kategori</span>
                       <select
                         onChange={e =>
-                          this.setState({ kategori: e.target.value })
+                          this.setState({
+                            kategori: e.target.value
+                          })
                         }
                         className="form-control"
                       >
@@ -116,11 +134,18 @@ class FormObat extends Component {
                   </div>
                 </div>
               </form>
+
+              {this.state.notification}
             </div>
             <div className="modal-footer justify-content-center">
               <button
                 className="btn btn-info"
                 onClick={event => this.tambahObat(event)}
+                disabled={
+                  !this.state.nama_obat ||
+                  !this.state.minimal_stok ||
+                  !this.state.satuan
+                }
               >
                 Simpan
               </button>

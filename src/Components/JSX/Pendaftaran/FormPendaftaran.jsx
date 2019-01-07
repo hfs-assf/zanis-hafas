@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import tambahPasien from "../../../Methods/RekamMedis/Pasien/tambahPasien";
-import Sukses from "../Animasi/modalSukses";
-// import Preloader from "../../../Views/JSX/Preloader/Preloader";
+import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
 
 class FormPendaftaran extends Component {
   state = {
-    notification: "",
+    notification: "0",
     nomor_pengenal: "",
     jenis_nomor_pengenal: "ktp",
     email: "",
@@ -30,6 +29,9 @@ class FormPendaftaran extends Component {
     alamat_penanggungjawab: "",
     catatan: ""
   };
+  // componentDidUpdate(){
+  //   this.state.notification === "1" ? document.getElementById("notification").
+  // }
   handleInputChange(event) {
     const target = event.target;
     // const value = target.type === "checkbox" ? target.checked : target.value;
@@ -75,10 +77,9 @@ class FormPendaftaran extends Component {
       catatan: catatan
     })
       .then(() => {
-        setTimeout(() => this.setState({ notification: true }), 3000);
-        // this.setState({ notification: true });
+        this.setState({ notification: "1" });
       })
-      .catch(() => alert("Gagal disimpan"));
+      .catch(() => this.setState({ notification: "0" }));
   }
   cleanAll() {
     this.setState({
@@ -106,10 +107,6 @@ class FormPendaftaran extends Component {
   render() {
     return (
       <div>
-        {/* <div className="loading1">
-          <Preloader />
-        </div> */}
-
         <div className="watermark">
           <img
             className="img-fluid"
@@ -181,7 +178,10 @@ class FormPendaftaran extends Component {
                   <div className="row">
                     <div className="col-sm-3">
                       <label>
-                        <span>Agama</span>
+                        <span>
+                          Agama
+                          <span className="required">*</span>
+                        </span>
                         <select
                           name="agama"
                           className="form-control"
@@ -196,9 +196,11 @@ class FormPendaftaran extends Component {
                       </label>
                     </div>
                     <div className="col-sm-4">
-                      {" "}
                       <label>
-                        <span>Jenis Kelamin</span>
+                        <span>
+                          Jenis Kelamin
+                          <span className="required">*</span>
+                        </span>
                         <select
                           name="jenis_kelamin"
                           className="form-control"
@@ -212,7 +214,10 @@ class FormPendaftaran extends Component {
                     </div>
                     <div className="col-sm-5">
                       <label>
-                        <span>Status</span>
+                        <span>
+                          Status
+                          <span className="required">*</span>
+                        </span>
                         <select
                           name="status"
                           className="form-control"
@@ -239,7 +244,10 @@ class FormPendaftaran extends Component {
                   <div className="row">
                     <div className="col-sm-4">
                       <label>
-                        <span>Kelurahan</span>
+                        <span>
+                          Kelurahan
+                          <span className="required">*</span>
+                        </span>
                         <select
                           name="kelurahan"
                           className="form-control"
@@ -253,7 +261,10 @@ class FormPendaftaran extends Component {
                     </div>
                     <div className="col-sm-4">
                       <label>
-                        <span>Kecamatan</span>
+                        <span>
+                          Kecamatan
+                          <span className="required">*</span>
+                        </span>
                         <select
                           name="kecamatan"
                           className="form-control"
@@ -267,15 +278,12 @@ class FormPendaftaran extends Component {
                     </div>
                     <div className="col-sm-4">
                       <label>
-                        <span>
-                          Kode Pos <span className="required">*</span>
-                        </span>
+                        <span>Kode Pos</span>
                         <input
                           type="number"
                           className="form-control"
                           name="kode_pos"
                           onChange={e => this.handleInputChange(e)}
-                          required
                         />
                       </label>
                     </div>
@@ -283,15 +291,12 @@ class FormPendaftaran extends Component {
                   <div className="row">
                     <div className="col-sm-6">
                       <label>
-                        <span>
-                          Telepon <span className="required">*</span>
-                        </span>
+                        <span>Telepon</span>
                         <input
                           type="number"
                           className="form-control"
                           name="telepon"
                           onChange={e => this.handleInputChange(e)}
-                          required
                         />
                       </label>
                     </div>
@@ -311,15 +316,12 @@ class FormPendaftaran extends Component {
                     </div>
                   </div>
                   <label>
-                    <span>
-                      Email <span className="required">*</span>
-                    </span>
+                    <span>Email</span>
                     <input
                       type="email"
                       className="form-control"
                       name="email"
                       onChange={e => this.handleInputChange(e)}
-                      required
                     />
                   </label>
                 </fieldset>
@@ -337,7 +339,6 @@ class FormPendaftaran extends Component {
                           className="form-control"
                           name="pendidikan"
                           onChange={e => this.handleInputChange(e)}
-                          required
                         />
                       </label>
                     </div>
@@ -349,7 +350,6 @@ class FormPendaftaran extends Component {
                           className="form-control"
                           name="pekerjaan"
                           onChange={e => this.handleInputChange(e)}
-                          required
                         />
                       </label>
                     </div>
@@ -362,7 +362,6 @@ class FormPendaftaran extends Component {
                       name="kantor"
                       className="form-control"
                       onChange={e => this.handleInputChange(e)}
-                      required
                     />
                   </label>
                 </fieldset>
@@ -438,7 +437,10 @@ class FormPendaftaran extends Component {
                 </div>
               </div>
             </div>
-            {this.state.notification ? null : <Sukses />}
+            <ModalKonfirmasi
+              notification={this.state.notification}
+              show="true"
+            />
           </form>
         </div>
       </div>
