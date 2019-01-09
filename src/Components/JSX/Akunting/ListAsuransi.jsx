@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-// import Calender from "../../ASSETS/SVG/Kalender1";
-// import ListCOA from "./ListCOA";
 import DataCoa from "../../../JSON/dataCOA.json";
-import MenuAkunting from "../MenuAkunting/MenuAkunting";
+import MenuAkunting from "./MenuAkunting";
 
 class ListAsuransi extends Component {
   daftarCOA() {

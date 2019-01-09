@@ -37,8 +37,9 @@ import PendaftaranLayanan from "./Views/JSX/Pendaftaran/PendaftaranLayanan";
 
 //Akunting
 import Akunting from "./Views/JSX/Akunting/ViewJurnal";
-import COA from "./Views/JSX/Akunting/ViewCoa";
-import ListAsuransi from "./Views/JSX/Akunting/ViewAsuransi";
+import DaftarAkun from "./Views/JSX/Akunting/ViewDaftarAkun";
+import SaldoAwal from "./Views/JSX/Akunting/ViewSaldoAwal";
+// import ListAsuransi from "./Views/JSX/Akunting/ViewAsuransi";
 
 class App extends Component {
   render() {
@@ -92,8 +93,9 @@ class App extends Component {
               component={DataRekamMedisPasien}
             /> */}
             <Route path="/akunting" component={Akunting} />
-            <Route path="/buku-coa" component={COA} />
-            <Route path="/list-asuransi" component={ListAsuransi} />
+            <Route path="/daftar-akun" component={DaftarAkun} />
+            <Route path="/saldo-awal" component={SaldoAwal} />
+            {/* <Route path="/list-asuransi" component={ListAsuransi} /> */}
           </Switch>
         </div>
       </div>

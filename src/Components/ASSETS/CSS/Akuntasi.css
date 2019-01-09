@@ -6,7 +6,7 @@
   margin-left: 120px;
 } */
 .debit {
-  font-size: 35px;
+  font-size: 15px;
   font-weight: 600;
   color: white;
   text-align: center;
@@ -14,7 +14,7 @@
 }
 .hrdeb {
   border: 1px dashed #ffffff;
-  margin-top: 10px;
+  /* margin-top: 10px; */
 }
 .hrtable {
   border: 1px dashed #1976d2;

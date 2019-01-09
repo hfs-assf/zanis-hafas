@@ -1,14 +1,42 @@
 import React, { Component } from "react";
-import tambahPoliklinik from "../../../Methods/Admin/tambahPoliknliki";
+import tambahPoliklinik from "../../../Methods/Admin/tambahPoliknlik";
 
 class TambahPoliklinik extends Component {
-  tambahPoli = event => {
-    event.preventDefault();
-    let { nama_poli } = this.refs;
-    tambahPoliklinik({ nama_poli: nama_poli.value })
-      .then(response => console.log(response))
-      .catch(() => alert("error"));
-  };
+  // tambahPoli = event => {
+  //   event.preventDefault();
+  //   let { nama_poli } = this.refs;
+  //   tambahPoliklinik({ nama_poli: nama_poli.value })
+  //     .then(response => console.log(response))
+  //     .catch(() => alert("error"));
+  // };
+  constructor(props) {
+    super(props);
+    this.handleSave = this.handleSave.bind(this);
+    this.state = {
+      id: "",
+      nama: ""
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.action === "edit") {
+      this.setState({
+        id: nextProps.selected.idTeam,
+        nama: nextProps.selected.strTeam
+      });
+    }
+  }
+
+  handleSave() {
+    if (this.props.action === "add") {
+      tambahPoliklinik({
+        id: this.state.id,
+        nama: this.state.nama
+      });
+      // } else {
+      //   editUser({ id: this.state.id, nama: this.state.nama });
+    }
+  }
 
   render() {
     return (
@@ -40,15 +68,20 @@ class TambahPoliklinik extends Component {
             </div>
 
             <div className="modal-body">
-              <form id="contact-form" name="contact-form" method="POST">
+              <form method="POST">
                 <div className="row">
                   <div className="col-md-12">
                     <div className="md-form mb-0">
                       <input
-                        type="number"
-                        ref="nama_poli"
+                        type="text"
                         className="form-control"
                         placeholder="Masukkan Nama Poliklinik"
+                        value={this.state.nama}
+                        onChange={event =>
+                          this.setState({
+                            nama: event.target.value
+                          })
+                        }
                       />
                     </div>
                   </div>
@@ -57,7 +90,7 @@ class TambahPoliklinik extends Component {
             </div>
 
             <div className="modal-footer justify-content-center">
-              <button className="btn btn-primary" onClick={this.tambahPoli}>
+              <button className="btn btn-primary" onClick={this.handleSave}>
                 Simpan
               </button>
               <button

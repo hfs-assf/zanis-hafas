@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../../ASSETS/CSS/Akuntasi.css";
 import Calender from "../../ASSETS/SVG/Kalender1";
-import MenuAkunting from "../MenuAkunting/MenuAkunting";
+import MenuAkunting from "./MenuAkunting";
 class JurnalUmum extends Component {
   render() {
     return (

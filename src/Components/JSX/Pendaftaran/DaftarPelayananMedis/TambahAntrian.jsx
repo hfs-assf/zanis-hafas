@@ -56,7 +56,6 @@ class TambahAntrian extends Component {
                   type="radio"
                   id="color-1"
                   name="janispasien"
-                  value="color-1"
                   onClick={() => this.showHide(false)}
                   defaultChecked
                 />
@@ -71,7 +70,6 @@ class TambahAntrian extends Component {
                   type="radio"
                   id="color-2"
                   name="janispasien"
-                  value="color-2"
                   onClick={() => this.showHide(true)}
                 />
                 <label htmlFor="color-2" className="radio-inline">

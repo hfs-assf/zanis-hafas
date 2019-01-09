@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import hapusObat from "../../Methods/Apotik/Obat/hapusObat";
 import hapusTindakan from "../../Methods/Poli/Tindakan/hapusTindakan";
-// import detailTindakan from "../../../Methods/Poli/Tindakan/detailTindakan";
 import ModalKonfirmasi from "./Animasi/ModalKonfirmasi";
 
 class Hapus extends Component {
@@ -21,7 +20,6 @@ class Hapus extends Component {
       field: nextProps.field
     });
   }
-
   deleteItem = uid => {
     if (this.state.field === "obat") {
       hapusObat(uid)

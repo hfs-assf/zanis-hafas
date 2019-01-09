@@ -9,13 +9,19 @@ class MenuAKunting extends Component {
         <div className="title">Pembukuan</div>
         <ul className="nav">
           <li>
-            <Link to="/buku-coa" target="_blank">
-              Chart Of Account
+            <Link to="/daftar-akun" target="_blank">
+              Daftar Akun
             </Link>
           </li>
           <li>
-            <Link to="/list-asuransi" target="_blank">
-              List Asuransi
+            <Link to="/saldo-awal" target="_blank">
+              Saldo Awal
+            </Link>
+          </li>
+
+          <li>
+            <Link to="/jurnal-umum" target="_blank">
+              Jurnal Umum
             </Link>
           </li>
         </ul>
