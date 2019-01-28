@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import tambahPoliklinik from "../../../Methods/Admin/tambahPoliknlik";
+import Sukses from "../Animasi/Sukses";
+import Gagal from "../Animasi/Gagal";
 
 class TambahPoliklinik extends Component {
   // tambahPoli = event => {
@@ -12,10 +14,7 @@ class TambahPoliklinik extends Component {
   constructor(props) {
     super(props);
     this.handleSave = this.handleSave.bind(this);
-    this.state = {
-      id: "",
-      nama: ""
-    };
+    this.state = { id: "", nama: "", notification: "" };
   }
 
   componentWillReceiveProps(nextProps) {
@@ -32,7 +31,11 @@ class TambahPoliklinik extends Component {
       tambahPoliklinik({
         id: this.state.id,
         nama: this.state.nama
-      });
+      })
+        .then(() => {
+          this.setState({ notification: <Sukses /> });
+        })
+        .catch(() => this.setState({ notification: <Gagal /> }));
       // } else {
       //   editUser({ id: this.state.id, nama: this.state.nama });
     }
@@ -87,6 +90,7 @@ class TambahPoliklinik extends Component {
                   </div>
                 </div>
               </form>
+              {this.state.notification}
             </div>
 
             <div className="modal-footer justify-content-center">

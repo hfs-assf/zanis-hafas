@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 class UbahProfilKlinik extends Component {
   state = {
     selectedFile: null,
@@ -9,7 +8,8 @@ class UbahProfilKlinik extends Component {
     telpon_klinik: "z",
     email_klinik: "z",
     website_klinik: "z",
-    foto_klinik: "z"
+    foto_klinik: "z",
+    notification: ""
   };
 
   handleInputChange(event) {

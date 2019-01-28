@@ -6,13 +6,24 @@ import ExpDetail from "../../../Components/JSX/Apotek/ExpiredDetail";
 import MinStockDetail from "../../../Components/JSX/Apotek/MinStockDetail";
 
 class KelolaApotek extends Component {
+  // state = {
+  //   blabla: "0"
+  // };
+
+  // untukCheck(param) {
+  //   this.setState({ blabla: param });
+  // }
+
+  // shouldComponentUpdate(nextP, nextS) {
+  //   return this.state.blabla !== nextS.blabla;
+  // }
   render() {
     return (
       <div className="container-fluid">
         <DashboardApotek />
         <br />
         <TableObat />
-        <FormObat />
+        <FormObat id="1" />
         <ExpDetail />
         <MinStockDetail />
       </div>

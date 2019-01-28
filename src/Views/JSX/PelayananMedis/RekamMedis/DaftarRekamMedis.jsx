@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import listPasien from "../../../../Methods/RekamMedis/Pasien/listPasien";
 
 class DaftarRekamMedis extends Component {
@@ -21,23 +20,25 @@ class DaftarRekamMedis extends Component {
       });
     });
   }
+  lihatDetail(id) {
+    window.location.assign("/detail-rekam-medis/" + id);
+  }
   renderDaftarRM = rm => {
-    const { filter } = this.state;
-    if (filter !== "") {
+    const { textFilter } = this.state;
+    if (textFilter !== "") {
       return (
         <div className="row1">
-          <div className="cell">{rm.nomor_rekam_medis}</div>
+          <div className="cell text-center">{rm.nomor_rekam_medis}</div>
           <div className="cell">{rm.nama_pasien}</div>
-          <div className="cell">{rm.jenis_kelamin}</div>
-          <div className="cell">{rm.status}</div>
-          <div className="cell">
-            <Link
-              to="/detail_rekam_medis"
-              target="_blank"
+          <div className="cell text-center">{rm.jenis_kelamin}</div>
+          <div className="cell text-center">{rm.status}</div>
+          <div className="cell text-center">
+            <button
               className="btn btn-primary btn-sm"
+              onClick={() => this.lihatDetail(rm.nomor_rekam_medis)}
             >
               Lihat Detail
-            </Link>
+            </button>
           </div>
         </div>
       );
@@ -47,24 +48,23 @@ class DaftarRekamMedis extends Component {
   render() {
     let header;
     const { textFilter, pasien } = this.state;
-    const filteresPasien = pasien;
 
-    if (filteresPasien.length !== 0 && textFilter !== "") {
+    if (pasien.length !== 0 && textFilter !== "") {
       header = (
         <div className="table">
           <div className="row1 header">
-            <div className="cell">Tanggal </div>
-            <div className="cell">No. RM</div>
+            <div className="cell">Nomor Rekam Medis </div>
             <div className="cell">Nama</div>
-            <div className="cell">Jenis Asuransi</div>
+            <div className="cell">Jenis Kelamin</div>
+            <div className="cell">Status</div>
             <div className="cell">Aksi</div>
           </div>
-          {filteresPasien.map(rm => {
+          {pasien.map(rm => {
             return this.renderDaftarRM(rm);
           })}
         </div>
       );
-    } else if (filteresPasien.length === 0 && textFilter !== "") {
+    } else if (pasien.length === 0 && textFilter !== "") {
       header = (
         <div className="table">
           <div className="row1">
@@ -79,9 +79,7 @@ class DaftarRekamMedis extends Component {
           role="alert"
         >
           Untuk <strong> melihat rekam medis pasien </strong> lakukan dengan
-          pencarian berdasarkan tanggal pelayanan, nomor RM, nama, dan jenis
-          ansuransi yang pasien gunakan. Kemudian klik{" "}
-          <strong>lihat detail </strong>
+          nama pasien . Kemudian klik <strong>lihat detail </strong>
           pada data pasien yang diinginkan.
         </div>
       );

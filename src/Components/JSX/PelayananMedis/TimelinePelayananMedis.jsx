@@ -17,7 +17,7 @@ class TimelinePelayananMedis extends Component {
     listAntrian().then(({ data }) => {
       for (var i = 0; i < data.length; i++) {
         this.searchName(data[i].nomor_rekam_medis).then(data => {
-          array.push(data);
+          this.setState({ nama: this.state.nama.concat(data) });
         });
 
         this.setState({
@@ -49,7 +49,7 @@ class TimelinePelayananMedis extends Component {
     deskripsiPasien = antrian.map((e, index) => {
       return (
         <li key={e.uid} className="animated bounceIn">
-          <Link to={"/pelayanan-medis/" + e.nomor_rekam_medis}>
+          <Link to={"/pelayanan-medis/" + e.uid}>
             <span />
             <div className="number"> {e.nomor_antrian} </div>
             <div>
@@ -57,7 +57,7 @@ class TimelinePelayananMedis extends Component {
 
               <div className="tefalsext-white">{nama[index]}</div>
               <div className="type">
-                {e.asuransi} - {e.poli}
+                {e.dokter} - {e.poli}
               </div>
             </div>
           </Link>

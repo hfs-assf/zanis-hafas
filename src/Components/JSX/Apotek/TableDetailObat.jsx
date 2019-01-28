@@ -35,7 +35,7 @@ class TableObat extends Component {
             onClick={() => this.ubahStok(obat.uid)}
           >
             Ubah
-          </button>{" "}
+          </button>
         </div>
       </div>
     );

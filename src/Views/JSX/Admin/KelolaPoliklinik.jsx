@@ -127,7 +127,6 @@ class KelolaPoliklinik extends Component {
                     className="form-control"
                     placeholder="Cari Poliklinik"
                     onKeyUp={e => this.setState({ filter: e.target.value })}
-                    // onKeyUp={() => this.getData(this.refs.search.value)}
                   />
                 </div>
               </div>

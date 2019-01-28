@@ -3,6 +3,7 @@ import Sukses from "./Sukses";
 import Gagal from "./Gagal";
 class ModalKonfirmasi extends Component {
   render() {
+    console.log(this.props.notification);
     return (
       <div
         className="modal fade bd-example-modal-sm"

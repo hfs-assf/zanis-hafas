@@ -29,9 +29,19 @@ class FormObat extends Component {
       kategori: this.state.kategori
     })
       .then(() => {
-        this.setState({ notification: <Sukses /> });
+        this.setState({
+          nama_obat: "",
+          minimal_stok: "",
+          satuan: "",
+          kategori: "Minum",
+          notification: <Sukses />
+        });
       })
-      .catch(() => this.setState({ notification: <Gagal /> }));
+      .then(() => this.setState({ notification: "" }))
+      .catch(err => {
+        console.log(err);
+        this.setState({ notification: <Gagal /> });
+      });
   };
 
   render() {
@@ -71,6 +81,7 @@ class FormObat extends Component {
                         name="nama_obat"
                         className="form-control"
                         placeholder="Nama Obat"
+                        value={this.state.nama_obat}
                         onChange={event =>
                           this.setState({
                             nama_obat: event.target.value
@@ -89,6 +100,7 @@ class FormObat extends Component {
                         name="minimal_stok"
                         className="form-control"
                         placeholder="Batas Minimum"
+                        value={this.state.minimal_stok}
                         onChange={event =>
                           this.setState({
                             minimal_stok: event.target.value
@@ -105,6 +117,7 @@ class FormObat extends Component {
                         name="satuan"
                         className="form-control"
                         placeholder="Satuan"
+                        value={this.state.satuan}
                         onChange={event =>
                           this.setState({
                             satuan: event.target.value
@@ -141,11 +154,11 @@ class FormObat extends Component {
               <button
                 className="btn btn-info"
                 onClick={event => this.tambahObat(event)}
-                disabled={
-                  !this.state.nama_obat ||
-                  !this.state.minimal_stok ||
-                  !this.state.satuan
-                }
+                // disabled={
+                //   !this.state.nama_obat ||
+                //   !this.state.minimal_stok ||
+                //   !this.state.satuan
+                // }
               >
                 Simpan
               </button>

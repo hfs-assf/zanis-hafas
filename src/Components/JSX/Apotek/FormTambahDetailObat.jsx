@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import tambahStokObat from "../../../Methods/Apotik/StokObat/tambahStokObat";
+import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
 
 class FormTambahDetailObat extends Component {
   state = {
@@ -8,7 +9,8 @@ class FormTambahDetailObat extends Component {
     stok: "",
     kadaluarsa: "",
     nik_penerima: "12121",
-    harga_modal: ""
+    harga_modal: "",
+    notification: ""
   };
 
   tambahStokObat = event => {
@@ -19,7 +21,12 @@ class FormTambahDetailObat extends Component {
       kadaluarsa: this.state.kadaluarsa,
       nik_penerima: this.state.nik_penerima,
       harga_modal: this.state.harga_modal
-    });
+    })
+      .then(this.setState({ notification: "1" }))
+      .catch(err => {
+        console.log(err);
+        this.setState({ notification: "0" });
+      });
   };
 
   render() {
@@ -110,6 +117,8 @@ class FormTambahDetailObat extends Component {
             <div className="modal-footer justify-content-center">
               <button
                 className="btn btn-primary"
+                data-toggle="modal"
+                data-target="#notification"
                 onClick={event => this.tambahStokObat(event)}
               >
                 Simpan
@@ -123,6 +132,7 @@ class FormTambahDetailObat extends Component {
             </div>
           </div>
         </div>
+        <ModalKonfirmasi notification={this.state.notification} />
       </div>
     );
   }

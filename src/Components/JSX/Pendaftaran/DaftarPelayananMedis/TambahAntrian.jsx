@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import tambahAntrian from "../../../../Methods/Pendaftaran/Antrian/tambahAntrian";
+import ModalKonfirmasi from "../../Animasi/ModalKonfirmasi";
 
 class TambahAntrian extends Component {
   constructor(props) {
@@ -9,11 +10,13 @@ class TambahAntrian extends Component {
     this.state = {
       showMe: false,
       antrian: {
+        jaminan: "",
         nomor_rekam_medis: "",
-        nama_dokter: "",
-        poli: "Umum",
-        jenis_asuransi: "",
-        asuransi_no_kartu: ""
+        dokter: "",
+        poli: "",
+        notification: ""
+        // jenis_asuransi: "",
+        // asuransi_no_kartu: ""
       }
     };
   }
@@ -24,13 +27,18 @@ class TambahAntrian extends Component {
   handleSave() {
     tambahAntrian({
       nomor_rekam_medis: this.props.pasien,
-      // nama_dokter: this.state.antrian.nama_dokter,
-      poli: this.state.antrian.poli
+      poli: this.state.poli,
+      jaminan: this.state.jaminan,
+      dokter: this.state.dokter
       // jenis_asuransi: this.state.antrian.jenis_asuransi,
       // asuransi_no_kartu: this.state.antrian.asuransi_no_kartu
     })
-      .then(() => this.props.alert.show("Antrian berhasil ditambah"))
-      .catch(() => this.props.alert.error("Input salah"));
+      .then(this.setState({ notification: "1" }))
+      .catch(err => {
+        console.log(err);
+        this.setState({ notification: "0" });
+      });
+    // console.log(this.state.jaminan);
   }
 
   render() {
@@ -44,7 +52,7 @@ class TambahAntrian extends Component {
           </div>
         </div>
         <hr className="hr2" />
-        <div className="form-group row">
+        {/* <div className="form-group row">
           <label htmlFor="inputjenispasien" className="col-sm-4 col-form-label">
             Jenis Pasien
             <span className="required">*</span>
@@ -79,7 +87,30 @@ class TambahAntrian extends Component {
               </div>
             </div>
           </div>
+        </div> */}
+        <div className="form-group row">
+          <label htmlFor="JenisPasien" className="col-sm-4 col-form-label">
+            Jenis Pasien
+            <span className="required">*</span>
+          </label>
+          <div className="col-sm-5">
+            <select
+              className="form-control"
+              onChange={event =>
+                this.setState({
+                  jaminan: event.target.value
+                })
+              }
+              required
+            >
+              <option value="">--- Pilihan ---</option>
+              <option value="Umum">Umum</option>
+              <option value="Asuransi BPJS">Asuransi BPJS</option>
+              <option value="Lain-lain">Lain-lain</option>
+            </select>
+          </div>
         </div>
+
         <div className="form-group row">
           <label htmlFor="NamaDokter" className="col-sm-4 col-form-label">
             Nama Dokter
@@ -90,14 +121,15 @@ class TambahAntrian extends Component {
               className="form-control"
               onChange={event =>
                 this.setState({
-                  antrian: { nama_dokter: event.target.value }
+                  dokter: event.target.value
                 })
               }
               required
             >
-              <option value="Miaw">dr. Miaw</option>
-              <option value="Kucing">dr. Kucing</option>
-              <option value="suci">dr. Suci</option>
+              <option value="">--- Pilihan ---</option>
+              <option value="dr. Miaw">dr. Miaw</option>
+              <option value="dr. Kucing">dr. Kucing</option>
+              <option value="dr. Suci">dr. Suci</option>
             </select>
           </div>
         </div>
@@ -111,17 +143,18 @@ class TambahAntrian extends Component {
               className="form-control"
               onChange={event =>
                 this.setState({
-                  antrian: { poli: event.target.value }
+                  poli: event.target.value
                 })
               }
               required
             >
-              <option>Umum</option>
-              <option>Gigi</option>
+              <option value="">--- Pilihan ---</option>
+              <option value="Poliklinik Umum">Poliklinik Umum</option>
+              <option value="Poliklinik Gigi">Poliklinik Gigi</option>
             </select>
           </div>
         </div>
-        {this.state.showMe ? (
+        {/* {this.state.showMe ? (
           <div className="animated fadeInRight">
             <h4>Asuransi / Jaminan</h4>
             <div className="form-group row">
@@ -164,17 +197,20 @@ class TambahAntrian extends Component {
               </div>
             </div>
           </div>
-        ) : null}
+        ) : null} */}
         <div className="col-md-12">
           <div className="modal-footer justify-content-center">
             <button
               className="btn btn-primary"
+              data-toggle="modal"
+              data-target="#notification"
               onClick={() => this.handleSave()}
             >
               Simpan
             </button>
           </div>
         </div>
+        <ModalKonfirmasi notification={this.state.notification} />
       </form>
     );
   }

@@ -51,7 +51,10 @@ class Sidebar extends Component {
                     <Link to="/pelayanan-medis">Daftar Antrian</Link>
                   </li>
                   <li>
-                    <Link to="/rekam_medis">Rekam Medis</Link>
+                    <Link to="/rekam-medis">Rekam Medis</Link>
+                  </li>
+                  <li>
+                    <Link to="/kode-icd">Kode ICD</Link>
                   </li>
                 </ul>
               </li>
@@ -66,7 +69,7 @@ class Sidebar extends Component {
                     <Link to="/apotek">Daftar Antrian</Link>
                   </li>
                   <li>
-                    <Link to="/kelola_apotek">Kelola Apotek</Link>
+                    <Link to="/kelola-apotek">Kelola Apotek</Link>
                   </li>
                 </ul>
               </li>
@@ -81,7 +84,7 @@ class Sidebar extends Component {
                     <Link to="/kasir">Daftar Antrian</Link>
                   </li>
                   <li>
-                    <Link to="/kelola_biaya">Kelola Biaya</Link>
+                    <Link to="/kelola-biaya">Kelola Biaya</Link>
                   </li>
                 </ul>
               </li>
@@ -115,12 +118,12 @@ class Sidebar extends Component {
               <li>
                 {" "}
                 <Link
-                  to="/akunting"
+                  to="/jurnal-umum"
                   className="has-arrow"
                   aria-expanded="false"
                 >
                   <SVGAkunting />
-                  <span className="hide-menu">Jurnal Akunting</span>
+                  <span className="hide-menu">Jurnal Umum</span>
                 </Link>
                 <ul aria-expanded="false" className="collapse">
                   <li>

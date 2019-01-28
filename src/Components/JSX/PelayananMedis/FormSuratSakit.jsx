@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import jsPDF from "jspdf";
 import detailPasien from "../../../Methods/RekamMedis/Pasien/detailPasien";
+import listAntrian from "../../../Methods/Pendaftaran/Antrian/listAntrian";
 
 class FormObat extends Component {
   constructor(props) {
@@ -10,14 +11,25 @@ class FormObat extends Component {
       no_rm: "",
       nama_pasien: "",
       tanggal_lahir: "",
-      alamat: ""
+      alamat: "",
+      poli: "",
+      jaminan: "",
+      dokter: ""
     };
   }
 
   componentWillMount() {
-    detailPasien(this.props.id).then(({ data }) => {
+    listAntrian(this.props.id).then(({ data }) => {
       this.setState({
-        nama_pasien: data[0].nama_pasien,
+        poli: data[0].poli,
+        no_rm: data[0].nomor_rekam_medis,
+        jaminan: data[0].jaminan,
+        dokter: data[0].dokter
+      });
+    });
+    detailPasien(this.state.no_rm).then(({ data }) => {
+      this.setState({
+        nama: data[0].nama_pasien,
         tanggal_lahir: data[0].tanggal_lahir,
         alamat: data[0].alamat
       });

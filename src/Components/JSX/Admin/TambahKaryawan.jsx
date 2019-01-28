@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import tambahUser from "../../../Methods/User/Akun/tambahUser";
 import editUser from "../../../Methods/User/Akun/editUser";
+import Sukses from "../Animasi/Sukses";
+import Gagal from "../Animasi/Gagal";
 
 class TambahKaryawan extends Component {
   constructor(props) {
@@ -14,20 +16,38 @@ class TambahKaryawan extends Component {
       role: "Dokter",
       email: "",
       password: "",
-      akses: "Pendaftaran"
+      akses: "Pendaftaran",
+      notification: ""
     };
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.action === "edit") {
       this.setState({
+        showMe: nextProps.selected.email ? true : false,
         uid: nextProps.selected.uid,
         nik: nextProps.selected.nik,
         nama: nextProps.selected.nama,
-        role: nextProps.selected.role,
+        // role: nextProps.selected.role,
         email: nextProps.selected.email,
-        password: nextProps.selected.password,
-        akses: nextProps.selected.akses
+        password: nextProps.selected.password
+        // akses: nextProps.selected.akses
+      });
+      React.createElement("input", {
+        type: "checkbox",
+        id: "showHide",
+        defaultChecked: true
+      });
+    } else {
+      this.setState({
+        showMe: false,
+        uid: "",
+        nik: "",
+        nama: "",
+        role: "Dokter",
+        email: "",
+        password: "",
+        akses: "Pendaftaran"
       });
     }
   }
@@ -40,25 +60,23 @@ class TambahKaryawan extends Component {
         nama: this.state.nama,
         email: this.state.email,
         akses: this.state.akses
-      });
+      })
+        .then(() => {
+          this.setState({ notification: <Sukses /> });
+        })
+        .catch(() => this.setState({ notification: <Gagal /> }));
     } else {
       editUser({
-        uid: this.state.uid,
         nik: this.state.nik,
         password: this.state.password,
         nama: this.state.nama,
         email: this.state.email,
         akses: this.state.akses
-      });
-    }
-  }
-
-  showHide(e) {
-    var hasil = e.target.value;
-    if (hasil === "false") {
-      this.setState({ showMe: true });
-    } else {
-      this.setState({ showMe: false });
+      })
+        .then(() => {
+          this.setState({ notification: <Sukses /> });
+        })
+        .catch(() => this.setState({ notification: <Gagal /> }));
     }
   }
 
@@ -76,7 +94,7 @@ class TambahKaryawan extends Component {
           <div className="modal-content">
             <div className="modal-header info-color text-white text-center ">
               <h4 className="modal-title w-100" id="myModalLabel">
-                Form Tambah Karyawan
+                {this.props.action === "add" ? "Tambah" : "Ubah"} Data Karyawan
               </h4>
 
               <button
@@ -107,6 +125,7 @@ class TambahKaryawan extends Component {
                             nik: event.target.value
                           })
                         }
+                        disabled={this.props.action === "add" ? false : true}
                       />
                     </div>
                   </div>
@@ -131,7 +150,7 @@ class TambahKaryawan extends Component {
                 <div className="row">
                   <div className="col-md-12">
                     <div className="md-form mb-0">
-                      <span>role</span>
+                      <span>Peran</span>
                       <select
                         className="custom-select"
                         name="role_karyawan"
@@ -160,7 +179,10 @@ class TambahKaryawan extends Component {
                         type="checkbox"
                         className="custom-checkbox"
                         value={this.state.showMe}
-                        onClick={e => this.showHide(e)}
+                        id="showHide"
+                        onClick={() =>
+                          this.setState({ showMe: !this.state.showMe })
+                        }
                       />
                       <span> Jadikan sebagai pengguna </span>
                     </div>
@@ -204,22 +226,23 @@ class TambahKaryawan extends Component {
                     <div className="row">
                       <div className="col-md-12">
                         <div className="md-form mb-0">
-                          <span>akses</span>
+                          <span>Akses</span>
                           <select
                             className="custom-select"
                             name="akses"
-                            value={this.state.akses}
                             onChange={event =>
                               this.setState({
                                 akses: event.target.value
                               })
                             }
                           >
-                            <option value="1">Pendaftaran</option>
-                            <option value="2">Pelayanan Medis</option>
-                            <option value="3">Apotek</option>
-                            <option value="4">Kasir</option>
-                            <option value="5">Administrasi</option>
+                            <option value="Pendaftaran">Pendaftaran</option>
+                            <option value="Pelayanan Medis">
+                              Pelayanan Medis
+                            </option>
+                            <option value="Apotek">Apotek</option>
+                            <option value="Kasir">Kasir</option>
+                            <option value="Administrasi">Administrasi</option>
                           </select>
                         </div>
                       </div>
@@ -227,10 +250,15 @@ class TambahKaryawan extends Component {
                   </div>
                 ) : null}
               </form>
+              {this.state.notification}
             </div>
 
             <div className="modal-footer justify-content-center">
-              <button className="btn btn-primary" onClick={this.handleSave}>
+              <button
+                className="btn btn-primary"
+                onClick={this.handleSave}
+                disabled={!this.state.nik || !this.state.nama}
+              >
                 Simpan
               </button>
               <button

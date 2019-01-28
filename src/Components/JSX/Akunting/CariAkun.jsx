@@ -1,56 +1,45 @@
 import React, { Component } from "react";
 import "../../ASSETS/CSS/Pendaftaran.css";
-import listPasien from "../../../Methods/RekamMedis/Pasien/listPasien";
-
-class CariPasien extends Component {
+import DataCoa from "../../../JSON/dataCOA.json";
+class CariAkun extends Component {
   constructor() {
     super();
     this.state = {
       textFilter: "",
       showSuggestions: false,
-      pasien: []
+      account: ""
     };
   }
-
-  onChange(e) {
-    var filter = e.target.value;
-    listPasien(filter).then(({ data }) => {
-      this.setState({
-        pasien: data,
-        textFilter: filter,
-        showSuggestions: true
-      });
-    });
+  changeAccount(e) {
+    this.state.setState({ account: e });
   }
-
-  tambahAntrian(id) {
-    window.location.assign("/tambah-layanan/" + id);
-  }
-
   render() {
     let suggestionsList;
-    const { textFilter, showSuggestions, pasien } = this.state;
-    const filteresPasien = pasien;
+    const { textFilter, showSuggestions } = this.state;
+    const filteredAkun = DataCoa.filter(e => {
+      return e.nama_akun.toLowerCase().indexOf(textFilter.toLowerCase()) !== -1;
+    });
     if (showSuggestions === true) {
-      if (filteresPasien.length !== 0 && textFilter !== "") {
+      if (filteredAkun.length !== 0 && textFilter !== "") {
         suggestionsList = (
           <ul className="suggestions">
-            {filteresPasien.map(pasien => {
+            {filteredAkun.map((e, index) => {
               return (
                 <li
-                  key={pasien.nomor_rekam_medis}
+                  key={index}
                   className="suggestion-active"
-                  onClick={() => this.tambahAntrian(pasien.nomor_rekam_medis)}
+                  // onClick={() => this.changeAccount(akun)}
                 >
-                  {pasien.nama_pasien}
+                  {e.kode + "-" + e.no_akun}
                   <br />
-                  {pasien.nomor_rekam_medis}
+                  {e.nama_akun}
                 </li>
               );
             })}
+            <li className="no-suggestion">Klik untuk menampilkan</li>
           </ul>
         );
-      } else if (filteresPasien.length === 0 && textFilter !== "") {
+      } else if (filteredAkun.length === 0 && textFilter !== "") {
         suggestionsList = (
           <ul className="suggestions">
             <li className="no-suggestion">Tidak tersedia</li>
@@ -58,6 +47,7 @@ class CariPasien extends Component {
         );
       }
     }
+
     return (
       <div className="mainsearch">
         <div className="form-group has-search">
@@ -65,8 +55,13 @@ class CariPasien extends Component {
           <input
             type="text"
             className="form-control"
-            placeholder="Cari pasien"
-            onChange={e => this.onChange(e)}
+            placeholder="Cari akun"
+            onChange={e =>
+              this.setState({
+                textFilter: e.target.value,
+                showSuggestions: true
+              })
+            }
           />
           {suggestionsList}
         </div>
@@ -75,4 +70,4 @@ class CariPasien extends Component {
   }
 }
 
-export default CariPasien;
+export default CariAkun;

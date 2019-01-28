@@ -3,7 +3,7 @@ const apiURL = "http://localhost:8002";
 
 let tambahPasien = ({
   nomor_pengenal,
-  jenis_nomor_pengenal,
+  jenis_nomor_pengenal, 
   email,
   nama_pasien,
   tempat_lahir,

@@ -24,6 +24,11 @@ class MenuAKunting extends Component {
               Jurnal Umum
             </Link>
           </li>
+          <li>
+            <Link to="/buku-besar" target="_blank">
+              Buku Besar
+            </Link>
+          </li>
         </ul>
       </div>
     );

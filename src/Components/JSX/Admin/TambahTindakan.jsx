@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import tambahTindakan from "../../../Methods/Poli/Tindakan/tambahTindakan";
 import editTindakan from "../../../Methods/Poli/Tindakan/editTindakan";
+import Sukses from "../Animasi/Sukses";
+import Gagal from "../Animasi/Gagal";
 // import detailTindakan from "../../../Methods/Poli/Tindakan/detailTindakan";
 
 class TambahTindakan extends Component {
@@ -10,7 +12,8 @@ class TambahTindakan extends Component {
     this.state = {
       showMe: false,
       nama_tindakan: "",
-      biaya_tindakan: ""
+      biaya_tindakan: "",
+      notification: ""
     };
   }
 
@@ -29,13 +32,21 @@ class TambahTindakan extends Component {
       tambahTindakan({
         nama_tindakan: this.state.nama_tindakan,
         biaya_tindakan: this.state.biaya_tindakan
-      }).then(() => alert("Berhasil Disimpan"));
+      })
+        .then(() => {
+          this.setState({ notification: <Sukses /> });
+        })
+        .catch(() => this.setState({ notification: <Gagal /> }));
     } else {
       editTindakan({
         uid: this.state.uid,
         nama_tindakan: this.state.nama_tindakan,
         biaya_tindakan: this.state.biaya_tindakan
-      });
+      })
+        .then(() => {
+          this.setState({ notification: <Sukses /> });
+        })
+        .catch(() => this.setState({ notification: <Gagal /> }));
     }
   }
 
@@ -106,6 +117,7 @@ class TambahTindakan extends Component {
                   </div>
                 </div>
               </form>
+              {this.state.notification}
             </div>
 
             <div className="modal-footer justify-content-center">

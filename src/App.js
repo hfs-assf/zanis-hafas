@@ -38,6 +38,7 @@ import PendaftaranLayanan from "./Views/JSX/Pendaftaran/PendaftaranLayanan";
 //Akunting
 import Akunting from "./Views/JSX/Akunting/ViewJurnal";
 import DaftarAkun from "./Views/JSX/Akunting/ViewDaftarAkun";
+import BukuBesar from "./Views/JSX/Akunting/ViewBukuBesar";
 import SaldoAwal from "./Views/JSX/Akunting/ViewSaldoAwal";
 // import ListAsuransi from "./Views/JSX/Akunting/ViewAsuransi";
 
@@ -64,7 +65,7 @@ class App extends Component {
               path="/detail-obat/:id"
               render={({ match }) => <DetailObat uid={match.params} />}
             />
-            <Route path="/kelola_apotek" component={KelolaApotek} />
+            <Route path="/kelola-apotek" component={KelolaApotek} />
             <Route path="/pendaftaran" component={Pendaftaran} />
             <Route
               path="/tambah-layanan/:id"
@@ -86,14 +87,18 @@ class App extends Component {
               path="/peralatan-laboratorium"
               component={KelolaItemLaboratorium}
             />
-            <Route path="/rekam_medis" component={DaftarRekamMedis} />
-            <Route path="/detail_rekam_medis" component={DetailRekamMedis} />
+            <Route path="/rekam-medis" component={DaftarRekamMedis} />
+            <Route
+              path="/detail-rekam-medis/:id"
+              render={({ match }) => <DetailRekamMedis pasien={match.params} />}
+            />
             {/* <Route
               path="/data_rekam_medis_pasien"
               component={DataRekamMedisPasien}
             /> */}
-            <Route path="/akunting" component={Akunting} />
+            <Route path="/jurnal-umum" component={Akunting} />
             <Route path="/daftar-akun" component={DaftarAkun} />
+            <Route path="/buku-besar" component={BukuBesar} />
             <Route path="/saldo-awal" component={SaldoAwal} />
             {/* <Route path="/list-asuransi" component={ListAsuransi} /> */}
           </Switch>

@@ -2,7 +2,7 @@ import axios from "axios";
 
 const apiURL = "http://localhost:8000";
 
-let editUser = ({ uid, nik, password, nama, email, akses }) => {
+let editUser = ({ nik, password, nama, email, akses }) => {
   return axios.put(apiURL + "/api/v1/akun-user/" + nik, {
     nik,
     password,

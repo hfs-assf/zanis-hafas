@@ -7,7 +7,7 @@ class ViewRekamMedisList extends Component {
   render() {
     return (
       <div id="demo">
-        <div class="alert alert-danger" role="alert">
+        <div className="alert alert-danger" role="alert">
           Untuk melihat MR pasien <strong>Arahkan kursor</strong> ke salah satu
           tahun <strong>Lalu Klik</strong>
         </div>

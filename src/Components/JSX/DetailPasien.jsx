@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import detailPasien from "../../Methods/RekamMedis/Pasien/detailPasien";
-
+import listAntrian from "../../Methods/Pendaftaran/Antrian/listAntrian";
 class DetailPasien extends Component {
   constructor(props) {
     super(props);
@@ -10,14 +10,22 @@ class DetailPasien extends Component {
       nama_pasien: "",
       tanggal_lahir: "",
       poli: "",
-      jaminan: ""
+      jaminan: "",
+      dokter: ""
     };
   }
 
   componentWillMount() {
-    detailPasien(this.props.id).then(({ data }) => {
+    listAntrian(this.props.id).then(({ data }) => {
       this.setState({
+        poli: data[0].poli,
         no_rm: data[0].nomor_rekam_medis,
+        jaminan: data[0].jaminan,
+        dokter: data[0].dokter
+      });
+    });
+    detailPasien(this.state.no_rm).then(({ data }) => {
+      this.setState({
         nama: data[0].nama_pasien,
         tanggal_lahir: data[0].tanggal_lahir
       });
@@ -60,6 +68,13 @@ class DetailPasien extends Component {
               <td className="datatable">
                 :&ensp;
                 {this.state.poli}
+              </td>
+            </tr>
+            <tr>
+              <td>Dokter</td>
+              <td className="datatable">
+                :&ensp;
+                {this.state.dokter}
               </td>
             </tr>
             <tr>

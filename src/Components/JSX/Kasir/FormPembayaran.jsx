@@ -7,17 +7,13 @@ class FormPembayaran extends Component {
   render() {
     return (
       <div className="container-fluid ">
-        <div className="row" style={{ margin: "0.5em" }}>
-          <div className="col-md-8 mr-0 boxriwayat">
+        <div className="row justify-content-center" style={{ margin: "0.5em" }}>
+          <div className="col-md-8 boxriwayat">
             <DetailPasien id={this.props.pasien} />
           </div>
-          <div className="col-md-2 mr-0">
+          {/* <div className="col-md-2 mr-0">
             <div className="row">
-              <div
-                className="boxsurat"
-                data-toggle="modal"
-                data-target="#addtransaction"
-              >
+              <div className="boxsurat" data-toggle="modal" data-target="#addtransaction">
                 <SVGBillInvoice />
                 <h5 className="h5-responsive"> Transaksi </h5>
               </div>
@@ -27,6 +23,24 @@ class FormPembayaran extends Component {
             <div className="row">
               <div className="boxsurat">
                 <SVGBillInvoice />
+                <h5 className="h5-responsive"> Faktur</h5>
+              </div>
+            </div>
+          </div>
+        </div> */}
+          <div className="col-md-4">
+            <div className="row">
+              <div className="boxsurat">
+                <SVGBillInvoice />
+                <h5 className="h5-responsive"> Transaksi</h5>
+              </div>
+              <div
+                className="boxsurat"
+                data-toggle="modal"
+                data-target="#sickleaveletter"
+              >
+                <SVGBillInvoice />
+
                 <h5 className="h5-responsive"> Faktur</h5>
               </div>
             </div>

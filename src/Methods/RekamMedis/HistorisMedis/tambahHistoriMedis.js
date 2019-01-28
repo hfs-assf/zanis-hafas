@@ -11,7 +11,8 @@ let tambahHistoriMedis = ({
   diagnosa,
   jenis_perawatan,
   penjamin,
-  tindakan
+  tindakan,
+  catatan
 }) => {
   return axios.post(apiURL + "/api/v1/histori-medis/" + nomor_rekam_medis, {
     nik_dokter,
@@ -21,9 +22,9 @@ let tambahHistoriMedis = ({
     diagnosa,
     jenis_perawatan,
     penjamin,
-    tindakan
+    tindakan,
+    catatan
   });
-  // console.log(subjektif);
 };
 
 export default tambahHistoriMedis;

@@ -76,10 +76,11 @@ class FormPendaftaran extends Component {
       kantor: this.state.kantor,
       catatan: catatan
     })
-      .then(() => {
-        this.setState({ notification: "1" });
-      })
-      .catch(() => this.setState({ notification: "0" }));
+      .then(this.setState({ notification: "1" }))
+      .catch(err => {
+        console.log(err);
+        this.setState({ notification: "0" });
+      });
   }
   cleanAll() {
     this.setState({
@@ -188,7 +189,7 @@ class FormPendaftaran extends Component {
                           onChange={e => this.handleInputChange(e)}
                           required
                         >
-                          <option value="Islam">Islam</option>
+                          <option defaultValue="Islam">Islam</option>
                           <option value="Kristen">Kristen</option>
                           <option value="Budha">Budha</option>
                           <option value="Hindu">Hindu</option>
@@ -207,7 +208,7 @@ class FormPendaftaran extends Component {
                           onChange={e => this.handleInputChange(e)}
                           required
                         >
-                          <option value="P">Perempuan</option>
+                          <option defaultValue="P">Perempuan</option>
                           <option value="L">Laki-laki</option>
                         </select>
                       </label>
@@ -224,7 +225,9 @@ class FormPendaftaran extends Component {
                           onChange={e => this.handleInputChange(e)}
                           required
                         >
-                          <option value="Belum Menikah">Belum Menikah</option>
+                          <option defaultValue="Belum Menikah">
+                            Belum Menikah
+                          </option>
                           <option value="Sudah Menikah">Sudah Menikah</option>
                         </select>
                       </label>
@@ -254,7 +257,9 @@ class FormPendaftaran extends Component {
                           onChange={e => this.handleInputChange(e)}
                           required
                         >
-                          <option value="Tenayan Raya">Tenayan Raya</option>
+                          <option defaultValue="Tenayan Raya">
+                            Tenayan Raya
+                          </option>
                           <option value="...">...</option>
                         </select>
                       </label>
@@ -271,7 +276,7 @@ class FormPendaftaran extends Component {
                           onChange={e => this.handleInputChange(e)}
                           required
                         >
-                          <option value="Sail">Sail</option>
+                          <option defaultValue="Sail">Sail</option>
                           <option value="Rumbai">Rumbai</option>
                         </select>
                       </label>
@@ -437,10 +442,7 @@ class FormPendaftaran extends Component {
                 </div>
               </div>
             </div>
-            <ModalKonfirmasi
-              notification={this.state.notification}
-              show="true"
-            />
+            <ModalKonfirmasi notification={this.state.notification} />
           </form>
         </div>
       </div>

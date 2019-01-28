@@ -11,7 +11,7 @@ class SoapPasien extends Component {
       nomor_rekam_medis: "",
       nik_dokter: "121212",
       jenis_perawatan: "Rawat Jalan",
-      penjamin: "Umum",
+      penjamin: "Umum", //belum dibuat bg er //belum dibuat bg er //belum dibuat bg er
       sistole: "",
       diastole: "",
       suhu: "",
@@ -28,6 +28,22 @@ class SoapPasien extends Component {
   }
 
   handleSave() {
+    var catatan = "Sistole ".concat(
+      this.state.sistole,
+      ", diastole ",
+      this.state.diastole,
+      ", suhu ",
+      this.state.suhu,
+      ", pulse ",
+      this.state.pulse,
+      ", respirasi ",
+      this.state.respirasi,
+      ", tinggi ",
+      this.state.tinggi,
+      ", berat ",
+      this.state.berat
+    );
+
     tambahHistoriMedis({
       nomor_rekam_medis: this.props.id,
       nik_dokter: this.state.nik_dokter,
@@ -37,7 +53,8 @@ class SoapPasien extends Component {
       diagnosa: this.state.diagnosa,
       jenis_perawatan: this.state.jenis_perawatan,
       penjamin: this.state.penjamin,
-      tindakan: this.state.tindakan
+      tindakan: this.state.tindakan,
+      catatan: catatan
     });
   }
 
@@ -66,7 +83,7 @@ class SoapPasien extends Component {
                         refs="sistole"
                         onChange={event =>
                           this.setState({
-                            sistole: { sistole: event.target.value }
+                            sistole: event.target.value
                           })
                         }
                       />
@@ -80,7 +97,7 @@ class SoapPasien extends Component {
                         refs="disatole"
                         onChange={event =>
                           this.setState({
-                            diastole: { diastole: event.target.value }
+                            diastole: event.target.value
                           })
                         }
                       />
@@ -94,7 +111,7 @@ class SoapPasien extends Component {
                         refs="suhu"
                         onChange={event =>
                           this.setState({
-                            suhu: { suhu: event.target.value }
+                            suhu: event.target.value
                           })
                         }
                       />
@@ -108,7 +125,7 @@ class SoapPasien extends Component {
                         refs="pulse"
                         onChange={event =>
                           this.setState({
-                            pulse: { pulse: event.target.value }
+                            pulse: event.target.value
                           })
                         }
                       />
@@ -122,7 +139,7 @@ class SoapPasien extends Component {
                         refs="respirasi"
                         onChange={event =>
                           this.setState({
-                            respirasi: { respirasi: event.target.value }
+                            respirasi: event.target.value
                           })
                         }
                       />
@@ -136,7 +153,7 @@ class SoapPasien extends Component {
                         refs="tinggi"
                         onChange={event =>
                           this.setState({
-                            tinggi: { tinggi: event.target.value }
+                            tinggi: event.target.value
                           })
                         }
                       />
@@ -150,7 +167,7 @@ class SoapPasien extends Component {
                         refs="berat"
                         onChange={event =>
                           this.setState({
-                            berat: { berat: event.target.value }
+                            berat: event.target.value
                           })
                         }
                       />
@@ -184,7 +201,7 @@ class SoapPasien extends Component {
                   className="textarea"
                   onChange={event =>
                     this.setState({
-                      subjektif: { subjektif: event.target.value }
+                      subjektif: event.target.value
                     })
                   }
                 />
@@ -196,7 +213,7 @@ class SoapPasien extends Component {
                   className="textarea"
                   onChange={event =>
                     this.setState({
-                      analisa: { analisa: event.target.value }
+                      analisa: event.target.value
                     })
                   }
                 />
@@ -210,7 +227,7 @@ class SoapPasien extends Component {
                   className="textarea"
                   onChange={event =>
                     this.setState({
-                      objektif: { objektif: event.target.value }
+                      objektif: event.target.value
                     })
                   }
                 />
@@ -222,7 +239,7 @@ class SoapPasien extends Component {
                   className="textarea"
                   onChange={event =>
                     this.setState({
-                      tindakan: { tindakan: event.target.value }
+                      tindakan: event.target.value
                     })
                   }
                 />
@@ -266,7 +283,7 @@ class SoapPasien extends Component {
                 className="form-control"
                 onChange={event =>
                   this.setState({
-                    diagnosa: { diagnosa: event.target.value }
+                    diagnosa: event.target.value
                   })
                 }
               />

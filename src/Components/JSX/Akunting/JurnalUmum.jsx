@@ -23,10 +23,10 @@ class JurnalUmum extends Component {
             <div className="row">
               <div className="col-md-3">
                 Untuk periode yang berakhir tanggal :
-                <div class="input-group date">
+                <div className="input-group date">
                   <input
                     type="date"
-                    class="form-control"
+                    className="form-control"
                     style={{ borderRadius: "5px" }}
                   />
 

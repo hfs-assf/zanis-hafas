@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../../../ASSETS/CSS/RiwayatPasien.css";
 import listHistoriMedis from "../../../../Methods/RekamMedis/HistorisMedis/listHistoriMedis";
 
-class RiwaatKunjungan extends Component {
+class RiwayatKunjungan extends Component {
   constructor() {
     super();
     this.state = {
@@ -20,7 +20,7 @@ class RiwaatKunjungan extends Component {
 
   renderHistoriMedis(rm) {
     return (
-      <div className="list-item col-md-12">
+      <div className="list-item col-md-12" key={rm.uid}>
         <div className="list-content">
           <div className="judulatas">
             <strong>{rm.waktu_checkup}</strong>
@@ -63,7 +63,7 @@ class RiwaatKunjungan extends Component {
   }
 }
 
-export default RiwaatKunjungan;
+export default RiwayatKunjungan;
 
 // const RiwayatKunjunganProfile = props => (
 //   <div className="listflex">
