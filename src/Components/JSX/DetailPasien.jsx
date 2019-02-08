@@ -14,9 +14,8 @@ class DetailPasien extends Component {
       dokter: ""
     };
   }
-
   componentWillMount() {
-    listAntrian(this.props.id).then(({ data }) => {
+    listAntrian(this.props.antrian_pasien).then(({ data }) => {
       this.setState({
         poli: data[0].poli,
         no_rm: data[0].nomor_rekam_medis,
@@ -24,9 +23,10 @@ class DetailPasien extends Component {
         dokter: data[0].dokter
       });
     });
-    detailPasien(this.state.no_rm).then(({ data }) => {
+
+    detailPasien(this.props.no_rm).then(({ data }) => {
       this.setState({
-        nama: data[0].nama_pasien,
+        nama_pasien: data[0].nama_pasien,
         tanggal_lahir: data[0].tanggal_lahir
       });
     });
@@ -59,8 +59,8 @@ class DetailPasien extends Component {
               <td>Nama</td>
               <td className="datatable">
                 :&ensp;
-                {this.state.nama} ({this.calculateAge(this.state.tanggal_lahir)}{" "}
-                tahun)
+                {this.state.nama_pasien} (
+                {this.calculateAge(this.state.tanggal_lahir)} tahun)
               </td>
             </tr>
             <tr>

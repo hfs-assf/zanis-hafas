@@ -45,7 +45,7 @@ class SoapPasien extends Component {
     );
 
     tambahHistoriMedis({
-      nomor_rekam_medis: this.props.id,
+      nomor_rekam_medis: this.props.no_rm,
       nik_dokter: this.state.nik_dokter,
       subjektif: this.state.subjektif,
       objektif: this.state.objektif,

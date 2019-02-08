@@ -69,7 +69,11 @@ class Sidebar extends Component {
                     <Link to="/apotek">Daftar Antrian</Link>
                   </li>
                   <li>
-                    <Link to="/kelola-apotek">Kelola Apotek</Link>
+                    <Link to="/kelola-obat">Kelola Obat</Link>
+                  </li>
+
+                  <li>
+                    <Link to="/transaksi-obat">Transaksi Obat</Link>
                   </li>
                 </ul>
               </li>

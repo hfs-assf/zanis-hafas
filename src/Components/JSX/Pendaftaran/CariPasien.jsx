@@ -14,7 +14,7 @@ class CariPasien extends Component {
 
   onChange(e) {
     var filter = e.target.value;
-    listPasien(filter).then(({ data }) => {
+    listPasien().then(({ data }) => {
       this.setState({
         pasien: data,
         textFilter: filter,

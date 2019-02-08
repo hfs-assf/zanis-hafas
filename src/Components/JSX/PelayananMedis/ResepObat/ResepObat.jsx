@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import obatList from "../../../../Methods/Apotik/Obat/listObat";
 import kurangStokObat from "../../../../Methods/Apotik/StokObat/kurangStokObat";
-
+import tambahPesananObat from "../../../../Methods/Apotik/PesananObat/tambahPesananObat";
 class resepObatTabulasi extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +15,7 @@ class resepObatTabulasi extends Component {
       keterangan_obat: [],
       filter: "",
       resep: [],
-      nik_dokter: ""
+      nik_dokter: "112121" //masih belum karna detail_antrian belum bisa filtered by uid_antrian
     };
   }
 
@@ -68,10 +68,13 @@ class resepObatTabulasi extends Component {
       kurangStokObat({
         uid: this.state.doResep[i].uid,
         jumlah_obat: this.state.jumlah_obat[i],
-        nik_dokter: this.props.dokter
+        nik_dokter: this.state.nik_dokter
+      });
+      tambahPesananObat({
+        uid_obat: this.state.doResep[i].uid,
+        nomor_rekam_medis: this.props.no_rm
       });
     }
-    // console.log(this.state.doResep);
   }
 
   daftardoResep() {
@@ -190,12 +193,7 @@ class resepObatTabulasi extends Component {
               type="text"
               className="form-control"
               value={filter}
-              onChange={
-                e => this.cariObat(e)
-                // this.setState({
-                //   filter: e.target.value
-                // })
-              }
+              onChange={e => this.cariObat(e)}
             />
             {suggestionsList}
           </div>

@@ -34,8 +34,14 @@ class PelayananMedis extends Component {
             </button>
           </div>
 
-          <FormPelayananMedis pasien={this.props.antrian.id} />
-          <TabulasiPelayananMedis pasien={this.props.antrian.id} />
+          <FormPelayananMedis
+            antrian_pasien={this.props.antrian.id}
+            no_rm={this.props.antrian.no_rm}
+          />
+          <TabulasiPelayananMedis
+            antrian_pasien={this.props.antrian.id}
+            no_rm={this.props.antrian.no_rm}
+          />
         </div>
       </div>
     );

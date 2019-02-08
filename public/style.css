@@ -1,3 +1,41 @@
 body {
   background-color: rgb(255, 255, 255);
 }
+
+/* autocomplete */
+.suggestions {
+  border: 1px solid #1c70c8;
+  border-radius: 0px 0px 10px 10px;
+  border-top-width: 0;
+  list-style: none;
+  margin-top: 0;
+  font-size: 12px;
+  max-height: 250px;
+  overflow-y: auto;
+  padding-left: 0;
+  width: 20.5em;
+  background-color: #fff;
+  color: #1c70c8;
+  position: absolute;
+  z-index: 1;
+}
+
+.suggestions > li {
+  padding: 0.5rem;
+}
+
+.suggestions > .suggestion-active:hover {
+  background-color: #fff;
+  color: #1c70c8;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.suggestions > .suggestion-active {
+  background-color: #1c70c8;
+  color: #fff;
+}
+.suggestions > .no-suggestion {
+  text-align: center;
+  font-weight: 700;
+}

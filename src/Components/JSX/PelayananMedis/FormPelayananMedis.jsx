@@ -9,7 +9,10 @@ class PendaftaranPelayananMedis extends Component {
     return (
       <div className="row justify-content-center" style={{ margin: "0.5em" }}>
         <div className="col-md-8 boxriwayat">
-          <DetailPasien id={this.props.pasien} />
+          <DetailPasien
+            no_rm={this.props.no_rm}
+            antrian_pasien={this.props.antrian_pasien}
+          />
         </div>
         <div className="col-md-4">
           <div className="row">
@@ -26,7 +29,7 @@ class PendaftaranPelayananMedis extends Component {
 
               <h5 className="h5-responsive"> Surat Sakit</h5>
             </div>
-            <SuratSakit id={this.props.pasien} />
+            <SuratSakit no_rm={this.props.no_rm} />
           </div>
         </div>
       </div>

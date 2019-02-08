@@ -38,12 +38,19 @@ class TableObat extends Component {
     this.setState({ selected: { uid }, field: "obat" });
   }
 
-  renderDaftarObat = ({ uid, nama_obat, stok_total, satuan, harga_jual }) => {
+  renderDaftarObat = ({
+    uid,
+    nama_obat,
+    kategori,
+    stok_total,
+    satuan,
+    harga_jual
+  }) => {
     if (this.state.filter !== "") {
       return (
         <div className="row1" key={uid}>
           <div className="cell">{nama_obat}</div>
-          <div className="cell text-center">Minum</div>
+          <div className="cell text-center">{kategori}</div>
           <div className="cell text-center"> {stok_total + " " + satuan}</div>
           <div className="cell text-right">
             Rp.0

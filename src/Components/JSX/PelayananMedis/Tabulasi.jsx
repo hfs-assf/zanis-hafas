@@ -28,19 +28,31 @@ class TabulasiPelayananMedis extends Component {
                 Laboratorium
               </label>
               <section id="content1" className="empat">
-                <SOAP id={this.props.pasien} />
+                <SOAP
+                  no_rm={this.props.no_rm}
+                  antrian_pasien={this.props.antrian_pasien}
+                />
               </section>
 
               <section id="content2" className="empat">
-                <ResepObat id={this.props.pasien} dokter="12122" />
+                <ResepObat
+                  no_rm={this.props.no_rm}
+                  antrian_pasien={this.props.antrian_pasien}
+                />
               </section>
 
               <section id="content3" className="empat">
-                <Tindakan id={this.props.pasien} />
+                <Tindakan
+                  no_rm={this.props.no_rm}
+                  antrian_pasien={this.props.antrian_pasien}
+                />
               </section>
 
               <section id="content4" className="empat">
-                <Laboratorium id={this.props.pasien} />
+                <Laboratorium
+                  no_rm={this.props.no_rm}
+                  antrian_pasien={this.props.antrian_pasien}
+                />
               </section>
             </div>
           </div>

@@ -7,7 +7,6 @@ class KelolaKaryawan extends Component {
     super(props);
     this.addModal = this.addModal.bind(this);
     this.editModal = this.editModal.bind(this);
-    // this.deleteItem = this.deleteItem.bind(this);
     this.state = { filter: "", user: [], selected: {}, action: "" };
   }
 
@@ -38,10 +37,6 @@ class KelolaKaryawan extends Component {
     });
   }
 
-  // deleteItem = uid => {
-  //   hapusKaryawan(uid);
-  // };
-
   rendereDaftarUser = ({ uid, nik, nama, role, email, password, akses }) => {
     const { filter } = this.state;
     if (filter !== "") {
@@ -63,7 +58,6 @@ class KelolaKaryawan extends Component {
             >
               Ubah
             </button>
-            <button className="btn btn-warning btn-sm">Hapus</button>
           </div>
         </div>
       );

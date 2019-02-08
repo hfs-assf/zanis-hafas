@@ -49,7 +49,7 @@ class TimelinePelayananMedis extends Component {
     deskripsiPasien = antrian.map((e, index) => {
       return (
         <li key={e.uid} className="animated bounceIn">
-          <Link to={"/pelayanan-medis/" + e.uid}>
+          <Link to={"/pelayanan-medis/" + e.uid + "/" + e.nomor_rekam_medis}>
             <span />
             <div className="number"> {e.nomor_antrian} </div>
             <div>

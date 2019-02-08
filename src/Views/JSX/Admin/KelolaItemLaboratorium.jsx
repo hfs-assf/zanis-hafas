@@ -25,7 +25,7 @@ class KelolaItemLaboratorium extends Component {
       });
       console.table(this.state.itemLabor);
     });
-  }
+  } 
 
   addModal() {
     this.setState({ selected: {}, action: "add" });

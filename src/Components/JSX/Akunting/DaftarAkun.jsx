@@ -15,7 +15,7 @@ class DaftarAkun extends Component {
           }
         >
           {el.kode}-{el.no_akun}
-        </div>
+        </div> 
         <div
           className="cell"
           style={

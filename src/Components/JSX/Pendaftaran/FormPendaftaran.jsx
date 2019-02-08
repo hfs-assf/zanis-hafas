@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import tambahPasien from "../../../Methods/RekamMedis/Pasien/tambahPasien";
 import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
+// import listProvinsi from "../../../JSON/provinsi";
+// import listProvinsi from "../../../Methods/Pendaftaran/listProvinsi";
 
 class FormPendaftaran extends Component {
   state = {
@@ -27,10 +29,15 @@ class FormPendaftaran extends Component {
     status_penanggungjawab: "",
     telepon_penanggungjawab: "",
     alamat_penanggungjawab: "",
-    catatan: ""
+    catatan: "",
+    provinsi: []
   };
-  // componentDidUpdate(){
-  //   this.state.notification === "1" ? document.getElementById("notification").
+  // componentWillMount() {
+  // listProvinsi().then(data => {
+  //   this.setState({
+  //     provinsi: this.state.provinsi.concat(data)
+  //   });
+  // });
   // }
   handleInputChange(event) {
     const target = event.target;
@@ -41,6 +48,17 @@ class FormPendaftaran extends Component {
     this.setState({
       [name]: value
     });
+  }
+
+  cariProvinsi(e) {
+    // var filter = e.target.value;
+    // listProvinsi(filter).then(({ data }) => {
+    //   this.setState({
+    //     provinsi: data,
+    //     tempat_lahir: filter
+    //   });
+    // });
+    console.log(this.state.provinsi);
   }
 
   tambahPasienBaru() {
@@ -106,13 +124,36 @@ class FormPendaftaran extends Component {
     });
   }
   render() {
+    let suggestionsList;
+    const { tempat_lahir, provinsi } = this.state;
+    const filterProvinsi = provinsi;
+    if (filterProvinsi.length !== 0 && tempat_lahir !== "") {
+      suggestionsList = (
+        <ul className="suggestions">
+          {filterProvinsi.map(p => {
+            return (
+              <li key={p.semuaprovinsi.id} className="suggestion-active">
+                {p.semuaprovinsi.nama}
+              </li>
+            );
+          })}
+        </ul>
+      );
+    } else if (filterProvinsi.length === 0 && tempat_lahir !== "") {
+      suggestionsList = (
+        <ul className="suggestions">
+          <li className="no-suggestion">Tidak tersedia</li>
+        </ul>
+      );
+    }
+
     return (
       <div>
         <div className="watermark">
           <img
             className="img-fluid"
             src="https://assets.about.me/background/users/r/s/i/rsia_zainab_1440732420_26.jpg"
-            alt="logo zainis"
+            alt="logo zanis"
           />
         </div>
         <div className="form-style">
@@ -156,7 +197,7 @@ class FormPendaftaran extends Component {
                           type="text"
                           className="form-control"
                           name="tempat_lahir"
-                          onChange={e => this.handleInputChange(e)}
+                          onChange={e => this.cariProvinsi(e)}
                           required
                         />
                       </label>
@@ -173,6 +214,7 @@ class FormPendaftaran extends Component {
                           onChange={e => this.handleInputChange(e)}
                           required
                         />
+                        {suggestionsList}
                       </label>
                     </div>
                   </div>

@@ -1,33 +1,74 @@
 import React, { Component } from "react";
 import tambahStokObat from "../../../Methods/Apotik/StokObat/tambahStokObat";
+import editStokObat from "../../../Methods/Apotik/StokObat/editStokObat";
 import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
 
 class FormTambahDetailObat extends Component {
-  state = {
-    showMe: false,
-    uid: "",
-    stok: "",
-    kadaluarsa: "",
-    nik_penerima: "12121",
-    harga_modal: "",
-    notification: ""
-  };
-
-  tambahStokObat = event => {
-    event.preventDefault();
-    tambahStokObat({
-      uid: this.props.uid,
-      stok: this.state.stok,
-      kadaluarsa: this.state.kadaluarsa,
-      nik_penerima: this.state.nik_penerima,
-      harga_modal: this.state.harga_modal
-    })
-      .then(this.setState({ notification: "1" }))
-      .catch(err => {
-        console.log(err);
-        this.setState({ notification: "0" });
+  constructor(props) {
+    super(props);
+    this.handleSave = this.handleSave.bind(this);
+    this.state = {
+      showMe: false,
+      uid: "",
+      stok: "",
+      kadaluarsa: "",
+      nik_penerima: "12121",
+      harga_modal: "",
+      notification: ""
+    };
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.action === "edit") {
+      this.setState({
+        stok: nextProps.selected.stok,
+        kadaluarsa: new Date(nextProps.selected.kadaluarsa).toLocaleDateString(
+          "en-GB"
+        ),
+        harga_modal: nextProps.selected.harga_modal
       });
-  };
+      React.createElement("input", {
+        type: "checkbox",
+        id: "showHide",
+        defaultChecked: true
+      });
+    } else {
+      this.setState({
+        uid: nextProps.uid,
+        stok: "",
+        kadaluarsa: "",
+        harga_modal: ""
+      });
+    }
+  }
+
+  handleSave() {
+    if (this.props.action === "add") {
+      tambahStokObat({
+        uid: this.props.uid,
+        stok: this.state.stok,
+        kadaluarsa: this.state.kadaluarsa,
+        nik_penerima: this.state.nik_penerima,
+        harga_modal: this.state.harga_modal
+      })
+        .then(this.setState({ notification: "1" }))
+        .catch(err => {
+          console.log(err);
+          this.setState({ notification: "0" });
+        });
+    } else {
+      editStokObat({
+        uid: this.props.selected.uid,
+        stok: this.state.stok,
+        harga_modal: this.state.harga_modal,
+        kadaluarsa: this.state.kadaluarsa
+      })
+        .then(this.setState({ notification: "1" }))
+        .catch(err => {
+          console.log(err);
+          this.setState({ notification: "0" });
+        });
+    }
+  }
 
   render() {
     return (
@@ -43,7 +84,7 @@ class FormTambahDetailObat extends Component {
           <div className="modal-content">
             <div className="modal-header info-color text-white text-center ">
               <h4 className="modal-title w-100" id="myModalLabel">
-                Form Tambah Obat
+                {this.props.action === "add" ? "Tambah" : "Ubah"} Obat
               </h4>
 
               <button
@@ -64,17 +105,32 @@ class FormTambahDetailObat extends Component {
                   <div className="col-md-12">
                     <div className="md-form mb-0">
                       <span>Kadaluarsa</span>
-                      <input
-                        type="date"
-                        name="kadaluarsa"
-                        className="form-control"
-                        onChange={event =>
-                          this.setState({
-                            kadaluarsa: event.target.value
-                          })
-                        }
-                        required
-                      />
+                      {this.props.action === "add" ? (
+                        <input
+                          type="date"
+                          name="kadaluarsa"
+                          className="form-control"
+                          onChange={event =>
+                            this.setState({
+                              kadaluarsa: event.target.value
+                            })
+                          }
+                          required
+                        />
+                      ) : (
+                        <input
+                          type="text"
+                          name="kadaluarsa"
+                          className="form-control"
+                          value={this.state.kadaluarsa}
+                          onChange={event =>
+                            this.setState({
+                              kadaluarsa: event.target.value
+                            })
+                          }
+                          required
+                        />
+                      )}
                     </div>
                   </div>
                   <div className="col-md-12">
@@ -84,6 +140,7 @@ class FormTambahDetailObat extends Component {
                         name="stok"
                         className="form-control"
                         placeholder="Jumlah Barang Masuk"
+                        value={this.state.stok}
                         onChange={event =>
                           this.setState({
                             stok: event.target.value
@@ -101,6 +158,7 @@ class FormTambahDetailObat extends Component {
                         name="harga_modal"
                         className="form-control"
                         placeholder="Harga Modal"
+                        value={this.state.harga_modal}
                         onChange={event =>
                           this.setState({
                             harga_modal: event.target.value
@@ -119,7 +177,7 @@ class FormTambahDetailObat extends Component {
                 className="btn btn-primary"
                 data-toggle="modal"
                 data-target="#notification"
-                onClick={event => this.tambahStokObat(event)}
+                onClick={this.handleSave}
               >
                 Simpan
               </button>
