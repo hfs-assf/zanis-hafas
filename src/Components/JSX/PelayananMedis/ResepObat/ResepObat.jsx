@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import obatList from "../../../../Methods/Apotik/Obat/listObat";
-import kurangStokObat from "../../../../Methods/Apotik/StokObat/kurangStokObat";
+import tambahDetailPesananObat from "../../../../Methods/Apotik/DetailPesananObat/tambahDetailPesananObat";
 import tambahPesananObat from "../../../../Methods/Apotik/PesananObat/tambahPesananObat";
 class resepObatTabulasi extends Component {
   constructor(props) {
@@ -11,10 +11,8 @@ class resepObatTabulasi extends Component {
     this.handleSave = this.handleSave.bind(this);
     this.state = {
       doResep: [],
-      jumlah_obat: [],
-      keterangan_obat: [],
       filter: "",
-      resep: [],
+      daftarObat: [],
       nik_dokter: "112121" //masih belum karna detail_antrian belum bisa filtered by uid_antrian
     };
   }
@@ -24,27 +22,33 @@ class resepObatTabulasi extends Component {
     var filter = e.target.value;
     obatList(filter).then(({ data }) => {
       this.setState({
-        resep: data,
+        daftarObat: data,
         filter: filter
       });
     });
   }
 
   ubahJumlahObat(e, i) {
-    let jumlah_obat = [...this.state.jumlah_obat];
-    jumlah_obat[i] = e.target.value;
-    this.setState({ jumlah_obat });
+    let doResep = [...this.state.doResep];
+    doResep[i].jumlah_obat = e.target.value;
+    this.setState({ doResep });
   }
 
   ubahKeteranganObat(e, i) {
-    let keterangan_obat = [...this.state.keterangan_obat];
-    keterangan_obat[i] = e.target.value;
-    this.setState({ keterangan_obat });
+    let doResep = [...this.state.doResep];
+    doResep[i].keterangan = e.target.value;
+    this.setState({ doResep });
   }
 
-  tambah(resep) {
+  tambah(daftarObat) {
     this.setState({
-      doResep: this.state.doResep.concat(resep),
+      doResep: this.state.doResep.concat({
+        nama_obat: daftarObat.nama_obat,
+        jumlah_obat: 0,
+        kategori: daftarObat.kategori,
+        satuan: daftarObat.satuan,
+        keterangan: ""
+      }),
       filter: ""
     });
   }
@@ -64,22 +68,19 @@ class resepObatTabulasi extends Component {
   }
 
   handleSave() {
-    for (let i = 0; i < this.state.doResep.length; i++) {
-      kurangStokObat({
-        uid: this.state.doResep[i].uid,
-        jumlah_obat: this.state.jumlah_obat[i],
-        nik_dokter: this.state.nik_dokter
-      });
-      tambahPesananObat({
-        uid_obat: this.state.doResep[i].uid,
-        nomor_rekam_medis: this.props.no_rm
-      });
-    }
+    tambahPesananObat({
+      nomor_rekam_medis: this.props.no_rm
+    }).then(response =>
+      tambahDetailPesananObat({
+        uid: response.data[0].uid,
+        doResep: this.state.doResep
+      })
+    );
   }
 
   daftardoResep() {
     return this.state.doResep.map((resep, index) => (
-      <div className="row1" key={resep.uid}>
+      <div className="row1" key={index}>
         <div className="cell">{resep.nama_obat}</div>
         <div className="cell text-center">
           <input
@@ -116,12 +117,13 @@ class resepObatTabulasi extends Component {
         </div>
       </div>
     ));
+    // console.log("huhu", this.state.doResep);
   }
 
   render() {
     let suggestionsList, daftarResep;
-    const { filter, doResep, resep } = this.state;
-    const filteredResep = resep;
+    const { filter, doResep, daftarObat } = this.state;
+    const filteredResep = daftarObat;
 
     if (filteredResep.length !== 0 && filter !== "") {
       suggestionsList = (

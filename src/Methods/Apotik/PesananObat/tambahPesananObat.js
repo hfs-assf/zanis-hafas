@@ -6,7 +6,6 @@ let tambahPesananObat = ({ uid_obat, nomor_rekam_medis }) => {
     uid_obat,
     nomor_rekam_medis
   });
-  // console.log(uid_obat + " - " + nomor_rekam_medis);
 };
 
 export default tambahPesananObat;
