@@ -3,7 +3,7 @@ const apiURL = "http://localhost:8002";
 
 let tambahPasien = ({
   nomor_pengenal,
-  jenis_nomor_pengenal, 
+  jenis_nomor_pengenal,
   email,
   nama_pasien,
   tempat_lahir,
@@ -25,7 +25,6 @@ let tambahPasien = ({
   return axios.post(apiURL + "/api/v1/pasien", {
     nomor_pengenal,
     jenis_nomor_pengenal,
-    email,
     nama_pasien,
     tempat_lahir,
     tanggal_lahir,

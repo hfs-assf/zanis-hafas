@@ -1,10 +1,12 @@
 import axios from "axios";
 const apiURL = "http://localhost:8005";
 
-let listPesananObat = status => {
+let listPesananObat = (uid, status) => {
   var filter = "";
-  if (nama_obat !== "") {
+  if (status !== "") {
     filter = "?status=" + status;
+  } else if (uid !== "") {
+    filter = "/" + uid;
   }
   return axios.get(apiURL + "/api/v1/pesanan-obat" + filter);
 };

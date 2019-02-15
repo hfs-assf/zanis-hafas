@@ -17,10 +17,12 @@ class KelolaTindakan extends Component {
       field: ""
     };
   }
-  componentWillMount() {
+  onChange(e) {
+    var filter = e.target.value;
     listTindakan().then(({ data }) => {
       this.setState({
-        tindakan: this.state.tindakan.concat(data)
+        obat: data,
+        filter: filter
       });
     });
   }
@@ -149,7 +151,7 @@ class KelolaTindakan extends Component {
                     type="text"
                     className="form-control"
                     placeholder="Cari Tindakan"
-                    onChange={e => this.setState({ filter: e.target.value })}
+                    onChange={e => this.onChange(e)}
                   />
                 </div>
               </div>

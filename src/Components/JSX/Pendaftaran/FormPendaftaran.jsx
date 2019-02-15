@@ -5,40 +5,34 @@ import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
 // import listProvinsi from "../../../Methods/Pendaftaran/listProvinsi";
 
 class FormPendaftaran extends Component {
-  state = {
-    notification: "0",
-    nomor_pengenal: "",
-    jenis_nomor_pengenal: "ktp",
-    email: "",
-    nama_pasien: "",
-    tempat_lahir: "",
-    tanggal_lahir: "",
-    jenis_kelamin: "P",
-    status: "Belum Menikah",
-    agama: "Islam",
-    alamat: "",
-    kecamatan: "Sail",
-    kelurahan: "Tenayan Raya",
-    kode_pos: "",
-    telepon: "",
-    handphone: "",
-    pendidikan: "",
-    pekerjaan: "",
-    kantor: "",
-    nama_penanggungjawab: "",
-    status_penanggungjawab: "",
-    telepon_penanggungjawab: "",
-    alamat_penanggungjawab: "",
-    catatan: "",
-    provinsi: []
-  };
-  // componentWillMount() {
-  // listProvinsi().then(data => {
-  //   this.setState({
-  //     provinsi: this.state.provinsi.concat(data)
-  //   });
-  // });
-  // }
+  constructor() {
+    super();
+    this.state = {
+      notification: "0",
+      nomor_pengenal: "",
+      jenis_nomor_pengenal: "ktp",
+      nama_pasien: "",
+      tempat_lahir: "",
+      tanggal_lahir: "",
+      jenis_kelamin: "P",
+      status: "Belum Menikah",
+      agama: "Islam",
+      alamat: "",
+      kecamatan: "Sail",
+      kelurahan: "Tenayan Raya",
+      kode_pos: "",
+      telepon: "",
+      handphone: "",
+      pendidikan: "",
+      pekerjaan: "",
+      kantor: "",
+      nama_penanggungjawab: "",
+      status_penanggungjawab: "",
+      telepon_penanggungjawab: "",
+      alamat_penanggungjawab: "",
+      provinsi: []
+    };
+  }
   handleInputChange(event) {
     const target = event.target;
     // const value = target.type === "checkbox" ? target.checked : target.value;
@@ -48,17 +42,6 @@ class FormPendaftaran extends Component {
     this.setState({
       [name]: value
     });
-  }
-
-  cariProvinsi(e) {
-    // var filter = e.target.value;
-    // listProvinsi(filter).then(({ data }) => {
-    //   this.setState({
-    //     provinsi: data,
-    //     tempat_lahir: filter
-    //   });
-    // });
-    console.log(this.state.provinsi);
   }
 
   tambahPasienBaru() {
@@ -72,11 +55,9 @@ class FormPendaftaran extends Component {
       this.state.alamat_penanggungjawab,
       ")"
     );
-
     tambahPasien({
       nomor_pengenal: this.state.nomor_pengenal,
       jenis_nomor_pengenal: "ktp",
-      email: this.state.email,
       nama_pasien: this.state.nama_pasien,
       tempat_lahir: this.state.tempat_lahir,
       tanggal_lahir: this.state.tanggal_lahir,
@@ -96,7 +77,6 @@ class FormPendaftaran extends Component {
     })
       .then(this.setState({ notification: "1" }))
       .catch(err => {
-        console.log(err);
         this.setState({ notification: "0" });
       });
   }
@@ -120,33 +100,13 @@ class FormPendaftaran extends Component {
       pendidikan: "",
       pekerjaan: "",
       kantor: "",
-      catatan: ""
+      nama_penanggungjawab: "",
+      status_penanggungjawab: "",
+      telepon_penanggungjawab: "",
+      alamat_penanggungjawab: ""
     });
   }
   render() {
-    let suggestionsList;
-    const { tempat_lahir, provinsi } = this.state;
-    const filterProvinsi = provinsi;
-    if (filterProvinsi.length !== 0 && tempat_lahir !== "") {
-      suggestionsList = (
-        <ul className="suggestions">
-          {filterProvinsi.map(p => {
-            return (
-              <li key={p.semuaprovinsi.id} className="suggestion-active">
-                {p.semuaprovinsi.nama}
-              </li>
-            );
-          })}
-        </ul>
-      );
-    } else if (filterProvinsi.length === 0 && tempat_lahir !== "") {
-      suggestionsList = (
-        <ul className="suggestions">
-          <li className="no-suggestion">Tidak tersedia</li>
-        </ul>
-      );
-    }
-
     return (
       <div>
         <div className="watermark">
@@ -157,335 +117,341 @@ class FormPendaftaran extends Component {
           />
         </div>
         <div className="form-style">
-          <form>
-            <div className="row">
-              <div className="col-md-5">
-                <fieldset>
-                  <legend>Data Diri</legend>
-                  <label>
-                    <span>
-                      No KTP <span className="required">*</span>
-                    </span>
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="nomor_pengenal"
-                      onChange={e => this.handleInputChange(e)}
-                      required
-                    />
-                  </label>
+          <div className="row">
+            <div className="col-md-5">
+              <fieldset>
+                <legend>Data Diri</legend>
+                <label>
+                  <span>
+                    No KTP <span className="required">*</span>
+                  </span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="nomor_pengenal"
+                    value={this.state.nomor_pengenal}
+                    onChange={e => this.handleInputChange(e)}
+                    required
+                  />
+                </label>
 
-                  <label>
-                    <span>
-                      Nama <span className="required">*</span>
-                    </span>
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="nama_pasien"
-                      onChange={e => this.handleInputChange(e)}
-                      required
-                    />
-                  </label>
-                  <div className="row">
-                    <div className="col-sm-6">
-                      <label>
-                        <span>
-                          Tempat Lahir <span className="required">*</span>
-                        </span>
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="tempat_lahir"
-                          onChange={e => this.cariProvinsi(e)}
-                          required
-                        />
-                      </label>
-                    </div>
-                    <div className="col-sm-6">
-                      <label>
-                        <span>
-                          Tanggal Lahir <span className="required">*</span>
-                        </span>
-                        <input
-                          type="date"
-                          className="form-control"
-                          name="tanggal_lahir"
-                          onChange={e => this.handleInputChange(e)}
-                          required
-                        />
-                        {suggestionsList}
-                      </label>
-                    </div>
+                <label>
+                  <span>
+                    Nama <span className="required">*</span>
+                  </span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="nama_pasien"
+                    value={this.state.nama_pasien}
+                    onChange={e => this.handleInputChange(e)}
+                    required
+                  />
+                </label>
+                <div className="row">
+                  <div className="col-sm-6">
+                    <label>
+                      <span>
+                        Tempat Lahir <span className="required">*</span>
+                      </span>
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="tempat_lahir"
+                        value={this.state.tempat_lahir}
+                        onChange={e => this.handleInputChange(e)}
+                        required
+                      />
+                    </label>
                   </div>
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <label>
-                        <span>
-                          Agama
-                          <span className="required">*</span>
-                        </span>
-                        <select
-                          name="agama"
-                          className="form-control"
-                          onChange={e => this.handleInputChange(e)}
-                          required
-                        >
-                          <option defaultValue="Islam">Islam</option>
-                          <option value="Kristen">Kristen</option>
-                          <option value="Budha">Budha</option>
-                          <option value="Hindu">Hindu</option>
-                        </select>
-                      </label>
-                    </div>
-                    <div className="col-sm-4">
-                      <label>
-                        <span>
-                          Jenis Kelamin
-                          <span className="required">*</span>
-                        </span>
-                        <select
-                          name="jenis_kelamin"
-                          className="form-control"
-                          onChange={e => this.handleInputChange(e)}
-                          required
-                        >
-                          <option defaultValue="P">Perempuan</option>
-                          <option value="L">Laki-laki</option>
-                        </select>
-                      </label>
-                    </div>
-                    <div className="col-sm-5">
-                      <label>
-                        <span>
-                          Status
-                          <span className="required">*</span>
-                        </span>
-                        <select
-                          name="status"
-                          className="form-control"
-                          onChange={e => this.handleInputChange(e)}
-                          required
-                        >
-                          <option defaultValue="Belum Menikah">
-                            Belum Menikah
-                          </option>
-                          <option value="Sudah Menikah">Sudah Menikah</option>
-                        </select>
-                      </label>
-                    </div>
+                  <div className="col-sm-6">
+                    <label>
+                      <span>
+                        Tanggal Lahir <span className="required">*</span>
+                      </span>
+                      <input
+                        type="date"
+                        className="form-control"
+                        name="tanggal_lahir"
+                        value={this.state.tanggal_lahir}
+                        onChange={e => this.handleInputChange(e)}
+                        required
+                      />
+                    </label>
                   </div>
-                  <label>
-                    <span>
-                      Alamat <span className="required">*</span>
-                    </span>
-                    <textarea
-                      name="alamat"
-                      className="form-control"
-                      onChange={e => this.handleInputChange(e)}
-                      required
-                    />
-                  </label>
-                  <div className="row">
-                    <div className="col-sm-4">
-                      <label>
-                        <span>
-                          Kelurahan
-                          <span className="required">*</span>
-                        </span>
-                        <select
-                          name="kelurahan"
-                          className="form-control"
-                          onChange={e => this.handleInputChange(e)}
-                          required
-                        >
-                          <option defaultValue="Tenayan Raya">
-                            Tenayan Raya
-                          </option>
-                          <option value="...">...</option>
-                        </select>
-                      </label>
-                    </div>
-                    <div className="col-sm-4">
-                      <label>
-                        <span>
-                          Kecamatan
-                          <span className="required">*</span>
-                        </span>
-                        <select
-                          name="kecamatan"
-                          className="form-control"
-                          onChange={e => this.handleInputChange(e)}
-                          required
-                        >
-                          <option defaultValue="Sail">Sail</option>
-                          <option value="Rumbai">Rumbai</option>
-                        </select>
-                      </label>
-                    </div>
-                    <div className="col-sm-4">
-                      <label>
-                        <span>Kode Pos</span>
-                        <input
-                          type="number"
-                          className="form-control"
-                          name="kode_pos"
-                          onChange={e => this.handleInputChange(e)}
-                        />
-                      </label>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-sm-6">
-                      <label>
-                        <span>Telepon</span>
-                        <input
-                          type="number"
-                          className="form-control"
-                          name="telepon"
-                          onChange={e => this.handleInputChange(e)}
-                        />
-                      </label>
-                    </div>
-                    <div className="col-sm-6">
-                      <label>
-                        <span>
-                          Handphone <span className="required">*</span>
-                        </span>
-                        <input
-                          type="number"
-                          className="form-control"
-                          name="handphone"
-                          onChange={e => this.handleInputChange(e)}
-                          required
-                        />
-                      </label>
-                    </div>
-                  </div>
-                  <label>
-                    <span>Email</span>
-                    <input
-                      type="email"
-                      className="form-control"
-                      name="email"
-                      onChange={e => this.handleInputChange(e)}
-                    />
-                  </label>
-                </fieldset>
-                <br />
-              </div>
-              <div className="col-md-5">
-                <fieldset>
-                  <legend>Pendidikan</legend>
-                  <div className="row">
-                    <div className="col-sm">
-                      <label>
-                        <span>Pendidikan</span>
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="pendidikan"
-                          onChange={e => this.handleInputChange(e)}
-                        />
-                      </label>
-                    </div>
-                    <div className="col-sm">
-                      <label>
-                        <span>Pekerjaan</span>
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="pekerjaan"
-                          onChange={e => this.handleInputChange(e)}
-                        />
-                      </label>
-                    </div>
-                  </div>
-                  <label>
-                    <span>
-                      <span>Alamat Kantor </span>
-                    </span>
-                    <textarea
-                      name="kantor"
-                      className="form-control"
-                      onChange={e => this.handleInputChange(e)}
-                    />
-                  </label>
-                </fieldset>
-                <br />
-                <fieldset>
-                  <legend>Penanggung Jawab</legend>
-                  <div className="row">
-                    <div className="col-sm">
-                      <label>
-                        <span>Nama</span>
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="nama_penanggungjawab"
-                          onChange={e => this.handleInputChange(e)}
-                        />
-                      </label>
-                    </div>
-                    <div className="col-sm">
-                      <label>
-                        <span>Status</span>
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="status_penanggungjawab"
-                          onChange={e => this.handleInputChange(e)}
-                        />
-                      </label>
-                    </div>
-                    <div className="col-sm">
-                      <label>
-                        <span>Telepon</span>
-                        <input
-                          type="number"
-                          className="form-control"
-                          name="telepon_penanggungjawab"
-                          onChange={e => this.handleInputChange(e)}
-                        />
-                      </label>
-                    </div>
-                  </div>
-                  <label>
-                    <span>
-                      <span>Alamat </span>
-                    </span>
-                    <textarea
-                      name="alamat_penanggungjawab"
-                      className="form-control"
-                      onChange={e => this.handleInputChange(e)}
-                    />
-                  </label>
-                  <br />
-                </fieldset>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-10">
-                <div className="modal-footer justify-content-center">
-                  <button
-                    className="btn btn-primary"
-                    data-toggle="modal"
-                    data-target="#notification"
-                    onClick={() => this.tambahPasienBaru()}
-                  >
-                    Simpan
-                  </button>
-                  <button
-                    className="btn btn-warning"
-                    onClick={() => this.cleanAll()}
-                  >
-                    Bersihkan
-                  </button>
                 </div>
+                <div className="row">
+                  <div className="col-sm-3">
+                    <label>
+                      <span>
+                        Agama
+                        <span className="required">*</span>
+                      </span>
+                      <select
+                        name="agama"
+                        className="form-control"
+                        onChange={e => this.handleInputChange(e)}
+                        required
+                      >
+                        <option defaultValue="Islam">Islam</option>
+                        <option value="Kristen">Kristen</option>
+                        <option value="Budha">Budha</option>
+                        <option value="Hindu">Hindu</option>
+                      </select>
+                    </label>
+                  </div>
+                  <div className="col-sm-4">
+                    <label>
+                      <span>
+                        Jenis Kelamin
+                        <span className="required">*</span>
+                      </span>
+                      <select
+                        name="jenis_kelamin"
+                        className="form-control"
+                        onChange={e => this.handleInputChange(e)}
+                        required
+                      >
+                        <option defaultValue="P">Perempuan</option>
+                        <option value="L">Laki-laki</option>
+                      </select>
+                    </label>
+                  </div>
+                  <div className="col-sm-5">
+                    <label>
+                      <span>
+                        Status
+                        <span className="required">*</span>
+                      </span>
+                      <select
+                        name="status"
+                        className="form-control"
+                        onChange={e => this.handleInputChange(e)}
+                        required
+                      >
+                        <option defaultValue="Belum Menikah">
+                          Belum Menikah
+                        </option>
+                        <option value="Sudah Menikah">Sudah Menikah</option>
+                      </select>
+                    </label>
+                  </div>
+                </div>
+                <label>
+                  <span>
+                    Alamat <span className="required">*</span>
+                  </span>
+                  <textarea
+                    name="alamat"
+                    value={this.state.alamat}
+                    className="form-control"
+                    onChange={e => this.handleInputChange(e)}
+                    required
+                  />
+                </label>
+                <div className="row">
+                  <div className="col-sm-4">
+                    <label>
+                      <span>
+                        Kelurahan
+                        <span className="required">*</span>
+                      </span>
+                      <select
+                        name="kelurahan"
+                        className="form-control"
+                        onChange={e => this.handleInputChange(e)}
+                        required
+                      >
+                        <option defaultValue="Tenayan Raya">
+                          Tenayan Raya
+                        </option>
+                        <option value="...">...</option>
+                      </select>
+                    </label>
+                  </div>
+                  <div className="col-sm-4">
+                    <label>
+                      <span>
+                        Kecamatan
+                        <span className="required">*</span>
+                      </span>
+                      <select
+                        name="kecamatan"
+                        className="form-control"
+                        onChange={e => this.handleInputChange(e)}
+                        required
+                      >
+                        <option defaultValue="Sail">Sail</option>
+                        <option value="Rumbai">Rumbai</option>
+                      </select>
+                    </label>
+                  </div>
+                  <div className="col-sm-4">
+                    <label>
+                      <span>Kode Pos</span>
+                      <input
+                        type="number"
+                        name="kode_pos"
+                        value={this.state.kode_pos}
+                        className="form-control"
+                        onChange={e => this.handleInputChange(e)}
+                      />
+                    </label>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-sm-6">
+                    <label>
+                      <span>Telepon</span>
+                      <input
+                        type="number"
+                        name="telepon"
+                        value={this.state.telepon}
+                        className="form-control"
+                        onChange={e => this.handleInputChange(e)}
+                      />
+                    </label>
+                  </div>
+                  <div className="col-sm-6">
+                    <label>
+                      <span>
+                        Handphone <span className="required">*</span>
+                      </span>
+                      <input
+                        type="number"
+                        name="handphone"
+                        value={this.state.handphone}
+                        className="form-control"
+                        onChange={e => this.handleInputChange(e)}
+                        required
+                      />
+                    </label>
+                  </div>
+                </div>
+              </fieldset>
+              <br />
+            </div>
+            <div className="col-md-5">
+              <fieldset>
+                <legend>Pendidikan</legend>
+                <div className="row">
+                  <div className="col-sm">
+                    <label>
+                      <span>Pendidikan</span>
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="pendidikan"
+                        value={this.state.pendidikan}
+                        onChange={e => this.handleInputChange(e)}
+                      />
+                    </label>
+                  </div>
+                  <div className="col-sm">
+                    <label>
+                      <span>Pekerjaan</span>
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="pekerjaan"
+                        value={this.state.pekerjaan}
+                        onChange={e => this.handleInputChange(e)}
+                      />
+                    </label>
+                  </div>
+                </div>
+                <label>
+                  <span>
+                    <span>Alamat Kantor </span>
+                  </span>
+                  <textarea
+                    name="kantor"
+                    className="form-control"
+                    value={this.state.kantor}
+                    onChange={e => this.handleInputChange(e)}
+                  />
+                </label>
+              </fieldset>
+              <br />
+              <fieldset>
+                <legend>Penanggung Jawab</legend>
+                <div className="row">
+                  <div className="col-sm">
+                    <label>
+                      <span>Nama</span>
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="nama_penanggungjawab"
+                        value={this.state.nama_penanggungjawab}
+                        onChange={e => this.handleInputChange(e)}
+                      />
+                    </label>
+                  </div>
+                  <div className="col-sm">
+                    <label>
+                      <span>Status</span>
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="status_penanggungjawab"
+                        value={this.state.status_penanggungjawab}
+                        onChange={e => this.handleInputChange(e)}
+                      />
+                    </label>
+                  </div>
+                  <div className="col-sm">
+                    <label>
+                      <span>Telepon</span>
+                      <input
+                        type="number"
+                        className="form-control"
+                        name="telepon_penanggungjawab"
+                        value={this.state.telepon_penanggungjawab}
+                        onChange={e => this.handleInputChange(e)}
+                      />
+                    </label>
+                  </div>
+                </div>
+                <label>
+                  <span>
+                    <span>Alamat </span>
+                  </span>
+                  <textarea
+                    name="alamat_penanggungjawab"
+                    className="form-control"
+                    value={this.state.alamat_penanggungjawab}
+                    onChange={e => this.handleInputChange(e)}
+                  />
+                </label>
+                <br />
+              </fieldset>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-10">
+              <div className="modal-footer justify-content-center">
+                <button
+                  className="btn btn-primary"
+                  data-toggle="modal"
+                  data-target="#konfirmasiPendaftaran"
+                  onClick={() => this.tambahPasienBaru()}
+                >
+                  Simpan
+                </button>
+                <button
+                  className="btn btn-warning"
+                  onClick={() => this.cleanAll()}
+                >
+                  Bersihkan
+                </button>
               </div>
             </div>
-            <ModalKonfirmasi notification={this.state.notification} />
-          </form>
+          </div>
+          <ModalKonfirmasi
+            notification={this.state.notification}
+            modal="konfirmasiPendaftaran"
+          />
         </div>
       </div>
     );

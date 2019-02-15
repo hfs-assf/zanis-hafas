@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import "../../../ASSETS/CSS/TambahPelayananAntrian.css";
+import ModalKonfirmasiTindakan from "../../Animasi/ModalKonfirmasiTindakan";
+import ModalKonfirmasi from "../../Animasi/ModalKonfirmasi";
 import tambahHistoriMedis from "../../../../Methods/RekamMedis/HistorisMedis/tambahHistoriMedis";
 
 class SoapPasien extends Component {
@@ -7,6 +9,7 @@ class SoapPasien extends Component {
     super(props);
     this.handleSave = this.handleSave.bind(this);
     this.state = {
+      notification: "0",
       showMe: false,
       nomor_rekam_medis: "",
       nik_dokter: "121212",
@@ -23,7 +26,8 @@ class SoapPasien extends Component {
       objektif: "",
       analisa: "",
       tindakan: "",
-      diagnosa: ""
+      diagnosa: "",
+      disabled: false
     };
   }
 
@@ -55,7 +59,17 @@ class SoapPasien extends Component {
       penjamin: this.state.penjamin,
       tindakan: this.state.tindakan,
       catatan: catatan
-    });
+    })
+      .then(
+        this.setState({
+          disabled: true,
+          notification: "1"
+        })
+      )
+      .catch(err => {
+        console.log(err);
+        this.setState({ notification: "0" });
+      });
   }
 
   showHide(e) {
@@ -86,6 +100,7 @@ class SoapPasien extends Component {
                             sistole: event.target.value
                           })
                         }
+                        disabled={this.state.disabled}
                       />
                     </td>
                   </tr>
@@ -100,6 +115,7 @@ class SoapPasien extends Component {
                             diastole: event.target.value
                           })
                         }
+                        disabled={this.state.disabled}
                       />
                     </td>
                   </tr>
@@ -114,6 +130,7 @@ class SoapPasien extends Component {
                             suhu: event.target.value
                           })
                         }
+                        disabled={this.state.disabled}
                       />
                     </td>
                   </tr>
@@ -128,6 +145,7 @@ class SoapPasien extends Component {
                             pulse: event.target.value
                           })
                         }
+                        disabled={this.state.disabled}
                       />
                     </td>
                   </tr>
@@ -142,6 +160,7 @@ class SoapPasien extends Component {
                             respirasi: event.target.value
                           })
                         }
+                        disabled={this.state.disabled}
                       />
                     </td>
                   </tr>
@@ -156,6 +175,7 @@ class SoapPasien extends Component {
                             tinggi: event.target.value
                           })
                         }
+                        disabled={this.state.disabled}
                       />
                     </td>
                   </tr>
@@ -170,6 +190,7 @@ class SoapPasien extends Component {
                             berat: event.target.value
                           })
                         }
+                        disabled={this.state.disabled}
                       />
                     </td>
                   </tr>
@@ -185,10 +206,14 @@ class SoapPasien extends Component {
                   refs="pencariansoap"
                   placeholder="Cari Nama Template SOAP"
                   className="form-control"
+                  disabled={this.state.disabled}
                 />
               </div>
               <div className="col-md-2" style={{ marginTop: "-5px" }}>
-                <button className="btn btn-cyan mt-0 mb-0 btn-sm ">
+                <button
+                  className="btn btn-cyan mt-0 mb-0 btn-sm "
+                  disabled={this.state.disabled}
+                >
                   Salin
                 </button>
               </div>
@@ -204,6 +229,7 @@ class SoapPasien extends Component {
                       subjektif: event.target.value
                     })
                   }
+                  disabled={this.state.disabled}
                 />
               </div>
               <div className="col-md-6 rowsoap">
@@ -216,6 +242,7 @@ class SoapPasien extends Component {
                       analisa: event.target.value
                     })
                   }
+                  disabled={this.state.disabled}
                 />
               </div>
             </div>
@@ -230,6 +257,7 @@ class SoapPasien extends Component {
                       objektif: event.target.value
                     })
                   }
+                  disabled={this.state.disabled}
                 />
               </div>
               <div className="col-md-6 rowsoap">
@@ -242,6 +270,7 @@ class SoapPasien extends Component {
                       tindakan: event.target.value
                     })
                   }
+                  disabled={this.state.disabled}
                 />
               </div>
             </div>
@@ -254,6 +283,7 @@ class SoapPasien extends Component {
                     name="template_soap"
                     value={this.state.showMe}
                     onClick={e => this.showHide(e)}
+                    disabled={this.state.disabled}
                   />
                   <label htmlFor="color-2" className="radio-inline">
                     <span />
@@ -269,6 +299,7 @@ class SoapPasien extends Component {
                     name="nama_soap"
                     className="input-template"
                     placeholder="Nama Template"
+                    disabled={this.state.disabled}
                   />
                 ) : null}
               </div>
@@ -286,6 +317,7 @@ class SoapPasien extends Component {
                     diagnosa: event.target.value
                   })
                 }
+                disabled={this.state.disabled}
               />
             </div>
           </div>
@@ -293,22 +325,30 @@ class SoapPasien extends Component {
             <div className="modal-footer justify-content-center">
               <button
                 className="btn btn-primary"
-                data-placement="bottom"
-                title="Simpan Data Soap Pasien"
-                onClick={this.handleSave}
+                data-toggle="modal"
+                data-target="#notification1"
+                disabled={this.state.disabled}
               >
                 Simpan
               </button>
               <button
                 className="btn btn-warning"
                 data-placement="bottom"
-                title="Bersihkan Data"
+                disabled={this.state.disabled}
               >
                 Bersihkan
               </button>
             </div>
           </div>
         </div>
+        <ModalKonfirmasiTindakan
+          passValue={this.handleSave}
+          modal="notification1"
+        />
+        <ModalKonfirmasi
+          notification={this.state.notification}
+          modal="konfirmasiSOAP"
+        />
       </div>
     );
   }

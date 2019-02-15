@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import obatList from "../../../../Methods/Apotik/Obat/listObat";
+import ModalKonfirmasiTindakan from "../../Animasi/ModalKonfirmasiTindakan";
+import ModalKonfirmasi from "../../Animasi/ModalKonfirmasi";
 import tambahDetailPesananObat from "../../../../Methods/Apotik/DetailPesananObat/tambahDetailPesananObat";
 import tambahPesananObat from "../../../../Methods/Apotik/PesananObat/tambahPesananObat";
 class resepObatTabulasi extends Component {
@@ -10,10 +12,12 @@ class resepObatTabulasi extends Component {
     this.ubahKeteranganObat = this.ubahKeteranganObat.bind(this);
     this.handleSave = this.handleSave.bind(this);
     this.state = {
+      notification: "0",
       doResep: [],
       filter: "",
       daftarObat: [],
-      nik_dokter: "112121" //masih belum karna detail_antrian belum bisa filtered by uid_antrian
+      nik_dokter: "112121", //masih belum karna detail_antrian belum bisa filtered by uid_antrian
+      disabled: false
     };
   }
 
@@ -70,12 +74,23 @@ class resepObatTabulasi extends Component {
   handleSave() {
     tambahPesananObat({
       nomor_rekam_medis: this.props.no_rm
-    }).then(response =>
-      tambahDetailPesananObat({
-        uid: response.data[0].uid,
-        doResep: this.state.doResep
-      })
-    );
+    })
+      .then(response =>
+        tambahDetailPesananObat({
+          uid: response.data[0].uid,
+          doResep: this.state.doResep
+        })
+      )
+      .then(
+        this.setState({
+          disabled: true,
+          notification: "1"
+        })
+      )
+      .catch(err => {
+        console.log(err);
+        this.setState({ notification: "0" });
+      });
   }
 
   daftardoResep() {
@@ -89,6 +104,7 @@ class resepObatTabulasi extends Component {
             min="1"
             max="10"
             onChange={e => this.ubahJumlahObat(e, index)}
+            disabled={this.state.disabled}
             required
           />
           &nbsp;
@@ -103,6 +119,7 @@ class resepObatTabulasi extends Component {
             type="text"
             refs="keteranganobat"
             onChange={e => this.ubahKeteranganObat(e, index)}
+            disabled={this.state.disabled}
           />
         </div>
         <div className="cell text-center">
@@ -111,13 +128,13 @@ class resepObatTabulasi extends Component {
             onClick={() => {
               this.hapus(resep.uid);
             }}
+            disabled={this.state.disabled}
           >
             Hapus
           </button>
         </div>
       </div>
     ));
-    // console.log("huhu", this.state.doResep);
   }
 
   render() {
@@ -169,13 +186,17 @@ class resepObatTabulasi extends Component {
             <div className="modal-footer justify-content-center">
               <button
                 className="btn btn-primary"
-                data-placement="bottom"
-                title="Simpan Data Obat "
-                onClick={() => this.handleSave()}
+                data-toggle="modal"
+                data-target="#notification2"
+                disabled={this.state.disabled}
               >
                 Simpan
               </button>
-              <button className="btn btn-warning" onClick={() => this.reset()}>
+              <button
+                className="btn btn-warning"
+                disabled={this.state.disabled}
+                onClick={() => this.reset()}
+              >
                 Bersihkan
               </button>
             </div>
@@ -196,11 +217,20 @@ class resepObatTabulasi extends Component {
               className="form-control"
               value={filter}
               onChange={e => this.cariObat(e)}
+              disabled={this.state.disabled}
             />
             {suggestionsList}
           </div>
         </div>
         {daftarResep}
+        <ModalKonfirmasiTindakan
+          passValue={this.handleSave}
+          modal="notification2"
+        />
+        <ModalKonfirmasi
+          notification={this.state.notification}
+          modal="konfirmasiResep"
+        />
       </div>
     );
   }

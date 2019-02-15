@@ -3,7 +3,6 @@ import SOAP from "./Soap/SoapPasien";
 import ResepObat from "./ResepObat/ResepObat";
 import Tindakan from "./Tindakan/TindakanPasien";
 import Laboratorium from "./Laboratorium/LaboratoriumPasien";
-
 class TabulasiPelayananMedis extends Component {
   render() {
     return (

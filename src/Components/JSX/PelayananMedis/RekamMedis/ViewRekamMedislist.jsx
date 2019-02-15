@@ -6,7 +6,7 @@ import "../../../ASSETS/CSS/option.css";
 class ViewRekamMedisList extends Component {
   render() {
     return (
-      <div id="demo">
+      <div className="card-box">
         <div className="alert alert-danger" role="alert">
           Untuk melihat MR pasien <strong>Arahkan kursor</strong> ke salah satu
           tahun <strong>Lalu Klik</strong>
@@ -15,11 +15,11 @@ class ViewRekamMedisList extends Component {
           <li>
             <input id="demo1-1" name="demo1-1" type="checkbox" />
             <SVGKalender />
-            <label for="demo1-1">2017</label>
+            <label htmlFor="demo1-1">2017</label>
             <ul>
               <li>
                 <input id="demo1-1-2" name="demo1-1-2" type="checkbox" />
-                <label for="demo1-1-2">Oktober</label>
+                <label htmlFor="demo1-1-2">Oktober</label>
                 <ul>
                   <li>
                     <Link target="_blank" to="/rekammedispasien">
@@ -42,7 +42,7 @@ class ViewRekamMedisList extends Component {
             <ul>
               <li>
                 <input id="demo1-1-3" name="demo1-1-2" type="checkbox" />
-                <label for="demo1-1-3">Desember</label>
+                <label htmlFor="demo1-1-3">Desember</label>
                 <ul>
                   <li>
                     <Link target="_blank" to="/rekammedispasien">
@@ -66,11 +66,11 @@ class ViewRekamMedisList extends Component {
           <li>
             <input id="demo1-2" name="demo1-2" type="checkbox" />
             <SVGKalender />
-            <label for="demo1-2">2018</label>
+            <label htmlFor="demo1-2">2018</label>
             <ul>
               <li>
                 <input id="demo1-2-1" name="demo1-2-1" type="checkbox" />
-                <label for="demo1-2-1">Januari</label>
+                <label htmlFor="demo1-2-1">Januari</label>
                 <ul>
                   <li>
                     <Link target="_blank" to="/rekammedispasien">

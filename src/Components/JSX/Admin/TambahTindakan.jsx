@@ -13,6 +13,7 @@ class TambahTindakan extends Component {
       showMe: false,
       nama_tindakan: "",
       biaya_tindakan: "",
+      jenis: "Oral",
       notification: ""
     };
   }
@@ -22,7 +23,8 @@ class TambahTindakan extends Component {
       this.setState({
         uid: nextProps.selected.uid,
         nama_tindakan: nextProps.selected.nama_tindakan,
-        biaya_tindakan: nextProps.selected.biaya_tindakan
+        biaya_tindakan: nextProps.selected.biaya_tindakan,
+        jenis: nextProps.selected.jenis
       });
     }
   }
@@ -31,7 +33,8 @@ class TambahTindakan extends Component {
     if (this.props.action === "add") {
       tambahTindakan({
         nama_tindakan: this.state.nama_tindakan,
-        biaya_tindakan: this.state.biaya_tindakan
+        biaya_tindakan: this.state.biaya_tindakan,
+        jenis: this.state.jenis
       })
         .then(() => {
           this.setState({ notification: <Sukses /> });
@@ -41,7 +44,8 @@ class TambahTindakan extends Component {
       editTindakan({
         uid: this.state.uid,
         nama_tindakan: this.state.nama_tindakan,
-        biaya_tindakan: this.state.biaya_tindakan
+        biaya_tindakan: this.state.biaya_tindakan,
+        jenis: this.state.jenis
       })
         .then(() => {
           this.setState({ notification: <Sukses /> });
@@ -113,6 +117,29 @@ class TambahTindakan extends Component {
                           })
                         }
                       />
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-12">
+                    <div className="md-form mb-0">
+                      <span>Jenis Tindakan</span>
+                      <select
+                        className="custom-select"
+                        name="jenis"
+                        value={this.state.jenis}
+                        onChange={event =>
+                          this.setState({
+                            jenis: event.target.value
+                          })
+                        }
+                      >
+                        <option value="">---Jenis Tindakan---</option>
+                        <option value="Oral">Oral</option>
+                        <option value="Laboratorium">Laboratorium</option>
+                        <option value="Radiologi">Radiologi</option>
+                        <option value="Fisiologi">Fisiologi</option>
+                      </select>
                     </div>
                   </div>
                 </div>

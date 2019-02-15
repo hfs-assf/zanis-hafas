@@ -23,11 +23,11 @@ class DaftarRekamMedis extends Component {
   lihatDetail(id) {
     window.location.assign("/detail-rekam-medis/" + id);
   }
-  renderDaftarRM = rm => {
+  renderDaftarRM = (rm, index) => {
     const { textFilter } = this.state;
     if (textFilter !== "") {
       return (
-        <div className="row1">
+        <div className="row1" key={index}>
           <div className="cell text-center">{rm.nomor_rekam_medis}</div>
           <div className="cell">{rm.nama_pasien}</div>
           <div className="cell text-center">{rm.jenis_kelamin}</div>
@@ -59,8 +59,8 @@ class DaftarRekamMedis extends Component {
             <div className="cell">Status</div>
             <div className="cell">Aksi</div>
           </div>
-          {pasien.map(rm => {
-            return this.renderDaftarRM(rm);
+          {pasien.map((rm, index) => {
+            return this.renderDaftarRM(rm, index);
           })}
         </div>
       );

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import TimelineAPotek from "../../../Components/JSX/Apotek/TimelineApotek";
+import TimelineAPotek from "../../../Components/JSX/Apotek/TablePesananObat";
 
 class Apotek extends Component {
   render() {

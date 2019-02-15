@@ -21,10 +21,10 @@ class RekamMedisList extends Component {
           </div>
           <hr className="hr2" />{" "}
           <div className="row">
-            <div className="col-md-4 hidden-sm hidden-xs">
+            <div className="col-md-5 hidden-sm hidden-xs">
               <ProfileKiriPasien pasien={this.props.pasien.id} />
             </div>
-            <div className="col-md-7 card-box1">
+            <div className="col-md-7 hidden-sm hidden-xs">
               {/* <div className="kotak"> */}
               <ViewRekamMedisList />
               {/* </div> */}

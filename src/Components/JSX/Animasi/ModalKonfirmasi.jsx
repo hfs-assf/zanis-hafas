@@ -3,11 +3,10 @@ import Sukses from "./Sukses";
 import Gagal from "./Gagal";
 class ModalKonfirmasi extends Component {
   render() {
-    console.log(this.props.notification);
     return (
       <div
         className="modal fade bd-example-modal-sm"
-        id="notification"
+        id={this.props.modal}
         tabIndex="-1"
         role="dialog"
         aria-labelledby="mySmallModalLabel"
