@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiURL = "http://localhost:8000";
+const apiURL = "http://192.168.100.250:8000";
 
 let editUser = ({ nik, password, nama, email, akses }) => {
   return axios.put(apiURL + "/api/v1/akun-user/" + nik, {

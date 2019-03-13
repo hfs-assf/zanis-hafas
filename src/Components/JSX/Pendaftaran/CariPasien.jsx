@@ -12,7 +12,11 @@ class CariPasien extends Component {
     };
   }
 
-  onChange(e) {
+  addQueue = (id) => {
+    window.location.assign("/tambah-layanan/" + id)
+  }
+
+  onChange = (e) => {
     var filter = e.target.value;
     listPasien(filter).then(({ data }) => {
       this.setState({
@@ -23,9 +27,6 @@ class CariPasien extends Component {
     });
   }
 
-  tambahAntrian(id) {
-    window.location.assign("/tambah-layanan/" + id);
-  }
 
   render() {
     let suggestionsList;
@@ -40,7 +41,7 @@ class CariPasien extends Component {
                 <li
                   key={pasien.nomor_rekam_medis}
                   className="suggestion-active"
-                  onClick={() => this.tambahAntrian(pasien.nomor_rekam_medis)}
+                  onClick={() => this.addQueue(pasien.nomor_rekam_medis)}
                 >
                   {pasien.nama_pasien}
                   <br />

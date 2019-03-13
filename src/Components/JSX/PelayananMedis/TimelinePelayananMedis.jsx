@@ -9,32 +9,58 @@ class TimelinePelayananMedis extends Component {
   constructor(props) {
     super(props);
     this.searchName = this.searchName.bind(this);
-    this.state = { antrian: [], nama: [], tanggal: new Date("mm/dd/YYYY") };
+    this.state = 
+      { 
+        antrian: [],
+        nama: [], 
+        tanggal: new Date("mm/dd/YYYY") 
+      };
   }
 
-  componentWillMount() {
-    var array = [...this.state.nama];
-    listAntrian().then(({ data }) => {
-      for (var i = 0; i < data.length; i++) {
-        this.searchName(data[i].nomor_rekam_medis).then(data => {
-          this.setState({ nama: this.state.nama.concat(data) });
-        });
 
-        this.setState({
-          antrian: this.state.antrian.concat(data[i]),
-          nama: array
-        });
-      }
+
+  componentWillMount = () => {
+    var arrays = this.state.nama;
+    listAntrian().then(({ data }) =>{ 
+      data.forEach(array =>{
+        this.searchName(array.nomor_rekam_medis).then(datas =>{
+          this.setState({nama:this.state.nama.concat(datas)})
+        })
+      });
+      this.setState({
+        antrian: this.state.antrian.concat(data),
+        nama: arrays
+      });
     });
+    
   }
 
-  searchName(nomor_rekam_medis) {
+  // componentWillMount() {
+  //   var array = this.state.nama;
+  //   listAntrian().then(({ data }) => {
+  //     for (var i = 0; i < data.length; i++) {
+  //       this.searchName(data[i].nomor_rekam_medis).then(data => {
+  //         this.setState({ nama: this.state.nama.concat(data) });
+  //       });
+
+  //       this.setState({
+  //         antrian: this.state.antrian.concat(data[i]),
+  //         nama: array
+  //       });
+  //     }
+  //   });
+  // }
+
+  
+
+  searchName = (nomor_rekam_medis) => {
     return detailPasien(nomor_rekam_medis).then(({ data }) => {
+      console.log
       return data[0].nama_pasien;
     });
   }
 
-  dateFormat(x) {
+  dateFormat = (x) => {
     var date = new Date(x);
     var hours = date.getHours();
     var minutes = date.getMinutes();
@@ -42,6 +68,8 @@ class TimelinePelayananMedis extends Component {
     var strTime = hours + ":" + minutes;
     return strTime;
   }
+
+
 
   render() {
     let deskripsiPasien, jumlahAntrian;
@@ -68,6 +96,8 @@ class TimelinePelayananMedis extends Component {
         </li>
       );
     });
+
+
     jumlahAntrian = antrian.length;
     return (
       <div className="row">

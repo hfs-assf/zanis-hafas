@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../../../Components/ASSETS/CSS/Pendaftaran.css";
-import ViewPencarian from "../../../Components/JSX/Pendaftaran/CariPasien";
-import FormTambah from "../../../Components/JSX/Pendaftaran/FormPendaftaran";
+import CariPasien from "../../../Components/JSX/Pendaftaran/CariPasien";
+import FormPendaftaran from "../../../Components/JSX/Pendaftaran/FormPendaftaran";
 
 class Pendaftaran extends Component {
   render() {
@@ -17,7 +17,7 @@ class Pendaftaran extends Component {
             </div>
 
             <div className="box column2">
-              <ViewPencarian />
+              <CariPasien />
             </div>
           </div>
           <hr className="hr2" />
@@ -35,7 +35,7 @@ class Pendaftaran extends Component {
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <FormTambah />
+          <FormPendaftaran />
         </div>
       </div>
     );

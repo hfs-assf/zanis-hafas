@@ -9,7 +9,7 @@ class FormPembayaran extends Component {
       <div className="container-fluid ">
         <div className="row justify-content-center" style={{ margin: "0.5em" }}>
           <div className="col-md-8 boxriwayat">
-            <DetailPasien id={this.props.pasien} />
+            <DetailPasien no_rm={this.props.pasien} />
           </div>
           {/* <div className="col-md-2 mr-0">
             <div className="row">

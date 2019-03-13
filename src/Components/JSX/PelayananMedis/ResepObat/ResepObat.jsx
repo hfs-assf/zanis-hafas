@@ -112,7 +112,7 @@ class resepObatTabulasi extends Component {
         </div>
         <div className="cell text-right">
           Rp.
-          {resep.harga_jual}
+          {resep.harga_jual}bonek
         </div>
         <div className="cell text-center">
           <input

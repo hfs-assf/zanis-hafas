@@ -4,7 +4,8 @@ import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
 // import listProvinsi from "../../../JSON/provinsi";
 // import listProvinsi from "../../../Methods/Pendaftaran/listProvinsi";
 
-class FormPendaftaran extends Component {
+class 
+FormPendaftaran extends Component {
   constructor() {
     super();
     this.state = {
@@ -33,7 +34,7 @@ class FormPendaftaran extends Component {
       provinsi: []
     };
   }
-  handleInputChange(event) {
+  handleInputChange = (event) => {
     const target = event.target;
     // const value = target.type === "checkbox" ? target.checked : target.value;
     const value = target.value;
@@ -44,7 +45,7 @@ class FormPendaftaran extends Component {
     });
   }
 
-  tambahPasienBaru() {
+  tambahPasienBaru = () => {
     var catatan = "Penanggung jawab ".concat(
       this.state.nama_penanggungjawab,
       " (",
@@ -55,6 +56,7 @@ class FormPendaftaran extends Component {
       this.state.alamat_penanggungjawab,
       ")"
     );
+    
     tambahPasien({
       nomor_pengenal: this.state.nomor_pengenal,
       jenis_nomor_pengenal: "ktp",
@@ -80,7 +82,7 @@ class FormPendaftaran extends Component {
         this.setState({ notification: "0" });
       });
   }
-  cleanAll() {
+  cleanAll = () => {
     this.setState({
       nomor_pengenal: "",
       jenis_nomor_pengenal: "ktp",

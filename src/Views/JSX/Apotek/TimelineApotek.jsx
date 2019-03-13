@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import TimelineAPotek from "../../../Components/JSX/Apotek/TablePesananObat";
+import TablePesananObat from "../../../Components/JSX/Apotek/TablePesananObat";
 
 class Apotek extends Component {
   render() {
@@ -20,7 +20,7 @@ class Apotek extends Component {
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <TimelineAPotek />
+        <TablePesananObat />
       </div>
     );
   }

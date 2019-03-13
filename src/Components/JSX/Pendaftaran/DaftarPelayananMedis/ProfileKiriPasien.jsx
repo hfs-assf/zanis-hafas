@@ -7,13 +7,13 @@ class ProfileKiriPasien extends Component {
     pasien: []
   };
 
-  componentWillMount() {
+  componentWillMount = () => {
     detailPasien(this.props.pasien).then(({ data }) => {
       this.setState({ pasien: this.state.pasien.concat(data) });
     });
   }
 
-  calculateAge(date) {
+  calculateAge = (date) => {
     var today = new Date();
     var birthDate = new Date(date);
     var age = today.getFullYear() - birthDate.getFullYear();

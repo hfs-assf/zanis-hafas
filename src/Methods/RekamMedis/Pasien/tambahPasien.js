@@ -1,5 +1,5 @@
 import axios from "axios";
-const apiURL = "http://localhost:8002";
+const apiURL = "http://192.168.100.250:8002";
 
 let tambahPasien = ({
   nomor_pengenal,

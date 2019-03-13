@@ -9,7 +9,7 @@ class TablePesananObat extends Component {
     detail_pesanan: []
   };
 
-  componentWillMount() {
+  componentWillMount = () => {
     listPesananObat("", "MENUNGGU").then(({ data }) => {
       this.setState({
         pesanan_obat: data
@@ -17,7 +17,8 @@ class TablePesananObat extends Component {
     });
   }
 
-  showDetail(uid) {
+
+  showDetail = (uid) => {
     listPesananObat(uid, "").then(({ data }) => {
       this.setState({
         detail_pesanan: data.detail_pesanan

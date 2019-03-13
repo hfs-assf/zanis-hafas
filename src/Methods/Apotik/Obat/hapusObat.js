@@ -1,5 +1,5 @@
 import axios from "axios";
-const apiURL = "http://localhost:8005";
+const apiURL = "http://192.168.100.250:8005";
 
 let hapusObat = uid => {
   return axios.delete(apiURL + "/api/v1/obat/" + uid, {

@@ -19,10 +19,11 @@ class TambahAntrian extends Component {
     };
   }
 
-  showHide(value) {
+  showHide = (value) => {
     this.setState({ showMe: value });
   }
-  handleSave() {
+  
+  handleSave = () => {
     tambahAntrian({
       nomor_rekam_medis: this.props.pasien,
       poli: this.state.poli,
