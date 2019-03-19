@@ -6,7 +6,7 @@ import ModalKonfirmasi from "./Animasi/ModalKonfirmasi";
 class Hapus extends Component {
   constructor(props) {
     super(props);
-    this.deleteItem = this.deleteItem.bind(this);
+    // this.deleteItem = this.deleteItem.bind(this);
     this.state = {
       uid: "",
       field: "",
@@ -14,29 +14,30 @@ class Hapus extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      uid: nextProps.selected.uid,
-      field: nextProps.field
-    });
-  }
-  deleteItem = uid => {
-    if (this.state.field === "obat") {
-      hapusObat(uid)
-        .then(() => {
-          this.setState({ notification: "1" });
-        })
-        .catch(() => this.setState({ notification: "0" }));
-    } else if (this.state.field === "tindakan") {
-      hapusTindakan(uid)
-        .then(() => {
-          this.setState({ notification: "1" });
-        })
-        .catch(() => this.setState({ notification: "0" }));
-    }
-  };
+  // componentWillReceiveProps(nextProps) {
+  //   this.setState({
+  //     uid: nextProps.selected.uid,
+  //     field: nextProps.field
+  //   });
+  // }
 
-  render() {
+  // deleteItem = (uid) => {
+  //   if (this.state.field === "obat") {
+  //     hapusObat(uid)
+  //       .then(() => {
+  //         this.setState({ notification: "1" });
+  //       })
+  //       .catch(() => this.setState({ notification: "0" }));
+  //   } else if (this.state.field === "tindakan") {
+  //     hapusTindakan(uid)
+  //       .then(() => {
+  //         this.setState({ notification: "1" });
+  //       })
+  //       .catch(() => this.setState({ notification: "0" }));
+  //   }
+  // };
+
+  render = () => {
     return (
       <div>
         <div
@@ -72,7 +73,7 @@ class Hapus extends Component {
               <div className="modal-footer justify-content-center">
                 <button
                   className="btn btn-info"
-                  onClick={() => this.deleteItem(this.state.uid)}
+                  onClick={() => this.props.fungsi()}
                   data-toggle="modal"
                   data-target="#notification"
                   data-dismiss="modal"
@@ -92,7 +93,7 @@ class Hapus extends Component {
         <ModalKonfirmasi notification={this.state.notification} />
       </div>
     );
-  }
+  };
 }
 
 export default Hapus;
