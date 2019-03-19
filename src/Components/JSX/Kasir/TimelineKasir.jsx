@@ -14,34 +14,30 @@ class TimelinePelayananMedis extends Component {
     };
   }
 
-
-
   componentWillMount = () => {
     var arrays = this.state.nama;
-    listAntrian().then(({ data }) =>{ 
-      data.forEach(array =>{
-        this.searchName(array.nomor_rekam_medis).then(datas =>{
-          this.setState({nama:this.state.nama.concat(datas)})
-        })
+    listAntrian().then(({ data }) => {
+      data.forEach(array => {
+        this.searchName(array.nomor_rekam_medis).then(datas => {
+          this.setState({ nama: this.state.nama.concat(datas) });
+        });
       });
       this.setState({
         antrian: this.state.antrian.concat(data),
         nama: arrays
       });
     });
-    
-  }
+  };
 
-
-  searchName = (nomor_rekam_medis) => {
+  searchName = nomor_rekam_medis => {
     return detailPasien(nomor_rekam_medis).then(({ data }) => {
       return data[0].nama_pasien;
     });
-  }
+  };
 
   render() {
     let deskripsiPasien;
-    const { antrian, nama} = this.state;
+    const { antrian, nama } = this.state;
     deskripsiPasien = antrian.map((e, index) => {
       return (
         <li key={e.uid} className="animated bounceIn">
@@ -50,7 +46,6 @@ class TimelinePelayananMedis extends Component {
             <div className="number"> {e.nomor_antrian} </div>
             <div>
               <div className="title">{e.nomor_rekam_medis}</div>
-
               <div className="tefalsext-white">{nama[index]}</div>
               <div className="type">
                 {e.asuransi} - {e.poli}

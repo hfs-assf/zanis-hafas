@@ -12,11 +12,11 @@ class CariPasien extends Component {
     };
   }
 
-  addQueue = (id) => {
-    window.location.assign("/tambah-layanan/" + id)
-  }
+  addQueue = id => {
+    window.location.assign("/tambah-layanan/" + id);
+  };
 
-  onChange = (e) => {
+  onChange = e => {
     var filter = e.target.value;
     listPasien(filter).then(({ data }) => {
       this.setState({
@@ -25,8 +25,7 @@ class CariPasien extends Component {
         showSuggestions: true
       });
     });
-  }
-
+  };
 
   render() {
     let suggestionsList;

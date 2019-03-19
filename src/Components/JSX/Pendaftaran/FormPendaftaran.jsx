@@ -4,8 +4,7 @@ import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
 // import listProvinsi from "../../../JSON/provinsi";
 // import listProvinsi from "../../../Methods/Pendaftaran/listProvinsi";
 
-class 
-FormPendaftaran extends Component {
+class FormPendaftaran extends Component {
   constructor() {
     super();
     this.state = {
@@ -34,7 +33,7 @@ FormPendaftaran extends Component {
       provinsi: []
     };
   }
-  handleInputChange = (event) => {
+  handleInputChange = event => {
     const target = event.target;
     // const value = target.type === "checkbox" ? target.checked : target.value;
     const value = target.value;
@@ -43,7 +42,25 @@ FormPendaftaran extends Component {
     this.setState({
       [name]: value
     });
-  }
+  };
+
+  handleInputChangeNama = event => {
+    const target = event.target;
+    // const value = target.type === "checkbox" ? target.checked : target.value;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: this.Capitalize(value)
+    });
+  };
+
+  toTitleCase = text => {
+    return text
+      .split(" ")
+      .map(string => string.charAt(0).toUpperCase() + string.substring(1))
+      .join(" ");
+  };
 
   tambahPasienBaru = () => {
     var catatan = "Penanggung jawab ".concat(
@@ -56,7 +73,7 @@ FormPendaftaran extends Component {
       this.state.alamat_penanggungjawab,
       ")"
     );
-    
+
     tambahPasien({
       nomor_pengenal: this.state.nomor_pengenal,
       jenis_nomor_pengenal: "ktp",
@@ -81,7 +98,7 @@ FormPendaftaran extends Component {
       .catch(err => {
         this.setState({ notification: "0" });
       });
-  }
+  };
   cleanAll = () => {
     this.setState({
       nomor_pengenal: "",
@@ -107,7 +124,7 @@ FormPendaftaran extends Component {
       telepon_penanggungjawab: "",
       alamat_penanggungjawab: ""
     });
-  }
+  };
   render() {
     return (
       <div>
@@ -145,7 +162,7 @@ FormPendaftaran extends Component {
                     type="text"
                     className="form-control"
                     name="nama_pasien"
-                    value={this.state.nama_pasien}
+                    value={this.toTitleCase(this.state.nama_pasien)}
                     onChange={e => this.handleInputChange(e)}
                     required
                   />
@@ -245,7 +262,7 @@ FormPendaftaran extends Component {
                   </span>
                   <textarea
                     name="alamat"
-                    value={this.state.alamat}
+                    value={this.toTitleCase(this.state.alamat)}
                     className="form-control"
                     onChange={e => this.handleInputChange(e)}
                     required
@@ -344,7 +361,7 @@ FormPendaftaran extends Component {
                         type="text"
                         className="form-control"
                         name="pendidikan"
-                        value={this.state.pendidikan}
+                        value={this.toTitleCase(this.state.pendidikan)}
                         onChange={e => this.handleInputChange(e)}
                       />
                     </label>
@@ -356,7 +373,7 @@ FormPendaftaran extends Component {
                         type="text"
                         className="form-control"
                         name="pekerjaan"
-                        value={this.state.pekerjaan}
+                        value={this.toTitleCase(this.state.pekerjaan)}
                         onChange={e => this.handleInputChange(e)}
                       />
                     </label>
