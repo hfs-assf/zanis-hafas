@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import hapusObat from "../../Methods/Apotik/Obat/hapusObat";
 import hapusTindakan from "../../Methods/Poli/Tindakan/hapusTindakan";
 import ModalKonfirmasi from "./Animasi/ModalKonfirmasi";
 

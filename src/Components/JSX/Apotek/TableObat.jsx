@@ -4,7 +4,6 @@ import "../../ASSETS/CSS/form.css";
 import obatList from "../../../Methods/Apotik/Obat/listObat";
 import hapusObat from "../../../Methods/Apotik/Obat/hapusObat";
 import HapusModal from "../hapusModal";
-// import hapusObat from "../../../Methods/Apotik/Obat/hapusObat";
 
 let delay;
 
@@ -27,11 +26,6 @@ class TableObat extends Component {
     this.refresh(this.state.filterKey);
   };
 
-  // shouldComponentUpdate = (nextProps, nextState) => {
-  //   this.refresh(this.state.filterKey);
-  //   return this.state.obat.length !== nextState.obat.length;
-  // };
-
   refresh = val => {
     clearTimeout(delay);
     delay = setTimeout(() => {
@@ -44,10 +38,29 @@ class TableObat extends Component {
   };
 
   onKeyUp = e => {
+    console.log(e.target.value);
     e.preventDefault();
     let val = e.target.value;
     this.setState({ filterKey: val });
   };
+
+  // onKeyUp = e => {
+  //   clearTimeout(delay);
+  //   const val = e.target.value;
+  //   const nilai = val.charAt(0).toUpperCase() + val.slice(1);
+  //   delay = setTimeout(() => {
+  //     if (nilai) {
+  //       obatList(nilai).then(({ data }) => this.setState({ obat: data }));
+  //     } else {
+  //       this.setState({ obat: [] });
+  //     }
+  //   }, 1000);
+
+  //   e.preventDefault();
+  //   this.setState({
+  //     filterKey: nilai
+  //   });
+  // };
 
   detailObat = ({ uid }) => {
     window.location.assign("/detail-obat/" + uid);

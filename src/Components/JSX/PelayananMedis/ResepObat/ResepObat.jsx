@@ -4,10 +4,12 @@ import ModalKonfirmasiTindakan from "../../Animasi/ModalKonfirmasiTindakan";
 import ModalKonfirmasi from "../../Animasi/ModalKonfirmasi";
 import tambahDetailPesananObat from "../../../../Methods/Apotik/DetailPesananObat/tambahDetailPesananObat";
 import tambahPesananObat from "../../../../Methods/Apotik/PesananObat/tambahPesananObat";
+
+let set;
 class resepObatTabulasi extends Component {
   constructor(props) {
     super(props);
-    this.cariObat = this.cariObat.bind(this);
+    // this.cariObat = this.cariObat.bind(this);
     this.ubahJumlahObat = this.ubahJumlahObat.bind(this);
     this.ubahKeteranganObat = this.ubahKeteranganObat.bind(this);
     this.handleSave = this.handleSave.bind(this);
@@ -21,16 +23,36 @@ class resepObatTabulasi extends Component {
     };
   }
 
-  cariObat(e) {
+  // cariObat(e) {
+  //   console.log(e.target.value);
+  //   clearTimeout(timeout);
+  //   e.preventDefault();
+  //   let filter = e.target.value;
+  //   obatList(filter).then(({ data }) => {
+  //     this.setState({
+  //       daftarObat: data,
+  //       filter: filter
+  //     });
+  //   });
+  // }
+
+  onKeyUp = e => {
+    clearTimeout(set);
+    const val = e.target.value;
+    const nilai = val.charAt(0).toUpperCase() + val.slice(1);
+    set = setTimeout(() => {
+      if (nilai) {
+        obatList(nilai).then(({ data }) => this.setState({ daftarObat: data }));
+      } else {
+        this.setState({ daftarObat: [] });
+      }
+    }, 1000);
+
     e.preventDefault();
-    var filter = e.target.value;
-    obatList(filter).then(({ data }) => {
-      this.setState({
-        daftarObat: data,
-        filter: filter
-      });
+    this.setState({
+      filter: nilai
     });
-  }
+  };
 
   ubahJumlahObat(e, i) {
     let doResep = [...this.state.doResep];
@@ -215,9 +237,10 @@ class resepObatTabulasi extends Component {
             <input
               type="text"
               className="form-control"
-              value={filter}
-              onChange={e => this.cariObat(e)}
-              disabled={this.state.disabled}
+              // value={filter}
+              onKeyUp={e => this.onKeyUp(e)}
+              // onChange={e => this.cariObat(e)}
+              // disabled={this.state.disabled}
             />
             {suggestionsList}
           </div>
