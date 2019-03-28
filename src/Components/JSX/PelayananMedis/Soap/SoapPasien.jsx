@@ -13,8 +13,13 @@ class SoapPasien extends Component {
       showMe: false,
       nomor_rekam_medis: "",
       nik_dokter: "121212",
+      subjektif: "",
+      objektif: "",
+      analisa: "",
+      diagnosa: "",
       jenis_perawatan: "Rawat Jalan",
-      penjamin: "Umum", //belum dibuat bg er //belum dibuat bg er //belum dibuat bg er
+      penjamin: "Umum",
+      tindakan: "",
       sistole: "",
       diastole: "",
       suhu: "",
@@ -22,31 +27,21 @@ class SoapPasien extends Component {
       respirasi: "",
       tinggi: "",
       berat: "",
-      subjektif: "",
-      objektif: "",
-      analisa: "",
-      tindakan: "",
-      diagnosa: "",
+
       disabled: false
     };
   }
 
-  handleSave() {
-    var catatan = "Sistole ".concat(
-      this.state.sistole,
-      ", diastole ",
-      this.state.diastole,
-      ", suhu ",
-      this.state.suhu,
-      ", pulse ",
-      this.state.pulse,
-      ", respirasi ",
-      this.state.respirasi,
-      ", tinggi ",
-      this.state.tinggi,
-      ", berat ",
-      this.state.berat
-    );
+  handleSave = () => {
+    const catatan = JSON.stringify({
+      sistole: this.state.sistole,
+      diastole: this.state.diastole,
+      suhu: this.state.suhu,
+      pulse: this.state.pulse,
+      respirasi: this.state.respirasi,
+      tinggi: this.state.tinggi,
+      berat: this.state.berat
+    });
 
     tambahHistoriMedis({
       nomor_rekam_medis: this.props.no_rm,
@@ -70,16 +65,37 @@ class SoapPasien extends Component {
         console.log(err);
         this.setState({ notification: "0" });
       });
-  }
+  };
 
-  showHide(e) {
+  cleanAll = () => {
+    this.setState({
+      nomor_rekam_medis: "",
+      nik_dokter: "121212",
+      subjektif: "",
+      objektif: "",
+      analisa: "",
+      diagnosa: "",
+      jenis_perawatan: "Rawat Jalan",
+      penjamin: "Umum",
+      tindakan: "",
+      sistole: "",
+      diastole: "",
+      suhu: "",
+      pulse: "",
+      respirasi: "",
+      tinggi: "",
+      berat: ""
+    });
+  };
+
+  showHide = e => {
     var hasil = e.target.value;
     if (hasil === "false") {
       this.setState({ showMe: true });
     } else {
       this.setState({ showMe: false });
     }
-  }
+  };
   render() {
     return (
       <div className="container-fluid">
@@ -199,7 +215,7 @@ class SoapPasien extends Component {
             </div>
           </div>
           <div className="col-md-10">
-            <div className="row maxrow">
+            <div className="row maxrow" style={{ height: "40px" }}>
               <div className="col-md-10">
                 <input
                   type="text"
@@ -334,6 +350,7 @@ class SoapPasien extends Component {
               <button
                 className="btn btn-warning"
                 data-placement="bottom"
+                onClick={() => this.cleanAll()}
                 disabled={this.state.disabled}
               >
                 Bersihkan

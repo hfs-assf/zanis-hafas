@@ -6,14 +6,10 @@ import listTransaksiObat from "../../../Methods/Apotik/TransaksiObat/listTransak
 class TableTransaksiObat extends Component {
   constructor() {
     super();
-    this.onChange = this.onChange.bind(this);
+    // this.onChange = this.onChange.bind(this);
     this.state = {
       filter: "",
-      transaksi_obat: [],
-      selected: {
-        uid: ""
-      },
-      field: ""
+      transaksi_obat: []
     };
   }
 
@@ -25,43 +21,25 @@ class TableTransaksiObat extends Component {
     });
   }
 
-  onChange(e) {
-    e.preventDefault();
-    var filter = e.target.value;
-    listTransaksiObat(filter).then(({ data }) => {
-      this.setState({
-        transaksi_obat: data,
-        filter: filter
-      });
-    });
-  }
-
-  renderTransaksiObat = (
-    index,
-    { waktu_transaksi, nama_obat, jumlah, nik_karyawan }
-  ) => {
-    if (this.state.filter !== "") {
-      return (
-        <div className="row1" key={index}>
-          <div className="cell">
-            {new Date(waktu_transaksi).toLocaleDateString("en-GB")}
-          </div>
-          <div className="cell text-center">{nama_obat}</div>
-          <div className="cell text-center">
-            {jumlah < 0 ? "Keluar" : "Masuk"} sebanyak
-            {" " + Math.abs(jumlah)}
-          </div>
-          <div className="cell text-center">{nik_karyawan}</div>
-        </div>
-      );
-    }
+  renderTO = (index, { waktu_transaksi, nama_obat, jumlah, nik_karyawan }) => {
+    <div className="row1" key={index}>
+      <div className="cell">
+        {new Date(waktu_transaksi).toLocaleDateString("en-GB")}
+      </div>
+      <div className="cell text-center">{nama_obat}</div>
+      <div className="cell text-center">
+        {jumlah < 0 ? "Keluar" : "Masuk"} sebanyak
+        {" " + Math.abs(jumlah)}
+      </div>
+      <div className="cell text-center">{nik_karyawan}</div>
+    </div>;
   };
 
   render() {
     let header;
-    const { filter, transaksi_obat } = this.state;
+    const { transaksi_obat } = this.state;
     const filteredTransaksi = transaksi_obat;
-    if (filteredTransaksi.length !== 0 && filter !== "") {
+    if (filteredTransaksi.length !== 0) {
       header = (
         <div className="table">
           <div className="row1 header">
@@ -75,7 +53,7 @@ class TableTransaksiObat extends Component {
           })}
         </div>
       );
-    } else if (filteredTransaksi.length === 0 && filter !== "") {
+    } else if (filteredTransaksi.length === 0) {
       header = (
         <div className="table">
           <div className="row1">
@@ -93,26 +71,13 @@ class TableTransaksiObat extends Component {
         </div>
       );
     }
+
     return (
       <div className="card" style={{ borderTop: "2px solid #1976d2" }}>
         <div className="card-body">
           <div className="flex-container">
             <div className="box column1">
               <h2 className="card-title text-left">Daftar Transaksi Obat</h2>
-            </div>
-
-            <div className="box column2">
-              <div className="mainsearch">
-                <div className="form-group has-search">
-                  <span className="fa fa-search form-control-feedback" />
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Cari dengan NIK"
-                    onChange={e => this.onChange(e)}
-                  />
-                </div>
-              </div>
             </div>
           </div>
           <hr className="hr2" />

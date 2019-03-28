@@ -5,7 +5,7 @@ import obatList from "../../../Methods/Apotik/Obat/listObat";
 import hapusObat from "../../../Methods/Apotik/Obat/hapusObat";
 import HapusModal from "../hapusModal";
 
-let delay;
+let delay = null;
 
 class TableObat extends Component {
   constructor() {
@@ -22,9 +22,19 @@ class TableObat extends Component {
     };
   }
 
-  componentDidUpdate = () => {
+  // componentDidUpdate = () => {
+  //   this.refresh(this.state.filterKey);
+  // };
+
+  shouldComponentUpdate = nextState => {
     this.refresh(this.state.filterKey);
+    return this.state.filterKey !== nextState.filterKey;
   };
+
+  // componentDidMount = () => {
+  //   this.refresh(this.state.filterKey);
+  //   // console.log("componentDidMount");
+  // };
 
   refresh = val => {
     clearTimeout(delay);
@@ -40,8 +50,9 @@ class TableObat extends Component {
   onKeyUp = e => {
     console.log(e.target.value);
     e.preventDefault();
-    let val = e.target.value;
-    this.setState({ filterKey: val });
+    const val = e.target.value;
+    const nilai = val.charAt(0).toUpperCase() + val.slice(1);
+    this.setState({ filterKey: nilai });
   };
 
   // onKeyUp = e => {

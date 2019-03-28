@@ -23,19 +23,6 @@ class resepObatTabulasi extends Component {
     };
   }
 
-  // cariObat(e) {
-  //   console.log(e.target.value);
-  //   clearTimeout(timeout);
-  //   e.preventDefault();
-  //   let filter = e.target.value;
-  //   obatList(filter).then(({ data }) => {
-  //     this.setState({
-  //       daftarObat: data,
-  //       filter: filter
-  //     });
-  //   });
-  // }
-
   onKeyUp = e => {
     clearTimeout(set);
     const val = e.target.value;
@@ -79,15 +66,17 @@ class resepObatTabulasi extends Component {
     });
   }
 
-  hapus(id) {
-    var array = [...this.state.doResep];
-    for (var i = 0; i < this.state.doResep.length; i++) {
-      if (this.state.doResep[i].uid === id) {
-        array.splice(i, 1);
+  hapus = id => {
+    var arrays = [...this.state.doResep];
+    console.log("loha", id, arrays);
+    arrays.forEach(index => {
+      // console.log(index, "dapat");
+      if (this.state.doResep.uid === id) {
+        arrays.splice(index, 1);
       }
-    }
-    this.setState({ doResep: array });
-  }
+    });
+    this.setState({ doResep: arrays });
+  };
 
   reset() {
     this.setState({ doResep: [] });
@@ -230,9 +219,7 @@ class resepObatTabulasi extends Component {
     return (
       <div className="container-fluid">
         <div className="row maxrow" style={{ margin: "0px" }}>
-          <div className="col-md-2">
-            <span>Tambah Obat</span>
-          </div>
+          <div className="col-md-2">Tambah Obat</div>
           <div className="col-md-10">
             <input
               type="text"

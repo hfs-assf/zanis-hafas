@@ -14,7 +14,7 @@
 import axios from "axios";
 const apiURL = "http://192.168.100.250:8005";
 
-let obatList = nama_obat =>
-  axios.get(apiURL + "/api/v1/obat?limit=20&nama_obat=" + nama_obat);
+let obatList = uid =>
+  axios.get(apiURL + "/api/v1/obat?limit=20&nama_obat=" + uid);
 
 export default obatList;

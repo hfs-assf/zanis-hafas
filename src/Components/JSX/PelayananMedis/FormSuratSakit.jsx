@@ -17,7 +17,7 @@ class FormObat extends Component {
     };
   }
 
-  componentWillMount() {
+  componentWillMount = () => {
     detailPasien(this.props.no_rm).then(({ data }) => {
       this.setState({
         nama_pasien: data[0].nama_pasien,
@@ -27,7 +27,7 @@ class FormObat extends Component {
     });
   }
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
     var doc = new jsPDF({

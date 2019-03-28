@@ -13,7 +13,7 @@ class Pendaftaran extends Component {
         <div className="card-body">
           <div className="flex-container">
             <div className="box column1">
-              <h2 className="card-title text-left">Pendaftaran Pasien</h2>
+              <h2 className="card-title text-left">Pendaftaran Pasien Baru</h2>
             </div>
 
             <div className="box column2">
@@ -25,7 +25,10 @@ class Pendaftaran extends Component {
             className="alert alert-warning alert-dismissible fade show"
             role="alert"
           >
-            <strong>Untuk melihat data pasien lama</strong> klik menu pencarian.
+            <strong>
+              Sesudah menginput data pasien atau melihat data pasien lama
+            </strong>{" "}
+            klik menu pencarian.
             <button
               type="button"
               className="close"
