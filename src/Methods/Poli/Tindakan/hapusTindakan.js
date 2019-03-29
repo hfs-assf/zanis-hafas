@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiURL = "http://192.168.100.250:8003";
+const apiURL = "http://10.6.35.1:8003";
 
 let hapusTindakan = uid => {
   return axios.delete(apiURL + "/api/v1/tindakan/" + uid, {

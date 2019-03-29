@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiURL = "http://192.168.100.250:8001";
+const apiURL = "http://10.6.35.1:8001";
 
 let listAntrian = uid => {
   var cari = uid !== null ? "?uid=" + uid : null;

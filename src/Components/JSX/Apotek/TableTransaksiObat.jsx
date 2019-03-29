@@ -8,69 +8,64 @@ class TableTransaksiObat extends Component {
     super();
     // this.onChange = this.onChange.bind(this);
     this.state = {
-      filter: "",
       transaksi_obat: []
     };
   }
 
-  componentWillMount() {
+  componentWillMount = () => {
     listTransaksiObat().then(({ data }) => {
       this.setState({
         transaksi_obat: data
       });
     });
-  }
-
-  renderTO = (index, { waktu_transaksi, nama_obat, jumlah, nik_karyawan }) => {
-    <div className="row1" key={index}>
-      <div className="cell">
-        {new Date(waktu_transaksi).toLocaleDateString("en-GB")}
-      </div>
-      <div className="cell text-center">{nama_obat}</div>
-      <div className="cell text-center">
-        {jumlah < 0 ? "Keluar" : "Masuk"} sebanyak
-        {" " + Math.abs(jumlah)}
-      </div>
-      <div className="cell text-center">{nik_karyawan}</div>
-    </div>;
   };
 
-  render() {
+  // renderTransaksiObat = (
+  //   index,
+  //   { waktu_transaksi, nama_obat, jumlah, nik_karyawan }
+  // ) => {
+  //   <div className="row1" key={index}>
+  //     <div className="cell">
+  //       {new Date(waktu_transaksi).toLocaleDateString("en-GB")}
+  //     </div>
+  //     <div className="cell text-center">{nama_obat}</div>
+  //     <div className="cell text-center">
+  //       {jumlah < 0 ? "Keluar" : "Masuk"} sebanyak
+  //       {" " + Math.abs(jumlah)}
+  //     </div>
+  //     <div className="cell text-center">{nik_karyawan}</div>
+  //   </div>;
+  // };
+
+  render = () => {
     let header;
     const { transaksi_obat } = this.state;
-    const filteredTransaksi = transaksi_obat;
-    if (filteredTransaksi.length !== 0) {
-      header = (
-        <div className="table">
-          <div className="row1 header">
-            <div className="cell">Waktu Transaksi</div>
-            <div className="cell">Nama Obat</div>
-            <div className="cell">Keterangan</div>
-            <div className="cell">Dicatat Oleh</div>
-          </div>
-          {filteredTransaksi.map((obat, index) => {
-            return this.renderTransaksiObat(index, obat);
-          })}
+    console.log(transaksi_obat, "ini filter");
+    header = (
+      <div className="table">
+        <div className="row1 header">
+          <div className="cell">Waktu Transaksi</div>
+          <div className="cell">Nama Obat</div>
+          <div className="cell">Keterangan</div>
+          <div className="cell">Dicatat Oleh</div>
         </div>
-      );
-    } else if (filteredTransaksi.length === 0) {
-      header = (
-        <div className="table">
-          <div className="row1">
-            <div className="cell">Transaksi obat tidak ada</div>
-          </div>
-        </div>
-      );
-    } else {
-      header = (
-        <div
-          className="alert alert-warning alert-dismissible fade show"
-          role="alert"
-        >
-          <strong>Untuk melihat transaksi</strong> klik menu pencarian.
-        </div>
-      );
-    }
+        {transaksi_obat.map((e, index) => {
+          return (
+            <div className="row1" key={index}>
+              <div className="cell">
+                {new Date(e.waktu_transaksi).toLocaleDateString("en-GB")}
+              </div>
+              <div className="cell text-center">{e.nama_obat}</div>
+              <div className="cell text-center">
+                {e.jumlah < 0 ? "Keluar" : "Masuk"} sebanyak
+                {" " + Math.abs(e.jumlah)}
+              </div>
+              <div className="cell text-center">{e.nik_karyawan}</div>
+            </div>
+          );
+        })}
+      </div>
+    );
 
     return (
       <div className="card" style={{ borderTop: "2px solid #1976d2" }}>
@@ -87,7 +82,7 @@ class TableTransaksiObat extends Component {
         </div>
       </div>
     );
-  }
+  };
 }
 
 export default TableTransaksiObat;
