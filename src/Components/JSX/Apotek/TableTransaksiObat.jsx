@@ -20,27 +20,9 @@ class TableTransaksiObat extends Component {
     });
   };
 
-  // renderTransaksiObat = (
-  //   index,
-  //   { waktu_transaksi, nama_obat, jumlah, nik_karyawan }
-  // ) => {
-  //   <div className="row1" key={index}>
-  //     <div className="cell">
-  //       {new Date(waktu_transaksi).toLocaleDateString("en-GB")}
-  //     </div>
-  //     <div className="cell text-center">{nama_obat}</div>
-  //     <div className="cell text-center">
-  //       {jumlah < 0 ? "Keluar" : "Masuk"} sebanyak
-  //       {" " + Math.abs(jumlah)}
-  //     </div>
-  //     <div className="cell text-center">{nik_karyawan}</div>
-  //   </div>;
-  // };
-
   render = () => {
     let header;
     const { transaksi_obat } = this.state;
-    console.log(transaksi_obat, "ini filter");
     header = (
       <div className="table">
         <div className="row1 header">
