@@ -29,29 +29,15 @@ class FormPendaftaran extends Component {
       nama_penanggungjawab: "",
       status_penanggungjawab: "",
       telepon_penanggungjawab: "",
-      alamat_penanggungjawab: "",
-      provinsi: []
+      alamat_penanggungjawab: ""
     };
   }
-  handleInputChange = event => {
-    const target = event.target;
-    // const value = target.type === "checkbox" ? target.checked : target.value;
-    const value = target.value;
-    const name = target.name;
 
+  handleChange = e => {
+    e.preventDefault();
+    const { value, name } = e.target;
     this.setState({
       [name]: value
-    });
-  };
-
-  handleInputChangeNama = event => {
-    const target = event.target;
-    // const value = target.type === "checkbox" ? target.checked : target.value;
-    const value = target.value;
-    const name = target.name;
-
-    this.setState({
-      [name]: this.Capitalize(value)
     });
   };
 
@@ -62,17 +48,13 @@ class FormPendaftaran extends Component {
       .join(" ");
   };
 
-  tambahPasienBaru = () => {
-    var catatan = "Penanggung jawab ".concat(
-      this.state.nama_penanggungjawab,
-      " (",
-      this.state.status_penanggungjawab,
-      ", ",
-      this.state.telepon_penanggungjawab,
-      ", ",
-      this.state.alamat_penanggungjawab,
-      ")"
-    );
+  onSubmit = () => {
+    console.log(this.state);
+    const catatan = `Penanggung Jawab: ${this.state.nama_penanggungjawab}, ${
+      this.state.status_penanggungjawab
+    },${this.state.telepon_penanggungjawab}, ${
+      this.state.alamat_penanggungjawab
+    }`;
 
     tambahPasien({
       nomor_pengenal: this.state.nomor_pengenal,
@@ -99,6 +81,7 @@ class FormPendaftaran extends Component {
         this.setState({ notification: "0" });
       });
   };
+
   cleanAll = () => {
     this.setState({
       nomor_pengenal: "",
@@ -149,7 +132,7 @@ class FormPendaftaran extends Component {
                     className="form-control"
                     name="nomor_pengenal"
                     value={this.state.nomor_pengenal}
-                    onChange={e => this.handleInputChange(e)}
+                    onChange={e => this.handleChange(e)}
                     required
                   />
                 </label>
@@ -163,7 +146,7 @@ class FormPendaftaran extends Component {
                     className="form-control"
                     name="nama_pasien"
                     value={this.toTitleCase(this.state.nama_pasien)}
-                    onChange={e => this.handleInputChange(e)}
+                    onChange={e => this.handleChange(e)}
                     required
                   />
                 </label>
@@ -178,7 +161,7 @@ class FormPendaftaran extends Component {
                         className="form-control"
                         name="tempat_lahir"
                         value={this.state.tempat_lahir}
-                        onChange={e => this.handleInputChange(e)}
+                        onChange={e => this.handleChange(e)}
                         required
                       />
                     </label>
@@ -193,7 +176,7 @@ class FormPendaftaran extends Component {
                         className="form-control"
                         name="tanggal_lahir"
                         value={this.state.tanggal_lahir}
-                        onChange={e => this.handleInputChange(e)}
+                        onChange={e => this.handleChange(e)}
                         required
                       />
                     </label>
@@ -209,7 +192,7 @@ class FormPendaftaran extends Component {
                       <select
                         name="agama"
                         className="form-control"
-                        onChange={e => this.handleInputChange(e)}
+                        onChange={e => this.handleChange(e)}
                         required
                       >
                         <option defaultValue="Islam">Islam</option>
@@ -228,7 +211,7 @@ class FormPendaftaran extends Component {
                       <select
                         name="jenis_kelamin"
                         className="form-control"
-                        onChange={e => this.handleInputChange(e)}
+                        onChange={e => this.handleChange(e)}
                         required
                       >
                         <option defaultValue="P">Perempuan</option>
@@ -245,7 +228,7 @@ class FormPendaftaran extends Component {
                       <select
                         name="status"
                         className="form-control"
-                        onChange={e => this.handleInputChange(e)}
+                        onChange={e => this.handleChange(e)}
                         required
                       >
                         <option defaultValue="Belum Menikah">
@@ -264,7 +247,7 @@ class FormPendaftaran extends Component {
                     name="alamat"
                     value={this.toTitleCase(this.state.alamat)}
                     className="form-control"
-                    onChange={e => this.handleInputChange(e)}
+                    onChange={e => this.handleChange(e)}
                     required
                   />
                 </label>
@@ -278,7 +261,7 @@ class FormPendaftaran extends Component {
                       <select
                         name="kelurahan"
                         className="form-control"
-                        onChange={e => this.handleInputChange(e)}
+                        onChange={e => this.handleChange(e)}
                         required
                       >
                         <option defaultValue="Tenayan Raya">
@@ -297,7 +280,7 @@ class FormPendaftaran extends Component {
                       <select
                         name="kecamatan"
                         className="form-control"
-                        onChange={e => this.handleInputChange(e)}
+                        onChange={e => this.handleChange(e)}
                         required
                       >
                         <option defaultValue="Sail">Sail</option>
@@ -313,7 +296,7 @@ class FormPendaftaran extends Component {
                         name="kode_pos"
                         value={this.state.kode_pos}
                         className="form-control"
-                        onChange={e => this.handleInputChange(e)}
+                        onChange={e => this.handleChange(e)}
                       />
                     </label>
                   </div>
@@ -327,7 +310,7 @@ class FormPendaftaran extends Component {
                         name="telepon"
                         value={this.state.telepon}
                         className="form-control"
-                        onChange={e => this.handleInputChange(e)}
+                        onChange={e => this.handleChange(e)}
                       />
                     </label>
                   </div>
@@ -341,7 +324,7 @@ class FormPendaftaran extends Component {
                         name="handphone"
                         value={this.state.handphone}
                         className="form-control"
-                        onChange={e => this.handleInputChange(e)}
+                        onChange={e => this.handleChange(e)}
                         required
                       />
                     </label>
@@ -362,7 +345,7 @@ class FormPendaftaran extends Component {
                         className="form-control"
                         name="pendidikan"
                         value={this.toTitleCase(this.state.pendidikan)}
-                        onChange={e => this.handleInputChange(e)}
+                        onChange={e => this.handleChange(e)}
                       />
                     </label>
                   </div>
@@ -374,7 +357,7 @@ class FormPendaftaran extends Component {
                         className="form-control"
                         name="pekerjaan"
                         value={this.toTitleCase(this.state.pekerjaan)}
-                        onChange={e => this.handleInputChange(e)}
+                        onChange={e => this.handleChange(e)}
                       />
                     </label>
                   </div>
@@ -387,7 +370,7 @@ class FormPendaftaran extends Component {
                     name="kantor"
                     className="form-control"
                     value={this.state.kantor}
-                    onChange={e => this.handleInputChange(e)}
+                    onChange={e => this.handleChange(e)}
                   />
                 </label>
               </fieldset>
@@ -403,7 +386,7 @@ class FormPendaftaran extends Component {
                         className="form-control"
                         name="nama_penanggungjawab"
                         value={this.state.nama_penanggungjawab}
-                        onChange={e => this.handleInputChange(e)}
+                        onChange={e => this.handleChange(e)}
                       />
                     </label>
                   </div>
@@ -415,7 +398,7 @@ class FormPendaftaran extends Component {
                         className="form-control"
                         name="status_penanggungjawab"
                         value={this.state.status_penanggungjawab}
-                        onChange={e => this.handleInputChange(e)}
+                        onChange={e => this.handleChange(e)}
                       />
                     </label>
                   </div>
@@ -427,7 +410,7 @@ class FormPendaftaran extends Component {
                         className="form-control"
                         name="telepon_penanggungjawab"
                         value={this.state.telepon_penanggungjawab}
-                        onChange={e => this.handleInputChange(e)}
+                        onChange={e => this.handleChange(e)}
                       />
                     </label>
                   </div>
@@ -440,7 +423,7 @@ class FormPendaftaran extends Component {
                     name="alamat_penanggungjawab"
                     className="form-control"
                     value={this.state.alamat_penanggungjawab}
-                    onChange={e => this.handleInputChange(e)}
+                    onChange={e => this.handleChange(e)}
                   />
                 </label>
                 <br />
@@ -454,7 +437,7 @@ class FormPendaftaran extends Component {
                   className="btn btn-primary"
                   data-toggle="modal"
                   data-target="#konfirmasiPendaftaran"
-                  onClick={() => this.tambahPasienBaru()}
+                  onClick={() => this.onSubmit()}
                 >
                   Simpan
                 </button>
