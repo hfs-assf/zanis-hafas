@@ -41,19 +41,19 @@ class resepObatTabulasi extends Component {
     });
   };
 
-  ubahJumlahObat(e, i) {
+  ubahJumlahObat = (e, i) => {
     let doResep = [...this.state.doResep];
     doResep[i].jumlah_obat = e.target.value;
     this.setState({ doResep });
-  }
+  };
 
-  ubahKeteranganObat(e, i) {
+  ubahKeteranganObat = (e, i) => {
     let doResep = [...this.state.doResep];
     doResep[i].keterangan = e.target.value;
     this.setState({ doResep });
-  }
+  };
 
-  tambah(daftarObat) {
+  tambah = daftarObat => {
     this.setState({
       doResep: this.state.doResep.concat({
         nama_obat: daftarObat.nama_obat,
@@ -64,15 +64,15 @@ class resepObatTabulasi extends Component {
       }),
       filter: ""
     });
-  }
+  };
 
   hapus = id => {
-    var arrays = [...this.state.doResep];
-    console.log("loha", id, arrays);
-    arrays.forEach(index => {
+    var arrays = this.state.doResep;
+    console.log("loha", arrays);
+    arrays.forEach(i => {
       // console.log(index, "dapat");
       if (this.state.doResep.uid === id) {
-        arrays.splice(index, 1);
+        arrays.splice(i, 1);
       }
     });
     this.setState({ doResep: arrays });
@@ -82,7 +82,7 @@ class resepObatTabulasi extends Component {
     this.setState({ doResep: [] });
   }
 
-  handleSave() {
+  handleSave = () => {
     tambahPesananObat({
       nomor_rekam_medis: this.props.no_rm
     })
@@ -102,9 +102,9 @@ class resepObatTabulasi extends Component {
         console.log(err);
         this.setState({ notification: "0" });
       });
-  }
+  };
 
-  daftardoResep() {
+  daftardoResep = () => {
     return this.state.doResep.map((resep, index) => (
       <div className="row1" key={index}>
         <div className="cell">{resep.nama_obat}</div>
@@ -121,10 +121,10 @@ class resepObatTabulasi extends Component {
           &nbsp;
           {resep.satuan}
         </div>
-        <div className="cell text-right">
+        {/* <div className="cell text-right">
           Rp.
-          {resep.harga_jual}bonek
-        </div>
+          {resep.harga_jual}
+        </div> */}
         <div className="cell text-center">
           <input
             type="text"
@@ -139,14 +139,13 @@ class resepObatTabulasi extends Component {
             onClick={() => {
               this.hapus(resep.uid);
             }}
-            disabled={this.state.disabled}
           >
             Hapus
           </button>
         </div>
       </div>
     ));
-  }
+  };
 
   render() {
     let suggestionsList, daftarResep;
@@ -186,7 +185,7 @@ class resepObatTabulasi extends Component {
               <div className="row1 header">
                 <div className="cell">Nama Obat</div>
                 <div className="cell">Jumlah</div>
-                <div className="cell">Harga</div>
+                {/* <div className="cell">Harga</div> */}
                 <div className="cell">Keterangan</div>
                 <div className="cell">Aksi</div>
               </div>

@@ -4,10 +4,11 @@ import ModalKonfirmasiTindakan from "../../Animasi/ModalKonfirmasiTindakan";
 import ModalKonfirmasi from "../../Animasi/ModalKonfirmasi";
 import tambahHistoriTindakan from "../../../../Methods/Poli/HistoriTindakan/tambahHistoriTindakan";
 
+let set;
 class tindakanTabulasi extends Component {
   constructor(props) {
     super(props);
-    this.cariTindakan = this.cariTindakan.bind(this);
+    // this.cariTindakan = this.cariTindakan.bind(this);
     this.ubahJumlahTindakan = this.ubahJumlahTindakan.bind(this);
     this.ubahKeteranganTindakan = this.ubahKeteranganTindakan.bind(this);
     this.handleSave = this.handleSave.bind(this);
@@ -20,16 +21,37 @@ class tindakanTabulasi extends Component {
     };
   }
 
-  cariTindakan(e) {
+  onKeyUp = e => {
+    clearTimeout(set);
+    const val = e.target.value;
+    console.log(e.target.value);
+    const nilai = val.charAt(0).toUpperCase() + val.slice(1);
+    set = setTimeout(() => {
+      if (nilai) {
+        listTindakan(nilai).then(({ data }) =>
+          this.setState({ tindakan: data })
+        );
+      } else {
+        this.setState({ tindakan: [] });
+      }
+    }, 1000);
+
     e.preventDefault();
-    var filter = e.target.value;
-    listTindakan(filter).then(({ data }) => {
-      this.setState({
-        tindakan: data,
-        filter: filter
-      });
+    this.setState({
+      filter: nilai
     });
-  }
+  };
+
+  // cariTindakan(e) {
+  //   e.preventDefault();
+  //   var filter = e.target.value;
+  //   listTindakan(filter).then(({ data }) => {
+  //     this.setState({
+  //       tindakan: data,
+  //       filter: filter
+  //     });
+  //   });
+  // }
 
   ubahJumlahTindakan(e, i) {
     let doTindakan = [...this.state.doTindakan];
@@ -50,15 +72,13 @@ class tindakanTabulasi extends Component {
     });
   }
 
-  hapus(id) {
-    var array = [...this.state.doTindakan];
-    for (var i = 0; i < this.state.doTindakan.length; i++) {
-      if (this.state.doTindakan[i].uid === id) {
-        array.splice(i, 1);
-      }
-    }
-    this.setState({ doTindakan: array });
-  }
+  hapus = id => {
+    const arrays = this.state.doTindakan;
+    console.log(arrays);
+    this.setState({
+      doTindakan: arrays.filter(el => el.uid !== id)
+    });
+  };
 
   reset() {
     this.setState({ doTindakan: [] });
@@ -203,9 +223,10 @@ class tindakanTabulasi extends Component {
             <input
               type="text"
               className="form-control"
-              value={filter}
-              onChange={e => this.cariTindakan(e)}
-              disabled={this.state.disabled}
+              onKeyUp={e => this.onKeyUp(e)}
+              // value={filter}
+              // onChange={e => this.cariTindakan(e)}
+              // disabled={this.state.disabled}
             />
             {suggestionsList}
           </div>

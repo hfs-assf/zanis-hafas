@@ -166,3 +166,10 @@
   line-height: 20px;
   text-align: center;
 }
+
+.menunggu {
+  font-size: 1em;
+  font-weight: 400;
+  color: white;
+  float: right;
+}

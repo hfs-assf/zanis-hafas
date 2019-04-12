@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import "../../ASSETS/CSS/Apotek.css";
-import "../../ASSETS/CSS/form.css";
+// import "../../ASSETS/CSS/Apotek.css";
+// import "../../ASSETS/CSS/form.css";
+import "../../ASSETS/CSS/Timeline.css";
 import listPesananObat from "../../../Methods/Apotik/PesananObat/listPesananObat";
 
 class TablePesananObat extends Component {
@@ -24,87 +25,143 @@ class TablePesananObat extends Component {
     return fetch(detail_link).then(res => res.json());
   }
 
+  dateFormat = x => {
+    var date = new Date(x);
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    var strTime = hours + ":" + minutes;
+    return strTime;
+  };
+
   render = () => {
     let header;
     const { pesanan_obat } = this.state;
-    // console.log(pesanan_obat, "lis obat");
-    header = (
-      <div className="table" style={{ borderCollapse: "collapse" }}>
-        <div className="row1" />
-        {pesanan_obat.map((e, index) => {
-          return (
-            <div className="row1" key={index}>
-              <div className="cell">
-                {new Date(e.waktu_pesan).toLocaleDateString("en-GB")} //
-                <strong>{e.nomor_rekam_medis}</strong>
-                <button
-                  className="btn btn-primary btn-sm"
-                  type="button"
-                  style={{ float: "right" }}
-                  data-toggle="collapse"
-                  data-target={"#collapse".concat(index)}
-                  aria-expanded="false"
-                  aria-controls="collapseExample"
-                  onClick={() =>
-                    this.getDetail(e.detail).then(el =>
-                      this.setState({ detail_pesanan: el.detail_pesanan })
-                    )
-                  }
-                >
-                  lihat
-                </button>
-                <div className="collapse" id={"collapse".concat(index)}>
-                  <div className="table">
-                    <div className="row1 header">
-                      <div className="cell">Nama Obat</div>
-                      <div className="cell">Jumlah</div>
-                      <div className="cell">Satuan</div>
-                      <div className="cell">Kategori</div>
-                      <div className="cell">Keterangan</div>
-                    </div>
-                    {this.state.detail_pesanan.map((subRow, k) => {
-                      return (
-                        <div className="row1" key={k}>
-                          <div className="cell text-center">
-                            {subRow.nama_obat}
-                          </div>
-                          <div className="cell text-center">
-                            {subRow.jumlah_obat}
-                          </div>
-                          <div className="cell text-center">
-                            {subRow.satuan}
-                          </div>
-                          <div className="cell text-center">
-                            {subRow.kategori}
-                          </div>
-                          <div className="cell text-center">
-                            {subRow.keterangan}
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
+    header = pesanan_obat.map((e, index) => {
+      return (
+        <li key={e.uid} className="animated bounceIn">
+          <span />
+          <div className="menunggu"> {e.status_pesanan} </div>
+          <div>
+            <div className="title">{e.nomor_rekam_medis}</div>
+            <div className="tefalsext-white">
+              {new Date(e.waktu_pesan).toLocaleDateString("en-GB")}
             </div>
-          );
-        })}
-      </div>
-    );
+          </div>
+          <span className="number">
+            <span>{this.dateFormat(e.waktu_pesan)}</span>
+          </span>
+        </li>
+      );
+    });
+    // let header;
+    // const { pesanan_obat } = this.state;
+    // // console.log(pesanan_obat, "lis obat");
+    // header = (
+    //   <div className="table" style={{ borderCollapse: "collapse" }}>
+    //     <div className="row1" />
+    //     {pesanan_obat.map((e, index) => {
+    //       return (
+    //         <div className="row1" key={index}>
+    //           <div className="cell">
+    //             {new Date(e.waktu_pesan).toLocaleDateString("en-GB")} //
+    //             <strong>{e.nomor_rekam_medis}</strong>
+    //             <button
+    //               className="btn btn-primary btn-sm"
+    //               type="button"
+    //               style={{ float: "right" }}
+    //               data-toggle="collapse"
+    //               data-target={"#collapse".concat(index)}
+    //               aria-expanded="false"
+    //               aria-controls="collapseExample"
+    //               onClick={() =>
+    //                 this.getDetail(e.detail).then(el =>
+    //                   this.setState({ detail_pesanan: el.detail_pesanan })
+    //                 )
+    //               }
+    //             >
+    //               lihat
+    //             </button>
+    //             <div className="collapse" id={"collapse".concat(index)}>
+    //               <div className="table">
+    //                 <div className="row1 header">
+    //                   <div className="cell">Nama Obat</div>
+    //                   <div className="cell">Jumlah</div>
+    //                   <div className="cell">Satuan</div>
+    //                   <div className="cell">Kategori</div>
+    //                   <div className="cell">Keterangan</div>
+    //                 </div>
+    //                 {this.state.detail_pesanan.map((subRow, k) => {
+    //                   return (
+    //                     <div className="row1" key={k}>
+    //                       <div className="cell text-center">
+    //                         {subRow.nama_obat}
+    //                       </div>
+    //                       <div className="cell text-center">
+    //                         {subRow.jumlah_obat}
+    //                       </div>
+    //                       <div className="cell text-center">
+    //                         {subRow.satuan}
+    //                       </div>
+    //                       <div className="cell text-center">
+    //                         {subRow.kategori}
+    //                       </div>
+    //                       <div className="cell text-center">
+    //                         {subRow.keterangan}
+    //                       </div>
+    //                     </div>
+    //                   );
+    //                 })}
+    //               </div>
+    //             </div>
+    //           </div>
+    //         </div>
+    //       );
+    //     })}
+    //   </div>
+    // );
 
     return (
-      <div className="card" style={{ borderTop: "2px solid #1976d2" }}>
-        <div className="card-body">
-          <div className="flex-container">
-            <div className="box column1">
-              <h2 className="card-title text-left">Daftar Pesanan Obat</h2>
-            </div>
-          </div>
-          <hr className="hr2" />
-          <div className="row">
-            <div className="col-md-12 rowsoap">{header}</div>
+      // <div className="card" style={{ borderTop: "2px solid #1976d2" }}>
+      //   <div className="card-body">
+      //     <div className="flex-container">
+      //       <div className="box column1">
+      //         <h2 className="card-title text-left">Daftar Pesanan Obat</h2>
+      //       </div>
+      //     </div>
+      //     <hr className="hr2" />
+      //     <div className="row">
+      //       {/* <div className="col-md-12 rowsoap">{header}</div> */}
+      //     </div>
+      //   </div>
+      // </div>
+      <div className="row">
+        <div className="col-md-7">
+          <div className="container">
+            <ul>{header}</ul>
           </div>
         </div>
+        {/* <div className="col-md-4 tglpasien">
+          <div className="form-group" style={{ width: "250px" }}>
+            <span>Silahkan Pilih Tanggal :</span>
+            <div className="input-group date">
+              <input
+                type="date"
+                className="form-control"
+                // value={this.state.tanggal}
+                style={{ borderRadius: "5px" }}
+              />
+
+              <div className="calender">
+                <Calender />
+              </div>
+              <hr />
+            </div>
+          </div>
+          <div className="banyakpasien">
+            <span className="badge">Jumlah Antrian : {jumlahAntrian}</span>
+          </div>
+        </div> */}
       </div>
     );
   };
