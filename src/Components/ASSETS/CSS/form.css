@@ -1,3 +1,89 @@
+.btn-circle {
+  width: 23px;
+  height: 23px;
+  padding: 6px 0px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1px;
+  position: absolute;
+  margin-top: -15px;
+  margin-right: 20px;
+  background-color: #bdc3c7;
+  right: 0;
+  font-weight: 600;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.tutup {
+  position: absolute;
+  margin-top: -15px;
+  margin-right: 20px;
+  width: 25px;
+  height: 25px;
+  line-height: 1px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 15px;
+  background-color: #bdc3c7;
+  right: 0;
+  font-weight: 600;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.boxdaftar {
+  position: fixed;
+  padding: 20px;
+  /* background-color: rgb(238, 238, 238); */
+  width: 55%;
+  box-shadow: 0 10px 10px rgba(116, 112, 112, 0.16),
+    0 3px 6px rgba(95, 92, 92, 0.23);
+  /* margin-top: 3px; */
+  border: 1px dashed #1976d2;
+  border-radius: 12px;
+  background-color: #fff;
+  color: #252422;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.boxdaftar .table {
+  padding: 2px;
+  margin-top: 15px;
+  width: 100%;
+  margin-bottom: 16px;
+  background-color: transparent;
+}
+
+.boxdaftar .table thead tr th {
+  font-size: 1em;
+  font-weight: 900;
+}
+
+.boxdaftar .table > thead > tr > th {
+  color: #1976d2;
+  padding: 12px 7px;
+  vertical-align: middle;
+  border-bottom-width: 1px;
+  font-weight: 600;
+  border: 0;
+}
+
+.boxdaftar .table > tbody > tr > td {
+  padding: 12px 8px;
+  vertical-align: middle;
+  border-bottom: #ddd;
+  font-weight: 300;
+  font-size: 14px;
+  color: #3c4858;
+}
+
+/* FORM PELAYANAN */
+
 .flexpelayanan {
   display: flex;
   padding: 2px;

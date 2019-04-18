@@ -4,6 +4,7 @@ import "../../ASSETS/CSS/Timeline.css";
 import Calender from "../../../Components/ASSETS/SVG/Kalender1";
 import listAntrian from "../../../Methods/Pendaftaran/Antrian/listAntrian";
 import detailPasien from "../../../Methods/RekamMedis/Pasien/detailPasien";
+import { dateFormat } from "../../../Methods/waktu";
 
 class TimelinePelayananMedis extends Component {
   constructor(props) {
@@ -38,15 +39,6 @@ class TimelinePelayananMedis extends Component {
     });
   };
 
-  dateFormat = x => {
-    var date = new Date(x);
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-    var strTime = hours + ":" + minutes;
-    return strTime;
-  };
-
   render() {
     let deskripsiPasien, jumlahAntrian;
     const { antrian, nama } = this.state;
@@ -66,7 +58,7 @@ class TimelinePelayananMedis extends Component {
             </div>
           </Link>
           <span className="number">
-            <span>{this.dateFormat(e.waktu_daftar)}</span>
+            <span>{dateFormat(e.waktu_daftar)}</span>
             <span />
           </span>
         </li>
