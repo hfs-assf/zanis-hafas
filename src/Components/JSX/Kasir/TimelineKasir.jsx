@@ -48,7 +48,7 @@ class TimelinePelayananMedis extends Component {
               <div className="title">{e.nomor_rekam_medis}</div>
               <div className="tefalsext-white">{nama[index]}</div>
               <div className="type">
-                {e.asuransi} - {e.poli}
+                {e.jaminan} - {e.poli}
               </div>
             </div>
           </Link>

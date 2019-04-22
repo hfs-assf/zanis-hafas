@@ -1,3 +1,101 @@
+/* RADIO BUTTON */
+
+.middle {
+  position: fixed;
+  right: 0;
+  text-align: center;
+  margin-right: 80px;
+  margin-top: -60px;
+  width: 250px;
+  height: auto;
+  border-radius: 5px;
+  /* box-shadow: 5px 10px 10px rgba(116, 112, 112, 0.16),
+    0 3px 6px rgba(95, 92, 92, 0.23); */
+  padding: 1px;
+}
+.middle h5 {
+  font-family: "Dax", sans-serif;
+  color: rgb(0, 0, 0);
+  font-size: 12px;
+  font-weight: 500;
+}
+.middle input[type="radio"] {
+  display: none;
+}
+.middle input[type="radio"]:checked + .box {
+  background-color: #1976d2;
+}
+.middle input[type="radio"]:checked + .box span {
+  color: white;
+  transform: translateY(70px);
+}
+.middle input[type="radio"]:checked + .box span:before {
+  transform: translateY(0px);
+  opacity: 1;
+}
+.box .span {
+  font-size: 54px;
+}
+.middle .box {
+  border-radius: 4px;
+  margin: 4px;
+  border: 1px solid #1976d2;
+  width: 100px;
+  height: 30px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 5px 10px 10px rgba(116, 112, 112, 0.16),
+    0 3px 6px rgba(95, 92, 92, 0.23);
+  transition: all 250ms ease;
+  will-change: transition;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+.middle .box:active {
+  transform: translateY(10px);
+}
+.middle .box span {
+  position: absolute;
+  transform: translate(0, 60px);
+  left: 0;
+  right: 0;
+  transition: all 300ms ease;
+  font-size: 10px;
+  font-weight: 00;
+  user-select: none;
+  color: black;
+  margin-top: -74px;
+}
+.middle .box span:before {
+  font-size: 10px;
+  font-family: FontAwesome;
+  display: block;
+  transform: translateY(-85px);
+  opacity: 0;
+  transition: all 300ms ease-in-out;
+  font-weight: normal;
+  color: rgb(26, 5, 5);
+}
+.middle .front-end span:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 400;
+  content: "\f058";
+  font-size: 13px;
+  margin-bottom: -2px;
+  margin-top: 2px;
+}
+.middle .back-end span:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 400;
+  content: "\f057";
+  font-size: 13px;
+  margin-bottom: -2px;
+  margin-top: 2px;
+}
+
+/* Tutuup Radio Button */
+
 .btn-circle {
   width: 23px;
   height: 23px;
@@ -55,7 +153,7 @@
   padding: 2px;
   margin-top: 15px;
   width: 100%;
-  margin-bottom: 16px;
+  margin-bottom: 25px;
   background-color: transparent;
 }
 

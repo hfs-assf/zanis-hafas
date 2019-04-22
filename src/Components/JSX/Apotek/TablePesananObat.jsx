@@ -2,6 +2,7 @@ import React, { Component } from "react";
 // import "../../ASSETS/CSS/Apotek.css";
 import "../../ASSETS/CSS/form.css";
 import "../../ASSETS/CSS/Timeline.css";
+import editPesananObat from "../../../Methods/Apotik/PesananObat/editPesananObat";
 import listPesananObat from "../../../Methods/Apotik/PesananObat/listPesananObat";
 import { dateFormat } from "../../../Methods/waktu";
 
@@ -9,6 +10,7 @@ class TablePesananObat extends Component {
   state = {
     pesanan_obat: [],
     detail_pesanan: [],
+    selesai: [],
     uid: "",
     showDetail: false
   };
@@ -23,6 +25,18 @@ class TablePesananObat extends Component {
       });
   }
 
+  editPesanan = () => {
+    console.log;
+    // editPesananObat(id,status)
+    //   .then(el => console.log("edit", el))
+    //   .then(({ data }) => {
+    //     this.setState({});
+    //   });
+    // editPesananObat(nilai).then(data => {
+    //   console.log(data);
+    // });
+  };
+
   // getDetail(detail_link) {
   //   return fetch(detail_link).then(res => res.json());
   // }
@@ -31,7 +45,7 @@ class TablePesananObat extends Component {
     fetch(el)
       .then(data => data.json())
       .then(data => {
-        console.log(data);
+        // console.log(data);
         this.setState({
           detail_pesanan: data.detail_pesanan,
           showDetail: true
@@ -39,34 +53,45 @@ class TablePesananObat extends Component {
       });
   };
 
-  tutup() {
+  tutup = () => {
     this.setState({ showDetail: false });
-  }
+  };
+
+  finishPress = () => {
+    console.log("selesai");
+  };
+
+  cancelPress = () => {
+    console.log("cancel");
+  };
 
   render() {
     let header;
     const { pesanan_obat, detail_pesanan, showDetail } = this.state;
+    console.log(pesanan_obat);
     // const slicePesanan = pesanan_obat.slice(0, 5);
     header = pesanan_obat.map(e => {
-      return (
-        <li
-          key={e.uid}
-          className="animated bounceIn"
-          onClick={() => this.handleClick(e.detail)}
-        >
-          <span />
-          <div className="menunggu"> {e.status_pesanan} </div>
-          <div>
-            <div className="title">{e.nomor_rekam_medis}</div>
-            <div className="tefalsext-white">
-              {new Date(e.waktu_pesan).toLocaleDateString("en-GB")}
+      if (e.status_pesanan === "MENUNGGU") {
+        return (
+          <li
+            key={e.uid}
+            className="animated bounceIn"
+            onClick={() => this.handleClick(e.detail)}
+          >
+            <span />
+            <div className="menunggu"> {e.status_pesanan} </div>
+            <div>
+              <div className="title">{e.nomor_rekam_medis}</div>
+              <div className="tefalsext-white">
+                {new Date(e.waktu_pesan).toLocaleDateString("en-GB")}
+              </div>
             </div>
-          </div>
-          <span className="number">
-            <span>{dateFormat(e.waktu_pesan)}</span>
-          </span>
-        </li>
-      );
+            <span className="number">
+              <span>{dateFormat(e.waktu_pesan)}</span>
+            </span>
+          </li>
+        );
+      }
     });
 
     return (
@@ -86,10 +111,10 @@ class TablePesananObat extends Component {
               >
                 x
               </button>
-              {/* <button type="button" class="btn btn-default btn-circle">
-                X
-              </button> */}
+
               <div className="table-responsive">
+                <span> Nama : Kurnianto Syaputra </span>
+                <span>Tanggal Lahir : 17 Oktober 1993</span>
                 <div className="table">
                   <thead>
                     <tr>
@@ -125,8 +150,12 @@ class TablePesananObat extends Component {
                 </div>
               </div>
               <span>
-                <button type="button" className="btn btn-success btn-sm">
-                  Selesai
+                <button
+                  type="button"
+                  className="btn btn-success btn-sm"
+                  onClick={() => this.editPesanan()}
+                >
+                  Simpan
                 </button>
               </span>
               <span>
@@ -134,6 +163,31 @@ class TablePesananObat extends Component {
                   Tambah Obat
                 </button>
               </span>
+
+              <div class="middle">
+                <h5>Pilih Status</h5>
+                <label>
+                  <input
+                    type="radio"
+                    name="radio"
+                    onClick={() => this.finishPress()}
+                  />
+                  <div class="front-end box">
+                    <span>SELESAI</span>
+                  </div>
+                </label>
+
+                <label>
+                  <input
+                    type="radio"
+                    name="radio"
+                    onClick={() => this.cancelPress()}
+                  />
+                  <div class="back-end box">
+                    <span>BATAL</span>
+                  </div>
+                </label>
+              </div>
             </div>
           ) : null}
         </div>
