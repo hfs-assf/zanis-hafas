@@ -7,7 +7,7 @@ import HapusModal from "../hapusModal";
 
 let delay = null;
 
-class TableObat extends Component {
+export default class TableObat extends React.Component {
   constructor() {
     super();
     // this.onChange = this.onChange.bind(this);
@@ -22,71 +22,41 @@ class TableObat extends Component {
     };
   }
 
-  // componentDidUpdate = () => {
+  // shouldComponentUpdate = nextState => {
   //   this.refresh(this.state.filterKey);
+  //   return this.state.filterKey !== nextState.filterKey;
   // };
 
-  shouldComponentUpdate = nextState => {
-    this.refresh(this.state.filterKey);
-    return this.state.filterKey !== nextState.filterKey;
-  };
-
-  // componentDidMount = () => {
-  //   this.refresh(this.state.filterKey);
-  //   // console.log("componentDidMount");
-  // };
-
-  refresh = val => {
+  onKeyUp = e => {
     clearTimeout(delay);
+    const nilai = e.target.value;
     delay = setTimeout(() => {
-      if (val) {
-        obatList(val).then(({ data }) => this.setState({ obat: data }));
+      if (nilai) {
+        obatList(nilai).then(({ data }) => this.setState({ obat: data }));
       } else {
         this.setState({ obat: [] });
       }
     }, 1000);
-  };
 
-  onKeyUp = e => {
-    console.log(e.target.value);
     e.preventDefault();
-    const val = e.target.value;
-    const nilai = val.charAt(0).toUpperCase() + val.slice(1);
-    this.setState({ filterKey: nilai });
+    this.setState({
+      filterKey: nilai
+    });
   };
 
-  // onKeyUp = e => {
-  //   clearTimeout(delay);
-  //   const val = e.target.value;
-  //   const nilai = val.charAt(0).toUpperCase() + val.slice(1);
-  //   delay = setTimeout(() => {
-  //     if (nilai) {
-  //       obatList(nilai).then(({ data }) => this.setState({ obat: data }));
-  //     } else {
-  //       this.setState({ obat: [] });
-  //     }
-  //   }, 1000);
-
-  //   e.preventDefault();
-  //   this.setState({
-  //     filterKey: nilai
-  //   });
-  // };
-
-  detailObat = ({ uid }) => {
+  detailObat = uid => {
     window.location.assign("/detail-obat/" + uid);
   };
 
-  deleteModal = ({ uid }) => {
+  deleteModal = uid => {
     this.setState({ deleted: true, selected: { uid }, field: "obat" });
-    // this.forceUpdate();
   };
 
   hapusData = uid => {
     console.log("menghapus data");
     hapusObat(uid).then(() => {
       console.log("berhasil dihapus");
-      this.refresh(this.state.filterKey);
+      // this.refresh(this.state.filterKey);
       this.setState(this.state);
     });
   };
@@ -134,53 +104,53 @@ class TableObat extends Component {
 
   render = () => {
     return (
-      <div className="card" style={{ borderTop: "2px solid #1976d2" }}>
-        <div className="card-body">
-          <div className="flex-container">
-            <div className="box column1">
-              <h2 className="card-title text-left">Daftar Obat</h2>
-            </div>
+      <React.Fragment>
+        <div className="card" style={{ borderTop: "2px solid #1976d2" }}>
+          <div className="card-body">
+            <div className="flex-container">
+              <div className="box column1">
+                <h2 className="card-title text-left">Daftar Obat</h2>
+              </div>
 
-            <div className="box column2">
-              <div className="mainsearch">
-                <div className="form-group has-search">
-                  <span className="fa fa-search form-control-feedback" />
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Cari Obat"
-                    onKeyUp={e => this.onKeyUp(e)}
-                    // onChange={e => this.onChange(e)}
-                  />
+              <div className="box column2">
+                <div className="mainsearch">
+                  <div className="form-group has-search">
+                    <span className="fa fa-search form-control-feedback" />
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Cari Obat"
+                      onKeyUp={e => this.onKeyUp(e)}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <hr className="hr2" />
-          <div className="row">
-            <div className="col-md-12 rowsoap">
-              {this.state.obat.length === 0 ? (
-                <div
-                  className="alert alert-warning alert-dismissible fade show"
-                  role="alert"
-                >
-                  <strong>Untuk melihat data obat</strong> klik menu pencarian.
-                </div>
-              ) : (
-                <div className="table">{this.renderDaftarObat()}</div>
-              )}
+            <hr className="hr2" />
+            <div className="row">
+              <div className="col-md-12 rowsoap">
+                {this.state.obat.length === 0 ? (
+                  <div
+                    className="alert alert-warning alert-dismissible fade show"
+                    role="alert"
+                  >
+                    <strong>Untuk melihat data obat</strong> klik menu
+                    pencarian.
+                  </div>
+                ) : (
+                  <div className="table">{this.renderDaftarObat()}</div>
+                )}
+              </div>
             </div>
+            <HapusModal
+              fungsi={() => this.hapusData(this.state.selected.uid)}
+              selected={this.state.selected}
+              field={this.state.field}
+            />
           </div>
-          <HapusModal
-            fungsi={() => this.hapusData(this.state.selected.uid)}
-            selected={this.state.selected}
-            field={this.state.field}
-          />
         </div>
-      </div>
+      </React.Fragment>
     );
   };
 }
-
-export default TableObat;
