@@ -10,7 +10,6 @@ let delay = null;
 export default class TableObat extends React.Component {
   constructor() {
     super();
-    // this.onChange = this.onChange.bind(this);
     this.state = {
       deleted: false,
       obat: [],
@@ -56,7 +55,7 @@ export default class TableObat extends React.Component {
     console.log("menghapus data");
     hapusObat(uid).then(() => {
       console.log("berhasil dihapus");
-      // this.refresh(this.state.filterKey);
+      window.location.reload();
       this.setState(this.state);
     });
   };
@@ -144,7 +143,7 @@ export default class TableObat extends React.Component {
               </div>
             </div>
             <HapusModal
-              fungsi={() => this.hapusData(this.state.selected.uid)}
+              fungsi={() => this.hapusData(this.state.selected.uid.uid)}
               selected={this.state.selected}
               field={this.state.field}
             />

@@ -21,3 +21,6 @@ const listPesananObat = id => {
 };
 
 export default listPesananObat;
+
+export const listPesananObatByStatus = statusPesanan =>
+  axios.get(apiURL + "/api/v1/pesanan-obat?status_pesanan=" + statusPesanan);

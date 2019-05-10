@@ -25,8 +25,7 @@ class resepObatTabulasi extends Component {
 
   onKeyUp = e => {
     clearTimeout(set);
-    const val = e.target.value;
-    const nilai = val.charAt(0).toUpperCase() + val.slice(1);
+    const nilai = e.target.value;
     set = setTimeout(() => {
       if (nilai) {
         obatList(nilai).then(({ data }) => this.setState({ daftarObat: data }));
