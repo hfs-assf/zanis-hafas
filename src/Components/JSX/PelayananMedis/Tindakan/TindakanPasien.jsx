@@ -17,15 +17,15 @@ class tindakanTabulasi extends Component {
       doTindakan: [],
       filter: "",
       tindakan: [],
-      disabled: false
+      disabled: false,
+      jumlah: "",
+      keterangan: ""
     };
   }
 
   onKeyUp = e => {
     clearTimeout(set);
-    const val = e.target.value;
-    console.log(e.target.value);
-    const nilai = val.charAt(0).toUpperCase() + val.slice(1);
+    const nilai = e.target.value;
     set = setTimeout(() => {
       if (nilai) {
         listTindakan(nilai).then(({ data }) =>
@@ -41,17 +41,6 @@ class tindakanTabulasi extends Component {
       filter: nilai
     });
   };
-
-  // cariTindakan(e) {
-  //   e.preventDefault();
-  //   var filter = e.target.value;
-  //   listTindakan(filter).then(({ data }) => {
-  //     this.setState({
-  //       tindakan: data,
-  //       filter: filter
-  //     });
-  //   });
-  // }
 
   ubahJumlahTindakan(e, i) {
     let doTindakan = [...this.state.doTindakan];
@@ -86,10 +75,10 @@ class tindakanTabulasi extends Component {
 
   handleSave() {
     // tambahHistoriTindakan({
-    //   uid_histori_medis,
+    //   uid_histori_medis: this.props.no_rm,
     //   uid_tindakan,
-    //   jumlah,
-    //   keterangan
+    //   jumlah: this.state.jumlah,
+    //   keterangan: this.state.keterangan
     // })
     //   .then(
     //     this.setState({
@@ -101,7 +90,7 @@ class tindakanTabulasi extends Component {
     //     console.log(err);
     //     this.setState({ notification: "0" });
     //   });
-    console.log(this.state.doTindakan);
+    console.log("simpan", this.props.no_rm);
   }
 
   daftardoTindakan() {

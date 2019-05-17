@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../../ASSETS/CSS/form.css";
 import SVGBillInvoice from "../../ASSETS/SVG/SVGBillInvoice";
-import DetailPasien from "../DetailPasien";
+import DetailPasienKasir from "../DetailPasienKasir";
 import FormTambahTransaksi from "./FormTambahTransksi";
 class FormPembayaran extends Component {
   render() {
@@ -9,7 +9,10 @@ class FormPembayaran extends Component {
       <div className="container-fluid ">
         <div className="row justify-content-center" style={{ margin: "0.5em" }}>
           <div className="col-md-8 boxriwayat">
-            <DetailPasien no_rm={this.props.pasien} />
+            <DetailPasienKasir
+              no_rm={this.props.kasir}
+              antrian_pasien={this.props.antrian_pasien}
+            />
           </div>
           {/* <div className="col-md-2 mr-0">
             <div className="row">

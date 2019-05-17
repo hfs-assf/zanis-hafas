@@ -17,9 +17,12 @@ export default class TablePesananObat extends React.Component {
       uid: ""
     },
     showDetail: false,
-    openModal: false,
-    field: ""
+    openModal: false
   };
+
+  pushDataKePesananObat(data) {
+    this.setState({ detail_pesanan: this.state.detail_pesanan.concat(data) });
+  }
 
   componentDidMount() {
     listPesananObatByStatus("", "MENUNGGU").then(({ data }) => {
@@ -33,7 +36,6 @@ export default class TablePesananObat extends React.Component {
     fetch(el)
       .then(data => data.json())
       .then(data => {
-        // console.log(data);
         this.setState({
           detail_pesanan: data.detail_pesanan,
           showDetail: true
@@ -64,7 +66,7 @@ export default class TablePesananObat extends React.Component {
   };
 
   tambahPesanan = uid => {
-    console.log(this.state.uid);
+    console.log("ini id", uid);
     this.setState({ openModal: true, selected: { uid } });
   };
 
@@ -115,7 +117,7 @@ export default class TablePesananObat extends React.Component {
                 </button>
 
                 <div className="table-responsive">
-                  <span> Nama : </span>
+                  <span> Nama : Kurnianto Syahputra </span>
                   <span>Tanggal Lahir : 17 Oktober 1993</span>
                   <div className="table">
                     <thead>
@@ -166,7 +168,7 @@ export default class TablePesananObat extends React.Component {
                   <button
                     type="button"
                     className="btn btn-warning btn-sm waves-effect waves-light"
-                    onClick={() => this.tambahPesanan()}
+                    onClick={() => this.tambahPesanan(this.state.uid)}
                     data-toggle="modal"
                     data-target="#addmedicine"
                     title="Tambah Obat"
@@ -200,7 +202,10 @@ export default class TablePesananObat extends React.Component {
                 </div>
               </div>
             ) : null}
-            <TambahPesananObat selected={this.state.selected} />
+            <TambahPesananObat
+              fnTambahPesananObat={this.pushDataKePesananObat.bind(this)}
+              selected={this.state.selected}
+            />
           </div>
         </div>
       </React.Fragment>

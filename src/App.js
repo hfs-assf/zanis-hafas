@@ -59,7 +59,7 @@ class App extends Component {
             <Route path="/apotek" component={Apotek} />
             <Route path="/kasir" component={Kasir} />
             <Route
-              path="/form-pembayaran/:id"
+              path="/form-pembayaran/:id/:no_rm"
               render={({ match }) => <Pembayaran antrian={match.params} />}
             />
             <Route

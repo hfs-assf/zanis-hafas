@@ -31,7 +31,7 @@ class Pembayaran extends Component {
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <Form pasien={this.props.antrian.id} />
+          <Form kasir={this.props.antrian.no_rm} />
         </div>
       </div>
     );

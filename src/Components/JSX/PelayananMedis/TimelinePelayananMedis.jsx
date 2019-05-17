@@ -6,43 +6,42 @@ import listAntrian from "../../../Methods/Pendaftaran/Antrian/listAntrian";
 import detailPasien from "../../../Methods/RekamMedis/Pasien/detailPasien";
 import { dateFormat } from "../../../Methods/waktu";
 
+let jumlahAntrian;
 class TimelinePelayananMedis extends Component {
   constructor(props) {
     super(props);
-    this.searchName = this.searchName.bind(this);
     this.state = {
       antrian: [],
       nama: [],
-      tanggal: new Date("mm/dd/YYYY")
+      tanggal: new Date("mm/dd/YYYY"),
+      lAntrian: []
     };
   }
 
-  componentWillMount = () => {
-    var arrays = this.state.nama;
-    listAntrian().then(({ data }) => {
-      data.forEach(array => {
-        this.searchName(array.nomor_rekam_medis).then(datas => {
-          this.setState({ nama: this.state.nama.concat(datas) });
-        });
-      });
+  componentDidMount = () => {
+    this.getData().then(data => {
       this.setState({
-        antrian: this.state.antrian.concat(data),
-        nama: arrays
+        lAntrian: data
       });
     });
   };
 
-  searchName = nomor_rekam_medis => {
-    return detailPasien(nomor_rekam_medis).then(({ data }) => {
-      console.log;
-      return data[0].nama_pasien;
-    });
-  };
+  async getData() {
+    let antrian = await listAntrian().then(data => data.data);
+    let namaList = [];
 
-  render() {
-    let deskripsiPasien, jumlahAntrian;
-    const { antrian, nama } = this.state;
-    deskripsiPasien = antrian.map((e, index) => {
+    let listRM = antrian.map(el => el.nomor_rekam_medis);
+    for (let i = 0; i < listRM.length; i++) {
+      let nama = await detailPasien(listRM[i]).then(data => data.data);
+      namaList.push(nama[0].nama_pasien);
+    }
+
+    return antrian.map((el, i) => ({ ...el, nama: namaList[i] }));
+  }
+
+  antrianList = () => {
+    const { lAntrian } = this.state;
+    return lAntrian.map(e => {
       return (
         <li key={e.uid} className="animated bounceIn">
           <Link to={"/pelayanan-medis/" + e.uid + "/" + e.nomor_rekam_medis}>
@@ -50,8 +49,7 @@ class TimelinePelayananMedis extends Component {
             <div className="number"> {e.nomor_antrian} </div>
             <div>
               <div className="title">{e.nomor_rekam_medis}</div>
-
-              <div className="tefalsext-white">{nama[index]}</div>
+              <div className="tefalsext-white">{e.nama}</div>
               <div className="type">
                 {e.dokter} - {e.poli}
               </div>
@@ -64,13 +62,16 @@ class TimelinePelayananMedis extends Component {
         </li>
       );
     });
+  };
 
-    jumlahAntrian = antrian.length;
+  render() {
+    jumlahAntrian = this.state.lAntrian.length;
+
     return (
       <div className="row">
         <div className="col-md-7">
           <div className="container">
-            <ul>{deskripsiPasien}</ul>
+            <ul>{this.antrianList()}</ul>
           </div>
         </div>
         <div className="col-md-4 tglpasien">
@@ -80,7 +81,7 @@ class TimelinePelayananMedis extends Component {
               <input
                 type="date"
                 className="form-control"
-                // value={this.state.tanggal}
+                value={this.state.tanggal}
                 style={{ borderRadius: "5px" }}
               />
 

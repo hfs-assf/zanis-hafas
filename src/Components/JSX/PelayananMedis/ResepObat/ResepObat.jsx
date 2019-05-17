@@ -82,25 +82,26 @@ class resepObatTabulasi extends Component {
   }
 
   handleSave = () => {
-    tambahPesananObat({
-      nomor_rekam_medis: this.props.no_rm
-    })
-      .then(response =>
-        tambahDetailPesananObat({
-          uid: response.data[0].uid,
-          doResep: this.state.doResep
-        })
-      )
-      .then(
-        this.setState({
-          disabled: true,
-          notification: "1"
-        })
-      )
-      .catch(err => {
-        console.log(err);
-        this.setState({ notification: "0" });
-      });
+    // tambahPesananObat({
+    //   nomor_rekam_medis: this.props.no_rm
+    // })
+    //   .then(response =>
+    //     tambahDetailPesananObat({
+    //       uid: response.data[0].uid,
+    //       doResep: this.state.doResep
+    //     })
+    //   )
+    //   .then(
+    //     this.setState({
+    //       disabled: true,
+    //       notification: "1"
+    //     })
+    //   )
+    //   .catch(err => {
+    //     console.log(err);
+    //     this.setState({ notification: "0" });
+    //   });
+    console.log("simpan data", this.props.no_rm);
   };
 
   daftardoResep = () => {

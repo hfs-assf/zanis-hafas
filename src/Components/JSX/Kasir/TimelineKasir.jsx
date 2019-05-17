@@ -1,59 +1,69 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "../../ASSETS/CSS/Timeline.css";
-import listAntrian from "../../../Methods/Pendaftaran/Antrian/listAntrian";
+import listTransaksi from "../../../Methods/Kasir/listTransaksi";
 import detailPasien from "../../../Methods/RekamMedis/Pasien/detailPasien";
+import { dateFormat } from "../../../Methods/waktu";
 
 class TimelinePelayananMedis extends Component {
   constructor(props) {
     super(props);
-    this.searchName = this.searchName.bind(this);
     this.state = {
       antrian: [],
-      nama: []
+      nama: [],
+      lAntrian: []
     };
   }
 
-  componentWillMount = () => {
-    var arrays = this.state.nama;
-    listAntrian().then(({ data }) => {
-      data.forEach(array => {
-        this.searchName(array.nomor_rekam_medis).then(datas => {
-          this.setState({ nama: this.state.nama.concat(datas) });
-        });
-      });
-      this.setState({
-        antrian: this.state.antrian.concat(data),
-        nama: arrays
-      });
-    });
-  };
+  async getData() {
+    let antrian = await listTransaksi("", "PENDING").then(data => data.data);
+    let namaList = [];
 
-  searchName = nomor_rekam_medis => {
-    return detailPasien(nomor_rekam_medis).then(({ data }) => {
-      return data[0].nama_pasien;
+    let listRM = antrian.map(el => el.nomor_rekam_medis);
+    for (let i = 0; i < listRM.length; i++) {
+      let nama = await detailPasien(listRM[i]).then(data => data.data);
+      // console.log("cari nama", nama);
+      namaList.push(nama[0].nama_pasien);
+    }
+
+    return antrian.map((el, i) => ({ ...el, nama: namaList[i] }));
+  }
+
+  componentDidMount = () => {
+    this.getData().then(data => {
+      this.setState({
+        lAntrian: data
+      });
     });
   };
 
   render() {
     let deskripsiPasien;
-    const { antrian, nama } = this.state;
-    deskripsiPasien = antrian.map((e, index) => {
-      return (
-        <li key={e.uid} className="animated bounceIn">
-          <Link to={"/form-pembayaran/" + e.nomor_rekam_medis}>
-            <span />
-            <div className="number"> {e.nomor_antrian} </div>
-            <div>
-              <div className="title">{e.nomor_rekam_medis}</div>
-              <div className="tefalsext-white">{nama[index]}</div>
-              <div className="type">
-                {e.jaminan} - {e.poli}
+    const { lAntrian } = this.state;
+    console.log("loha", lAntrian);
+    deskripsiPasien = lAntrian.map(e => {
+      if (e.status_transaksi === "PENDING") {
+        return (
+          <li key={e.uid} className="animated bounceIn">
+            <Link to={"/form-pembayaran/" + e.uid + "/" + e.nomor_rekam_medis}>
+              <span />
+              <div className="menunggu"> {e.status_transaksi} </div>
+              <div>
+                <div className="title">{e.nomor_rekam_medis}</div>
+                <div className="tefalsext-white">
+                  {new Date(e.waktu_transaksi).toLocaleDateString("en-GB")}
+                </div>
+                <div className="tefalsext-white">{e.nama}</div>
+                <div className="type">{e.penjamin}</div>
               </div>
-            </div>
-          </Link>
-        </li>
-      );
+            </Link>
+            <span className="number">
+              <span>{dateFormat(e.waktu_terbit)}</span>
+              <span />
+            </span>
+          </li>
+        );
+      }
     });
     return (
       <div className="row">

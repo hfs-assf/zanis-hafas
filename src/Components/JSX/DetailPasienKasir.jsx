@@ -1,36 +1,32 @@
 import React, { Component } from "react";
+import listTransaksi from "../../Methods/Kasir/listTransaksi";
 import detailPasien from "../../Methods/RekamMedis/Pasien/detailPasien";
-import listAntrian from "../../Methods/Pendaftaran/Antrian/listAntrian";
-class DetailPasien extends Component {
+
+class DetailPasienKasir extends Component {
   constructor(props) {
     super(props);
-    this.calculateAge = this.calculateAge.bind(this);
     this.state = {
       no_rm: "",
       nama_pasien: "",
       tanggal_lahir: "",
-      poli: "",
-      jaminan: "",
-      dokter: ""
+      penjamin: ""
     };
   }
-  componentWillMount() {
-    listAntrian(this.props.no_rm).then(({ data }) => {
+  componentWillReceiveProps = nextProps => {
+    listTransaksi(nextProps.no_rm).then(({ data }) => {
       this.setState({
-        poli: data[0].poli,
         no_rm: data[0].nomor_rekam_medis,
-        jaminan: data[0].jaminan,
-        dokter: data[0].dokter
+        penjamin: data[0].penjamin
       });
     });
 
-    detailPasien(this.props.no_rm).then(({ data }) => {
+    detailPasien(nextProps.no_rm).then(({ data }) => {
       this.setState({
         nama_pasien: data[0].nama_pasien,
         tanggal_lahir: data[0].tanggal_lahir
       });
     });
-  }
+  };
 
   calculateAge(date) {
     var today = new Date();
@@ -45,7 +41,7 @@ class DetailPasien extends Component {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         <table>
           <tbody>
             <tr>
@@ -64,31 +60,17 @@ class DetailPasien extends Component {
               </td>
             </tr>
             <tr>
-              <td>Poli</td>
-              <td className="datatable">
-                :&ensp;
-                {this.state.poli}
-              </td>
-            </tr>
-            <tr>
-              <td>Dokter</td>
-              <td className="datatable">
-                :&ensp;
-                {this.state.dokter}
-              </td>
-            </tr>
-            <tr>
               <td>Jaminan</td>
               <td className="datatable">
                 :&ensp;
-                {this.state.jaminan}
+                {this.state.penjamin}
               </td>
             </tr>
           </tbody>
         </table>
-      </div>
+      </React.Fragment>
     );
   }
 }
 
-export default DetailPasien;
+export default DetailPasienKasir;
