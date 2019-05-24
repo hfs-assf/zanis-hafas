@@ -15,14 +15,16 @@ class DetailPasien extends Component {
     };
   }
   componentWillMount() {
-    listAntrian(this.props.no_rm).then(({ data }) => {
-      this.setState({
-        poli: data[0].poli,
-        no_rm: data[0].nomor_rekam_medis,
-        jaminan: data[0].jaminan,
-        dokter: data[0].dokter
+    listAntrian(this.props.no_rm)
+      // .then(data => console.log(data));
+      .then(({ data }) => {
+        this.setState({
+          poli: data[0].poli,
+          no_rm: data[0].nomor_rekam_medis,
+          jaminan: data[0].jaminan,
+          dokter: data[0].dokter
+        });
       });
-    });
 
     detailPasien(this.props.no_rm).then(({ data }) => {
       this.setState({

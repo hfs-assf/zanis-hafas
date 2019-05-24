@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "../../ASSETS/CSS/Timeline.css";
-import listTransaksi from "../../../Methods/Kasir/listTransaksi";
+import listTransaksi from "../../../Methods/Kasir/Transaksi/listTransaksi";
 import detailPasien from "../../../Methods/RekamMedis/Pasien/detailPasien";
 import { dateFormat } from "../../../Methods/waktu";
 

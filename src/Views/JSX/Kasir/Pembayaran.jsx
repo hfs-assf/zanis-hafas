@@ -32,7 +32,7 @@ class Pembayaran extends Component {
             </button>
           </div>
           <Form
-            antrian_pasien={this.props.antrian.id}
+            antrian_kasir={this.props.antrian.id}
             kasir={this.props.antrian.no_rm}
           />
         </div>

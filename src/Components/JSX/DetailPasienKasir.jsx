@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import listTransaksi from "../../Methods/Kasir/listTransaksi";
+import listTransaksi from "../../Methods/Kasir/Transaksi/listTransaksi";
 import detailPasien from "../../Methods/RekamMedis/Pasien/detailPasien";
 
 class DetailPasienKasir extends Component {
@@ -12,21 +12,23 @@ class DetailPasienKasir extends Component {
       penjamin: ""
     };
   }
-  componentWillReceiveProps = nextProps => {
-    listTransaksi(nextProps.no_rm).then(({ data }) => {
-      this.setState({
-        no_rm: data[0].nomor_rekam_medis,
-        penjamin: data[0].penjamin
+  componentDidMount() {
+    // console.log(uid);
+    listTransaksi("", "PENDING")
+      // .then(data => console.log("ini ya", data));
+      .then(({ data }) => {
+        this.setState({
+          no_rm: data[0].nomor_rekam_medis,
+          penjamin: data[0].penjamin
+        });
       });
-    });
-
-    detailPasien(nextProps.no_rm).then(({ data }) => {
+    detailPasien(this.props.no_rm).then(({ data }) => {
       this.setState({
         nama_pasien: data[0].nama_pasien,
         tanggal_lahir: data[0].tanggal_lahir
       });
     });
-  };
+  }
 
   calculateAge(date) {
     var today = new Date();
