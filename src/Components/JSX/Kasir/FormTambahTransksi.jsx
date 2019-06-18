@@ -12,11 +12,12 @@ class FormTambahTransaksi extends Component {
     };
   }
 
-  componentWillMount() {
-    this.setState({
-      no_rm: this.props.id
-    });
-  }
+  componentDidMount = () => {
+    console.log("ke form tambah transaksi", this.props.no_rm);
+    // this.setState({
+    //   no_rm: this.this.props.no_rm
+    // });
+  };
 
   handleSubmit() {}
   ubahTransaksi(e) {
