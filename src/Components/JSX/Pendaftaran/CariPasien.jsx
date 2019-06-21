@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom"
 import "../../ASSETS/CSS/Pendaftaran.css";
 import listPasien from "../../../Methods/RekamMedis/Pasien/listPasien";
 
@@ -12,9 +13,10 @@ class CariPasien extends Component {
     };
   }
 
-  addQueue = id => {
-    window.location.assign("/tambah-layanan/" + id);
-  };
+  // addQueue =(e, id) => {
+  //   e.preventDefault()
+  //   window.location.assign("/tambah-layanan/" + id);
+  // };
 
   onChange = e => {
     var filter = e.target.value;
@@ -37,15 +39,16 @@ class CariPasien extends Component {
           <ul className="suggestions">
             {filteresPasien.map(pasien => {
               return (
+               <Link to={"/tambah-layanan/" + pasien.nomor_rekam_medis}>
                 <li
                   key={pasien.nomor_rekam_medis}
                   className="suggestion-active"
-                  onClick={() => this.addQueue(pasien.nomor_rekam_medis)}
                 >
                   {pasien.nama_pasien}
                   <br />
                   {pasien.nomor_rekam_medis}
                 </li>
+                </Link>
               );
             })}
           </ul>

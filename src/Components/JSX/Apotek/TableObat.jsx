@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../../ASSETS/CSS/Apotek.css";
 import "../../ASSETS/CSS/form.css";
+import { Link } from "react-router-dom"
 import obatList from "../../../Methods/Apotik/Obat/listObat";
 import hapusObat from "../../../Methods/Apotik/Obat/hapusObat";
 import HapusModal from "../hapusModal";
@@ -21,11 +22,6 @@ export default class TableObat extends React.Component {
     };
   }
 
-  // shouldComponentUpdate = nextState => {
-  //   this.refresh(this.state.filterKey);
-  //   return this.state.filterKey !== nextState.filterKey;
-  // };
-
   onKeyUp = e => {
     clearTimeout(delay);
     const nilai = e.target.value;
@@ -43,9 +39,9 @@ export default class TableObat extends React.Component {
     });
   };
 
-  detailObat = uid => {
-    window.location.assign("/detail-obat/" + uid);
-  };
+  // detailObat = uid => {
+  //   window.location.assign("/detail-obat/" + uid);
+  // };
 
   deleteModal = uid => {
     this.setState({ deleted: true, selected: { uid }, field: "obat" });
@@ -80,12 +76,13 @@ export default class TableObat extends React.Component {
               {harga_jual}
             </div>
             <div className="cell text-center">
+              <Link to={"/detail-obat/" + uid}>
               <button
                 className="btn btn-primary btn-sm "
-                onClick={() => this.detailObat({ uid })}
               >
                 Detail
               </button>
+               </Link>
               <button
                 className="btn btn-outline-primary btn-sm"
                 onClick={() => this.deleteModal({ uid })}

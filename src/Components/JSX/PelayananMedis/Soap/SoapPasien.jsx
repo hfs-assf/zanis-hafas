@@ -12,7 +12,7 @@ class SoapPasien extends Component {
       notification: "0",
       showMe: false,
       nomor_rekam_medis: "",
-      nik_dokter: "121212",
+      nik_dokter: "",
       subjektif: "",
       objektif: "",
       analisa: "",
@@ -70,7 +70,7 @@ class SoapPasien extends Component {
   cleanAll = () => {
     this.setState({
       nomor_rekam_medis: "",
-      nik_dokter: "121212",
+      nik_dokter: "",
       subjektif: "",
       objektif: "",
       analisa: "",

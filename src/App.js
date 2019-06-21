@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, BrowserRouter, Redirect } from "react-router-dom";
+import { Store, Consumer } from "./Methods/User/Auth/Store";
+import ProtectedRoute from "./Methods/User/Auth/protectRoute";
 
 import Login from "./Views/JSX/Login/Login";
 import Header from "./Views/JSX/Header/Header";
@@ -46,66 +48,97 @@ import SaldoAwal from "./Views/JSX/Akunting/ViewSaldoAwal";
 class App extends Component {
   render() {
     return (
-      <div>
-        <Header />
-        <Profil />
-        <Route path="/tampilantv" component={TampilanTV} />
-        <Route path="/login" component={Login} />
-
-        <Sidebar />
-        <div className="containercontent">
-          <Switch>
-            <Route exact path="/" component={Dashboard} />
-            <Route path="/apotek" component={Apotek} />
-            <Route path="/kasir" component={Kasir} />
-            <Route
-              path="/form-pembayaran/:id/:no_rm"
-              render={({ match }) => <Pembayaran antrian={match.params} />}
-            />
-            <Route
-              path="/detail-obat/:id"
-              render={({ match }) => <DetailObat uid={match.params} />}
-            />
-            <Route path="/kelola-obat" component={KelolaObat} />
-            <Route path="/transaksi-obat" component={TransaksiObat} />
-            <Route path="/pendaftaran" component={Pendaftaran} />
-            <Route
-              path="/tambah-layanan/:id"
-              render={({ match }) => (
-                <PendaftaranLayanan antrian={match.params} />
+      <Store>
+        <BrowserRouter>
+          <div>
+            <Consumer>
+              {({ state }) => (
+                <div>
+                  {console.log("ini status", state.auth)}
+                  {state.auth ? <Redirect exact to="/dashboard" /> : null}
+                </div>
               )}
-            />
-            <Route
-              path="/pelayanan-medis/:id/:no_rm"
-              render={({ match }) => <PelayananMedis antrian={match.params} />}
-            />
-            <Route path="/pelayanan-medis" component={TimelinePelayananMedis} />
-            <Route path="/admin" component={Admin} />
-            <Route path="/karyawan" component={KelolaKaryawan} />
-            <Route path="/poliklinik" component={KelolaPoliklinik} />
-            <Route path="/tindakan" component={KelolaTindakan} />
-            <Route path="/profil-klinik" component={ProfilKlinik} />
-            <Route
-              path="/peralatan-laboratorium"
-              component={KelolaItemLaboratorium}
-            />
-            <Route path="/rekam-medis" component={DaftarRekamMedis} />
-            <Route
-              path="/detail-rekam-medis/:id"
-              render={({ match }) => <DetailRekamMedis pasien={match.params} />}
-            />
-            {/* <Route
+            </Consumer>
+            <Header />
+            <Profil />
+            <Route path="/tampilantv" component={TampilanTV} />
+            <Route exact path="/" component={Login} />
+            <Sidebar />
+            <div className="containercontent">
+              <Switch>
+                <ProtectedRoute exact path="/dashboard" component={Dashboard} />
+                <ProtectedRoute path="/apotek" component={Apotek} />
+                <ProtectedRoute path="/kasir" component={Kasir} />
+                <ProtectedRoute
+                  path="/form-pembayaran/:id/:no_rm"
+                  render={({ match }) => <Pembayaran antrian={match.params} />}
+                />
+                <ProtectedRoute
+                  path="/detail-obat/:id"
+                  render={({ match }) => <DetailObat uid={match.params} />}
+                />
+                <ProtectedRoute path="/kelola-obat" component={KelolaObat} />
+                <ProtectedRoute
+                  path="/transaksi-obat"
+                  component={TransaksiObat}
+                />
+                <ProtectedRoute path="/pendaftaran" component={Pendaftaran} />
+                <ProtectedRoute
+                  path="/tambah-layanan/:id"
+                  render={({ match }) => (
+                    <PendaftaranLayanan antrian={match.params} />
+                  )}
+                />
+                <ProtectedRoute
+                  path="/pelayanan-medis/:id/:no_rm"
+                  render={({ match }) => (
+                    <PelayananMedis antrian={match.params} />
+                  )}
+                />
+                <ProtectedRoute
+                  path="/pelayanan-medis"
+                  component={TimelinePelayananMedis}
+                />
+                <ProtectedRoute path="/admin" component={Admin} />
+                <ProtectedRoute path="/karyawan" component={KelolaKaryawan} />
+                <ProtectedRoute
+                  path="/poliklinik"
+                  component={KelolaPoliklinik}
+                />
+                <ProtectedRoute path="/tindakan" component={KelolaTindakan} />
+                <ProtectedRoute
+                  path="/profil-klinik"
+                  component={ProfilKlinik}
+                />
+                <ProtectedRoute
+                  path="/peralatan-laboratorium"
+                  component={KelolaItemLaboratorium}
+                />
+                <ProtectedRoute
+                  path="/rekam-medis"
+                  component={DaftarRekamMedis}
+                />
+                <ProtectedRoute
+                  path="/detail-rekam-medis/:id"
+                  render={({ match }) => (
+                    <DetailRekamMedis pasien={match.params} />
+                  )}
+                />
+                <ProtectedRoute path="*" component={Login}/>
+                {/* <Route
               path="/data_rekam_medis_pasien"
               component={DataRekamMedisPasien}
             /> */}
-            <Route path="/jurnal-umum" component={Akunting} />
-            <Route path="/daftar-akun" component={DaftarAkun} />
-            <Route path="/buku-besar" component={BukuBesar} />
-            <Route path="/saldo-awal" component={SaldoAwal} />
-            {/* <Route path="/list-asuransi" component={ListAsuransi} /> */}
-          </Switch>
-        </div>
-      </div>
+                <ProtectedRoute path="/jurnal-umum" component={Akunting} />
+                <ProtectedRoute path="/daftar-akun" component={DaftarAkun} />
+                <ProtectedRoute path="/buku-besar" component={BukuBesar} />
+                <ProtectedRoute path="/saldo-awal" component={SaldoAwal} />
+                {/* <Route path="/list-asuransi" component={ListAsuransi} /> */}
+              </Switch>
+            </div>
+          </div>
+        </BrowserRouter>
+      </Store>
     );
   }
 }

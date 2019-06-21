@@ -1,66 +1,85 @@
 import React, { Component } from "react";
 import "../../ASSETS/CSS/Viewlogin.css";
 import login from "../../../../src/Methods/User/Auth/login";
+import Logo from "../../ASSETS/IMG/senang.png";
 import { Consumer } from "../../../../src/Methods/User/Auth/Store";
+
 class ViewLogin extends Component {
   state = {
     nik: "",
     password: ""
   };
 
-  newLogin = (e, action) => {
-    e.preventDefault();
+  newLogin = (event, action) => {
+    event.preventDefault();
     login({
       nik: this.state.nik,
       password: this.state.password
-    }).catch(er => console.log("error", er));
+    })
+      .then(() => action.checkSession())
+      .catch(() => {
+        let input = document.querySelectorAll("input");
+        input.forEach(el => (el.value = ""));
+        this.setState({ error: true });
+        setTimeout(() => {
+          this.setState({ error: false, pesan: "Gagal Masuk" });
+        }, 4000);
+      });
   };
 
-  render = () => {
-    return (
-      <div className="container1">
-        <div className="window">
-          <div className="overlay" />
-          <div className="content">
-            <div className="welcome">
-              <img
-                src={require("../../ASSETS/IMG/zanis.png")}
-                alt="zanis"
-                height="100px"
-              />
+  render = () => (
+    <Consumer>
+      {({ state, action }) => (
+        <div className="wrapper fadeInDown">
+          <div id="formContent">
+            <div className="loginFonts"> Login </div>
+            <div className="fadeIn first">
+              <img src={Logo} id="icon" alt="User Icon" />
             </div>
-
-            <div className="input-fields">
+            <div className="field">
+              {this.state.error ? (
+                <h7 style={{ textAlign: "center", color: "red" }}>
+                  {this.state.pesan}
+                </h7>
+              ) : null}
               <input
                 type="text"
-                placeholder="Username"
-                className="input-line full-width"
+                id="nik"
+                className="input"
                 onChange={event => this.setState({ nik: event.target.value })}
               />
+              <label htmlFor="nik" className="form-control-placeholder">
+                Masukkan nik
+              </label>
+            </div>
+            <div className="field">
               <input
                 type="password"
-                placeholder="Password"
-                className="input-line full-width"
+                id="password"
+                className="input"
                 onChange={event =>
                   this.setState({ password: event.target.value })
                 }
               />
+              <label htmlFor="password" className="form-control-placeholder">
+                Masukkan sandi anda
+              </label>
             </div>
-            <div className="spacing">
-              Lupa Password ?? <span className="highlight">Klik Disini</span>
-              <button
-                className="ghost-round full-width mt"
-                onClick={e => this.newLogin(e)}
-              >
-                Masuk
-              </button>
-              <div className="versi">Versi 1.0</div>
+            <input
+              type="button"
+              className="fadeIn fourth"
+              value="Masuk"
+              onClick={event => this.newLogin(event, action)}
+            />
+            <div id="formFooter">
+              <h5 className="underlineHover">Teman Klinik V.Alpha</h5>
+              <h6 className="underlineHover2"> Team IT PT Senang</h6>
             </div>
           </div>
         </div>
-      </div>
-    );
-  };
+      )}
+    </Consumer>
+  );
 }
 
 export default ViewLogin;
