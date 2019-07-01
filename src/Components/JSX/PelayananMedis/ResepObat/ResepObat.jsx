@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import obatList from "../../../../Methods/Apotik/Obat/listObat";
 import ModalKonfirmasiTindakan from "../../Animasi/ModalKonfirmasiTindakan";
 import ModalKonfirmasi from "../../Animasi/ModalKonfirmasi";
-import tambahDetailPesananObat from "../../../../Methods/Apotik/DetailPesananObat/tambahDetailPesananObat";
 import tambahPesananObat from "../../../../Methods/Apotik/PesananObat/tambahPesananObat";
+import { Consumer } from "../../../../Methods/User/Auth/Store";
 
 let set;
 class resepObatTabulasi extends Component {
@@ -18,7 +18,7 @@ class resepObatTabulasi extends Component {
       doResep: [],
       filter: "",
       daftarObat: [],
-      nik_dokter: "112121", //masih belum karna detail_antrian belum bisa filtered by uid_antrian
+      nik_dokter: "",
       disabled: false
     };
   }
@@ -41,13 +41,13 @@ class resepObatTabulasi extends Component {
   };
 
   ubahJumlahObat = (e, i) => {
-    let doResep = [...this.state.doResep];
+    const doResep = [...this.state.doResep];
     doResep[i].jumlah_obat = e.target.value;
     this.setState({ doResep });
   };
 
   ubahKeteranganObat = (e, i) => {
-    let doResep = [...this.state.doResep];
+    const doResep = [...this.state.doResep];
     doResep[i].keterangan = e.target.value;
     this.setState({ doResep });
   };
@@ -55,6 +55,7 @@ class resepObatTabulasi extends Component {
   tambah = daftarObat => {
     this.setState({
       doResep: this.state.doResep.concat({
+        uid: daftarObat.uid,
         nama_obat: daftarObat.nama_obat,
         jumlah_obat: 0,
         kategori: daftarObat.kategori,
@@ -69,7 +70,6 @@ class resepObatTabulasi extends Component {
     var arrays = this.state.doResep;
     console.log("loha", arrays);
     arrays.forEach(i => {
-      // console.log(index, "dapat");
       if (this.state.doResep.uid === id) {
         arrays.splice(i, 1);
       }
@@ -81,27 +81,28 @@ class resepObatTabulasi extends Component {
     this.setState({ doResep: [] });
   }
 
-  handleSave = () => {
-    // tambahPesananObat({
-    //   nomor_rekam_medis: this.props.no_rm
-    // })
-    //   .then(response =>
-    //     tambahDetailPesananObat({
-    //       uid: response.data[0].uid,
-    //       doResep: this.state.doResep
-    //     })
-    //   )
-    //   .then(
-    //     this.setState({
-    //       disabled: true,
-    //       notification: "1"
-    //     })
-    //   )
-    //   .catch(err => {
-    //     console.log(err);
-    //     this.setState({ notification: "0" });
-    //   });
-    console.log("simpan data", this.props.no_rm);
+  handleSave = nik => {
+    tambahPesananObat({
+      nomor_rekam_medis: this.props.no_rm,
+      nik_dokter: nik,
+      detail_pesanan_obat: this.state.doResep.map(
+        ({ uid, jumlah_obat, keterangan }) => ({
+          uid_obat: uid,
+          jumlah_obat,
+          keterangan
+        })
+      )
+    })
+      .then(
+        this.setState({
+          disabled: true,
+          notification: "1"
+        })
+      )
+      .catch(err => {
+        console.log(err);
+        this.setState({ notification: "0" });
+      });
   };
 
   daftardoResep = () => {
@@ -151,6 +152,7 @@ class resepObatTabulasi extends Component {
     let suggestionsList, daftarResep;
     const { filter, doResep, daftarObat } = this.state;
     const filteredResep = daftarObat;
+    // console.table("resep", doResep);
 
     if (filteredResep.length !== 0 && filter !== "") {
       suggestionsList = (
@@ -232,10 +234,14 @@ class resepObatTabulasi extends Component {
           </div>
         </div>
         {daftarResep}
-        <ModalKonfirmasiTindakan
-          passValue={this.handleSave}
-          modal="notification2"
-        />
+        <Consumer>
+          {({ state }) => (
+            <ModalKonfirmasiTindakan
+              passValue={() => this.handleSave(state.dataLogin.nik)}
+              modal="notification2"
+            />
+          )}
+        </Consumer>
         <ModalKonfirmasi
           notification={this.state.notification}
           modal="konfirmasiResep"

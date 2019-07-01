@@ -3,6 +3,7 @@ import "../../../ASSETS/CSS/TambahPelayananAntrian.css";
 import ModalKonfirmasiTindakan from "../../Animasi/ModalKonfirmasiTindakan";
 import ModalKonfirmasi from "../../Animasi/ModalKonfirmasi";
 import tambahHistoriMedis from "../../../../Methods/RekamMedis/HistorisMedis/tambahHistoriMedis";
+import { Consumer } from "../../../../Methods/User/Auth/Store";
 
 class SoapPasien extends Component {
   constructor(props) {
@@ -32,7 +33,8 @@ class SoapPasien extends Component {
     };
   }
 
-  handleSave = () => {
+  handleSave = nik => {
+    console.log("ini nik dokter", nik);
     const catatan = JSON.stringify({
       sistole: this.state.sistole,
       diastole: this.state.diastole,
@@ -45,7 +47,7 @@ class SoapPasien extends Component {
 
     tambahHistoriMedis({
       nomor_rekam_medis: this.props.no_rm,
-      nik_dokter: this.state.nik_dokter,
+      nik_dokter: nik,
       subjektif: this.state.subjektif,
       objektif: this.state.objektif,
       analisa: this.state.analisa,
@@ -358,10 +360,14 @@ class SoapPasien extends Component {
             </div>
           </div>
         </div>
-        <ModalKonfirmasiTindakan
-          passValue={this.handleSave}
-          modal="notification1"
-        />
+        <Consumer>
+          {({ state }) => (
+            <ModalKonfirmasiTindakan
+              passValue={() => this.handleSave(state.dataLogin.nik)}
+              modal="notification1"
+            />
+          )}
+        </Consumer>
         <ModalKonfirmasi
           notification={this.state.notification}
           modal="konfirmasiSOAP"

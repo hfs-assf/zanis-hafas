@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import "../../ASSETS/CSS/Pendaftaran.css";
 import listPasien from "../../../Methods/RekamMedis/Pasien/listPasien";
 
@@ -39,15 +39,15 @@ class CariPasien extends Component {
           <ul className="suggestions">
             {filteresPasien.map(pasien => {
               return (
-               <Link to={"/tambah-layanan/" + pasien.nomor_rekam_medis}>
-                <li
-                  key={pasien.nomor_rekam_medis}
-                  className="suggestion-active"
-                >
-                  {pasien.nama_pasien}
-                  <br />
-                  {pasien.nomor_rekam_medis}
-                </li>
+                <Link to={"/tambah-layanan/" + pasien.nomor_rekam_medis}>
+                  <li
+                    key={pasien.nomor_rekam_medis}
+                    className="suggestion-active"
+                  >
+                    {pasien.nama_pasien}
+                    <br />
+                    {pasien.nomor_rekam_medis}
+                  </li>
                 </Link>
               );
             })}

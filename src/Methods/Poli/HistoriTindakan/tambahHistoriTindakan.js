@@ -8,6 +8,12 @@ let tambahHistoriTindakan = ({
   jumlah,
   keterangan
 }) => {
+  console.log({
+    uid_histori_medis,
+    uid_tindakan,
+    jumlah,
+    keterangan
+  });
   return axios.post(apiURL + "/api/v1/histori_tindakan", {
     uid_histori_medis,
     uid_tindakan,

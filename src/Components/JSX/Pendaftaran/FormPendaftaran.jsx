@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import tambahPasien from "../../../Methods/RekamMedis/Pasien/tambahPasien";
 import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
+import kecamatan from "../../../Methods/data.json";
 // import listProvinsi from "../../../JSON/provinsi";
 // import listProvinsi from "../../../Methods/Pendaftaran/listProvinsi";
 
@@ -19,7 +20,7 @@ class FormPendaftaran extends Component {
       agama: "Islam",
       alamat: "",
       kecamatan: "Sail",
-      kelurahan: "Tenayan Raya",
+      kelurahan: "",
       kode_pos: "",
       telepon: "",
       handphone: "",
@@ -41,12 +42,23 @@ class FormPendaftaran extends Component {
     });
   };
 
-  toTitleCase = text => {
-    return text
-      .split(" ")
-      .map(string => string.charAt(0).toUpperCase() + string.substring(1))
-      .join(" ");
-  };
+  listKelurahan(namakecamatan) {
+    let saring = kecamatan.filter(
+      el => el.nama_kecamatan === `${namakecamatan}`
+    )[0].nama_kelurahan;
+    return saring.map((el, index) => (
+      <option key={index} value={el}>
+        {el}
+      </option>
+    ));
+  }
+
+  // toTitleCase = text => {
+  //   return text
+  //     .split(" ")
+  //     .map(string => string.charAt(0).toUpperCase() + string.substring(1))
+  //     .join(" ");
+  // };
 
   onSubmit = () => {
     console.log(this.state);
@@ -109,6 +121,8 @@ class FormPendaftaran extends Component {
     });
   };
   render() {
+    console.log("kelurahan", this.state.kelurahan);
+    console.log("ini kecamatan", this.state.kecamatan);
     return (
       <div>
         <div className="watermark">
@@ -145,7 +159,7 @@ class FormPendaftaran extends Component {
                     type="text"
                     className="form-control"
                     name="nama_pasien"
-                    value={this.toTitleCase(this.state.nama_pasien)}
+                    value={this.state.nama_pasien}
                     onChange={e => this.handleChange(e)}
                     required
                   />
@@ -245,32 +259,13 @@ class FormPendaftaran extends Component {
                   </span>
                   <textarea
                     name="alamat"
-                    value={this.toTitleCase(this.state.alamat)}
+                    value={this.state.alamat}
                     className="form-control"
                     onChange={e => this.handleChange(e)}
                     required
                   />
                 </label>
                 <div className="row">
-                  <div className="col-sm-4">
-                    <label>
-                      <span>
-                        Kelurahan
-                        <span className="required">*</span>
-                      </span>
-                      <select
-                        name="kelurahan"
-                        className="form-control"
-                        onChange={e => this.handleChange(e)}
-                        required
-                      >
-                        <option defaultValue="Tenayan Raya">
-                          Tenayan Raya
-                        </option>
-                        <option value="...">...</option>
-                      </select>
-                    </label>
-                  </div>
                   <div className="col-sm-4">
                     <label>
                       <span>
@@ -281,13 +276,38 @@ class FormPendaftaran extends Component {
                         name="kecamatan"
                         className="form-control"
                         onChange={e => this.handleChange(e)}
+                        value={this.state.kecamatan}
                         required
                       >
-                        <option defaultValue="Sail">Sail</option>
-                        <option value="Rumbai">Rumbai</option>
+                        {kecamatan.map((el, index) => {
+                          return (
+                            <option value={el.nama_kecamatan} key={index}>
+                              {el.nama_kecamatan}
+                            </option>
+                          );
+                        })}
                       </select>
                     </label>
                   </div>
+                  <div className="col-sm-4">
+                    <label>
+                      <span>
+                        Kelurahan
+                        <span className="required">*</span>
+                      </span>
+                      <select
+                        name="kelurahan"
+                        className="form-control"
+                        onChange={e => this.handleChange(e)}
+                        value={this.state.kelurahan}
+                        required
+                      >
+                        <option>Pilih Kelurahan</option>
+                        {this.listKelurahan(this.state.kecamatan)}
+                      </select>
+                    </label>
+                  </div>
+
                   <div className="col-sm-4">
                     <label>
                       <span>Kode Pos</span>
@@ -344,7 +364,7 @@ class FormPendaftaran extends Component {
                         type="text"
                         className="form-control"
                         name="pendidikan"
-                        value={this.toTitleCase(this.state.pendidikan)}
+                        value={this.state.pendidikan}
                         onChange={e => this.handleChange(e)}
                       />
                     </label>
@@ -356,7 +376,7 @@ class FormPendaftaran extends Component {
                         type="text"
                         className="form-control"
                         name="pekerjaan"
-                        value={this.toTitleCase(this.state.pekerjaan)}
+                        value={this.state.pekerjaan}
                         onChange={e => this.handleChange(e)}
                       />
                     </label>

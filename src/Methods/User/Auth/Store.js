@@ -24,13 +24,17 @@ export class Store extends React.Component {
   };
 
   storeCheckSession = () => {
-    checkSession().then(({ data }) =>
-      this.setState({
-        auth: true,
-        dataLogin: data
-      })
-    );
-    // data => this.setState({ auth: true, dataLogin: data }));
+    checkSession()
+      .then(({ data }) =>
+        this.setState({
+          auth: true,
+          dataLogin: data
+        })
+      )
+      .catch(err => {
+        console.log(err, "ini error");
+        localStorage.clear();
+      });
   };
 
   render = () => (

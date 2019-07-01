@@ -1,0 +1,126 @@
+[
+  {
+    "kode_kecamatan": 1,
+    "nama_kecamatan": "Bukit Raya",
+    "nama_kelurahan": [
+      "Tangkerang Labuai",
+      "Dirgantara",
+      "Simpang Tiga",
+      "Tebingtinggi",
+      "Tangkerang Selatan",
+      "Tangkerang Utara"
+    ]
+  },
+  {
+    "kode_kecamatan": 2,
+    "nama_kecamatan": "Lima Puluh",
+    "nama_kelurahan": ["Rintis ", "Sekip ", "Tanjung Rhu ", "Pesisir "]
+  },
+  {
+    "kode_kecamatan": 3,
+    "nama_kecamatan": "Marpoyan",
+    "nama_kelurahan": [
+      "Maharatu",
+      "Sidomulyo Timur",
+      "Wonorejo",
+      "Tangkerang Barat",
+      "Tangkerang Tengah"
+    ]
+  },
+  {
+    "kode_kecamatan": 4,
+    "nama_kecamatan": "Payung Sekaki",
+    "nama_kelurahan": [
+      "Air Hitam ",
+      "Labuh Baru Barat ",
+      "Labuh Baru Timur ",
+      "Tampan "
+    ]
+  },
+  {
+    "kode_kecamatan": 5,
+    "nama_kecamatan": "Pekanbaru Kota",
+    "nama_kelurahan": [
+      "Suka Ramai ",
+      "Suma Hilang ",
+      "Kota Tinggi ",
+      "Kota Baru ",
+      "Tanah Datar ",
+      "Simpang Empat "
+    ]
+  },
+
+  {
+    "kode_kecamatan": 6,
+    "nama_kecamatan": "Rumbai",
+    "nama_kelurahan": [
+      "Agrowisata",
+      "Maharani",
+      "Muara Fajar Barat",
+      "Muara Fajar Timur",
+      "Sri Meranti",
+      "Palas",
+      "Rumbai Bukit",
+      "Umban Sari",
+      "Rantau Panjang"
+    ]
+  },
+  {
+    "kode_kecamatan": 7,
+    "nama_kecamatan": "Rumbai Pesisir",
+    "nama_kelurahan": [
+      "Limbungan ",
+      "Limbungan Baru ",
+      "Lembah Sari ",
+      "Lembah Damai ",
+      "Meranti Pandak ",
+      "Tebing Tinggi Okura "
+    ]
+  },
+  {
+    "kode_kecamatan": 8,
+    "nama_kecamatan": "Sail",
+    "nama_kelurahan": ["Cinta Raja ", "Suka Maju ", "Suka Mulia (Sukamulya) "]
+  },
+  {
+    "kode_kecamatan": 9,
+    "nama_kecamatan": "Senapelan",
+    "nama_kelurahan": [
+      "Sago ",
+      "Kampung Dalam ",
+      "Kampung Bandar ",
+      "Kampung Baru ",
+      "Padang Terubuk ",
+      "Padang Bulan "
+    ]
+  },
+  {
+    "kode_kecamatan": 10,
+    "nama_kecamatan": "Sukajadi",
+    "nama_kelurahan": [
+      "Sukajadi ",
+      "Harjosari ",
+      "Kedungsari ",
+      "Kampung Melayu ",
+      "Jadirejo ",
+      "Pulau Karam ",
+      "Kampung Tengah "
+    ]
+  },
+  {
+    "kode_kecamatan": 11,
+    "nama_kecamatan": "Tampan",
+    "nama_kelurahan": [
+      "Tobek Godang",
+      "Delima ",
+      "Tuah Karya ",
+      "Simpang Baru ",
+      "Sidomulyo Barat "
+    ]
+  },
+  {
+    "kode_kecamatan": 12,
+    "nama_kecamatan": "Tenayan Raya",
+    "nama_kelurahan": ["Rejosari ", "Sail ", "Kulim ", "Tangkerang Timur "]
+  }
+]

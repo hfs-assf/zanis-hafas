@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import listTindakan from "../../../../Methods/Poli/Tindakan/listTindakan";
+import detailPasien from "../../../../Methods/RekamMedis/Pasien/detailPasien";
 import ModalKonfirmasiTindakan from "../../Animasi/ModalKonfirmasiTindakan";
 import ModalKonfirmasi from "../../Animasi/ModalKonfirmasi";
 import tambahHistoriTindakan from "../../../../Methods/Poli/HistoriTindakan/tambahHistoriTindakan";
+import { Consumer } from "../../../../Methods/User/Auth/Store";
 
 let set;
 class tindakanTabulasi extends Component {
@@ -19,9 +21,21 @@ class tindakanTabulasi extends Component {
       tindakan: [],
       disabled: false,
       jumlah: "",
-      keterangan: ""
+      nik: "",
+      keterangan: "",
+      uid: "",
+      dPasien: [],
+      listHistory: []
     };
   }
+
+  componentDidMount = () => {
+    detailPasien(this.props.no_rm).then(({ data }) => {
+      this.setState({
+        dPasien: data[0].histori_medis[0].uid
+      });
+    });
+  };
 
   onKeyUp = e => {
     clearTimeout(set);
@@ -56,7 +70,13 @@ class tindakanTabulasi extends Component {
 
   tambah(tindakan) {
     this.setState({
-      doTindakan: this.state.doTindakan.concat(tindakan),
+      doTindakan: this.state.doTindakan.concat({
+        uid: tindakan.uid,
+        nama_tindakan: tindakan.nama_tindakan,
+        jumlah: 0,
+        biaya_tindakan: tindakan.biaya_tindakan,
+        keterangan: ""
+      }),
       filter: ""
     });
   }
@@ -74,23 +94,25 @@ class tindakanTabulasi extends Component {
   }
 
   handleSave() {
-    // tambahHistoriTindakan({
-    //   uid_histori_medis: this.props.no_rm,
-    //   uid_tindakan,
-    //   jumlah: this.state.jumlah,
-    //   keterangan: this.state.keterangan
-    // })
-    //   .then(
-    //     this.setState({
-    //       disabled: true,
-    //       notification: "1"
-    //     })
-    //   )
-    //   .catch(err => {
-    //     console.log(err);
-    //     this.setState({ notification: "0" });
-    //   });
-    console.log("simpan", this.props.no_rm);
+    tambahHistoriTindakan({
+      uid_histori_medis: this.state.dPasien,
+      listHistory: this.state.doTindakan.map(({ uid, jumlah, keterangan }) => ({
+        uid_tindakan: uid,
+        jumlah: jumlah,
+        keterangan
+      }))
+    })
+      .then(
+        this.setState({
+          disabled: true,
+          notification: "1"
+        })
+      )
+      .catch(err => {
+        console.log(err);
+        this.setState({ notification: "0" });
+      });
+    // console.log("ini rm nya", this.props.uid);
   }
 
   daftardoTindakan() {
@@ -140,6 +162,7 @@ class tindakanTabulasi extends Component {
     let suggestionsList, daftarTindakan;
     const { filter, doTindakan, tindakan } = this.state;
     const filteredTindakan = tindakan;
+    console.table(doTindakan, "ini tindakan nya ya");
 
     if (filteredTindakan.length !== 0 && filter !== "") {
       suggestionsList = (
@@ -221,10 +244,14 @@ class tindakanTabulasi extends Component {
           </div>
         </div>
         {daftarTindakan}
-        <ModalKonfirmasiTindakan
-          passValue={this.handleSave}
-          modal="notification3"
-        />
+        <Consumer>
+          {({ state }) => (
+            <ModalKonfirmasiTindakan
+              passValue={() => this.handleSave(state.dataLogin.nik)}
+              modal="notification3"
+            />
+          )}
+        </Consumer>
         <ModalKonfirmasi
           notification={this.state.notification}
           modal="konfirmasiTindakan"
