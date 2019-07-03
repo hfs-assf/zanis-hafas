@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import tambahStokObat from "../../../Methods/Apotik/StokObat/tambahStokObat";
 import editStokObat from "../../../Methods/Apotik/StokObat/editStokObat";
 import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
+import ModalKonfirmasiTindakan from "../Animasi/ModalKonfirmasiTindakan";
+import { Consumer } from "../../../Methods/User/Auth/Store";
 
 class FormTambahDetailObat extends Component {
   constructor(props) {
@@ -12,7 +14,7 @@ class FormTambahDetailObat extends Component {
       uid: "",
       stok: "",
       kadaluarsa: "",
-      nik_penerima: "12121",
+      nik_penerima: "",
       harga_modal: "",
       notification: ""
     };
@@ -41,13 +43,13 @@ class FormTambahDetailObat extends Component {
     }
   }
 
-  handleSave() {
+  handleSave = nik => {
     if (this.props.action === "add") {
       tambahStokObat({
         uid: this.props.uid,
         stok: this.state.stok,
         kadaluarsa: this.state.kadaluarsa,
-        nik_penerima: this.state.nik_penerima,
+        nik_penerima: nik,
         harga_modal: this.state.harga_modal
       })
         .then(this.setState({ notification: "1" }))
@@ -68,7 +70,8 @@ class FormTambahDetailObat extends Component {
           this.setState({ notification: "0" });
         });
     }
-  }
+    console.log("ini dia nik", nik);
+  };
 
   render() {
     return (
@@ -176,8 +179,8 @@ class FormTambahDetailObat extends Component {
               <button
                 className="btn btn-primary"
                 data-toggle="modal"
-                data-target="#notification"
-                onClick={this.handleSave}
+                data-target="#notification1"
+                disabled={this.state.disabled}
               >
                 Simpan
               </button>
@@ -190,6 +193,14 @@ class FormTambahDetailObat extends Component {
             </div>
           </div>
         </div>
+        <Consumer>
+          {({ state }) => (
+            <ModalKonfirmasiTindakan
+              passValue={() => this.handleSave(state.dataLogin.nik)}
+              modal="notification1"
+            />
+          )}
+        </Consumer>
         <ModalKonfirmasi notification={this.state.notification} />
       </div>
     );

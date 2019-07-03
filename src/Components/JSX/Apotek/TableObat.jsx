@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../../ASSETS/CSS/Apotek.css";
 import "../../ASSETS/CSS/form.css";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import obatList from "../../../Methods/Apotik/Obat/listObat";
 import hapusObat from "../../../Methods/Apotik/Obat/hapusObat";
 import HapusModal from "../hapusModal";
@@ -77,12 +77,8 @@ export default class TableObat extends React.Component {
             </div>
             <div className="cell text-center">
               <Link to={"/detail-obat/" + uid}>
-              <button
-                className="btn btn-primary btn-sm "
-              >
-                Detail
-              </button>
-               </Link>
+                <button className="btn btn-primary btn-sm ">Detail</button>
+              </Link>
               <button
                 className="btn btn-outline-primary btn-sm"
                 onClick={() => this.deleteModal({ uid })}

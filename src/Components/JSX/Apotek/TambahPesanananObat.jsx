@@ -4,6 +4,8 @@ import "../../ASSETS/CSS/Timeline.css";
 import obatList from "../../../Methods/Apotik/Obat/listObat";
 import tambahDetailPesananObat from "../../../Methods/Apotik/DetailPesananObat/tambahDetailPesananObat";
 import tambahPesananObat from "../../../Methods/Apotik/PesananObat/tambahPesananObat";
+import detailPasien from "../../../Methods/RekamMedis/Pasien/detailPasien";
+import { Consumer } from "../../../Methods/User/Auth/Store";
 import ModalKonfirmasiTindakan from "../../JSX/Animasi/ModalKonfirmasiTindakan";
 import ModalKonfirmasi from "../../JSX/Animasi/ModalKonfirmasi";
 
@@ -14,8 +16,20 @@ export default class TambahPesananObat extends React.Component {
     doResep: [],
     filter: "",
     daftarObat: [],
+    dPasien: [],
     disabled: false
   };
+
+  // componentDidMount = () => {
+  //   detailPasien(this.props.ambilUid).then(el =>
+  //     console.log("ambil data", el.data)
+  //   );
+  //   // .then(({ data }) => {
+  //   //   this.setState({
+  //   //     dPasien: data.nomor_rekam_medis
+  //   //   });
+  //   // });
+  // };
 
   onKeyUp = e => {
     clearTimeout(set);
@@ -49,6 +63,7 @@ export default class TambahPesananObat extends React.Component {
   tambah = daftarObat => {
     this.setState({
       doResep: this.state.doResep.concat({
+        uid: daftarObat.uid,
         nama_obat: daftarObat.nama_obat,
         jumlah_obat: 0,
         kategori: daftarObat.kategori,
@@ -75,16 +90,18 @@ export default class TambahPesananObat extends React.Component {
     this.setState({ doResep: [] });
   }
 
-  handleSave = () => {
-    tambahPesananObat({
-      nomor_rekam_medis: this.props.no_rm
-    })
-      .then(response =>
-        tambahDetailPesananObat({
-          uid: response.data[0].uid,
-          doResep: this.state.doResep
+  handleSave = nik => {
+    tambahPesananObat(this.props.action === "add", {
+      nomor_rekam_medis: this.props.ambilUid,
+      nik_dokter: nik,
+      detail_pesanan_obat: this.state.doResep.map(
+        ({ uid, jumlah_obat, keterangan }) => ({
+          uid_obat: uid,
+          jumlah_obat,
+          keterangan
         })
       )
+    })
       .then(
         this.setState({
           disabled: true,
@@ -95,6 +112,7 @@ export default class TambahPesananObat extends React.Component {
         console.log(err);
         this.setState({ notification: "0" });
       });
+    // console.log("props", this.props.ambilUid);
   };
 
   tambahPesanan = () => {
@@ -153,6 +171,7 @@ export default class TambahPesananObat extends React.Component {
     let suggestionList, daftarResep;
     const { filter, doResep, daftarObat } = this.state;
     const filteredResep = daftarObat;
+    console.log("ini doResep euy", doResep);
     if (filteredResep.length !== 0 && filter !== "") {
       suggestionList = (
         <ul
@@ -271,10 +290,18 @@ export default class TambahPesananObat extends React.Component {
               </button>
             </div>
             {daftarResep}
-            <ModalKonfirmasiTindakan
+            {/* <ModalKonfirmasiTindakan
               passValue={this.handleSave}
               modal="notification2"
-            />
+            /> */}
+            <Consumer>
+              {({ state }) => (
+                <ModalKonfirmasiTindakan
+                  passValue={() => this.handleSave(state.dataLogin.nik)}
+                  modal="notification2"
+                />
+              )}
+            </Consumer>
             <ModalKonfirmasi
               notification={this.state.notification}
               modal="konfirmasiResep"

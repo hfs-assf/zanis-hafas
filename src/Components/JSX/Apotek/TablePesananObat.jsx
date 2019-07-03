@@ -3,9 +3,9 @@ import React, { Component } from "react";
 import "../../ASSETS/CSS/form.css";
 import "../../ASSETS/CSS/Timeline.css";
 import editPesananObat from "../../../Methods/Apotik/PesananObat/editPesananObat";
-import listPesananObat from "../../../Methods/Apotik/PesananObat/listPesananObat";
 import listPesananObatByStatus from "../../../Methods/Apotik/PesananObat/listPesananObat";
 import TambahPesananObat from "./TambahPesanananObat";
+import { Consumer } from "../../../Methods/User/Auth/Store";
 import { dateFormat } from "../../../Methods/waktu";
 
 export default class TablePesananObat extends React.Component {
@@ -17,7 +17,8 @@ export default class TablePesananObat extends React.Component {
       uid: ""
     },
     showDetail: false,
-    openModal: false
+    openModal: false,
+    nik: ""
   };
 
   pushDataKePesananObat(data) {
@@ -61,7 +62,7 @@ export default class TablePesananObat extends React.Component {
     console.log("cancel");
   };
 
-  simpanPesanan = () => {
+  simpanPesanan = nik => {
     window.location.reload();
   };
 

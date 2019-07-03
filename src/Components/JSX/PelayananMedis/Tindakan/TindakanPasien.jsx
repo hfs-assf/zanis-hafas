@@ -3,6 +3,7 @@ import listTindakan from "../../../../Methods/Poli/Tindakan/listTindakan";
 import detailPasien from "../../../../Methods/RekamMedis/Pasien/detailPasien";
 import ModalKonfirmasiTindakan from "../../Animasi/ModalKonfirmasiTindakan";
 import ModalKonfirmasi from "../../Animasi/ModalKonfirmasi";
+import tambahDetailTransaksi from "../../../../Methods/Kasir/DetailTransaksi/tambahDetailTransaksi";
 import tambahHistoriTindakan from "../../../../Methods/Poli/HistoriTindakan/tambahHistoriTindakan";
 import { Consumer } from "../../../../Methods/User/Auth/Store";
 
@@ -73,7 +74,7 @@ class tindakanTabulasi extends Component {
       doTindakan: this.state.doTindakan.concat({
         uid: tindakan.uid,
         nama_tindakan: tindakan.nama_tindakan,
-        jumlah: 0,
+        jumlah_tindakan: 0,
         biaya_tindakan: tindakan.biaya_tindakan,
         keterangan: ""
       }),
@@ -96,12 +97,13 @@ class tindakanTabulasi extends Component {
   handleSave() {
     tambahHistoriTindakan({
       uid_histori_medis: this.state.dPasien,
-      listHistory: this.state.doTindakan.map(({ uid, jumlah, keterangan }) => ({
-        uid_tindakan: uid,
-        jumlah: jumlah,
-        keterangan
-      }))
+      uid_tindakan: this.state.doTindakan[0].uid,
+      jumlah: this.state.doTindakan[0].jumlah_tindakan,
+      keterangan: this.state.doTindakan[0].keterangan
     })
+      // .then(response => tambahDetailTransaksi({
+      //   item_transaksi:this.state
+      // }))
       .then(
         this.setState({
           disabled: true,
@@ -112,7 +114,7 @@ class tindakanTabulasi extends Component {
         console.log(err);
         this.setState({ notification: "0" });
       });
-    // console.log("ini rm nya", this.props.uid);
+    // console.log("ini rm nya", this.state.doTindakan[0].keterangan);
   }
 
   daftardoTindakan() {
@@ -162,7 +164,7 @@ class tindakanTabulasi extends Component {
     let suggestionsList, daftarTindakan;
     const { filter, doTindakan, tindakan } = this.state;
     const filteredTindakan = tindakan;
-    console.table(doTindakan, "ini tindakan nya ya");
+    console.table("tindakan", doTindakan);
 
     if (filteredTindakan.length !== 0 && filter !== "") {
       suggestionsList = (
