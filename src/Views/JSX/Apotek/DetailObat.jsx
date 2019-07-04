@@ -14,17 +14,23 @@ class DetailObat extends Component {
       filter: "",
       obat: [],
       selected: {},
-      action: ""
+      action: "",
+      margin: 0
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     listStokObat(this.props.uid.id).then(({ data }) => {
       this.setState({
         obat: this.state.obat.concat(data)
       });
     });
   }
+
+  // getMargin(harga_modal) {
+  //   let costPrice = harga_modal;
+  //   return costPrice + costPrice * this.state.margin;
+  // }
 
   addModal() {
     this.setState({ selected: {}, action: "add" });
@@ -36,7 +42,14 @@ class DetailObat extends Component {
       action: "edit"
     });
   }
-  renderDaftarObat = ({ uid, waktu_masuk, stok, kadaluarsa, harga_modal }) => {
+  renderDaftarObat = ({
+    uid,
+    waktu_masuk,
+    stok,
+    kadaluarsa,
+    harga_modal,
+    harga
+  }) => {
     return (
       <div className="row1" key={uid}>
         <div className="cell text-center">
@@ -47,7 +60,7 @@ class DetailObat extends Component {
           {new Date(kadaluarsa).toLocaleDateString("en-GB")}
         </div>
         <div className="cell text-left">Rp. {harga_modal}</div>
-
+        <div className="cell text-left">{harga}</div>
         <div className="cell text-center">
           <button
             className="btn btn-primary btn-sm "
@@ -85,6 +98,7 @@ class DetailObat extends Component {
             <div className="cell">Jumlah</div>
             <div className="cell">Kadaluarsa</div>
             <div className="cell">Harga Modal</div>
+            <div className="cell">Harga</div>
             <div className="cell">Aksi</div>
           </div>
           {obat.map(obat => {

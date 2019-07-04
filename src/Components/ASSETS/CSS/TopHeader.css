@@ -1,6 +1,5 @@
 .warna1 {
-  background-color: #1c70c8;
-  /* background-color: #5bc0de; */
+  background-color: #fff;
 }
 /* bagdes animasi cuy */
 
@@ -127,14 +126,14 @@
 
 .notifications a.content {
   text-decoration: none;
-  background: rgb(255, 255, 255);
+  background: #25a9dd;
 }
 
 .notification-item {
   padding: 6px;
   margin: 5px;
-  background: #ffffff;
-  color: white;
+  background: #25a9dd;
+  color: #25a9dd;
   height: 80px;
   font-style: normal;
   border-radius: 10px;

@@ -50,7 +50,7 @@ class App extends Component {
     return (
       <Store>
         <BrowserRouter>
-          <div>
+          <div style={{ backgroundColor: "#f8f9fa", fontWeight: "bold" }}>
             <Consumer>
               {({ state }) => (
                 <div>
@@ -124,7 +124,7 @@ class App extends Component {
                     <DetailRekamMedis pasien={match.params} />
                   )}
                 />
-                <ProtectedRoute path="*" component={Login}/>
+                <ProtectedRoute path="*" component={Login} />
                 {/* <Route
               path="/data_rekam_medis_pasien"
               component={DataRekamMedisPasien}

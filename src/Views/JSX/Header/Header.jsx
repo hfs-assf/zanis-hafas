@@ -22,7 +22,7 @@ export default class Header extends Component {
               <nav className="mb-4 navbar navbar-expand-lg sticky-top navbar-dark warna1">
                 <Link to="/" className="navbar-brand font-bold" href="#">
                   <img
-                    src={require("../../../Components/ASSETS/IMG/zanis.png")}
+                    src={require("../../../Components/ASSETS/IMG/teman.jpg")}
                     alt="zanis"
                     height="48px"
                   />
@@ -51,8 +51,10 @@ export default class Header extends Component {
                         data-toggle="dropdown"
                         aria-haspopup="true"
                         aria-expanded="false"
+                        style={{ color: "#333" }}
                       >
-                        <i className="fa fa-user" /> Selamat Datang Admin
+                        <i className="fa fa-user" />
+                        Selamat Datang Admin
                       </a>
                       <div
                         className="dropdown-menu dropdown-menu-right"

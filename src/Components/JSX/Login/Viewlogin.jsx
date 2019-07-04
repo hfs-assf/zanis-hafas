@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../../ASSETS/CSS/Viewlogin.css";
 import login from "../../../../src/Methods/User/Auth/login";
-import Logo from "../../ASSETS/IMG/senang.png";
+import Logo from "../../ASSETS/IMG/teman.jpg";
 import { Consumer } from "../../../../src/Methods/User/Auth/Store";
 
 class ViewLogin extends Component {
@@ -32,7 +32,7 @@ class ViewLogin extends Component {
       {({ state, action }) => (
         <div className="wrapper fadeInDown">
           <div id="formContent">
-            <div className="loginFonts"> Login </div>
+            {/* <div className="loginFonts"> Login </div> */}
             <div className="fadeIn first">
               <img src={Logo} id="icon" alt="User Icon" />
             </div>
@@ -66,6 +66,11 @@ class ViewLogin extends Component {
               </label>
             </div>
             <input
+              style={{
+                width: "75%",
+                letterSpacing: "2.5px",
+                fontWeight: "600"
+              }}
               type="button"
               className="fadeIn fourth"
               value="Masuk"
