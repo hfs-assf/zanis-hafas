@@ -111,7 +111,7 @@ class Sidebar extends Component {
                           </li>
                         </ul>
                       </li>
-                      <li>
+                      {/* <li>
                         <Link
                           to="/admin"
                           className="has-arrow"
@@ -155,7 +155,7 @@ class Sidebar extends Component {
                             <Link to="/neraca-lajur">Neraca Lajur</Link>
                           </li>
                         </ul>
-                      </li>
+                      </li> */}
                     </ul>
                   </nav>
                 </div>

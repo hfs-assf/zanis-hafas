@@ -5,14 +5,14 @@ table .table-body {
   color: black;
 }
 .header-resep {
-  background-color: #1976d2;
+  background-color: #25a9dd;
   border-radius: 15px 15px 15px 15px;
   color: white;
   font-size: 20px;
   padding: 10px;
 }
 .resep {
-  border: 2px solid #1976d2;
+  border: 2px solid #25a9dd;
   background-color: white;
-  color: #1976d2;
+  color: #25a9dd;
 }

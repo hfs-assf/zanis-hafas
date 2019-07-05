@@ -46,7 +46,7 @@
   display: none;
 }
 .middle input[type="radio"]:checked + .box {
-  background-color: #1976d2;
+  background-color: #25a9dd;
 }
 .middle input[type="radio"]:checked + .box span {
   color: white;
@@ -62,7 +62,7 @@
 .middle .box {
   border-radius: 4px;
   margin: 4px;
-  border: 1px solid #1976d2;
+  border: 1px solid #25a9dd;
   width: 100px;
   height: 30px;
   background-color: rgb(255, 255, 255);
@@ -164,7 +164,7 @@
   box-shadow: 0 10px 10px rgba(116, 112, 112, 0.16),
     0 3px 6px rgba(95, 92, 92, 0.23);
   /* margin-top: 3px; */
-  border: 1px dashed #1976d2;
+  border: 1px dashed #25a9dd;
   border-radius: 12px;
   background-color: #fff;
   color: #252422;
@@ -186,7 +186,7 @@
 }
 
 .boxdaftar .table > thead > tr > th {
-  color: #1976d2;
+  color: #25a9dd;
   padding: 12px 7px;
   vertical-align: middle;
   border-bottom-width: 1px;
@@ -219,7 +219,7 @@
 }
 
 .modal-body .table > thead > tr > th {
-  color: #1976d2;
+  color: #25a9dd;
   padding: 12px 7px;
   vertical-align: middle;
   border-bottom-width: 1px;
@@ -253,7 +253,6 @@
   margin-left: -2px;
 }
 .flexpelayanan > .boxpelayanan {
-  
   width: 100%;
   margin-top: 3px;
   border-radius: 30px;
@@ -283,7 +282,7 @@
   background-color: rgb(238, 238, 238);
 }
 .boxsurat:hover {
-  background-color: #1976d2;
+  background-color: #25a9dd;
   color: white;
 }
 
@@ -292,7 +291,7 @@
 
 .main {
   max-width: 100%;
-  border: 1px dashed #1976d2;
+  border: 1px dashed #25a9dd;
   border-radius: 30px;
   padding: 15px;
 }
@@ -354,7 +353,7 @@
 
 /* SOAP */
 .boxsoap {
-  background-color: #1976d2;
+  background-color: #25a9dd;
   text-align: center;
   color: white;
   max-width: 10em;
@@ -396,7 +395,7 @@ td select {
 }
 
 .rowsoap > .legendtitle {
-  background-color: #1976d2;
+  background-color: #25a9dd;
   color: white;
   border-radius: 10px 10px 0 0;
   max-width: 10em;
@@ -404,7 +403,7 @@ td select {
 }
 
 .rowsoap > .legendtitle1 {
-  background-color: #1976d2;
+  background-color: #25a9dd;
   color: white;
   margin-left: -1px;
   margin-top: 12px;
@@ -417,7 +416,7 @@ td select {
 }
 .input-template {
   border-radius: 6px 6px 6px 6px;
-  border: 1px solid #1976d2;
+  border: 1px solid #25a9dd;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12) inset;
   width: 100%;
   padding: 5px !important;
@@ -425,7 +424,7 @@ td select {
 .textarea {
   width: 100%;
   border-radius: 0 6px 6px 6px;
-  border: 1px solid #1976d2;
+  border: 1px solid #25a9dd;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12) inset;
   color: #555555;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -444,7 +443,7 @@ td select {
 
 .maxrow {
   padding-top: 0.285em;
-  background-color: #1976d2;
+  background-color: #25a9dd;
   color: white;
   width: 100%;
   border-radius: 10px;
@@ -494,12 +493,12 @@ td select {
 .cell input[type="number"] {
   width: 50px;
   border-radius: 5px;
-  border: 1px solid #1976d2;
+  border: 1px solid #25a9dd;
   line-height: 2.2em;
 }
 .cell input[type="text"] {
   border-radius: 5px;
-  border: 1px solid #1976d2;
+  border: 1px solid #25a9dd;
   line-height: 2.2em;
 }
 .cell input:focus {
@@ -530,7 +529,7 @@ td select {
   background: rgb(233, 235, 235);
 }
 .row1.header {
-  background-color: #1976d2 !important;
+  background-color: #25a9dd !important;
   font-weight: 00;
   text-align: center;
   font-size: 15px;

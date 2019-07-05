@@ -49,7 +49,7 @@ class ViewLogin extends Component {
                 onChange={event => this.setState({ nik: event.target.value })}
               />
               <label htmlFor="nik" className="form-control-placeholder">
-                Masukkan nik
+                Nik
               </label>
             </div>
             <div className="field">
@@ -62,7 +62,7 @@ class ViewLogin extends Component {
                 }
               />
               <label htmlFor="password" className="form-control-placeholder">
-                Masukkan sandi anda
+                Sandi
               </label>
             </div>
             <input

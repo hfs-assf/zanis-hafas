@@ -6,10 +6,7 @@ import FormPendaftaran from "../../../Components/JSX/Pendaftaran/FormPendaftaran
 class Pendaftaran extends Component {
   render() {
     return (
-      <div
-        className="card"
-        style={{ width: "99%", borderTop: "2px solid #1976d2" }}
-      >
+      <div className="card">
         <div className="card-body">
           <div className="flex-container">
             <div className="box column1">
@@ -27,7 +24,7 @@ class Pendaftaran extends Component {
           >
             <strong>
               Sesudah menginput data pasien atau melihat data pasien lama
-            </strong>{" "}
+            </strong>
             klik menu pencarian.
             <button
               type="button"

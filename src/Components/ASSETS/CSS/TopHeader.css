@@ -1,5 +1,7 @@
-.warna1 {
+.navTop {
   background-color: #fff;
+  position: fixed;
+  width: 100%;
 }
 /* bagdes animasi cuy */
 

@@ -128,7 +128,7 @@ class FormPendaftaran extends Component {
         <div className="watermark">
           <img
             className="img-fluid"
-            src="https://assets.about.me/background/users/r/s/i/rsia_zainab_1440732420_26.jpg"
+            src={require("../../../Components/ASSETS/IMG/teman.jpg")}
             alt="logo zanis"
           />
         </div>

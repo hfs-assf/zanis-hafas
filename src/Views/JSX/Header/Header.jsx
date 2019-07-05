@@ -19,7 +19,7 @@ export default class Header extends Component {
         {({ state, action }) => (
           <div>
             {state.auth ? (
-              <nav className="mb-4 navbar navbar-expand-lg sticky-top navbar-dark warna1">
+              <nav className="mb-4 navbar navbar-expand-lg sticky-top navbar-dark navTop">
                 <Link to="/" className="navbar-brand font-bold" href="#">
                   <img
                     src={require("../../../Components/ASSETS/IMG/teman.jpg")}

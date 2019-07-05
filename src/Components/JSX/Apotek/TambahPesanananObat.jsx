@@ -171,7 +171,6 @@ export default class TambahPesananObat extends React.Component {
     let suggestionList, daftarResep;
     const { filter, doResep, daftarObat } = this.state;
     const filteredResep = daftarObat;
-    console.log("ini doResep euy", doResep);
     if (filteredResep.length !== 0 && filter !== "") {
       suggestionList = (
         <ul
