@@ -19,10 +19,10 @@ class TambahAntrian extends Component {
     };
   }
 
-  showHide = (value) => {
+  showHide = value => {
     this.setState({ showMe: value });
-  }
-  
+  };
+
   handleSave = () => {
     tambahAntrian({
       nomor_rekam_medis: this.props.pasien,
@@ -35,7 +35,7 @@ class TambahAntrian extends Component {
         console.log(err);
         this.setState({ notification: "0" });
       });
-  }
+  };
 
   render() {
     return (
@@ -87,9 +87,7 @@ class TambahAntrian extends Component {
               required
             >
               <option value="">--- Pilihan ---</option>
-              <option value="dr. Miaw">dr. Miaw</option>
-              <option value="dr. Kucing">dr. Kucing</option>
-              <option value="dr. Suci">dr. Suci</option>
+              <option value="dr. Miaw">dr. Nurlailiyani</option>
             </select>
           </div>
         </div>
