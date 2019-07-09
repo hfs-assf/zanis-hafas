@@ -5,6 +5,7 @@ import Calender from "../../../Components/ASSETS/SVG/Kalender1";
 import listAntrian from "../../../Methods/Pendaftaran/Antrian/listAntrian";
 import detailPasien from "../../../Methods/RekamMedis/Pasien/detailPasien";
 import { dateFormat } from "../../../Methods/waktu";
+import { list } from "postcss";
 
 let jumlahAntrian;
 class TimelinePelayananMedis extends Component {
@@ -30,9 +31,10 @@ class TimelinePelayananMedis extends Component {
     let antrian = await listAntrian().then(data => data.data);
     let namaList = [];
 
-    let listRM = antrian.map(el => el.nomor_rekam_medis);
+    const listRM = antrian.map(el => el.nomor_rekam_medis);
     for (let i = 0; i < listRM.length; i++) {
       let nama = await detailPasien(listRM[i]).then(data => data.data);
+      console.log("ini nama ", nama);
       namaList.push(nama[0].nama_pasien);
     }
 
@@ -41,6 +43,7 @@ class TimelinePelayananMedis extends Component {
 
   antrianList = () => {
     const { lAntrian } = this.state;
+    console.log("antriannya", lAntrian);
     return lAntrian.map(e => {
       return (
         <li key={e.uid} className="animated bounceIn">

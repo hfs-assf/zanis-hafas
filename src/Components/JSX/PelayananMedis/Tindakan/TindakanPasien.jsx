@@ -3,7 +3,6 @@ import listTindakan from "../../../../Methods/Poli/Tindakan/listTindakan";
 import detailPasien from "../../../../Methods/RekamMedis/Pasien/detailPasien";
 import ModalKonfirmasiTindakan from "../../Animasi/ModalKonfirmasiTindakan";
 import ModalKonfirmasi from "../../Animasi/ModalKonfirmasi";
-import tambahDetailTransaksi from "../../../../Methods/Kasir/DetailTransaksi/tambahDetailTransaksi";
 import tambahHistoriTindakan from "../../../../Methods/Poli/HistoriTindakan/tambahHistoriTindakan";
 import { Consumer } from "../../../../Methods/User/Auth/Store";
 
@@ -30,12 +29,25 @@ class tindakanTabulasi extends Component {
     };
   }
 
+  getRm() {
+    let rm = detailPasien(this.props.no_rm).then(
+      data => data.data[0].histori_medis[0].uid
+    );
+    return rm;
+  }
+
   componentDidMount = () => {
-    detailPasien(this.props.no_rm).then(({ data }) => {
-      this.setState({
-        dPasien: data[0].histori_medis[0].uid
-      });
-    });
+    this.getRm()
+      .then(data =>
+        this.setState({
+          dPasien: data
+        })
+      )
+      .catch(error =>
+        this.setState({
+          error
+        })
+      );
   };
 
   onKeyUp = e => {
@@ -164,7 +176,7 @@ class tindakanTabulasi extends Component {
     let suggestionsList, daftarTindakan;
     const { filter, doTindakan, tindakan } = this.state;
     const filteredTindakan = tindakan;
-    console.table("tindakan", doTindakan);
+    console.table("dPasien", this.state.dPasien);
 
     if (filteredTindakan.length !== 0 && filter !== "") {
       suggestionsList = (
