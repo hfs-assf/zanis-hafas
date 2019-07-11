@@ -50,7 +50,7 @@ class TambahAntrian extends Component {
         <hr className="hr2" />
         <div className="form-group row">
           <label htmlFor="JenisPasien" className="col-sm-4 col-form-label">
-            Jenis Pasien
+            Jaminan
             <span className="required">*</span>
           </label>
           <div className="col-sm-5">
@@ -87,7 +87,7 @@ class TambahAntrian extends Component {
               required
             >
               <option value="">--- Pilihan ---</option>
-              <option value="dr. Miaw">dr. Nurlailiyani</option>
+              <option value="dr. Nurlailiyani">dr. Nurlailiyani</option>
             </select>
           </div>
         </div>

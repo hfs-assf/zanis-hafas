@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../../../ASSETS/CSS/RiwayatPasien.css";
 import listHistoriMedis from "../../../../Methods/RekamMedis/HistorisMedis/listHistoriMedis";
+import detailPasien from "../../../../Methods/RekamMedis/Pasien/detailPasien";
 
 class RiwayatKunjungan extends Component {
   constructor() {
@@ -10,34 +11,39 @@ class RiwayatKunjungan extends Component {
     };
   }
 
-  componentWillMount =() => {
+  componentDidMount = () => {
+    listHistoriMedis(this.props.id);
+
     listHistoriMedis(this.props.id).then(({ data }) => {
       this.setState({
         histori: data
       });
     });
-  }
+  };
 
-  renderHistoriMedis = (rm) => {
+  renderHistoriMedis = rm => {
     return (
       <div className="list-item col-md-12" key={rm.uid}>
         <div className="list-content">
           <div className="judulatas">
-            <strong>{rm.waktu_checkup}</strong>
+            <strong>
+              {new Date(rm.waktu_checkup).toLocaleDateString("en-GB")}
+            </strong>
           </div>
           <ul>
-            <li>Poli Umum</li>
             <li>{rm.penjamin}</li>
             <li>{rm.diagnosa}</li>
+            <li>{rm.jenis_perawatan}</li>
           </ul>
         </div>
       </div>
     );
-  }
+  };
 
   render() {
     let header;
     const { histori } = this.state;
+    console.log("histori", histori);
 
     if (histori.length !== 0) {
       header = histori.map(rm => {

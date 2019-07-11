@@ -96,7 +96,6 @@ class tindakanTabulasi extends Component {
 
   hapus = id => {
     const arrays = this.state.doTindakan;
-    console.log(arrays);
     this.setState({
       doTindakan: arrays.filter(el => el.uid !== id)
     });
@@ -126,7 +125,6 @@ class tindakanTabulasi extends Component {
         console.log(err);
         this.setState({ notification: "0" });
       });
-    // console.log("ini rm nya", this.state.doTindakan[0].keterangan);
   }
 
   daftardoTindakan() {
@@ -176,8 +174,7 @@ class tindakanTabulasi extends Component {
     let suggestionsList, daftarTindakan;
     const { filter, doTindakan, tindakan } = this.state;
     const filteredTindakan = tindakan;
-    console.table("dPasien", this.state.dPasien);
-
+    // console.table("dPasien", this.state.dPasien);
     if (filteredTindakan.length !== 0 && filter !== "") {
       suggestionsList = (
         <ul className="suggestions">

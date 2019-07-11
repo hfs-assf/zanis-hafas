@@ -5,6 +5,7 @@ import "../../ASSETS/CSS/Timeline.css";
 import editPesananObat from "../../../Methods/Apotik/PesananObat/editPesananObat";
 import listPesananObatByStatus from "../../../Methods/Apotik/PesananObat/listPesananObat";
 import TambahPesananObat from "./TambahPesanananObat";
+import kurangStockObat from "../../../Methods/Apotik/StokObat/kurangStokObat";
 import { Consumer } from "../../../Methods/User/Auth/Store";
 import { dateFormat } from "../../../Methods/waktu";
 
@@ -53,13 +54,15 @@ export default class TablePesananObat extends React.Component {
     editPesananObat(uid, "SELESAI").then(() => {
       this.setState(this.state);
     });
+    kurangStockObat(uid).then(() => {
+      this.setState(this.state);
+    });
   };
 
   cancelPress = uid => {
     editPesananObat(uid, "BATAL").then(() => {
       this.setState(this.state);
     });
-    console.log("cancel");
   };
 
   simpanPesanan = nik => {
@@ -67,7 +70,6 @@ export default class TablePesananObat extends React.Component {
   };
 
   tambahPesanan = uid => {
-    console.log("ini id", uid);
     this.setState({ openModal: true, selected: { uid } });
   };
 

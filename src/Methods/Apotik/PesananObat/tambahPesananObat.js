@@ -6,6 +6,9 @@ let tambahPesananObat = ({
   nomor_rekam_medis,
   detail_pesanan_obat
 }) => {
+  // console.log({
+  //   detail_pesanan_obat
+  // });
   return axios.post(apiURL + "/api/v1/pesanan-obat", {
     nik_dokter,
     nomor_rekam_medis,

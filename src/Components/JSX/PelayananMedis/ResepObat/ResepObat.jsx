@@ -68,7 +68,6 @@ class resepObatTabulasi extends Component {
 
   hapus = id => {
     var arrays = this.state.doResep;
-    console.log("loha", arrays);
     arrays.forEach(i => {
       if (this.state.doResep.uid === id) {
         arrays.splice(i, 1);
@@ -152,7 +151,6 @@ class resepObatTabulasi extends Component {
     let suggestionsList, daftarResep;
     const { filter, doResep, daftarObat } = this.state;
     const filteredResep = daftarObat;
-    console.table("resep", doResep);
 
     if (filteredResep.length !== 0 && filter !== "") {
       suggestionsList = (

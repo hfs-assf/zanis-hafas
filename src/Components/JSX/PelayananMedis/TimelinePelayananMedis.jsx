@@ -27,23 +27,21 @@ class TimelinePelayananMedis extends Component {
     });
   };
 
-  async getData() {
+  getData = async () => {
     let antrian = await listAntrian().then(data => data.data);
     let namaList = [];
 
     const listRM = antrian.map(el => el.nomor_rekam_medis);
     for (let i = 0; i < listRM.length; i++) {
       let nama = await detailPasien(listRM[i]).then(data => data.data);
-      console.log("ini nama ", nama);
       namaList.push(nama[0].nama_pasien);
     }
 
     return antrian.map((el, i) => ({ ...el, nama: namaList[i] }));
-  }
+  };
 
   antrianList = () => {
     const { lAntrian } = this.state;
-    console.log("antriannya", lAntrian);
     return lAntrian.map(e => {
       return (
         <li key={e.uid} className="animated bounceIn">
