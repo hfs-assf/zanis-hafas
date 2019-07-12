@@ -3,6 +3,7 @@ import listTindakan from "../../../../Methods/Poli/Tindakan/listTindakan";
 import detailPasien from "../../../../Methods/RekamMedis/Pasien/detailPasien";
 import ModalKonfirmasiTindakan from "../../Animasi/ModalKonfirmasiTindakan";
 import ModalKonfirmasi from "../../Animasi/ModalKonfirmasi";
+import TambahTindakan from "../TambahTindakan";
 import tambahHistoriTindakan from "../../../../Methods/Poli/HistoriTindakan/tambahHistoriTindakan";
 import { Consumer } from "../../../../Methods/User/Auth/Store";
 
@@ -14,6 +15,7 @@ class tindakanTabulasi extends Component {
     this.ubahJumlahTindakan = this.ubahJumlahTindakan.bind(this);
     this.ubahKeteranganTindakan = this.ubahKeteranganTindakan.bind(this);
     this.handleSave = this.handleSave.bind(this);
+    this.addModal = this.addModal.bind(this);
     this.state = {
       notification: "0",
       doTindakan: [],
@@ -25,7 +27,9 @@ class tindakanTabulasi extends Component {
       keterangan: "",
       uid: "",
       dPasien: [],
-      listHistory: []
+      listHistory: [],
+      selected: {},
+      action: ""
     };
   }
 
@@ -48,6 +52,10 @@ class tindakanTabulasi extends Component {
           error
         })
       );
+  };
+
+  addModal = () => {
+    this.setState({ selected: {}, action: "add" });
   };
 
   onKeyUp = e => {
@@ -241,8 +249,8 @@ class tindakanTabulasi extends Component {
     return (
       <div className="container-fluid">
         <div className="row maxrow" style={{ margin: "0px" }}>
-          <div className="col-md-2">Tambah Tindakan</div>
-          <div className="col-md-10">
+          <div className="col-md-2">Cari Tindakan</div>
+          <div className="col-md-8">
             <input
               type="text"
               className="form-control"
@@ -253,7 +261,22 @@ class tindakanTabulasi extends Component {
             />
             {suggestionsList}
           </div>
+          <div className="col-md-2">
+            <button
+              className="btn btn-sm btn-secondary"
+              style={{ marginTop: "-7px" }}
+              data-toggle="modal"
+              data-target="#tambahTindakan"
+              onClick={() => this.addModal}
+            >
+              Tambah
+            </button>
+          </div>
         </div>
+        <TambahTindakan
+          selected={this.state.selected}
+          action={this.state.action}
+        />
         {daftarTindakan}
         <Consumer>
           {({ state }) => (

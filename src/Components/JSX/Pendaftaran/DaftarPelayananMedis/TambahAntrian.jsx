@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import tambahAntrian from "../../../../Methods/Pendaftaran/Antrian/tambahAntrian";
+import tambahTransaksi from "../../../../Methods/Kasir/Transaksi/tambahTransaksi";
 import ModalKonfirmasi from "../../Animasi/ModalKonfirmasi";
+import ModalKonfirmasiTindakan from "../../Animasi/ModalKonfirmasiTindakan";
+import { Consumer } from "../../../../Methods/User/Auth/Store";
 
 class TambahAntrian extends Component {
   constructor(props) {
@@ -14,7 +17,8 @@ class TambahAntrian extends Component {
         nomor_rekam_medis: "",
         dokter: "",
         poli: "",
-        notification: "0"
+        notification: "",
+        jenis_pembayaran: ""
       }
     };
   }
@@ -23,7 +27,27 @@ class TambahAntrian extends Component {
     this.setState({ showMe: value });
   };
 
-  handleSave = () => {
+  handleSave = nik => {
+    console.log({
+      nik_penerbit: nik,
+      nomor_rekam_medis: this.props.pasien,
+      penjamin: this.state.jaminan,
+      jenis_pembayaran: this.state.jenis_pembayaran
+    });
+    tambahTransaksi({
+      nik_penerbit: nik,
+      nomor_rekam_medis: this.props.pasien,
+      penjamin: this.state.jaminan,
+      jenis_pembayaran: this.state.jenis_pembayaran
+    })
+      .then(
+        data => console.log("ini data ,", data),
+        this.setState({ notification: "1" })
+      )
+      .catch(err => {
+        console.log(err);
+        this.setState({ notification: "0" });
+      });
     tambahAntrian({
       nomor_rekam_medis: this.props.pasien,
       poli: this.state.poli,
@@ -112,23 +136,49 @@ class TambahAntrian extends Component {
             </select>
           </div>
         </div>
-
+        <div className="form-group row">
+          <label htmlFor="JenisPembayaran" className="col-sm-4 col-form-label">
+            Jenis Pembayaran
+            <span className="required">*</span>
+          </label>
+          <div className="col-sm-5">
+            <select
+              className="form-control"
+              onChange={event =>
+                this.setState({
+                  jenis_pembayaran: event.target.value
+                })
+              }
+              required
+            >
+              <option value="">--- Pilihan ---</option>
+              <option value="CASH">CASH</option>
+              <option value="KREDIT">KREDIT</option>
+            </select>
+          </div>
+        </div>
         <div className="col-md-12">
           <div className="modal-footer justify-content-center">
             <button
               className="btn btn-primary"
               data-toggle="modal"
               data-target="#konfirmasiAntrian"
-              onClick={() => this.handleSave()}
+              // onClick={() => this.handleSave(state.dataLogin.nik)}
+              disabled={this.state.disabled}
             >
               Simpan
             </button>
           </div>
         </div>
-        <ModalKonfirmasi
-          notification={this.state.notification}
-          modal="konfirmasiAntrian"
-        />
+        <Consumer>
+          {({ state }) => (
+            <ModalKonfirmasiTindakan
+              passValue={() => this.handleSave(state.dataLogin.nik)}
+              modal="konfirmasiAntrian"
+            />
+          )}
+        </Consumer>
+        <ModalKonfirmasi notification={this.state.notification} />
       </div>
     );
   }
