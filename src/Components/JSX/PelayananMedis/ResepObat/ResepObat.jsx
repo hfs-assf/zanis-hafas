@@ -151,7 +151,6 @@ class resepObatTabulasi extends Component {
     let suggestionsList, daftarResep;
     const { filter, doResep, daftarObat } = this.state;
     const filteredResep = daftarObat;
-
     if (filteredResep.length !== 0 && filter !== "") {
       suggestionsList = (
         <ul className="suggestions">

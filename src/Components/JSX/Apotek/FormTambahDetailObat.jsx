@@ -16,6 +16,7 @@ class FormTambahDetailObat extends Component {
       kadaluarsa: "",
       nik_penerima: "",
       harga_modal: "",
+      harga_jual: "",
       notification: ""
     };
   }
@@ -38,7 +39,8 @@ class FormTambahDetailObat extends Component {
         uid: nextProps.uid,
         stok: "",
         kadaluarsa: "",
-        harga_modal: ""
+        harga_modal: "",
+        harga_jual: ""
       });
     }
   }
@@ -50,7 +52,8 @@ class FormTambahDetailObat extends Component {
         stok: this.state.stok,
         kadaluarsa: this.state.kadaluarsa,
         nik_penerima: nik,
-        harga_modal: this.state.harga_modal
+        harga_modal: this.state.harga_modal,
+        harga_jual: this.state.harga_jual
       })
         .then(this.setState({ notification: "1" }))
         .catch(err => {
@@ -62,7 +65,8 @@ class FormTambahDetailObat extends Component {
         uid: this.props.selected.uid,
         stok: this.state.stok,
         harga_modal: this.state.harga_modal,
-        kadaluarsa: this.state.kadaluarsa
+        kadaluarsa: this.state.kadaluarsa,
+        harga_jual: this.state.harga_jual
       })
         .then(this.setState({ notification: "1" }))
         .catch(err => {
@@ -70,7 +74,6 @@ class FormTambahDetailObat extends Component {
           this.setState({ notification: "0" });
         });
     }
-    console.log("ini dia nik", nik);
   };
 
   render() {
@@ -165,6 +168,23 @@ class FormTambahDetailObat extends Component {
                         onChange={event =>
                           this.setState({
                             harga_modal: event.target.value
+                          })
+                        }
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div className="col-md-12">
+                    <div className="md-form mb-0">
+                      <input
+                        type="number"
+                        name="harga_jual"
+                        className="form-control"
+                        placeholder="Harga Jual"
+                        value={this.state.harga_jual}
+                        onChange={event =>
+                          this.setState({
+                            harga_jual: event.target.value
                           })
                         }
                         required

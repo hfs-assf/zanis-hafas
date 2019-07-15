@@ -36,9 +36,9 @@ class DetailObat extends Component {
     this.setState({ selected: {}, action: "add" });
   }
 
-  editModal({ uid, waktu_masuk, stok, kadaluarsa, harga_modal }) {
+  editModal({ uid, waktu_masuk, stok, kadaluarsa, harga_modal, harga_jual }) {
     this.setState({
-      selected: { uid, waktu_masuk, stok, kadaluarsa, harga_modal },
+      selected: { uid, waktu_masuk, stok, kadaluarsa, harga_modal, harga_jual },
       action: "edit"
     });
   }
@@ -48,7 +48,7 @@ class DetailObat extends Component {
     stok,
     kadaluarsa,
     harga_modal,
-    harga
+    harga_jual
   }) => {
     return (
       <div className="row1" key={uid}>
@@ -60,7 +60,7 @@ class DetailObat extends Component {
           {new Date(kadaluarsa).toLocaleDateString("en-GB")}
         </div>
         <div className="cell text-left">Rp. {harga_modal}</div>
-        <div className="cell text-left">{harga}</div>
+        <div className="cell text-left">{harga_jual}</div>
         <div className="cell text-center">
           <button
             className="btn btn-primary btn-sm "

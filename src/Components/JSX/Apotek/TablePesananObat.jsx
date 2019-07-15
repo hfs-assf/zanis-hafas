@@ -5,11 +5,12 @@ import "../../ASSETS/CSS/Timeline.css";
 import editPesananObat from "../../../Methods/Apotik/PesananObat/editPesananObat";
 import listPesananObatByStatus from "../../../Methods/Apotik/PesananObat/listPesananObat";
 import TambahPesananObat from "./TambahPesanananObat";
+import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
 import kurangStockObat from "../../../Methods/Apotik/StokObat/kurangStokObat";
-import { Consumer } from "../../../Methods/User/Auth/Store";
+import tambahDetailTransaksi from "../../../Methods/Kasir/DetailTransaksi/tambahDetailTransaksi";
 import { dateFormat } from "../../../Methods/waktu";
 
-export default class TablePesananObat extends React.Component {
+class TablePesananObat extends React.Component {
   state = {
     pesanan_obat: [],
     detail_pesanan: [],
@@ -17,9 +18,11 @@ export default class TablePesananObat extends React.Component {
     selected: {
       uid: ""
     },
+    nomormr: "",
     showDetail: false,
     openModal: false,
-    nik: ""
+    nik: "",
+    notification: "0"
   };
 
   pushDataKePesananObat(data) {
@@ -27,20 +30,22 @@ export default class TablePesananObat extends React.Component {
   }
 
   componentDidMount() {
-    listPesananObatByStatus("", "MENUNGGU").then(({ data }) => {
+    listPesananObatByStatus("MENUNGGU").then(({ data }) => {
+      console.log(data);
       this.setState({
         pesanan_obat: data
       });
     });
   }
 
-  handleClick = (el, uid) => {
+  handleClick = (el, uid, nomormr) => {
     fetch(el)
       .then(data => data.json())
       .then(data => {
         this.setState({
           detail_pesanan: data.detail_pesanan,
-          showDetail: true
+          showDetail: true,
+          nomormr: nomormr
         });
       });
     this.setState({ uid });
@@ -65,8 +70,22 @@ export default class TablePesananObat extends React.Component {
     });
   };
 
-  simpanPesanan = nik => {
-    window.location.reload();
+  simpanPesanan = () => {
+    tambahDetailTransaksi({
+      nomor_rekam_medis: this.state.nomormr,
+      listDetail: this.state.detail_pesanan.map(
+        ({ nama_obat, jumlah_obat, harga_jual }) => ({
+          item_transaksi: nama_obat,
+          jumlah_item: jumlah_obat,
+          biaya: harga_jual
+        })
+      )
+    })
+      .then(this.setState({ notification: "1" }))
+      .catch(err => {
+        console.log(err);
+        this.setState({ notification: "0" });
+      });
   };
 
   tambahPesanan = uid => {
@@ -76,28 +95,28 @@ export default class TablePesananObat extends React.Component {
   render() {
     let header;
     const { pesanan_obat, detail_pesanan, showDetail } = this.state;
+    console.log("ini detail pesanan, ", detail_pesanan);
+    console.log("ini pesanan nomor mr , ", this.state.nomormr);
     header = pesanan_obat.map(e => {
-      if (e.status_pesanan === "MENUNGGU") {
-        return (
-          <li
-            key={e.uid}
-            className="animated bounceIn"
-            onClick={() => this.handleClick(e.detail, e.uid)}
-          >
-            <span />
-            <div className="menunggu"> {e.status_pesanan} </div>
-            <div>
-              <div className="title">{e.nomor_rekam_medis}</div>
-              <div className="tefalsext-white">
-                {new Date(e.waktu_pesan).toLocaleDateString("en-GB")}
-              </div>
+      return (
+        <li
+          key={e.uid}
+          className="animated bounceIn"
+          onClick={() => this.handleClick(e.detail, e.uid, e.nomor_rekam_medis)}
+        >
+          <span />
+          <div className="menunggu"> {e.status_pesanan} </div>
+          <div>
+            <div className="title">{e.nomor_rekam_medis}</div>
+            <div className="tefalsext-white">
+              {new Date(e.waktu_pesan).toLocaleDateString("en-GB")}
             </div>
-            <span className="number">
-              <span>{dateFormat(e.waktu_pesan)}</span>
-            </span>
-          </li>
-        );
-      }
+          </div>
+          <span className="number">
+            <span>{dateFormat(e.waktu_pesan)}</span>
+          </span>
+        </li>
+      );
     });
 
     return (
@@ -128,9 +147,9 @@ export default class TablePesananObat extends React.Component {
                         <th className="text-center">NAMA OBAT</th>
                         <th className="text-center">JUMLAH</th>
                         <th className="text-center">SATUAN</th>
+                        <th className="text-center">HARGA</th>
                         <th className="text-center">KATEGORI</th>
                         <th className="text-center">KETERANGAN</th>
-                        <th className="text-center">ACTION</th>
                       </tr>
                     </thead>
                     {detail_pesanan.map(subRow => {
@@ -142,16 +161,9 @@ export default class TablePesananObat extends React.Component {
                               {subRow.jumlah_obat}
                             </td>
                             <td className="text-center">{subRow.satuan}</td>
+                            <td className="text-center">{subRow.harga_jual}</td>
                             <td className="text-center">{subRow.kategori}</td>
                             <td className="text-center">{subRow.keterangan}</td>
-                            <td className="td-actions text-center">
-                              <button
-                                type="button"
-                                className="btn btn-warning btn-sm"
-                              >
-                                Cetak
-                              </button>
-                            </td>
                           </tr>
                         </tbody>
                       );
@@ -163,6 +175,8 @@ export default class TablePesananObat extends React.Component {
                     type="button"
                     className="btn btn-success btn-sm"
                     onClick={() => this.simpanPesanan()}
+                    data-toggle="modal"
+                    data-target="#konfirmasiTransaksi"
                   >
                     Simpan
                   </button>
@@ -171,7 +185,7 @@ export default class TablePesananObat extends React.Component {
                   <button
                     type="button"
                     className="btn btn-warning btn-sm waves-effect waves-light"
-                    onClick={() => this.tambahPesanan(this.state.uid)}
+                    onClick={() => this.tambahPesanan()}
                     data-toggle="modal"
                     data-target="#addmedicine"
                     title="Tambah Obat"
@@ -209,9 +223,15 @@ export default class TablePesananObat extends React.Component {
               fnTambahPesananObat={this.pushDataKePesananObat.bind(this)}
               selected={this.state.selected}
             />
+            <ModalKonfirmasi
+              notification={this.state.notification}
+              modal="konfirmasiTransaksi"
+            />
           </div>
         </div>
       </React.Fragment>
     );
   }
 }
+
+export default TablePesananObat;

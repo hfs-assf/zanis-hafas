@@ -3,6 +3,7 @@ import listTindakan from "../../../../Methods/Poli/Tindakan/listTindakan";
 import detailPasien from "../../../../Methods/RekamMedis/Pasien/detailPasien";
 import ModalKonfirmasiTindakan from "../../Animasi/ModalKonfirmasiTindakan";
 import ModalKonfirmasi from "../../Animasi/ModalKonfirmasi";
+import tambahDetailTransaksi from "../../../../Methods/Kasir/DetailTransaksi/tambahDetailTransaksi.js";
 import TambahTindakan from "../TambahTindakan";
 import tambahHistoriTindakan from "../../../../Methods/Poli/HistoriTindakan/tambahHistoriTindakan";
 import { Consumer } from "../../../../Methods/User/Auth/Store";
@@ -120,15 +121,36 @@ class tindakanTabulasi extends Component {
       jumlah: this.state.doTindakan[0].jumlah_tindakan,
       keterangan: this.state.doTindakan[0].keterangan
     })
-      // .then(response => tambahDetailTransaksi({
-      //   item_transaksi:this.state
-      // }))
       .then(
         this.setState({
           disabled: true,
           notification: "1"
         })
       )
+      .catch(err => {
+        console.log(err);
+        this.setState({ notification: "0" });
+      });
+
+    tambahDetailTransaksi({
+      nomor_rekam_medis: this.props.no_rm,
+      listDetail: this.state.doTindakan.map(
+        ({ nama_tindakan, jumlah_tindakan, biaya_tindakan }) => ({
+          item_transaksi: nama_tindakan,
+          jumlah_item: jumlah_tindakan,
+          biaya: biaya_tindakan
+        })
+      )
+    })
+      .then(
+        this.setState({
+          disabled: true,
+          notification: "1"
+        })
+      )
+      // .then(data => {
+      //   console.log("ini datanya , :", data);
+      // })
       .catch(err => {
         console.log(err);
         this.setState({ notification: "0" });
@@ -182,7 +204,6 @@ class tindakanTabulasi extends Component {
     let suggestionsList, daftarTindakan;
     const { filter, doTindakan, tindakan } = this.state;
     const filteredTindakan = tindakan;
-    // console.table("dPasien", this.state.dPasien);
     if (filteredTindakan.length !== 0 && filter !== "") {
       suggestionsList = (
         <ul className="suggestions">
@@ -278,14 +299,12 @@ class tindakanTabulasi extends Component {
           action={this.state.action}
         />
         {daftarTindakan}
-        <Consumer>
-          {({ state }) => (
-            <ModalKonfirmasiTindakan
-              passValue={() => this.handleSave(state.dataLogin.nik)}
-              modal="notification3"
-            />
-          )}
-        </Consumer>
+
+        <ModalKonfirmasiTindakan
+          passValue={this.handleSave}
+          modal="notification3"
+        />
+
         <ModalKonfirmasi
           notification={this.state.notification}
           modal="konfirmasiTindakan"
