@@ -7,12 +7,13 @@ let tambahTransaksi = ({
   penjamin,
   jenis_pembayaran
 }) => {
-  console.log(nik_penerbit, nomor_rekam_medis, penjamin, jenis_pembayaran);
   return axios.post(apiURL + "/api/v1/transaksi", {
-    nik_penerbit,
-    nomor_rekam_medis,
-    penjamin,
-    jenis_pembayaran
+    data: {
+      nik_penerbit,
+      nomor_rekam_medis,
+      penjamin,
+      jenis_pembayaran
+    }
   });
 };
 

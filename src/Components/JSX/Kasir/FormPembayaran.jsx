@@ -4,24 +4,28 @@ import SVGBillInvoice from "../../ASSETS/SVG/SVGBillInvoice";
 import DetailPasienKasir from "../DetailPasienKasir";
 import FormTambahTransaksi from "./FormTambahTransksi";
 import listTransaksi from "../../../Methods/Kasir/DetailTransaksi/listTransaksi";
+import bayarTransaksi from "../../../Methods/Kasir/Transaksi/bayarTransaksi";
+import ModalKonfirmasiTindakan from "../Animasi/ModalKonfirmasiTindakan";
+import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
+
+import { Consumer } from "../../../Methods/User/Auth/Store";
 
 class FormPembayaran extends Component {
   constructor(props) {
     super(props);
     this.state = {
       detailTransaksi: [],
-      diskon: 0
+      diskon: 0,
+      notification: "0"
     };
   }
 
   componentDidMount = () => {
-    listTransaksi(this.props.antrian_kasir)
-      // .then(data => console.log(data))
-      .then(({ data }) => {
-        this.setState({
-          detailTransaksi: data
-        });
+    listTransaksi(this.props.antrian_kasir).then(({ data }) => {
+      this.setState({
+        detailTransaksi: data
       });
+    });
   };
 
   totalPrice = () => {
@@ -45,6 +49,24 @@ class FormPembayaran extends Component {
   getDiskon = () => {
     let harga = this.totalPrice();
     return harga - harga * (this.state.diskon / 100);
+  };
+
+  handleSave = nik => {
+    bayarTransaksi({
+      uid_transaksi: this.props.antrian_kasir,
+      nik_kasir: nik,
+      status: "DONE"
+    })
+      .then(
+        this.setState({
+          disabled: true,
+          notification: "1"
+        })
+      )
+      .catch(err => {
+        console.log(err);
+        this.setState({ notification: "0" });
+      });
   };
 
   render() {
@@ -159,12 +181,39 @@ class FormPembayaran extends Component {
             {header}
             <div className="main">
               <div className="modal-footer justify-content-center">
-                <button className="btn btn-primary">Selesai</button>
+                <button
+                  className="btn btn-primary"
+                  data-toggle="modal"
+                  data-target="#notification2"
+                  disabled={this.state.disabled}
+                >
+                  Simpan
+                </button>
+
+                <button
+                  className="btn btn-warning"
+                  disabled={this.state.disabled}
+                  onClick={() => this.handleCancel()}
+                >
+                  Cancel
+                </button>
               </div>
             </div>
           </div>
         </div>
         <FormTambahTransaksi no_rm={this.props.kasir} />
+        <Consumer>
+          {({ state }) => (
+            <ModalKonfirmasiTindakan
+              passValue={() => this.handleSave(state.dataLogin.nik)}
+              modal="notification2"
+            />
+          )}
+        </Consumer>
+        <ModalKonfirmasi
+          notification={this.state.notification}
+          modal="konfirmasiResep"
+        />
       </div>
     );
   }

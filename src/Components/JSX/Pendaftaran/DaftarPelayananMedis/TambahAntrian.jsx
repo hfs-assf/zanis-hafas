@@ -28,22 +28,13 @@ class TambahAntrian extends Component {
   };
 
   handleSave = nik => {
-    console.log({
-      nik_penerbit: nik,
-      nomor_rekam_medis: this.props.pasien,
-      penjamin: this.state.jaminan,
-      jenis_pembayaran: this.state.jenis_pembayaran
-    });
     tambahTransaksi({
       nik_penerbit: nik,
       nomor_rekam_medis: this.props.pasien,
       penjamin: this.state.jaminan,
       jenis_pembayaran: this.state.jenis_pembayaran
     })
-      .then(
-        data => console.log("ini data ,", data),
-        this.setState({ notification: "1" })
-      )
+      .then(this.setState({ notification: "1" }))
       .catch(err => {
         console.log(err);
         this.setState({ notification: "0" });

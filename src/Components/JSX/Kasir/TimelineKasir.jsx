@@ -16,13 +16,13 @@ class TimelinePelayananMedis extends Component {
   }
 
   async getData() {
-    let antrian = await listTransaksi("", "PENDING").then(data => data.data);
+    let antrian = await listTransaksi("PENDING").then(data => data.data);
     let namaList = [];
 
     let listRM = antrian.map(el => el.nomor_rekam_medis);
     for (let i = 0; i < listRM.length; i++) {
       let nama = await detailPasien(listRM[i]).then(data => data.data);
-      // console.log("cari nama", nama);
+
       namaList.push(nama[0].nama_pasien);
     }
 
@@ -51,7 +51,7 @@ class TimelinePelayananMedis extends Component {
               <div>
                 <div className="title">{e.nomor_rekam_medis}</div>
                 <div className="tefalsext-white">
-                  {new Date(e.waktu_transaksi).toLocaleDateString("en-GB")}
+                  {new Date(e.waktu_terbit).toLocaleDateString("en-GB")}
                 </div>
                 <div className="tefalsext-white">{e.nama}</div>
                 <div className="type">{e.penjamin}</div>
