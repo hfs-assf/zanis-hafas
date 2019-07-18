@@ -1,24 +1,23 @@
-/* KASIR */
-.card-counter {
-  box-shadow: 1px #dadada;
-  margin: 5px;
-  padding: 20px 10px;
-  background-color: #fff;
+/* Container-Parent */
+.container-parent {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+}
+
+.container-parent > div {
+  padding: 5px;
+  margin: 7px;
+}
+
+.flex-item {
   height: 100px;
-  border-radius: 3px;
-  transition: 0.3s linear all;
-  border: 1px solid #dadada;
-}
-
-.counter {
-  font-size: 25px;
-}
-
-.card-counter .counter-center {
-  position: absolute;
-  left: 42%;
-  top: 10%;
-  display: block;
+  flex: 15em;
+  background-color: #fff;
+  margin: 1em;
+  border: 1px #dadada solid;
 }
 
 /* RADIO BUTTON */
@@ -250,7 +249,6 @@
 .flexpelayanan > div {
   padding: 10px;
   margin: 5px;
-  margin-left: -2px;
 }
 .flexpelayanan > .boxpelayanan {
   width: 100%;

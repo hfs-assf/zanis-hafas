@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { api } from "../../api";
 const apiURL = "http://10.6.35.1:8002";
 
 let tambahHistoriMedis = ({
@@ -14,7 +14,7 @@ let tambahHistoriMedis = ({
   tindakan,
   catatan
 }) => {
-  return axios.post(apiURL + "/api/v1/histori-medis/" + nomor_rekam_medis, {
+  return axios.post(api.rekamMedis + "/histori-medis/" + nomor_rekam_medis, {
     nik_dokter,
     subjektif,
     objektif,

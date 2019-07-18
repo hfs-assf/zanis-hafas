@@ -9,6 +9,7 @@ import ModalKonfirmasiTindakan from "../Animasi/ModalKonfirmasiTindakan";
 import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
 
 import { Consumer } from "../../../Methods/User/Auth/Store";
+import { height } from "window-size";
 
 class FormPembayaran extends Component {
   constructor(props) {
@@ -71,9 +72,12 @@ class FormPembayaran extends Component {
 
   render() {
     const divStyle = {
-      fontSize: "16px",
+      fontSize: "11px",
       textAlign: "center",
       color: "#bbb"
+    };
+    const fontSize = {
+      fontSize: "16px"
     };
 
     let header;
@@ -124,58 +128,30 @@ class FormPembayaran extends Component {
       </table>
     );
     return (
-      <div className="container-fluid center ">
-        <div className="row">
-          <div className="col-lg-4">
-            <div className="card-counter  ">
+      <div>
+        <div className="container-parent">
+          <div className="flex-item">
+            <div>
               <DetailPasienKasir
                 no_rm={this.props.kasir}
                 antrian_kasir={this.props.antrian_kasir}
               />
             </div>
           </div>
-          <div className="col-lg-4">
-            <div className="card-counter ">
-              <div className="counter-center">
-                <SVGBillInvoice />
-                <h5 style={divStyle}>Transaksi</h5>
-              </div>
+          <div class="flex-item">
+            <div style={divStyle}>
+              <SVGBillInvoice />
+              <h5 style={fontSize}>Transaksi</h5>
             </div>
           </div>
-          <div className="col-lg-4">
-            <div className="card-counter ">
-              <div className="counter-center">
-                <SVGBillInvoice />
-                <h5 style={divStyle}>Faktur</h5>
-              </div>
+          <div class="flex-item">
+            <div style={divStyle}>
+              <SVGBillInvoice />
+              <h5 style={fontSize}>Faktur</h5>
             </div>
           </div>
         </div>
 
-        {/* <div className="row justify-content-center" style={{ margin: "0.5em" }}>
-          <div className="col-md-8 boxriwayat">
-            <DetailPasienKasir
-              no_rm={this.props.kasir}
-              antrian_kasir={this.props.antrian_kasir}
-            />
-          </div>
-          <div className="col-md-4">
-            <div className="row">
-              <div className="boxsurat">
-                <SVGBillInvoice />
-                <h5 className="h5-responsive"> Transaksi</h5>
-              </div>
-              <div
-                className="boxsurat"
-                data-toggle="modal"
-                data-target="#sickleaveletter"
-              >
-                <SVGBillInvoice />
-                <h5 className="h5-responsive"> Faktur</h5>
-              </div>
-            </div>
-          </div>
-        </div> */}
         <div className="flexpelayanan">
           <div className="boxpelayanan">
             {header}

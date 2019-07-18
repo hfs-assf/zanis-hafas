@@ -1,9 +1,8 @@
 import axios from "axios";
-
-const apiURL = "http://10.6.35.1:8003";
+import { api } from "../../api";
 
 let detailTindakan = uid => {
-  return axios.get(apiURL + "/api/v1/tindakan/" + uid);
+  return axios.get(api.poli + "/tindakan/" + uid);
 };
 
 export default detailTindakan;

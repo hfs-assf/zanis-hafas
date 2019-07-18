@@ -1,8 +1,8 @@
 import axios from "axios";
-const apiURL = "http://10.6.35.1:8002";
+import { api } from "../../api";
 
 let detailPasien = nomor_rekam_medis => {
-  return axios.get(apiURL + "/api/v1/pasien/" + nomor_rekam_medis);
+  return axios.get(api.rekamMedis + "/pasien/" + nomor_rekam_medis);
 };
 
 export default detailPasien;

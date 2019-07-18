@@ -13,15 +13,11 @@ class DetailPasienKasir extends Component {
     };
   }
   componentDidMount() {
-    // console.log(uid);
-    listTransaksi("", "PENDING")
-      // .then(data => console.log("ini ya", data));
-      .then(({ data }) => {
-        this.setState({
-          no_rm: data[0].nomor_rekam_medis,
-          penjamin: data[0].penjamin
-        });
+    listTransaksi(this.props.no_rm, "PENDING").then(({ data }) => {
+      this.setState({
+        penjamin: data[0].penjamin
       });
+    });
     detailPasien(this.props.no_rm).then(({ data }) => {
       this.setState({
         nama_pasien: data[0].nama_pasien,

@@ -1,9 +1,8 @@
 import axios from "axios";
-
-const apiURL = "http://10.6.35.1:8005";
+import { api } from "../../api";
 
 let listStokObat = uid => {
-  return axios.get(apiURL + "/api/v1/stok-obat/" + uid);
+  return axios.get(api.apotik + "/stok-obat/" + uid);
 };
 
 export default listStokObat;

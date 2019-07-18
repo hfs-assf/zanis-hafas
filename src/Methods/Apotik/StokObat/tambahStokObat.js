@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const apiURL = "http://10.6.35.1:8005";
+import { api } from "../../api";
 
 let tambahStokObat = ({
   uid,
@@ -10,7 +9,7 @@ let tambahStokObat = ({
   harga_modal,
   harga_jual
 }) => {
-  return axios.post(apiURL + "/api/v1/stok-obat/" + uid, {
+  return axios.post(api.apotik + "/stok-obat/" + uid, {
     stok,
     kadaluarsa,
     nik_penerima,

@@ -1,5 +1,5 @@
 import axios from "axios";
-const apiURL = "http://10.6.35.1:8002";
+import { api } from "../../api";
 
 let tambahPasien = ({
   nomor_pengenal,
@@ -22,7 +22,7 @@ let tambahPasien = ({
   kantor,
   catatan
 }) => {
-  return axios.post(apiURL + "/api/v1/pasien", {
+  return axios.post(api.rekamMedis + "/pasien", {
     nomor_pengenal,
     jenis_nomor_pengenal,
     nama_pasien: nama_pasien.toLowerCase(),

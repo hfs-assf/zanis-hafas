@@ -1,8 +1,8 @@
 import axios from "axios";
-const apiURL = "http://10.6.35.1:8005";
+import { api } from "../../api";
 
 let hapusObat = uid => {
-  return axios.delete(apiURL + "/api/v1/obat/" + uid, {
+  return axios.delete(api.apotik + "/obat/" + uid, {
     headers: { Authorization: "token" }
   });
 };

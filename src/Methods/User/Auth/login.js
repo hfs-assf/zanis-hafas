@@ -1,9 +1,10 @@
 import axios from "axios";
-const apiUrl = "http://10.6.35.1:8000/api/v1/login";
+import { api } from "../../api";
 
+console.log("isi", api.akunUser);
 let masuk = ({ nik, password }) => {
   return axios
-    .post(apiUrl, {
+    .post(api.akunUser + "/login", {
       nik,
       password
     })

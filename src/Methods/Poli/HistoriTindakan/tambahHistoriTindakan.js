@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const apiURL = "http://10.6.35.1:8003";
+import { api } from "../../api";
 
 let tambahHistoriTindakan = ({
   uid_histori_medis,
@@ -14,7 +13,7 @@ let tambahHistoriTindakan = ({
     jumlah,
     keterangan
   });
-  return axios.post(apiURL + "/api/v1/histori_tindakan", {
+  return axios.post(api.poli + "/histori_tindakan", {
     uid_histori_medis,
     uid_tindakan,
     jumlah,

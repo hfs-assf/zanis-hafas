@@ -1,5 +1,5 @@
 import axios from "axios";
-const apiURL = "http://10.6.35.1:8004";
+import { api } from "../../api";
 
 let tambahTransaksi = ({
   nik_penerbit,
@@ -7,7 +7,7 @@ let tambahTransaksi = ({
   penjamin,
   jenis_pembayaran
 }) => {
-  return axios.post(apiURL + "/api/v1/transaksi", {
+  return axios.post(api.kasir + "/transaksi", {
     data: {
       nik_penerbit,
       nomor_rekam_medis,

@@ -1,12 +1,13 @@
 import axios from "axios";
-const apiURL = "http://10.6.35.1:8002";
+
+import { api } from "../../api";
 
 let listPasien = pencarian => {
   var filter = "";
   if (pencarian !== "") {
     filter = "?cari=" + pencarian;
   }
-  return axios.get(apiURL + "/api/v1/pasien" + filter);
+  return axios.get(api.rekamMedis + "/pasien" + filter);
 };
 
 export default listPasien;

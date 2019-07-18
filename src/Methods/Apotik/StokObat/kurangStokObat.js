@@ -1,9 +1,8 @@
 import axios from "axios";
-
-const apiURL = "http://10.6.35.1:8005";
+import { api } from "../../api";
 
 let kurangStokObat = uid_pesanan => {
-  return axios.patch(apiURL + "/api/v1/stok-obat/" + uid_pesanan);
+  return axios.patch(api.apotik + "/stok-obat/" + uid_pesanan);
 };
 
 export default kurangStokObat;

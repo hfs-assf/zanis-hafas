@@ -1,16 +1,12 @@
 import axios from "axios";
-const apiURL = "http://10.6.35.1:8005";
+import { api } from "../../api";
 
 let tambahDetailPesananObat = ({ uid_obat, doResep }) => {
-  return axios.post(
-    apiURL + "/api/v1/detail-pesanan-obat/" + uid_obat,
-    doResep,
-    {
-      headers: {
-        "Content-Type": "application/json"
-      }
+  return axios.post(api.apotik + "/detail-pesanan-obat/" + uid_obat, doResep, {
+    headers: {
+      "Content-Type": "application/json"
     }
-  );
+  });
 };
 
 export default tambahDetailPesananObat;

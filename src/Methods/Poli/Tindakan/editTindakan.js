@@ -1,9 +1,8 @@
 import axios from "axios";
-
-const apiURL = "http://10.6.35.1:8003";
+import { api } from "../../api";
 
 let editTindakan = ({ uid, nama_tindakan, biaya_tindakan, jenis }) => {
-  return axios.put(apiURL + "/api/v1/tindakan/" + uid, {
+  return axios.put(api.poli + "/tindakan/" + uid, {
     nama_tindakan,
     biaya_tindakan,
     jenis
