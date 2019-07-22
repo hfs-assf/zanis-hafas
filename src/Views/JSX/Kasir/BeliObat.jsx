@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import ReactToPrint from "react-to-print";
-import Form from "../../../Components/JSX/Kasir/FormPembayaran";
-class Pembayaran extends Component {
+// import ReactToPrint from "react-to-print";
+import Form from "../../../Components/JSX/Kasir/FormBeli";
+
+export class BeliObat extends Component {
   render() {
     return (
       <div>
@@ -10,18 +11,14 @@ class Pembayaran extends Component {
             Kasir
           </h2>
         </div>
-        <ReactToPrint
+        {/* <ReactToPrint
           trigger={() => <a href="#">Print this out!</a>}
           content={() => this.componentRef}
-        />
-        <Form
-          antrian_kasir={this.props.antrian.id}
-          kasir={this.props.antrian.no_rm}
-          ref={el => (this.componentRef = el)}
-        />
+        /> */}
+        <Form />
       </div>
     );
   }
 }
 
-export default Pembayaran;
+export default BeliObat;

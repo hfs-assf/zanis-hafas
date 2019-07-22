@@ -5,12 +5,7 @@ class TimelineKasir extends Component {
   render() {
     return (
       <div className="container-fluid">
-        <div
-          className="alert alert-danger alert-dismissible fade show"
-          role="alert"
-        >
-          <strong>Arahkan kursor untuk melanjutkan perintah.</strong> Untuk
-          melihat data sebelumnya silahkan pilih tanggal di pojok kanan.
+        <div>
           <button
             type="button"
             className="close"
@@ -20,7 +15,6 @@ class TimelineKasir extends Component {
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-
         <Timeline />
       </div>
     );

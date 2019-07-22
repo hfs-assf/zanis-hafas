@@ -20,16 +20,13 @@ export default class TambahPesananObat extends React.Component {
     disabled: false
   };
 
-  // componentDidMount = () => {
-  //   detailPasien(this.props.ambilUid).then(el =>
-  //     console.log("ambil data", el.data)
-  //   );
-  //   // .then(({ data }) => {
-  //   //   this.setState({
-  //   //     dPasien: data.nomor_rekam_medis
-  //   //   });
-  //   // });
-  // };
+  componentDidMount = () => {
+    detailPasien(this.props.ambilUid).then(({ data }) => {
+      this.setState({
+        dPasien: data.nomor_rekam_medis
+      });
+    });
+  };
 
   onKeyUp = e => {
     clearTimeout(set);
@@ -112,7 +109,6 @@ export default class TambahPesananObat extends React.Component {
         console.log(err);
         this.setState({ notification: "0" });
       });
-    // console.log("props", this.props.ambilUid);
   };
 
   tambahPesanan = () => {

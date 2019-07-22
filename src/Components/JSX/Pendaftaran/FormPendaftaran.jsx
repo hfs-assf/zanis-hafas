@@ -134,7 +134,7 @@ class FormPendaftaran extends Component {
         </div>
         <div className="form-style">
           <div className="row">
-            <div className="col-md-5">
+            <div className="col-md-6">
               <fieldset>
                 <legend>Data Diri</legend>
                 <label>
@@ -353,7 +353,7 @@ class FormPendaftaran extends Component {
               </fieldset>
               <br />
             </div>
-            <div className="col-md-5">
+            <div className="col-md-6">
               <fieldset>
                 <legend>Pendidikan</legend>
                 <div className="row">

@@ -13,17 +13,28 @@ class DetailPasienKasir extends Component {
     };
   }
   componentDidMount() {
-    listTransaksi(this.props.no_rm, "PENDING").then(({ data }) => {
-      this.setState({
-        penjamin: data[0].penjamin
+    listTransaksi(this.props.no_rm, "PENDING")
+      .then(({ data }) => {
+        this.setState({
+          penjamin: data[0].penjamin
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState(this.state);
       });
-    });
-    detailPasien(this.props.no_rm).then(({ data }) => {
-      this.setState({
-        nama_pasien: data[0].nama_pasien,
-        tanggal_lahir: data[0].tanggal_lahir
+
+    detailPasien(this.props.no_rm)
+      .then(({ data }) => {
+        this.setState({
+          nama_pasien: data[0].nama_pasien,
+          tanggal_lahir: data[0].tanggal_lahir
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState(this.state);
       });
-    });
   }
 
   calculateAge(date) {

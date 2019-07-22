@@ -18,8 +18,26 @@
   background-color: #fff;
   margin: 1em;
   border: 1px #dadada solid;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.08);
 }
 
+.items-subs-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.items-subs-left {
+  display: flex;
+  justify-content: space-between;
+}
+
+.items-subs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 /* RADIO BUTTON */
 
 .middle {
@@ -238,7 +256,6 @@
 /* --------------------------------- */
 
 /* FORM PELAYANAN */
-
 .flexpelayanan {
   display: flex;
   padding: 2px;
@@ -250,7 +267,7 @@
   padding: 10px;
   margin: 5px;
 }
-.flexpelayanan > .boxpelayanan {
+.flexpelayanan > .boxpelayanan-medis {
   width: 100%;
   margin-top: 3px;
   border-radius: 30px;
@@ -284,12 +301,34 @@
   color: white;
 }
 
+.boxpelayanan {
+  display: flex;
+  padding: 10px;
+  margin: 0;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.boxpelayanan > table {
+  background-color: #fff;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.08);
+}
+
+.boxpelayanan > table > thead {
+  background-color: #25a9dd;
+}
+
+.main-footer {
+  margin: 0;
+  display: inline;
+  justify-content: flex-end;
+}
+
 /* TABULASI PELAYANAN MEDIS */
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
 
 .main {
   max-width: 100%;
-  border: 1px dashed #25a9dd;
   border-radius: 30px;
   padding: 15px;
 }
@@ -317,11 +356,8 @@
   display: inline-block;
   margin-top: 5px;
   padding: 5px;
-  /* padding: 10px 50px 10px 50px; */
   font-weight: 500;
-  /* width: 50%; */
   text-align: center;
-  /* text-align: center; */
   color: rgb(0, 0, 0);
 }
 .main label.dua {

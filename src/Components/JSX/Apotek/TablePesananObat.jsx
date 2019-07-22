@@ -95,8 +95,6 @@ class TablePesananObat extends React.Component {
   render() {
     let header;
     const { pesanan_obat, detail_pesanan, showDetail } = this.state;
-    console.log("ini detail pesanan, ", detail_pesanan);
-    console.log("ini pesanan nomor mr , ", this.state.nomormr);
     header = pesanan_obat.map(e => {
       return (
         <li

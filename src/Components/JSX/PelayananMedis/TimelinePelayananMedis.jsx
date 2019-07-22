@@ -5,7 +5,6 @@ import Calender from "../../../Components/ASSETS/SVG/Kalender1";
 import listAntrian from "../../../Methods/Pendaftaran/Antrian/listAntrian";
 import detailPasien from "../../../Methods/RekamMedis/Pasien/detailPasien";
 import { dateFormat } from "../../../Methods/waktu";
-import { list } from "postcss";
 
 let jumlahAntrian;
 class TimelinePelayananMedis extends Component {

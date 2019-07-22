@@ -107,6 +107,9 @@ class Sidebar extends Component {
                             <Link to="/kasir">Daftar Antrian</Link>
                           </li>
                           <li>
+                            <Link to="beli-obat">Beli Obat</Link>
+                          </li>
+                          <li>
                             <Link to="/kelola-biaya">Kelola Biaya</Link>
                           </li>
                         </ul>

@@ -9,7 +9,6 @@ import ModalKonfirmasiTindakan from "../Animasi/ModalKonfirmasiTindakan";
 import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
 
 import { Consumer } from "../../../Methods/User/Auth/Store";
-import { height } from "window-size";
 
 class FormPembayaran extends Component {
   constructor(props) {
@@ -71,18 +70,9 @@ class FormPembayaran extends Component {
   };
 
   render() {
-    const divStyle = {
-      fontSize: "11px",
-      textAlign: "center",
-      color: "#bbb"
-    };
-    const fontSize = {
-      fontSize: "16px"
-    };
-
     let header;
     header = (
-      <table className="table table-hover">
+      <table className="table">
         <thead>
           <tr>
             <th>Deskripsi</th>
@@ -109,10 +99,6 @@ class FormPembayaran extends Component {
               />
             </td>
           </tr>
-          <tr>
-            <td colSpan="3">Total Pembayaran</td>
-            <td>{this.getDiskon()}</td>
-          </tr>
 
           <tr>
             <td colSpan="3">Jenis Pembayaran</td>
@@ -124,6 +110,10 @@ class FormPembayaran extends Component {
               </select>
             </td>
           </tr>
+          <tr>
+            <td colSpan="3">Total Pembayaran</td>
+            <td>{this.getDiskon()}</td>
+          </tr>
         </tbody>
       </table>
     );
@@ -131,7 +121,7 @@ class FormPembayaran extends Component {
       <div>
         <div className="container-parent">
           <div className="flex-item">
-            <div>
+            <div className="items-subs-left">
               <DetailPasienKasir
                 no_rm={this.props.kasir}
                 antrian_kasir={this.props.antrian_kasir}
@@ -139,44 +129,41 @@ class FormPembayaran extends Component {
             </div>
           </div>
           <div class="flex-item">
-            <div style={divStyle}>
+            <div className="items-subs">
               <SVGBillInvoice />
-              <h5 style={fontSize}>Transaksi</h5>
+              <h5>Transaksi</h5>
             </div>
           </div>
           <div class="flex-item">
-            <div style={divStyle}>
+            <div className="items-subs">
               <SVGBillInvoice />
-              <h5 style={fontSize}>Faktur</h5>
+              <h5>Faktur</h5>
             </div>
           </div>
         </div>
 
-        <div className="flexpelayanan">
-          <div className="boxpelayanan">
-            {header}
-            <div className="main">
-              <div className="modal-footer justify-content-center">
-                <button
-                  className="btn btn-primary"
-                  data-toggle="modal"
-                  data-target="#notification2"
-                  disabled={this.state.disabled}
-                >
-                  Simpan
-                </button>
+        <div className="boxpelayanan">{header}</div>
+        <div className="main">
+          <div className="modal-footer justify-content-center">
+            <button
+              className="btn btn-primary"
+              data-toggle="modal"
+              data-target="#notification2"
+              disabled={this.state.disabled}
+            >
+              Simpan
+            </button>
 
-                <button
-                  className="btn btn-warning"
-                  disabled={this.state.disabled}
-                  onClick={() => this.handleCancel()}
-                >
-                  Cancel
-                </button>
-              </div>
-            </div>
+            <button
+              className="btn btn-warning"
+              disabled={this.state.disabled}
+              onClick={() => this.handleCancel()}
+            >
+              Cancel
+            </button>
           </div>
         </div>
+
         <FormTambahTransaksi no_rm={this.props.kasir} />
         <Consumer>
           {({ state }) => (

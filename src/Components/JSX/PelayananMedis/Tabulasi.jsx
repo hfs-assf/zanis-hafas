@@ -8,7 +8,7 @@ class TabulasiPelayananMedis extends Component {
     return (
       <div>
         <div className="flexpelayanan">
-          <div className="boxpelayanan">
+          <div className="boxpelayanan-medis">
             <div className="main">
               <input id="tab1" type="radio" name="tabs" />
               <label htmlFor="tab1" className="empat">
