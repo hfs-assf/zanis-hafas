@@ -1,3 +1,14 @@
+/* timeline css */
+.container-timeline {
+  display: flex;
+  justify-content: space-between;
+}
+
+.item-timeline-left {
+  display: flex;
+  justify-items: center;
+}
+
 /* Kalender */
 .calender > svg {
   position: relative;

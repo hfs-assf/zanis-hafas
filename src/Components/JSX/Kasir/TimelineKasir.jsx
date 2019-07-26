@@ -15,32 +15,41 @@ class TimelinePelayananMedis extends Component {
     };
   }
 
-  async getData() {
-    let antrian = await listTransaksi("PENDING").then(data => data.data);
-    let namaList = [];
+  // async getData() {
+  //   let antrian = await listTransaksi("PENDING").then(data => data.data);
+  //   let namaList = [];
 
-    let listRM = antrian.map(el => el.nomor_rekam_medis);
-    for (let i = 0; i < listRM.length; i++) {
-      let nama = await detailPasien(listRM[i]).then(data => data.data);
+  //   let listRM = antrian.map(el => el.nomor_rekam_medis);
+  //   for (let i = 0; i < listRM.length; i++) {
+  //     let nama = await detailPasien(listRM[i]).then(data => data.data);
 
-      namaList.push(nama[0].nama_pasien);
-    }
+  //     namaList.push(nama[0].nama_pasien);
+  //   }
 
-    return antrian.map((el, i) => ({ ...el, nama: namaList[i] }));
-  }
+  //   return antrian.map((el, i) => ({ ...el, nama: namaList[i] }));
+  // }
 
   componentDidMount = () => {
-    this.getData().then(data => {
+    // this.getData().then(data => {
+    //   this.setState({
+    //     lAntrian: data
+    //   });
+    // });
+    listTransaksi("PENDING").then(({ data }) => {
       this.setState({
         lAntrian: data
       });
     });
+    // .catch(err => {
+    //   console.log(err);
+    //   this.setState(this.state);
+    // });
   };
 
   render() {
     let deskripsiPasien;
     const { lAntrian } = this.state;
-    console.log("loha", lAntrian);
+
     deskripsiPasien = lAntrian.map(e => {
       if (e.status_transaksi === "PENDING") {
         return (
@@ -53,7 +62,6 @@ class TimelinePelayananMedis extends Component {
                 <div className="tefalsext-white">
                   {new Date(e.waktu_terbit).toLocaleDateString("en-GB")}
                 </div>
-                <div className="tefalsext-white">{e.nama}</div>
                 <div className="type">{e.penjamin}</div>
               </div>
             </Link>
@@ -66,7 +74,7 @@ class TimelinePelayananMedis extends Component {
       }
     });
     return (
-      <div className="row">
+      <div className="row" style={{ marginTop: "15px" }}>
         <div className="col-md-7">
           <div className="container">
             <ul>{deskripsiPasien}</ul>

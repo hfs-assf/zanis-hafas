@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import "../../ASSETS/CSS/form.css";
+import "../../ASSETS/CSS/Timeline.css"
 
 class FormTambahTransaksi extends Component {
   constructor(props) {

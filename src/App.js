@@ -27,7 +27,6 @@ import Apotek from "./Views/JSX/Apotek/TimelineApotek";
 // Kasir
 import Pembayaran from "./Views/JSX/Kasir/Pembayaran";
 import Kasir from "./Views/JSX/Kasir/TimelineKasir";
-import BeliObat from "./Views/JSX/Kasir/BeliObat";
 
 // Pelayanan Medis
 import DaftarRekamMedis from "./Views/JSX/PelayananMedis/RekamMedis/DaftarRekamMedis";
@@ -70,7 +69,7 @@ class App extends Component {
                 <ProtectedRoute exact path="/dashboard" component={Dashboard} />
                 <ProtectedRoute path="/apotek" component={Apotek} />
                 <ProtectedRoute path="/kasir" component={Kasir} />
-                <ProtectedRoute path="/beli-obat" component={BeliObat} />
+
                 <ProtectedRoute
                   path="/form-pembayaran/:id/:no_rm"
                   render={({ match }) => <Pembayaran antrian={match.params} />}

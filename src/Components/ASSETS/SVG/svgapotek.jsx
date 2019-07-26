@@ -2,11 +2,11 @@ import React from "react";
 
 const SVGApotek = props => (
   <svg
-    // style={{ marginTop: "-25px" }}
-    height="20pt"
+    style={{ marginTop: "14px" }}
+    height="2.75em"
     viewBox="0 0 464 464.13019"
-    width="20pt"
     xmlns="http://www.w3.org/2000/svg"
+    width="40pt"
   >
     <path d="m24.195312 0h256v64h-256zm0 0" fill="#3498db" />
     <path

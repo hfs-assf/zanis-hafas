@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import "../../ASSETS/CSS/form.css";
 import "../../ASSETS/CSS/Timeline.css";
-import obatList from "../../../Methods/Apotik/Obat/listObat";
-import tambahDetailPesananObat from "../../../Methods/Apotik/DetailPesananObat/tambahDetailPesananObat";
-import tambahPesananObat from "../../../Methods/Apotik/PesananObat/tambahPesananObat";
-import detailPasien from "../../../Methods/RekamMedis/Pasien/detailPasien";
-import { Consumer } from "../../../Methods/User/Auth/Store";
+import listBelanja from "../../../Methods/Apotik/StokObat/listBelanja";
 import ModalKonfirmasiTindakan from "../../JSX/Animasi/ModalKonfirmasiTindakan";
 import ModalKonfirmasi from "../../JSX/Animasi/ModalKonfirmasi";
+import { Consumer } from "../../../Methods/User/Auth/Store";
+import kurangStokBelanja from "../../../Methods/Apotik/StokObat/kurangStokBelanja";
+import tambahDetailTransaksi from "../../../Methods/Kasir/DetailTransaksi/tambahDetailTransaksi";
+import tambahPesananObat from "../../../Methods/Apotik/PesananObat/tambahPesananObat";
 
 let set;
 export default class TambahPesananObat extends React.Component {
@@ -20,20 +20,14 @@ export default class TambahPesananObat extends React.Component {
     disabled: false
   };
 
-  componentDidMount = () => {
-    detailPasien(this.props.ambilUid).then(({ data }) => {
-      this.setState({
-        dPasien: data.nomor_rekam_medis
-      });
-    });
-  };
-
   onKeyUp = e => {
     clearTimeout(set);
     const nilai = e.target.value;
     set = setTimeout(() => {
       if (nilai) {
-        obatList(nilai).then(({ data }) => this.setState({ daftarObat: data }));
+        listBelanja(nilai).then(({ data }) =>
+          this.setState({ daftarObat: data })
+        );
       } else {
         this.setState({ daftarObat: [] });
       }
@@ -60,12 +54,10 @@ export default class TambahPesananObat extends React.Component {
   tambah = daftarObat => {
     this.setState({
       doResep: this.state.doResep.concat({
-        uid: daftarObat.uid,
+        uid_obat: daftarObat.uid_obat,
         nama_obat: daftarObat.nama_obat,
         jumlah_obat: 0,
-        kategori: daftarObat.kategori,
-        satuan: daftarObat.satuan,
-        keterangan: ""
+        harga_jual: daftarObat.harga_jual
       }),
       filter: ""
     });
@@ -88,27 +80,26 @@ export default class TambahPesananObat extends React.Component {
   }
 
   handleSave = nik => {
-    tambahPesananObat(this.props.action === "add", {
-      nomor_rekam_medis: this.props.ambilUid,
-      nik_dokter: nik,
-      detail_pesanan_obat: this.state.doResep.map(
-        ({ uid, jumlah_obat, keterangan }) => ({
-          uid_obat: uid,
-          jumlah_obat,
-          keterangan
-        })
-      )
-    })
-      .then(
-        this.setState({
-          disabled: true,
-          notification: "1"
-        })
-      )
-      .catch(err => {
-        console.log(err);
-        this.setState({ notification: "0" });
-      });
+    // tambahDetailTransaksi({
+    //   nomor_rekam_medis: 0,
+    //   listDetail: this.state.doResep.map(
+    //     ({ nama_obat, jumlah_obat, harga_jual }) => ({
+    //       item_transaksi: nama_obat,
+    //       jumlah_item: jumlah_obat,
+    //       biaya: harga_jual
+    //     })
+    //   )
+    // })
+    //   .then(
+    //     this.setState({
+    //       disabled: true,
+    //       notification: "1"
+    //     })
+    //   )
+    //   .catch(err => {
+    //     console.log(err);
+    //     this.setState({ notification: "0" });
+    //   });
   };
 
   tambahPesanan = () => {
@@ -134,19 +125,7 @@ export default class TambahPesananObat extends React.Component {
             &nbsp;
             {resep.satuan}
           </td>
-          <td className="text-center">
-            <input
-              style={{
-                width: "7.3rem",
-                border: "1px solid #aaa",
-                borderRadius: "3px"
-              }}
-              type="text"
-              refs="keteranganobat"
-              onChange={e => this.ubahKeteranganObat(e, index)}
-              disabled={this.state.disabled}
-            />
-          </td>
+          <td className="text-center">{resep.harga_jual}</td>
           <td className="text-center">
             <button
               className="btn btn-sm mt-0 mb-0 btn-danger"
@@ -208,7 +187,7 @@ export default class TambahPesananObat extends React.Component {
                   <tr>
                     <th className="text-center">NAMA OBAT</th>
                     <th className="text-center">JUMLAH</th>
-                    <th className="text-center">KETERANGAN</th>
+                    <th className="text-center">HARGA</th>
                     <th className="text-center">ACTION</th>
                   </tr>
                 </thead>
@@ -222,9 +201,6 @@ export default class TambahPesananObat extends React.Component {
               data-toggle="modal"
               data-target="#notification2"
               disabled={this.state.disabled}
-              onClick={() => {
-                this.props.fnTambahPesananObat(this.state.doResep);
-              }}
             >
               Simpan
             </button>
@@ -285,10 +261,6 @@ export default class TambahPesananObat extends React.Component {
               </button>
             </div>
             {daftarResep}
-            {/* <ModalKonfirmasiTindakan
-              passValue={this.handleSave}
-              modal="notification2"
-            /> */}
             <Consumer>
               {({ state }) => (
                 <ModalKonfirmasiTindakan
