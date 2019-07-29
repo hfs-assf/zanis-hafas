@@ -7,7 +7,6 @@ import ModalKonfirmasi from "../../JSX/Animasi/ModalKonfirmasi";
 import { Consumer } from "../../../Methods/User/Auth/Store";
 import kurangStokBelanja from "../../../Methods/Apotik/StokObat/kurangStokBelanja";
 import tambahDetailTransaksi from "../../../Methods/Kasir/DetailTransaksi/tambahDetailTransaksi";
-import tambahPesananObat from "../../../Methods/Apotik/PesananObat/tambahPesananObat";
 
 let set;
 export default class TambahPesananObat extends React.Component {
@@ -80,26 +79,44 @@ export default class TambahPesananObat extends React.Component {
   }
 
   handleSave = nik => {
-    // tambahDetailTransaksi({
-    //   nomor_rekam_medis: 0,
-    //   listDetail: this.state.doResep.map(
-    //     ({ nama_obat, jumlah_obat, harga_jual }) => ({
-    //       item_transaksi: nama_obat,
-    //       jumlah_item: jumlah_obat,
-    //       biaya: harga_jual
-    //     })
-    //   )
-    // })
-    //   .then(
-    //     this.setState({
-    //       disabled: true,
-    //       notification: "1"
-    //     })
-    //   )
-    //   .catch(err => {
-    //     console.log(err);
-    //     this.setState({ notification: "0" });
-    //   });
+    console.log("hallo", nik);
+    tambahDetailTransaksi({
+      nomor_rekam_medis: 0,
+      listDetail: this.state.doResep.map(
+        ({ nama_obat, jumlah_obat, harga_jual }) => ({
+          item_transaksi: nama_obat,
+          jumlah_item: jumlah_obat,
+          biaya: harga_jual
+        })
+      )
+    })
+      .then(
+        this.setState({
+          disabled: true,
+          notification: "1"
+        })
+      )
+      .catch(err => {
+        console.log(err);
+        this.setState({ notification: "0" });
+      });
+    kurangStokBelanja({
+      nik_karyawan: nik,
+      listDetail: this.state.doResep.map(({ uid_obat, jumlah_obat }) => ({
+        uid_obat: uid_obat,
+        jumlah_item: jumlah_obat
+      }))
+    })
+      .then(
+        this.setState({
+          disabled: true,
+          notification: "1"
+        })
+      )
+      .catch(err => {
+        console.log(err);
+        this.setState({ notification: "0" });
+      });
   };
 
   tambahPesanan = () => {

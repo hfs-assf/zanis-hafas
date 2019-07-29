@@ -23,6 +23,13 @@ export class FormBeli extends Component {
   };
 
   render() {
+    const iconObat = {
+      marginTop: "14px",
+      width: "3.25em",
+      display: "flex",
+      justifyContent: "center"
+    };
+
     const icon = {
       width: "3.25em",
       display: "flex",
@@ -64,7 +71,7 @@ export class FormBeli extends Component {
             title="Tambah Obat"
           >
             <div className="items-subs">
-              <div style={icon}>
+              <div style={iconObat}>
                 <SVGApotik />
               </div>
               <div style={fonts}>

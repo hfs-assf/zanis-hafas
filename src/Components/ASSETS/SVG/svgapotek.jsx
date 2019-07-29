@@ -2,7 +2,6 @@ import React from "react";
 
 const SVGApotek = props => (
   <svg
-    style={{ marginTop: "14px" }}
     height="2.75em"
     viewBox="0 0 464 464.13019"
     xmlns="http://www.w3.org/2000/svg"

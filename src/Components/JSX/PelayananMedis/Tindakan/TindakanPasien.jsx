@@ -284,8 +284,8 @@ class tindakanTabulasi extends Component {
           </div>
           <div className="col-md-2">
             <button
-              className="btn btn-sm btn-secondary"
-              style={{ marginTop: "-7px" }}
+              className="btn btn-sm"
+              style={{ marginTop: "-7px", backgroundColor: "#2ad" }}
               data-toggle="modal"
               data-target="#tambahTindakan"
               onClick={() => this.addModal}

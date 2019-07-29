@@ -2,7 +2,6 @@ import axios from "axios";
 import { api } from "../../api";
 
 let tambahDetailTransaksi = ({ nomor_rekam_medis, listDetail }) => {
-  console.log("kirim ya", { nomor_rekam_medis, listDetail });
   return axios.post(api.kasir + "/detail-transaksi", {
     nomor_rekam_medis,
     listDetail

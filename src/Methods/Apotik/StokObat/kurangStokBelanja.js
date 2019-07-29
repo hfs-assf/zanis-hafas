@@ -6,7 +6,7 @@ let kurangStokBelanja = ({ nik_karyawan, listDetail }) => {
     nik_karyawan,
     listDetail
   });
-  return axios.post(api.apotik + "/stok-obat/", {
+  return axios.patch(api.apotik + "/stok-obat", {
     nik_karyawan,
     listDetail
   });
