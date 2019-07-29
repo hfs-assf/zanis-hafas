@@ -451,7 +451,7 @@ class FormPendaftaran extends Component {
             </div>
           </div>
           <div className="row">
-            <div className="col-md-10">
+            <div className="col-md-12">
               <div className="modal-footer justify-content-center">
                 <button
                   className="btn btn-primary"
