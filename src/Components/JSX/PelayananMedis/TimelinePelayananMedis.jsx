@@ -19,11 +19,13 @@ class TimelinePelayananMedis extends Component {
   }
 
   componentDidMount = () => {
-    this.getData().then(data => {
-      this.setState({
-        lAntrian: data
-      });
-    });
+    this.getData()
+      .then(data => {
+        this.setState({
+          lAntrian: data
+        });
+      })
+      .catch(err => console.log(err));
   };
 
   getData = async () => {
@@ -75,7 +77,7 @@ class TimelinePelayananMedis extends Component {
           </div>
         </div>
         <div className="col-md-4 tglpasien">
-          <div className="form-group" style={{ width: "250px" }}>
+          {/* <div className="form-group" style={{ width: "250px" }}>
             <span>Silahkan Pilih Tanggal :</span>
             <div className="input-group date">
               <input
@@ -90,7 +92,7 @@ class TimelinePelayananMedis extends Component {
               </div>
               <hr />
             </div>
-          </div>
+          </div> */}
           <div className="banyakpasien">
             <span className="badge">Jumlah Antrian : {jumlahAntrian}</span>
           </div>

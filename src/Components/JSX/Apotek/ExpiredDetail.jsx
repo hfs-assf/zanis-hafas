@@ -1,15 +1,34 @@
 import React, { Component } from "react";
 import obat from "../../../JSON/daftarObat.json";
 
+import listBelanja from "../../../Methods/Apotik/StokObat/listBelanja";
+
 class ExpiredDetail extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      lisObat: []
+    };
+  }
+
+  componentDidMount = () => {
+    listBelanja()
+      // .then(data => console.log("check", data))
+      .then(({ data }) => {
+        this.setState({
+          lisObat: data
+        });
+      });
+  };
+
   daftarObatExp() {
-    return obat.map((el, index) => (
+    return this.state.lisObat.map((el, index) => (
       <li
         className="list-group-item d-flex justify-content-between align-items-center"
         key={index}
       >
-        {el.nama} : {el.persediaan} {el.satuan}.
-        <span className="badge badge-danger badge-pill">{el.masa_berlaku}</span>
+        {el.nama_obat} : {el.stok} {el.satuan}.
+        <span className="badge badge-danger badge-pill">{el.kadaluarsa}</span>
       </li>
     ));
   }

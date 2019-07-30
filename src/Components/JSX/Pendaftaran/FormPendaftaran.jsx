@@ -61,7 +61,6 @@ class FormPendaftaran extends Component {
   // };
 
   onSubmit = () => {
-    console.log(this.state);
     const catatan = `Penanggung Jawab: ${this.state.nama_penanggungjawab}, ${
       this.state.status_penanggungjawab
     },${this.state.telepon_penanggungjawab}, ${
@@ -121,8 +120,6 @@ class FormPendaftaran extends Component {
     });
   };
   render() {
-    console.log("kelurahan", this.state.kelurahan);
-    console.log("ini kecamatan", this.state.kecamatan);
     return (
       <div>
         <div className="watermark">

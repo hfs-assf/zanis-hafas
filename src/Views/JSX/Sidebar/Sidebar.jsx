@@ -22,7 +22,7 @@ class Sidebar extends Component {
       <Consumer>
         {({ state, action }) => (
           <React.Fragment>
-            {console.log("Ada ga ya", state.dataLogin.nik)}
+            {/* {console.log("Ada ga ya", state.dataLogin.nik)} */}
             {state.auth ? (
               <aside className="left-sidebar sticky">
                 <div className="scroll-sidebar">
