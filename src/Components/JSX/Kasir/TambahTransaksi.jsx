@@ -31,8 +31,6 @@ export class TambahTransaksi extends Component {
   };
 
   render() {
-    console.log("heyy", this.state.jaminan);
-    console.log("hooo", this.state.jenis_pembayaran);
     return (
       <div
         className="modal fade"

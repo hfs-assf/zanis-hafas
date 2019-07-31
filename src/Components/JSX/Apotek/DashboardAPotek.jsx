@@ -1,9 +1,28 @@
 import React, { Component } from "react";
 import SVGapotek from "../../ASSETS/SVG/svgapotek";
 import "../../ASSETS/CSS/DashboardApotek.css";
+import { obat } from "../../../Methods/Apotik/Obat/listObat";
 
+let jumlahObat;
 class DashboardApotek extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      daftarObat: []
+    };
+  }
+
+  componentDidMount = () => {
+    obat().then(({ data }) => {
+      this.setState({
+        daftarObat: data
+      });
+    });
+  };
+
   render() {
+    jumlahObat = this.state.daftarObat.length;
+    console.log("panjang", this.state.daftarObat.length);
     return (
       <div className="row">
         <div className="col-md-4 ">
@@ -15,7 +34,7 @@ class DashboardApotek extends Component {
                 </div>
                 <div className="col-sm-9">
                   <h4 className="text-white">Daftar Obat</h4>
-                  <h2 className="font-light text-white">1400</h2>
+                  <h2 className="font-light text-white">{jumlahObat}</h2>
                 </div>
               </div>
             </div>
@@ -42,8 +61,8 @@ class DashboardApotek extends Component {
                 </div>
                 <div className="col-sm-9">
                   <h4 className="text-white">Obat yang akan expired</h4>
-                  <h6 className="text-white">Oktober 2018</h6>
-                  <h2 className="font-light text-white">1400</h2>
+                  {/* <h6 className="text-white">Oktober 2018</h6>
+                  <h2 className="font-light text-white">1400</h2> */}
                 </div>
               </div>
             </div>
@@ -69,7 +88,7 @@ class DashboardApotek extends Component {
                 </div>
                 <div className="col-sm-9">
                   <h4 className="text-white">Persediaan obat yang menipis</h4>
-                  <h2 className="font-light text-white">1400</h2>
+                  {/* <h2 className="font-light text-white">1400</h2> */}
                 </div>
               </div>
             </div>
