@@ -31,6 +31,8 @@ export class TambahTransaksi extends Component {
   };
 
   render() {
+    console.log("heyy", this.state.jaminan);
+    console.log("hooo", this.state.jenis_pembayaran);
     return (
       <div
         className="modal fade"
@@ -79,9 +81,9 @@ export class TambahTransaksi extends Component {
                     required
                   >
                     <option value="">--- Pilihan ---</option>
-                    <option value="Umum">Umum</option>
-                    <option value="Asuransi BPJS">Asuransi BPJS</option>
-                    <option value="Lain-lain">Lain-lain</option>
+                    <option value="umum">Umum</option>
+                    <option value="bpjs">Asuransi BPJS</option>
+                    <option value="lain-lain">Lain-lain</option>
                   </select>
                 </div>
               </div>
@@ -105,8 +107,8 @@ export class TambahTransaksi extends Component {
                     required
                   >
                     <option value="">--- Pilihan ---</option>
-                    <option value="CASH">CASH</option>
-                    <option value="KREDIT">KREDIT</option>
+                    <option value="cash">CASH</option>
+                    <option value="kredit">KREDIT</option>
                   </select>
                 </div>
               </div>
