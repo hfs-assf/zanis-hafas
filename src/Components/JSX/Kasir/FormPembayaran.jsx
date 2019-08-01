@@ -51,6 +51,31 @@ class FormPembayaran extends Component {
     return harga - harga * (this.state.diskon / 100);
   };
 
+  reset = nik => {
+    bayarTransaksi({
+      uid_transaksi: this.props.antrian_kasir,
+      nik_kasir: nik,
+      status: "CANCEL"
+    })
+      .then(
+        this.setState({
+          disabled: true,
+          notification: "1"
+        })
+      )
+      .catch(err => {
+        console.log(err);
+        this.setState({ notification: "0" });
+      });
+  };
+
+  // hapus = id => {
+  //   const arrays = this.state.detailTransaksi;
+  //   this.setState({
+  //     detailTransaksi: arrays.filter(el => el.uid !== id)
+  //   });
+  // };
+
   handleSave = nik => {
     bayarTransaksi({
       uid_transaksi: this.props.antrian_kasir,
@@ -157,7 +182,9 @@ class FormPembayaran extends Component {
             <button
               className="btn btn-warning"
               disabled={this.state.disabled}
-              onClick={() => this.handleCancel()}
+              data-toggle="modal"
+              data-target="#notification2"
+              onClick={() => this.reset()}
             >
               Cancel
             </button>
