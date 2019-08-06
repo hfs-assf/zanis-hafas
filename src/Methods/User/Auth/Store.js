@@ -32,7 +32,6 @@ export class Store extends React.Component {
         })
       )
       .catch(err => {
-        console.log(err, "ini error");
         localStorage.clear();
       });
   };

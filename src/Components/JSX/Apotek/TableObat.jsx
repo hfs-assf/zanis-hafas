@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import "../../ASSETS/CSS/Apotek.css";
 import "../../ASSETS/CSS/form.css";
 import { Link } from "react-router-dom";

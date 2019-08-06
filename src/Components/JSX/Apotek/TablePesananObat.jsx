@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 // import "../../ASSETS/CSS/Apotek.css";
 import "../../ASSETS/CSS/form.css";
 import "../../ASSETS/CSS/Timeline.css";
@@ -31,7 +31,6 @@ class TablePesananObat extends React.Component {
 
   componentDidMount() {
     listPesananObatByStatus("MENUNGGU").then(({ data }) => {
-      console.log(data);
       this.setState({
         pesanan_obat: data
       });
@@ -137,8 +136,6 @@ class TablePesananObat extends React.Component {
                 </button>
 
                 <div className="table-responsive">
-                  <span> Nama : Kurnianto Syahputra </span>
-                  <span>Tanggal Lahir : 17 Oktober 1993</span>
                   <div className="table">
                     <thead>
                       <tr>

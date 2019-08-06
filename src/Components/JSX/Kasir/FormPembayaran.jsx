@@ -2,41 +2,50 @@ import React, { Component } from "react";
 import "../../ASSETS/CSS/form.css";
 import SVGBillInvoice from "../../ASSETS/SVG/SVGBillInvoice";
 import DetailPasienKasir from "../DetailPasienKasir";
-import FormTambahTransaksi from "./FormTambahTransksi";
 import listTransaksi from "../../../Methods/Kasir/DetailTransaksi/listTransaksi";
 import bayarTransaksi from "../../../Methods/Kasir/Transaksi/bayarTransaksi";
 import ModalKonfirmasiTindakan from "../Animasi/ModalKonfirmasiTindakan";
 import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
 
 import { Consumer } from "../../../Methods/User/Auth/Store";
+import Kwitansi from "./Kwitansi";
 
 class FormPembayaran extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      transaksi: [],
       detailTransaksi: [],
       diskon: 0,
-      notification: "0"
+      notification: "0",
+      selected: {},
+      action: "",
+      uid_transaksi: ""
     };
   }
 
   componentDidMount = () => {
     listTransaksi(this.props.antrian_kasir).then(({ data }) => {
       this.setState({
-        detailTransaksi: data
+        transaksi: data,
+        uid_transaksi: data[0].uid_transaksi
       });
     });
   };
 
+  cetakFaktur = uid => {
+    this.setState({ selected: { uid }, action: "cetak" });
+  };
+
   totalPrice = () => {
-    return this.state.detailTransaksi.reduce(
+    return this.state.transaksi.reduce(
       (sum, i) => (sum += i.jumlah_item * i.biaya),
       0
     );
   };
 
   details = () => {
-    return this.state.detailTransaksi.map(e => (
+    return this.state.transaksi.map(e => (
       <tr key={e.uid}>
         <td>{e.item_transaksi}</td>
         <td>{e.jumlah_item} </td>
@@ -68,13 +77,6 @@ class FormPembayaran extends Component {
         this.setState({ notification: "0" });
       });
   };
-
-  // hapus = id => {
-  //   const arrays = this.state.detailTransaksi;
-  //   this.setState({
-  //     detailTransaksi: arrays.filter(el => el.uid !== id)
-  //   });
-  // };
 
   handleSave = nik => {
     bayarTransaksi({
@@ -153,13 +155,20 @@ class FormPembayaran extends Component {
               />
             </div>
           </div>
-          <div class="flex-item">
+          <div className="flex-item">
             <div className="items-subs">
               <SVGBillInvoice />
               <h5>Transaksi</h5>
             </div>
           </div>
-          <div class="flex-item">
+
+          <div
+            className="flex-item"
+            // onClick={e => this.cetakFaktur(this.state.uid_transaksi)}
+            // data-toggle="modal"
+            // data-target="#addFaktur"
+            // title="Tambah Faktur"
+          >
             <div className="items-subs">
               <SVGBillInvoice />
               <h5>Faktur</h5>
@@ -191,7 +200,12 @@ class FormPembayaran extends Component {
           </div>
         </div>
 
-        <FormTambahTransaksi no_rm={this.props.kasir} />
+        <Kwitansi
+          uid={this.props.antrian_kasir}
+          selected={this.state.selected}
+          action={this.state.action}
+          ref={el => (this.componentRef = el)}
+        />
         <Consumer>
           {({ state }) => (
             <ModalKonfirmasiTindakan

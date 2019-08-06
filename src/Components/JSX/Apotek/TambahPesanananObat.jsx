@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import "../../ASSETS/CSS/form.css";
 import "../../ASSETS/CSS/Timeline.css";
 import listBelanja from "../../../Methods/Apotik/StokObat/listBelanja";

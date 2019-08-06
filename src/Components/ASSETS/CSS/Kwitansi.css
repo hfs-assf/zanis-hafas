@@ -1,0 +1,19 @@
+.container-flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.container-table {
+  display: flex;
+  justify-content: space-around;
+}
+
+.container-table > table > tr {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container-table > table > tr > th {
+  border-style: none;
+}

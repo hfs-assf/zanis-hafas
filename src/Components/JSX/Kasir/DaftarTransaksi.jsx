@@ -23,18 +23,7 @@ export class DaftarTransaksi extends Component {
         listDaftar: data
       });
     });
-    // if (this.state.filterTanggal) {
-    //   daftarTransaksi(this.state.filterTanggal).then(({ data }) =>
-    //     this.setState({ listDaftar: data })
-    //   );
-    // } else {
-    //   this.setState({ listDaftar: [] });
-    // }
   };
-
-  // getData = () => {
-
-  // };
 
   renderTable = () => (
     <table className="table">
@@ -60,11 +49,6 @@ export class DaftarTransaksi extends Component {
   );
 
   render = () => {
-    console.log(
-      "kudo berubah",
-      this.state.filterTanggal,
-      this.state.listDaftar
-    );
     return (
       <div>
         <div className="boxpelayanan">

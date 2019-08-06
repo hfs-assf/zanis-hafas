@@ -1,24 +1,22 @@
 import React, { Component } from "react";
-import obat from "../../../JSON/daftarObat.json";
-
-import listBelanja from "../../../Methods/Apotik/StokObat/listBelanja";
+import * as waktu from "../../../Methods/waktu";
+import expiredObat from "../../../Methods/Apotik/StokObat/expiredObat";
 
 class ExpiredDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      lisObat: []
+      lisObat: [],
+      filterTanggal: waktu.dateFormat()
     };
   }
 
   componentDidMount = () => {
-    listBelanja()
-      // .then(data => console.log("check", data))
-      .then(({ data }) => {
-        this.setState({
-          lisObat: data
-        });
+    expiredObat(this.state.filterTanggal).then(({ data }) => {
+      this.setState({
+        lisObat: data
       });
+    });
   };
 
   daftarObatExp() {
@@ -27,8 +25,10 @@ class ExpiredDetail extends Component {
         className="list-group-item d-flex justify-content-between align-items-center"
         key={index}
       >
-        {el.nama_obat} : {el.stok} {el.satuan}.
-        <span className="badge badge-danger badge-pill">{el.kadaluarsa}</span>
+        {el.nama_obat} : {el.stok}
+        <span className="badge badge-danger badge-pill">
+          {new Date(el.kadaluarsa).toLocaleDateString("en-GB")}
+        </span>
       </li>
     ));
   }

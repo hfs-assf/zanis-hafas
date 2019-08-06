@@ -12,7 +12,6 @@ class Pendaftaran extends Component {
             <div className="box column1">
               <h2 className="card-title text-left">Pendaftaran Pasien Baru</h2>
             </div>
-
             <div className="box column2">
               <CariPasien />
             </div>

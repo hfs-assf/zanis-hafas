@@ -37,16 +37,13 @@ class CariPasien extends Component {
       if (filteresPasien.length !== 0 && textFilter !== "") {
         suggestionsList = (
           <ul className="suggestions">
-            {filteresPasien.map(pasien => {
+            {filteresPasien.map((todo, index) => {
               return (
-                <Link to={"/tambah-layanan/" + pasien.nomor_rekam_medis}>
-                  <li
-                    key={pasien.nomor_rekam_medis}
-                    className="suggestion-active"
-                  >
-                    {pasien.nama_pasien}
+                <Link to={"/tambah-layanan/" + todo.nomor_rekam_medis}>
+                  <li key={index} className="suggestion-active">
+                    {todo.nama_pasien}
                     <br />
-                    {pasien.nomor_rekam_medis}
+                    {todo.nomor_rekam_medis}
                   </li>
                 </Link>
               );

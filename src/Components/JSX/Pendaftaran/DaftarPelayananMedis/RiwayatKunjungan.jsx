@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "../../../ASSETS/CSS/RiwayatPasien.css";
 import listHistoriMedis from "../../../../Methods/RekamMedis/HistorisMedis/listHistoriMedis";
-import detailPasien from "../../../../Methods/RekamMedis/Pasien/detailPasien";
 
 class RiwayatKunjungan extends Component {
   constructor() {
@@ -43,7 +42,6 @@ class RiwayatKunjungan extends Component {
   render() {
     let header;
     const { histori } = this.state;
-    console.log("histori", histori);
 
     if (histori.length !== 0) {
       header = histori.map(rm => {

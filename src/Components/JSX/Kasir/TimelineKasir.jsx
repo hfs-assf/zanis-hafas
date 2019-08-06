@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "../../ASSETS/CSS/Timeline.css";
 import listTransaksi from "../../../Methods/Kasir/Transaksi/listTransaksi";
-import detailPasien from "../../../Methods/RekamMedis/Pasien/detailPasien";
-import { dateFormat } from "../../../Methods/waktu";
+import { timeFormat } from "../../../Methods/waktu";
 
 class TimelinePelayananMedis extends Component {
   constructor(props) {
@@ -46,38 +45,37 @@ class TimelinePelayananMedis extends Component {
     // });
   };
 
-  render() {
-    let deskripsiPasien;
+  listAntrian = () => {
     const { lAntrian } = this.state;
-
-    deskripsiPasien = lAntrian.map(e => {
-      if (e.status_transaksi === "PENDING") {
-        return (
-          <li key={e.uid} className="animated bounceIn">
-            <Link to={"/form-pembayaran/" + e.uid + "/" + e.nomor_rekam_medis}>
-              <span />
-              <div className="menunggu"> {e.status_transaksi} </div>
-              <div>
-                <div className="title">{e.nomor_rekam_medis}</div>
-                <div className="tefalsext-white">
-                  {new Date(e.waktu_terbit).toLocaleDateString("en-GB")}
-                </div>
-                <div className="type">{e.penjamin}</div>
+    return lAntrian.map(e => {
+      return (
+        <li key={e.uid} className="animated bounceIn">
+          <Link to={"/form-pembayaran/" + e.uid + "/" + e.nomor_rekam_medis}>
+            <span />
+            <div className="menunggu"> {e.status_transaksi} </div>
+            <div>
+              <div className="title">{e.nomor_rekam_medis}</div>
+              <div className="tefalsext-white">
+                {new Date(e.waktu_terbit).toLocaleDateString("en-GB")}
               </div>
-            </Link>
-            <span className="number">
-              <span>{dateFormat(e.waktu_terbit)}</span>
-              <span />
-            </span>
-          </li>
-        );
-      }
+              <div className="type">{e.penjamin}</div>
+            </div>
+          </Link>
+          <span className="number">
+            <span>{timeFormat(e.waktu_terbit)}</span>
+            <span />
+          </span>
+        </li>
+      );
     });
+  };
+
+  render() {
     return (
       <div className="row" style={{ marginTop: "15px" }}>
         <div className="col-md-7">
           <div className="container">
-            <ul>{deskripsiPasien}</ul>
+            <ul>{this.listAntrian()}</ul>
           </div>
         </div>
       </div>

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "../../ASSETS/CSS/Timeline.css";
-import Calender from "../../../Components/ASSETS/SVG/Kalender1";
 import listAntrian from "../../../Methods/Pendaftaran/Antrian/listAntrian";
 import detailPasien from "../../../Methods/RekamMedis/Pasien/detailPasien";
 import { dateFormat } from "../../../Methods/waktu";

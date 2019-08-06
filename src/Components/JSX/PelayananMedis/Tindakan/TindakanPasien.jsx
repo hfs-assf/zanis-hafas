@@ -6,7 +6,7 @@ import ModalKonfirmasi from "../../Animasi/ModalKonfirmasi";
 import tambahDetailTransaksi from "../../../../Methods/Kasir/DetailTransaksi/tambahDetailTransaksi.js";
 import TambahTindakan from "../TambahTindakan";
 import tambahHistoriTindakan from "../../../../Methods/Poli/HistoriTindakan/tambahHistoriTindakan";
-import { Consumer } from "../../../../Methods/User/Auth/Store";
+
 
 let set;
 class tindakanTabulasi extends Component {

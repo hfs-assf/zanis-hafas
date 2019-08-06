@@ -7,7 +7,7 @@ export const timeFormat = parameter => {
   return strTime;
 };
 
-export const dateFormat = value => {
+export const dateFormat = () => {
   let tanggal = new Date();
   let date = tanggal.getDate();
   let month = tanggal.getMonth();

@@ -48,6 +48,10 @@ import SaldoAwal from "./Views/JSX/Akunting/ViewSaldoAwal";
 
 class App extends Component {
   render() {
+    console.log(
+      "%c Ini adalah fitur browser untuk pengembangan. Jangan macam-macam ya",
+      "color: red; font-style: italic; font-size: 20px"
+    );
     return (
       <Store>
         <BrowserRouter>
@@ -63,10 +67,10 @@ class App extends Component {
             <Header />
             <Profil />
             <Route path="/tampilantv" component={TampilanTV} />
-            <Route exact path="/" component={Login} />
             <Sidebar />
             <div className="containercontent">
               <Switch>
+                <Route exact path="/" component={Login} />
                 <ProtectedRoute exact path="/dashboard" component={Dashboard} />
                 <ProtectedRoute path="/apotek" component={Apotek} />
                 <ProtectedRoute path="/kasir" component={Kasir} />

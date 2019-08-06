@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import tambahTindakan from "../../../Methods/Poli/Tindakan/tambahTindakan";
-import ModalKonfirmasi from "../../JSX/Animasi/ModalKonfirmasi";
-import ModalKonfirmasiTindakan from "../../JSX/Animasi/ModalKonfirmasiTindakan";
+
 class TambahTindakan extends Component {
   constructor(props) {
     super(props);

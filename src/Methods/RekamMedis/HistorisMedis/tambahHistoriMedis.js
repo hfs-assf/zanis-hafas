@@ -1,6 +1,5 @@
 import axios from "axios";
 import { api } from "../../api";
-const apiURL = "http://10.6.35.1:8002";
 
 let tambahHistoriMedis = ({
   nomor_rekam_medis,

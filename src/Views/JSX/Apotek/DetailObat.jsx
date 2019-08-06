@@ -27,11 +27,6 @@ class DetailObat extends Component {
     });
   }
 
-  // getMargin(harga_modal) {
-  //   let costPrice = harga_modal;
-  //   return costPrice + costPrice * this.state.margin;
-  // }
-
   addModal() {
     this.setState({ selected: {}, action: "add" });
   }
