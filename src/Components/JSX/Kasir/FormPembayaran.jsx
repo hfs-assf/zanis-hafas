@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "../../ASSETS/CSS/form.css";
+import "../../ASSETS/CSS/Kwitansi.css";
 import SVGBillInvoice from "../../ASSETS/SVG/SVGBillInvoice";
 import DetailPasienKasir from "../DetailPasienKasir";
 import listTransaksi from "../../../Methods/Kasir/DetailTransaksi/listTransaksi";
@@ -47,7 +48,7 @@ class FormPembayaran extends Component {
   details = () => {
     return this.state.transaksi.map(e => (
       <tr key={e.uid}>
-        <td>{e.item_transaksi}</td>
+        <td className="fontBold">{e.item_transaksi}</td>
         <td>{e.jumlah_item} </td>
         <td>{e.biaya}</td>
         <td>{e.biaya * e.jumlah_item}</td>
@@ -102,51 +103,55 @@ class FormPembayaran extends Component {
       <table className="table">
         <thead>
           <tr>
-            <th>Deskripsi</th>
-            <th>Jumlah</th>
-            <th>Harga</th>
-            <th>Total Harga</th>
+            <th style={{ color: "#ccc" }}>Deskripsi</th>
+            <th style={{ color: "#ccc" }}>Jumlah</th>
+            <th style={{ color: "#ccc" }}>Harga</th>
+            <th style={{ color: "#ccc" }}>Total Harga</th>
           </tr>
         </thead>
-        <tbody>
-          {this.details()}
-          <tr>
-            <td colSpan="3">Total</td>
-            <td>{this.totalPrice()}</td>
-          </tr>
-          <tr>
-            <td colSpan="3">Disc (%)</td>
-            <td>
-              <input
-                type="number"
-                name="diskon"
-                className="form-control"
-                style={{ width: "150px" }}
-                onChange={e => this.setState({ diskon: e.target.value })}
-              />
-            </td>
-          </tr>
+        <tbody>{this.details()}</tbody>
+        <tr>
+          <td colSpan="2" />
+          <td className="fontBold">Total</td>
+          <td className="fontBold">{this.totalPrice()}</td>
+        </tr>
+        <tr>
+          <td colSpan="2" style={{ border: "none" }} />
 
-          <tr>
-            <td colSpan="3">Jenis Pembayaran</td>
-            <td>
-              <select name="jenis_pembayaran" className="form-control">
-                <option value="0"> asuransi / jaminan </option>
-                <option value="1"> tunai</option>
-                <option value="2"> kredit</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td colSpan="3">Total Pembayaran</td>
-            <td>{this.getDiskon()}</td>
-          </tr>
-        </tbody>
+          <td className="fontBold">Disc (%)</td>
+          <td>
+            <input
+              type="number"
+              name="diskon"
+              className="form-control"
+              style={{ width: "150px" }}
+              onChange={e => this.setState({ diskon: e.target.value })}
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td colSpan="2" style={{ border: "none" }} />
+          <td className="fontBold" style={{ background: "papayawhip" }}>
+            Total Pembayaran
+          </td>
+          <td className="fontBold" style={{ background: "papayawhip" }}>
+            {this.getDiskon()}
+          </td>
+        </tr>
       </table>
     );
     return (
       <div>
-        <div className="container-parent">
+        <div className="container-flex">
+          <div className="item-container">
+            <h5>Logo</h5>
+          </div>
+          <div className="item-container">
+            <h5>NO: 21334</h5>
+          </div>
+        </div>
+        {/* <div className="container-parent">
           <div className="flex-item">
             <div className="items-subs-left">
               <DetailPasienKasir
@@ -174,7 +179,7 @@ class FormPembayaran extends Component {
               <h5>Faktur</h5>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="boxpelayanan">{header}</div>
         <div className="main">

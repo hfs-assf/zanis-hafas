@@ -311,23 +311,6 @@
   color: white;
 }
 
-.boxpelayanan {
-  display: flex;
-  padding: 10px;
-  margin: 0;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-.boxpelayanan > table {
-  background-color: #fff;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.08);
-}
-
-.boxpelayanan > table > thead {
-  background-color: #25a9dd;
-}
-
 .main-footer {
   margin: 0;
   display: inline;
@@ -556,8 +539,6 @@ td select {
 
 .table {
   width: 100%;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  display: table;
 }
 @media screen and (max-width: 580px) {
   .table {
