@@ -1,27 +1,29 @@
 import React, { Component } from "react";
 import "../../ASSETS/CSS/form.css";
 import "../../ASSETS/CSS/Kwitansi.css";
-import SVGBillInvoice from "../../ASSETS/SVG/SVGBillInvoice";
-import DetailPasienKasir from "../DetailPasienKasir";
+
 import listTransaksi from "../../../Methods/Kasir/DetailTransaksi/listTransaksi";
+import list from "../../../Methods/Kasir/Transaksi/listTransaksi";
+
 import bayarTransaksi from "../../../Methods/Kasir/Transaksi/bayarTransaksi";
 import ModalKonfirmasiTindakan from "../Animasi/ModalKonfirmasiTindakan";
 import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
 
 import { Consumer } from "../../../Methods/User/Auth/Store";
-import Kwitansi from "./Kwitansi";
+import ReactToPrint from "react-to-print";
 
 class FormPembayaran extends Component {
   constructor(props) {
     super(props);
     this.state = {
       transaksi: [],
-      detailTransaksi: [],
+      daftarTransaksi: [],
       diskon: 0,
       notification: "0",
       selected: {},
       action: "",
-      uid_transaksi: ""
+      uid_transaksi: "",
+      no_transaksi: ""
     };
   }
 
@@ -30,6 +32,12 @@ class FormPembayaran extends Component {
       this.setState({
         transaksi: data,
         uid_transaksi: data[0].uid_transaksi
+      });
+    });
+    list(this.props.kasir).then(({ data }) => {
+      this.setState({
+        daftarTransaksi: data,
+        no_transaksi: data[0].no_transaksi
       });
     });
   };
@@ -49,9 +57,9 @@ class FormPembayaran extends Component {
     return this.state.transaksi.map(e => (
       <tr key={e.uid}>
         <td className="fontBold">{e.item_transaksi}</td>
-        <td>{e.jumlah_item} </td>
-        <td>{e.biaya}</td>
-        <td>{e.biaya * e.jumlah_item}</td>
+        <td style={{ fontSize: "12.5pt" }}>{e.jumlah_item} </td>
+        <td style={{ fontSize: "12.5pt" }}>{e.biaya}</td>
+        <td style={{ fontSize: "12.5pt" }}>{e.biaya * e.jumlah_item}</td>
       </tr>
     ));
   };
@@ -99,14 +107,15 @@ class FormPembayaran extends Component {
 
   render() {
     let header;
+
     header = (
       <table className="table">
         <thead>
           <tr>
-            <th style={{ color: "#ccc" }}>Deskripsi</th>
-            <th style={{ color: "#ccc" }}>Jumlah</th>
-            <th style={{ color: "#ccc" }}>Harga</th>
-            <th style={{ color: "#ccc" }}>Total Harga</th>
+            <th className="fontBold">Deskripsi</th>
+            <th className="fontBold">Jumlah</th>
+            <th className="fontBold">Harga</th>
+            <th className="fontBold">Total Harga</th>
           </tr>
         </thead>
         <tbody>{this.details()}</tbody>
@@ -123,8 +132,8 @@ class FormPembayaran extends Component {
             <input
               type="number"
               name="diskon"
-              className="form-control"
-              style={{ width: "150px" }}
+              className="center"
+              style={{ width: "150px", outline: "none" }}
               onChange={e => this.setState({ diskon: e.target.value })}
             />
           </td>
@@ -135,53 +144,45 @@ class FormPembayaran extends Component {
           <td className="fontBold" style={{ background: "papayawhip" }}>
             Total Pembayaran
           </td>
-          <td className="fontBold" style={{ background: "papayawhip" }}>
+          <td
+            className="fontBold"
+            style={{ background: "papayawhip", fontSize: "12.5pt" }}
+          >
             {this.getDiskon()}
           </td>
         </tr>
       </table>
     );
     return (
-      <div>
-        <div className="container-flex">
-          <div className="item-container">
-            <h5>Logo</h5>
-          </div>
-          <div className="item-container">
-            <h5>NO: 21334</h5>
-          </div>
-        </div>
-        {/* <div className="container-parent">
-          <div className="flex-item">
-            <div className="items-subs-left">
-              <DetailPasienKasir
-                no_rm={this.props.kasir}
-                antrian_kasir={this.props.antrian_kasir}
+      <React.Fragment>
+        <div ref={el => (this.componentRef = el)}>
+          <Consumer>
+            {({ state }) => (
+              <div className="container-flex">
+                <div className="item-container">
+                  <h3>{state.dataLogin.nama_lokasi}</h3>
+                </div>
+                <div className="item-container">
+                  <h2>No: {this.state.no_transaksi}</h2>
+                </div>
+              </div>
+            )}
+          </Consumer>
+          <div className="boxpelayanan">{header}</div>
+
+          <Consumer>
+            {({ state }) => (
+              <ModalKonfirmasiTindakan
+                passValue={() => this.handleSave(state.dataLogin.nik)}
+                modal="notification2"
               />
-            </div>
-          </div>
-          <div className="flex-item">
-            <div className="items-subs">
-              <SVGBillInvoice />
-              <h5>Transaksi</h5>
-            </div>
-          </div>
-
-          <div
-            className="flex-item"
-            // onClick={e => this.cetakFaktur(this.state.uid_transaksi)}
-            // data-toggle="modal"
-            // data-target="#addFaktur"
-            // title="Tambah Faktur"
-          >
-            <div className="items-subs">
-              <SVGBillInvoice />
-              <h5>Faktur</h5>
-            </div>
-          </div>
-        </div> */}
-
-        <div className="boxpelayanan">{header}</div>
+            )}
+          </Consumer>
+          <ModalKonfirmasi
+            notification={this.state.notification}
+            modal="konfirmasiResep"
+          />
+        </div>
         <div className="main">
           <div className="modal-footer justify-content-center">
             <button
@@ -202,28 +203,18 @@ class FormPembayaran extends Component {
             >
               Cancel
             </button>
+
+            <ReactToPrint
+              trigger={() => (
+                <a href="#">
+                  <button className="btn btn-warning md">Print</button>
+                </a>
+              )}
+              content={() => this.componentRef}
+            />
           </div>
         </div>
-
-        <Kwitansi
-          uid={this.props.antrian_kasir}
-          selected={this.state.selected}
-          action={this.state.action}
-          ref={el => (this.componentRef = el)}
-        />
-        <Consumer>
-          {({ state }) => (
-            <ModalKonfirmasiTindakan
-              passValue={() => this.handleSave(state.dataLogin.nik)}
-              modal="notification2"
-            />
-          )}
-        </Consumer>
-        <ModalKonfirmasi
-          notification={this.state.notification}
-          modal="konfirmasiResep"
-        />
-      </div>
+      </React.Fragment>
     );
   }
 }

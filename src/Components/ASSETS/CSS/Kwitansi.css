@@ -7,6 +7,7 @@
 
 .fontBold {
   font-weight: 500;
+  font-size: 12.5pt;
 }
 .container-table {
   display: flex;
@@ -20,4 +21,16 @@
 
 .container-table > table > tr > th {
   border-style: none;
+}
+
+input[type="number"] {
+  border: none;
+  background-color: none;
+  outline: 0;
+}
+
+input[type="number"]:focus {
+  border: none;
+  background-color: none;
+  outline: 0;
 }

@@ -1,7 +1,7 @@
 import axios from "axios";
 import getToken from "./getToken";
 
-let api = "http://10.6.35.1:8000/api/v1/cek-token";
+let api = "http://10.6.35.1:8006/api/v1/cek-token";
 
 let checkSession = () => {
   let token = getToken();

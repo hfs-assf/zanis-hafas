@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Route, Switch, BrowserRouter, Redirect } from "react-router-dom";
+import { Route, Switch, HashRouter, Redirect } from "react-router-dom";
 import { Store, Consumer } from "./Methods/User/Auth/Store";
 import ProtectedRoute from "./Methods/User/Auth/protectRoute";
 
@@ -54,7 +54,7 @@ class App extends Component {
     );
     return (
       <Store>
-        <BrowserRouter>
+        <HashRouter>
           <div style={{ backgroundColor: "#f8f9fa", fontWeight: "bold" }}>
             <Consumer>
               {({ state }) => (
@@ -143,7 +143,7 @@ class App extends Component {
               </Switch>
             </div>
           </div>
-        </BrowserRouter>
+        </HashRouter>
       </Store>
     );
   }

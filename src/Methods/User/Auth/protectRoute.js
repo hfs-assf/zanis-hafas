@@ -5,14 +5,12 @@ import { Consumer } from "./Store";
 const ProtectedRoute = ({ component: Component, ...rest }) => (
   <Consumer>
     {({ state }) => (
-      <React.Fragment>
-        <Route
-          render={props =>
-            state.auth ? <Component {...props} /> : <Redirect to="/" />
-          }
-          {...rest}
-        />
-      </React.Fragment>
+      <Route
+        render={props =>
+          state.auth ? <Component {...props} /> : <Redirect to="/" />
+        }
+        {...rest}
+      />
     )}
   </Consumer>
 );

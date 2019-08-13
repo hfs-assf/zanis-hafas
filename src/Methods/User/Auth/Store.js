@@ -25,6 +25,7 @@ export class Store extends React.Component {
 
   storeCheckSession = () => {
     checkSession()
+      // .then(data => console.log("check datat", data))
       .then(({ data }) =>
         this.setState({
           auth: true,
