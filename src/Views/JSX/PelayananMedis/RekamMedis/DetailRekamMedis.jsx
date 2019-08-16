@@ -3,7 +3,6 @@ import ViewRekamMedisList from "../../../../Components/JSX/PelayananMedis/RekamM
 import ProfileKiriPasien from "../../../../Components/JSX/Pendaftaran/DaftarPelayananMedis/ProfileKiriPasien";
 class RekamMedisList extends Component {
   render() {
-    console.log(this.props.pasien.id);
     return (
       <div
         className="card"

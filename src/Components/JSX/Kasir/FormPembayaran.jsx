@@ -8,7 +8,7 @@ import list from "../../../Methods/Kasir/Transaksi/listTransaksi";
 import bayarTransaksi from "../../../Methods/Kasir/Transaksi/bayarTransaksi";
 import ModalKonfirmasiTindakan from "../Animasi/ModalKonfirmasiTindakan";
 import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
-
+import { dateFormat } from "../../../Methods/waktu";
 import { Consumer } from "../../../Methods/User/Auth/Store";
 import ReactToPrint from "react-to-print";
 
@@ -23,7 +23,8 @@ class FormPembayaran extends Component {
       selected: {},
       action: "",
       uid_transaksi: "",
-      no_transaksi: ""
+      no_transaksi: "",
+      waktu_terbit: ""
     };
   }
 
@@ -37,7 +38,9 @@ class FormPembayaran extends Component {
     list(this.props.kasir).then(({ data }) => {
       this.setState({
         daftarTransaksi: data,
-        no_transaksi: data[0].no_transaksi
+        no_transaksi: data[0].no_transaksi,
+        waktu_terbit: data[0].waktu_terbit,
+        alamat: data[0].alamat
       });
     });
   };
@@ -138,7 +141,6 @@ class FormPembayaran extends Component {
             />
           </td>
         </tr>
-
         <tr>
           <td colSpan="2" style={{ border: "none" }} />
           <td className="fontBold" style={{ background: "papayawhip" }}>
@@ -161,9 +163,11 @@ class FormPembayaran extends Component {
               <div className="container-flex">
                 <div className="item-container">
                   <h3>{state.dataLogin.nama_lokasi}</h3>
+                  <h4>{state.dataLogin.alamat}</h4>
                 </div>
                 <div className="item-container">
                   <h2>No: {this.state.no_transaksi}</h2>
+                  <h4>Tanggal: {dateFormat(this.state.waktu_terbit)}</h4>
                 </div>
               </div>
             )}
@@ -206,7 +210,7 @@ class FormPembayaran extends Component {
 
             <ReactToPrint
               trigger={() => (
-                <a href="#">
+                <a href={null}>
                   <button className="btn btn-warning md">Print</button>
                 </a>
               )}

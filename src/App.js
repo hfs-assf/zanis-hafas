@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Route, Switch, HashRouter, Redirect } from "react-router-dom";
+import { Route, Switch, BrowserRouter, Redirect } from "react-router-dom";
 import { Store, Consumer } from "./Methods/User/Auth/Store";
 import ProtectedRoute from "./Methods/User/Auth/protectRoute";
 
@@ -34,6 +34,7 @@ import DaftarRekamMedis from "./Views/JSX/PelayananMedis/RekamMedis/DaftarRekamM
 import DetailRekamMedis from "./Views/JSX/PelayananMedis/RekamMedis/DetailRekamMedis";
 import PelayananMedis from "./Views/JSX/PelayananMedis/PelayananMedis";
 import TimelinePelayananMedis from "./Views/JSX/PelayananMedis/TimelinePelayananMedis";
+import antrianTerapis from "./Views/JSX/PelayananMedis/antrianTerapis";
 
 //Pendaftaran
 import Pendaftaran from "./Views/JSX/Pendaftaran/Pendaftaran";
@@ -54,7 +55,7 @@ class App extends Component {
     );
     return (
       <Store>
-        <HashRouter>
+        <BrowserRouter>
           <div style={{ backgroundColor: "#f8f9fa", fontWeight: "bold" }}>
             <Consumer>
               {({ state }) => (
@@ -105,6 +106,13 @@ class App extends Component {
                   path="/pelayanan-medis"
                   component={TimelinePelayananMedis}
                 />
+
+                <ProtectedRoute path="/antrian-terapis/:id" />
+                <ProtectedRoute
+                  path="/antrian-terapis"
+                  component={antrianTerapis}
+                />
+
                 <ProtectedRoute path="/admin" component={Admin} />
                 <ProtectedRoute path="/karyawan" component={KelolaKaryawan} />
                 <ProtectedRoute
@@ -143,7 +151,7 @@ class App extends Component {
               </Switch>
             </div>
           </div>
-        </HashRouter>
+        </BrowserRouter>
       </Store>
     );
   }

@@ -39,6 +39,7 @@ class Sidebar extends Component {
                           <span className="hide-menu">Dashboard</span>
                         </Link>
                       </li>
+
                       {/* {this.lastNumber(state.dataLogin.nik) === "9" ? ( */}
                       <li>
                         <Link
@@ -68,6 +69,9 @@ class Sidebar extends Component {
                           </li>
                           <li>
                             <Link to="/kode-icd">Kode ICD</Link>
+                          </li>
+                          <li>
+                            <Link to="/antrian-terapis">Terapis</Link>
                           </li>
                         </ul>
                       </li>
