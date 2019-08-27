@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "../../ASSETS/CSS/Pendaftaran.css";
 import listPasien from "../../../Methods/RekamMedis/Pasien/listPasien";
+import listRM from "../../../Methods/RekamMedis/Pasien/listRM";
 
 class CariPasien extends Component {
   constructor() {
@@ -37,10 +38,10 @@ class CariPasien extends Component {
       if (filteresPasien.length !== 0 && textFilter !== "") {
         suggestionsList = (
           <ul className="suggestions">
-            {filteresPasien.map((todo, index) => {
+            {filteresPasien.map(todo => {
               return (
                 <Link to={"/tambah-layanan/" + todo.nomor_rekam_medis}>
-                  <li key={index} className="suggestion-active">
+                  <li key={todo} className="suggestion-active">
                     {todo.nama_pasien}
                     <br />
                     {todo.nomor_rekam_medis}

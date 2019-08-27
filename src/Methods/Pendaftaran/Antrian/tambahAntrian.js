@@ -1,13 +1,20 @@
 import axios from "axios";
 import { api } from "../../api";
 
-let tambahAntrian = ({ nomor_rekam_medis, poli, jaminan, dokter }) => {
-  // console.log({ nomor_rekam_medis, poli, jaminan, dokter });
+let tambahAntrian = ({
+  nomor_rekam_medis,
+  poli,
+  jaminan,
+  dokter,
+  id_lokasi
+}) => {
+  console.log("cek", { nomor_rekam_medis, poli, jaminan, dokter, id_lokasi });
   return axios.post(api.pendaftaran + "/antrian", {
     nomor_rekam_medis,
     poli,
     jaminan,
-    dokter
+    dokter,
+    id_lokasi
   });
 };
 

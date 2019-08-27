@@ -14,7 +14,7 @@ export class TimelineTerapis extends Component {
   }
 
   componentDidMount = () => {
-    listTerapis("2019-08-13").then(({ data }) => {
+    listTerapis(this.state.filterTanggal).then(({ data }) => {
       this.setState({
         listDaftar: data
       });

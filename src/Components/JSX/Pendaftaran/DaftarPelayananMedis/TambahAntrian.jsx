@@ -27,7 +27,7 @@ class TambahAntrian extends Component {
     this.setState({ showMe: value });
   };
 
-  handleSave = nik => {
+  handleSave = (nik, id_lokasi) => {
     tambahTransaksi({
       nik_penerbit: nik,
       nomor_rekam_medis: this.props.pasien,
@@ -40,6 +40,7 @@ class TambahAntrian extends Component {
         this.setState({ notification: "0" });
       });
     tambahAntrian({
+      id_lokasi: id_lokasi,
       nomor_rekam_medis: this.props.pasien,
       poli: this.state.poli,
       jaminan: this.state.jaminan,
@@ -53,6 +54,7 @@ class TambahAntrian extends Component {
   };
 
   render() {
+    console.log("this", this);
     return (
       <div className="card-box">
         <div className="flex-container">
@@ -164,7 +166,9 @@ class TambahAntrian extends Component {
         <Consumer>
           {({ state }) => (
             <ModalKonfirmasiTindakan
-              passValue={() => this.handleSave(state.dataLogin.nik)}
+              passValue={() =>
+                this.handleSave(state.dataLogin.nik, state.dataLogin.id_lokasi)
+              }
               modal="konfirmasiAntrian"
             />
           )}

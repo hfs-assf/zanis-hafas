@@ -11,8 +11,6 @@ class RiwayatKunjungan extends Component {
   }
 
   componentDidMount = () => {
-    listHistoriMedis(this.props.id);
-
     listHistoriMedis(this.props.id).then(({ data }) => {
       this.setState({
         histori: data
