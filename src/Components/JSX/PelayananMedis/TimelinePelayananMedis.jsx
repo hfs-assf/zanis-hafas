@@ -69,7 +69,7 @@ class TimelinePelayananMedis extends Component {
   };
 
   render() {
-    jumlahAntrian = this.antrianList().length;
+    jumlahAntrian = this.state.lAntrian.length;
 
     return (
       <div className="row">
