@@ -12,13 +12,15 @@ export class TambahTransaksi extends Component {
         jaminan: "",
         jenis_pembayaran: "",
         notification: ""
-      }
+      },
+      id_lokasi: ""
     };
   }
 
-  handleSave = nik => {
+  handleSave = (nik, id_lokasi) => {
     tambahTransaksi({
       nik_penerbit: nik,
+      id_lokasi: id_lokasi,
       nomor_rekam_medis: 0,
       penjamin: this.state.jaminan,
       jenis_pembayaran: this.state.jenis_pembayaran
@@ -129,7 +131,9 @@ export class TambahTransaksi extends Component {
         <Consumer>
           {({ state }) => (
             <ModalKonfirmasiTindakan
-              passValue={() => this.handleSave(state.dataLogin.nik)}
+              passValue={() =>
+                this.handleSave(state.dataLogin.nik, state.dataLogin.id_lokasi)
+              }
               modal="konfirmasiAntrian"
             />
           )}

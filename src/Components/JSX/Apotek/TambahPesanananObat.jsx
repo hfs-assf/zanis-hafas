@@ -256,13 +256,22 @@ export default class TambahPesananObat extends React.Component {
               <div className="mainsearch">
                 <div className="form-group has-search">
                   <span className="fa fa-search form-control-feedback" />
-                  <input
-                    style={{ width: "435px" }}
-                    type="text"
-                    className="form-control"
-                    placeholder="Tambah Pesanan Obat"
-                    onKeyUp={e => this.onKeyUp(e, id_lokasi)}
-                  />
+                  <Consumer>
+                    {({ state }) => {
+                      return (
+                        <input
+                          style={{ width: "435px" }}
+                          type="text"
+                          className="form-control"
+                          placeholder="Tambah Pesanan Obat"
+                          onKeyUp={e =>
+                            this.onKeyUp(e, state.dataLogin.id_lokasi)
+                          }
+                        />
+                      );
+                    }}
+                  </Consumer>
+
                   {suggestionList}
                 </div>
               </div>

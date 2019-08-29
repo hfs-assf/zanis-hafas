@@ -29,12 +29,11 @@ class SoapPasien extends Component {
       respirasi: "",
       tinggi: "",
       berat: "",
-      id_lokasi: "",
       disabled: false
     };
   }
 
-  handleSave = (nik, id_lokasi) => {
+  handleSave = nik => {
     console.log("ini nik dokter", nik);
     const catatan = JSON.stringify({
       sistole: this.state.sistole,
@@ -48,7 +47,6 @@ class SoapPasien extends Component {
 
     tambahHistoriMedis({
       nomor_rekam_medis: this.props.no_rm,
-      id_lokasi: id_lokasi,
       nik_dokter: nik,
       subjektif: this.state.subjektif,
       objektif: this.state.objektif,
@@ -372,9 +370,7 @@ class SoapPasien extends Component {
         <Consumer>
           {({ state }) => (
             <ModalKonfirmasiTindakan
-              passValue={() =>
-                this.handleSave(state.dataLogin.nik, state.dataLogin.id_lokasi)
-              }
+              passValue={() => this.handleSave(state.dataLogin.nik)}
               modal="notification1"
             />
           )}

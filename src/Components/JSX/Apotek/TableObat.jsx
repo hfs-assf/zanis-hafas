@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import obatList from "../../../Methods/Apotik/Obat/listObat";
 import hapusObat from "../../../Methods/Apotik/Obat/hapusObat";
 import HapusModal from "../hapusModal";
+import { Consumer } from "../../../Methods/User/Auth/Store";
+Consumer;
 
 let delay = null;
 
@@ -18,16 +20,19 @@ export default class TableObat extends React.Component {
       selected: {
         uid: ""
       },
-      field: ""
+      field: "",
+      id_lokasi: ""
     };
   }
 
-  onKeyUp = e => {
+  onKeyUp = (e, id_lokasi) => {
     clearTimeout(delay);
     const nilai = e.target.value;
     delay = setTimeout(() => {
       if (nilai) {
-        obatList(nilai).then(({ data }) => this.setState({ obat: data }));
+        obatList(nilai, id_lokasi).then(({ data }) =>
+          this.setState({ obat: data })
+        );
       } else {
         this.setState({ obat: [] });
       }
@@ -108,12 +113,20 @@ export default class TableObat extends React.Component {
                 <div className="mainsearch">
                   <div className="form-group has-search">
                     <span className="fa fa-search form-control-feedback" />
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Cari Obat"
-                      onKeyUp={e => this.onKeyUp(e)}
-                    />
+                    <Consumer>
+                      {({ state }) => {
+                        return (
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Cari Obat"
+                            onKeyUp={e =>
+                              this.onKeyUp(e, state.dataLogin.id_lokasi)
+                            }
+                          />
+                        );
+                      }}
+                    </Consumer>
                   </div>
                 </div>
               </div>

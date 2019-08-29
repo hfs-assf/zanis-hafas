@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import tambahPasien from "../../../Methods/RekamMedis/Pasien/tambahPasien";
 import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
 import kecamatan from "../../../Methods/data.json";
+import { Consumer } from "../../../Methods/User/Auth/Store";
+
 // import listProvinsi from "../../../JSON/provinsi";
 // import listProvinsi from "../../../Methods/Pendaftaran/listProvinsi";
 
@@ -60,14 +62,11 @@ class FormPendaftaran extends Component {
   //     .join(" ");
   // };
 
-  onSubmit = () => {
-    const catatan = `Penanggung Jawab: ${this.state.nama_penanggungjawab}, ${
-      this.state.status_penanggungjawab
-    },${this.state.telepon_penanggungjawab}, ${
-      this.state.alamat_penanggungjawab
-    }`;
+  onSubmit = id_lokasi => {
+    const catatan = `Penanggung Jawab: ${this.state.nama_penanggungjawab}, ${this.state.status_penanggungjawab},${this.state.telepon_penanggungjawab}, ${this.state.alamat_penanggungjawab}`;
 
     tambahPasien({
+      id_lokasi: id_lokasi,
       nomor_pengenal: this.state.nomor_pengenal,
       jenis_nomor_pengenal: "ktp",
       nama_pasien: this.state.nama_pasien,
@@ -449,22 +448,28 @@ class FormPendaftaran extends Component {
           </div>
           <div className="row">
             <div className="col-md-12">
-              <div className="modal-footer justify-content-center">
-                <button
-                  className="btn btn-primary"
-                  data-toggle="modal"
-                  data-target="#konfirmasiPendaftaran"
-                  onClick={() => this.onSubmit()}
-                >
-                  Simpan
-                </button>
-                <button
-                  className="btn btn-warning"
-                  onClick={() => this.cleanAll()}
-                >
-                  Bersihkan
-                </button>
-              </div>
+              <Consumer>
+                {({ state }) => {
+                  return (
+                    <div className="modal-footer justify-content-center">
+                      <button
+                        className="btn btn-primary"
+                        data-toggle="modal"
+                        data-target="#konfirmasiPendaftaran"
+                        onClick={() => this.onSubmit(state.dataLogin.id_lokasi)}
+                      >
+                        Simpan
+                      </button>
+                      <button
+                        className="btn btn-warning"
+                        onClick={() => this.cleanAll()}
+                      >
+                        Bersihkan
+                      </button>
+                    </div>
+                  );
+                }}
+              </Consumer>
             </div>
           </div>
           <ModalKonfirmasi

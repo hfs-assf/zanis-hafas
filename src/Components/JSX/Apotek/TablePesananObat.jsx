@@ -52,11 +52,11 @@ class TablePesananObat extends React.Component {
     this.setState({ showDetail: false });
   };
 
-  finishPress = uid => {
+  finishPress = (uid, id_lokasi) => {
     editPesananObat(uid, "SELESAI").then(() => {
       this.setState(this.state);
     });
-    kurangStockObat(uid).then(() => {
+    kurangStockObat(uid, id_lokasi).then(() => {
       this.setState(this.state);
     });
   };
@@ -113,7 +113,6 @@ class TablePesananObat extends React.Component {
 
   render() {
     const { detail_pesanan, showDetail } = this.state;
-
     return (
       <React.Fragment>
         <div className="row">
@@ -178,31 +177,30 @@ class TablePesananObat extends React.Component {
                     Simpan
                   </button>
                 </span>
-                <span>
-                  <button
-                    type="button"
-                    className="btn btn-warning btn-sm waves-effect waves-light"
-                    onClick={() => this.tambahPesanan()}
-                    data-toggle="modal"
-                    data-target="#addmedicine"
-                    title="Tambah Obat"
-                  >
-                    Tambah Obat
-                  </button>
-                </span>
 
                 <div class="middle">
                   <h5>Pilih Status</h5>
-                  <label>
-                    <input
-                      type="radio"
-                      name="radio"
-                      onClick={() => this.finishPress(this.state.uid)}
-                    />
-                    <div class="front-end box">
-                      <span>SELESAI</span>
-                    </div>
-                  </label>
+                  <Consumer>
+                    {({ state }) => {
+                      return (
+                        <label>
+                          <input
+                            type="radio"
+                            name="radio"
+                            onClick={() =>
+                              this.finishPress(
+                                this.state.uid,
+                                state.dataLogin.id_lokasi
+                              )
+                            }
+                          />
+                          <div class="front-end box">
+                            <span>SELESAI</span>
+                          </div>
+                        </label>
+                      );
+                    }}
+                  </Consumer>
                   <label>
                     <input
                       type="radio"

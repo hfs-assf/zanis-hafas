@@ -45,13 +45,14 @@ class FormTambahDetailObat extends Component {
     }
   }
 
-  handleSave = nik => {
+  handleSave = (nik, id_lokasi) => {
     if (this.props.action === "add") {
       tambahStokObat({
         uid: this.props.uid,
         stok: this.state.stok,
         kadaluarsa: this.state.kadaluarsa,
         nik_penerima: nik,
+        id_lokasi: id_lokasi,
         harga_modal: this.state.harga_modal,
         harga_jual: this.state.harga_jual
       })
@@ -216,7 +217,9 @@ class FormTambahDetailObat extends Component {
         <Consumer>
           {({ state }) => (
             <ModalKonfirmasiTindakan
-              passValue={() => this.handleSave(state.dataLogin.nik)}
+              passValue={() =>
+                this.handleSave(state.dataLogin.nik, state.dataLogin.id_lokasi)
+              }
               modal="notification1"
             />
           )}

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "../../ASSETS/CSS/Timeline.css";
-import * as waktu from "../../../Methods/waktu";
 import listTerapis from "../../../Methods/RekamMedis/HistorisMedis/listTerapis";
 import "../../ASSETS/CSS/form.css";
 import { Consumer } from "../../../Methods/User/Auth/Store";
@@ -9,24 +8,22 @@ export class TimelineTerapis extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      listDaftar: [],
-      filterTanggal: waktu.dateFormat()
+      listDaftar: []
     };
   }
 
   componentDidMount = () => {
-    listTerapis(this.state.filterTanggal).then(({ data }) => {
+    listTerapis().then(({ data }) => {
       this.setState({
         listDaftar: data
       });
     });
-    // .catch(err => console.log(err));
   };
 
   renderTable = value => {
     const { listDaftar } = this.state;
-    const filterData = listDaftar.filter(el => el.id_lokasi === value);
-    return filterData.map(e => {
+    // const filterData = listDaftar.filter(el => el.id_lokasi === value);
+    return listDaftar.map(e => {
       return (
         <tr key={e.uid}>
           <td>{new Date(e.waktu_checkup).toLocaleDateString("en-GB")}</td>
@@ -56,13 +53,7 @@ export class TimelineTerapis extends Component {
               <th>Diagnosa</th>
             </tr>
           </thead>
-          <Consumer>
-            {({ state }) => {
-              return (
-                <tbody>{this.renderTable(state.dataLogin.id_lokasi)}</tbody>
-              );
-            }}
-          </Consumer>
+          <tbody>{this.renderTable()}</tbody>
         </table>
       </div>
     );

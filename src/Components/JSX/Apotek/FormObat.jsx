@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import tambahObat from "../../../Methods/Apotik/Obat/tambahObat";
 import Sukses from "../Animasi/Sukses";
 import Gagal from "../Animasi/Gagal";
+import { Consumer } from "../../../Methods/User/Auth/Store";
 
 class FormObat extends Component {
   state = {
@@ -9,7 +10,8 @@ class FormObat extends Component {
     minimal_stok: "",
     satuan: "",
     kategori: "Minum",
-    notification: ""
+    notification: "",
+    id_lokasi: ""
   };
 
   componentWillMount() {
@@ -20,9 +22,10 @@ class FormObat extends Component {
       notification: ""
     });
   }
-  tambahObat = event => {
+  tambahObat = (event, id_lokasi) => {
     event.preventDefault();
     tambahObat({
+      id_lokasi: id_lokasi,
       nama_obat: this.state.nama_obat,
       minimal_stok: this.state.minimal_stok,
       satuan: this.state.satuan,
@@ -150,22 +153,33 @@ class FormObat extends Component {
 
               {this.state.notification}
             </div>
-            <div className="modal-footer justify-content-center">
-              <button
-                className="btn btn-info"
-                onClick={event => this.tambahObat(event)}
-                // disabled={
-                //   !this.state.nama_obat ||
-                //   !this.state.minimal_stok ||
-                //   !this.state.satuan
-                // }
-              >
-                Simpan
-              </button>
-              <button className="btn btn-outline-info" data-dismiss="modal">
-                Kembali
-              </button>
-            </div>
+            <Consumer>
+              {({ state }) => {
+                return (
+                  <div className="modal-footer justify-content-center">
+                    <button
+                      className="btn btn-info"
+                      onClick={event =>
+                        this.tambahObat(event, state.dataLogin.id_lokasi)
+                      }
+                      // disabled={
+                      //   !this.state.nama_obat ||
+                      //   !this.state.minimal_stok ||
+                      //   !this.state.satuan
+                      // }
+                    >
+                      Simpan
+                    </button>
+                    <button
+                      className="btn btn-outline-info"
+                      data-dismiss="modal"
+                    >
+                      Kembali
+                    </button>
+                  </div>
+                );
+              }}
+            </Consumer>
           </div>
         </div>
       </div>

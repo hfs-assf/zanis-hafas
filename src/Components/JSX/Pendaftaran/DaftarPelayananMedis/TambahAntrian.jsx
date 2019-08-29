@@ -19,7 +19,8 @@ class TambahAntrian extends Component {
         poli: "",
         notification: "",
         jenis_pembayaran: ""
-      }
+      },
+      id_lokasi: ""
     };
   }
 
@@ -30,6 +31,7 @@ class TambahAntrian extends Component {
   handleSave = (nik, id_lokasi) => {
     tambahTransaksi({
       nik_penerbit: nik,
+      id_lokasi: id_lokasi,
       nomor_rekam_medis: this.props.pasien,
       penjamin: this.state.jaminan,
       jenis_pembayaran: this.state.jenis_pembayaran

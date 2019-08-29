@@ -20,8 +20,31 @@ let tambahPasien = ({
   pendidikan,
   pekerjaan,
   kantor,
+  id_lokasi,
   catatan
 }) => {
+  console.log({
+    nomor_pengenal,
+    jenis_nomor_pengenal,
+    email,
+    nama_pasien,
+    tempat_lahir,
+    tanggal_lahir,
+    jenis_kelamin,
+    status,
+    agama,
+    alamat,
+    kecamatan,
+    kelurahan,
+    kode_pos,
+    telepon,
+    handphone,
+    pendidikan,
+    pekerjaan,
+    kantor,
+    id_lokasi,
+    catatan
+  });
   return axios.post(api.rekamMedis + "/pasien", {
     nomor_pengenal,
     jenis_nomor_pengenal,
@@ -40,6 +63,7 @@ let tambahPasien = ({
     pendidikan: pendidikan.toLowerCase(),
     pekerjaan: pekerjaan.toLowerCase(),
     kantor,
+    id_lokasi,
     catatan
   });
 };
