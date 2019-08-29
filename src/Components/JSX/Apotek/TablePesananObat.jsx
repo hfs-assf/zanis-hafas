@@ -9,6 +9,7 @@ import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
 import kurangStockObat from "../../../Methods/Apotik/StokObat/kurangStokObat";
 import tambahDetailTransaksi from "../../../Methods/Kasir/DetailTransaksi/tambahDetailTransaksi";
 import { dateFormat } from "../../../Methods/waktu";
+import { Consumer } from "../../../Methods/User/Auth/Store";
 
 class TablePesananObat extends React.Component {
   state = {
@@ -22,12 +23,9 @@ class TablePesananObat extends React.Component {
     showDetail: false,
     openModal: false,
     nik: "",
-    notification: "0"
+    notification: "0",
+    id_lokasi: ""
   };
-
-  pushDataKePesananObat(data) {
-    this.setState({ detail_pesanan: this.state.detail_pesanan.concat(data) });
-  }
 
   componentDidMount() {
     listPesananObatByStatus("MENUNGGU").then(({ data }) => {
@@ -87,14 +85,10 @@ class TablePesananObat extends React.Component {
       });
   };
 
-  tambahPesanan = uid => {
-    this.setState({ openModal: true, selected: { uid } });
-  };
-
-  render() {
-    let header;
-    const { pesanan_obat, detail_pesanan, showDetail } = this.state;
-    header = pesanan_obat.map(e => {
+  header = value => {
+    const { pesanan_obat } = this.state;
+    const filterDaftar = pesanan_obat.filter(el => el.id_lokasi === value);
+    return filterDaftar.map(e => {
       return (
         <li
           key={e.uid}
@@ -115,13 +109,21 @@ class TablePesananObat extends React.Component {
         </li>
       );
     });
+  };
+
+  render() {
+    const { detail_pesanan, showDetail } = this.state;
 
     return (
       <React.Fragment>
         <div className="row">
           <div className="col-md-4">
             <div className="container">
-              <ul>{header}</ul>
+              <Consumer>
+                {({ state }) => {
+                  return <ul>{this.header(state.dataLogin.id_lokasi)}</ul>;
+                }}
+              </Consumer>
             </div>
           </div>
           <div className="col-md-8">
@@ -214,10 +216,7 @@ class TablePesananObat extends React.Component {
                 </div>
               </div>
             ) : null}
-            <TambahPesananObat
-              fnTambahPesananObat={this.pushDataKePesananObat.bind(this)}
-              selected={this.state.selected}
-            />
+
             <ModalKonfirmasi
               notification={this.state.notification}
               modal="konfirmasiTransaksi"

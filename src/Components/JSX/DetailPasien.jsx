@@ -11,19 +11,20 @@ class DetailPasien extends Component {
       tanggal_lahir: "",
       poli: "",
       jaminan: "",
-      dokter: ""
+      dokter: "",
+      lAntrian: []
     };
   }
-  componentWillMount() {
-    listAntrian().then(data => console.log("ayo check", data));
-    // .then(({ data }) => {
-    //   this.setState({
-    //     poli: data[0].poli,
-    //     no_rm: data[0].nomor_rekam_medis,
-    //     jaminan: data[0].jaminan,
-    //     dokter: data[0].dokter
-    //   });
-    // });
+
+  componentDidMount() {
+    listAntrian(this.props.no_rm).then(({ data }) => {
+      this.setState({
+        poli: data[0].poli,
+        no_rm: data[0].nomor_rekam_medis,
+        jaminan: data[0].jaminan,
+        dokter: data[0].dokter
+      });
+    });
 
     detailPasien(this.props.no_rm).then(({ data }) => {
       this.setState({

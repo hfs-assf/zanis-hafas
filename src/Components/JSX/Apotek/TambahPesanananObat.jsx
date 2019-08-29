@@ -19,12 +19,12 @@ export default class TambahPesananObat extends React.Component {
     disabled: false
   };
 
-  onKeyUp = e => {
+  onKeyUp = (e, id_lokasi) => {
     clearTimeout(set);
     const nilai = e.target.value;
     set = setTimeout(() => {
       if (nilai) {
-        listBelanja(nilai).then(({ data }) =>
+        listBelanja(nilai, id_lokasi).then(({ data }) =>
           this.setState({ daftarObat: data })
         );
       } else {
@@ -261,7 +261,7 @@ export default class TambahPesananObat extends React.Component {
                     type="text"
                     className="form-control"
                     placeholder="Tambah Pesanan Obat"
-                    onKeyUp={e => this.onKeyUp(e)}
+                    onKeyUp={e => this.onKeyUp(e, id_lokasi)}
                   />
                   {suggestionList}
                 </div>

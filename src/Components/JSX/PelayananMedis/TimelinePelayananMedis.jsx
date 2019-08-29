@@ -82,12 +82,7 @@ class TimelinePelayananMedis extends Component {
             </Consumer>
           </div>
         </div>
-        ;
-        {/* <div className="col-md-7">
-          <div className="container">
-            <ul>{this.antrianList()}</ul>
-          </div>
-        </div> */}
+
         <div className="col-md-4 tglpasien">
           <div className="banyakpasien">
             <span className="badge">Jumlah Antrian : {jumlahAntrian}</span>

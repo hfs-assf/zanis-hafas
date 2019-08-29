@@ -11,7 +11,9 @@ let tambahHistoriMedis = ({
   jenis_perawatan,
   penjamin,
   tindakan,
-  catatan
+  catatan,
+  nama_terapis,
+  id_lokasi
 }) => {
   return axios.post(api.rekamMedis + "/histori-medis/" + nomor_rekam_medis, {
     nik_dokter,
@@ -22,7 +24,9 @@ let tambahHistoriMedis = ({
     jenis_perawatan,
     penjamin,
     tindakan,
-    catatan
+    catatan,
+    nama_terapis,
+    id_lokasi
   });
 };
 

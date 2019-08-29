@@ -3,6 +3,7 @@ import "../../ASSETS/CSS/Timeline.css";
 import * as waktu from "../../../Methods/waktu";
 import listTerapis from "../../../Methods/RekamMedis/HistorisMedis/listTerapis";
 import "../../ASSETS/CSS/form.css";
+import { Consumer } from "../../../Methods/User/Auth/Store";
 
 export class TimelineTerapis extends Component {
   constructor(props) {
@@ -22,9 +23,10 @@ export class TimelineTerapis extends Component {
     // .catch(err => console.log(err));
   };
 
-  renderTable = () => {
+  renderTable = value => {
     const { listDaftar } = this.state;
-    return listDaftar.map(e => {
+    const filterData = listDaftar.filter(el => el.id_lokasi === value);
+    return filterData.map(e => {
       return (
         <tr key={e.uid}>
           <td>{new Date(e.waktu_checkup).toLocaleDateString("en-GB")}</td>
@@ -54,7 +56,13 @@ export class TimelineTerapis extends Component {
               <th>Diagnosa</th>
             </tr>
           </thead>
-          <tbody>{this.renderTable()}</tbody>
+          <Consumer>
+            {({ state }) => {
+              return (
+                <tbody>{this.renderTable(state.dataLogin.id_lokasi)}</tbody>
+              );
+            }}
+          </Consumer>
         </table>
       </div>
     );

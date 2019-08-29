@@ -19,16 +19,20 @@ class resepObatTabulasi extends Component {
       filter: "",
       daftarObat: [],
       nik_dokter: "",
-      disabled: false
+      disabled: false,
+      id_lokasi: ""
     };
   }
 
-  onKeyUp = e => {
+  onKeyUp = (e, id_lokasi) => {
+    console.log("id", id_lokasi);
     clearTimeout(set);
     const nilai = e.target.value;
     set = setTimeout(() => {
       if (nilai) {
-        obatList(nilai).then(({ data }) => this.setState({ daftarObat: data }));
+        obatList(nilai, id_lokasi).then(({ data }) =>
+          this.setState({ daftarObat: data })
+        );
       } else {
         this.setState({ daftarObat: [] });
       }
@@ -80,10 +84,11 @@ class resepObatTabulasi extends Component {
     this.setState({ doResep: [] });
   }
 
-  handleSave = nik => {
+  handleSave = (nik, id_lokasi) => {
     tambahPesananObat({
       nomor_rekam_medis: this.props.no_rm,
       nik_dokter: nik,
+      id_lokasi: id_lokasi,
       detail_pesanan_obat: this.state.doResep.map(
         ({ uid, jumlah_obat, keterangan }) => ({
           uid_obat: uid,
@@ -219,14 +224,21 @@ class resepObatTabulasi extends Component {
         <div className="row maxrow" style={{ margin: "0px" }}>
           <div className="col-md-2">Tambah Obat</div>
           <div className="col-md-10">
-            <input
-              type="text"
-              className="form-control"
-              // value={filter}
-              onKeyUp={e => this.onKeyUp(e)}
-              // onChange={e => this.cariObat(e)}
-              // disabled={this.state.disabled}
-            />
+            <Consumer>
+              {({ state }) => {
+                return (
+                  <input
+                    type="text"
+                    className="form-control"
+                    // value={filter}
+                    onKeyUp={e => this.onKeyUp(e, state.dataLogin.id_lokasi)}
+                    // onChange={e => this.cariObat(e)}
+                    // disabled={this.state.disabled}
+                  />
+                );
+              }}
+            </Consumer>
+
             {suggestionsList}
           </div>
         </div>
@@ -234,7 +246,9 @@ class resepObatTabulasi extends Component {
         <Consumer>
           {({ state }) => (
             <ModalKonfirmasiTindakan
-              passValue={() => this.handleSave(state.dataLogin.nik)}
+              passValue={() =>
+                this.handleSave(state.dataLogin.nik, state.dataLogin.id_lokasi)
+              }
               modal="notification2"
             />
           )}

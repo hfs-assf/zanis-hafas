@@ -54,7 +54,6 @@ class TambahAntrian extends Component {
   };
 
   render() {
-    console.log("this", this);
     return (
       <div className="card-box">
         <div className="flex-container">

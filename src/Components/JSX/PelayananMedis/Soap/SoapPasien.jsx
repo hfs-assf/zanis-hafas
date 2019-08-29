@@ -18,6 +18,7 @@ class SoapPasien extends Component {
       objektif: "",
       analisa: "",
       diagnosa: "",
+      nama_terapis: "",
       jenis_perawatan: "Rawat Jalan",
       penjamin: "Umum",
       tindakan: "",
@@ -28,12 +29,12 @@ class SoapPasien extends Component {
       respirasi: "",
       tinggi: "",
       berat: "",
-
+      id_lokasi: "",
       disabled: false
     };
   }
 
-  handleSave = nik => {
+  handleSave = (nik, id_lokasi) => {
     console.log("ini nik dokter", nik);
     const catatan = JSON.stringify({
       sistole: this.state.sistole,
@@ -47,11 +48,13 @@ class SoapPasien extends Component {
 
     tambahHistoriMedis({
       nomor_rekam_medis: this.props.no_rm,
+      id_lokasi: id_lokasi,
       nik_dokter: nik,
       subjektif: this.state.subjektif,
       objektif: this.state.objektif,
       analisa: this.state.analisa,
       diagnosa: this.state.diagnosa,
+      nama_terapis: this.state.nama_terapis,
       jenis_perawatan: this.state.jenis_perawatan,
       penjamin: this.state.penjamin,
       tindakan: this.state.tindakan,
@@ -77,6 +80,7 @@ class SoapPasien extends Component {
       objektif: "",
       analisa: "",
       diagnosa: "",
+      nama_terapis: "",
       jenis_perawatan: "Rawat Jalan",
       penjamin: "Umum",
       tindakan: "",
@@ -306,7 +310,7 @@ class SoapPasien extends Component {
                   <label htmlFor="color-2" className="radio-inline">
                     <span />
                   </label>
-                  Simpan Template SOAP
+                  Tambahkan Nama Terapis
                 </div>
               </div>
 
@@ -318,6 +322,11 @@ class SoapPasien extends Component {
                     className="input-template"
                     placeholder="Nama Template"
                     disabled={this.state.disabled}
+                    onChange={event =>
+                      this.setState({
+                        nama_terapis: event.target.value
+                      })
+                    }
                   />
                 ) : null}
               </div>
@@ -363,7 +372,9 @@ class SoapPasien extends Component {
         <Consumer>
           {({ state }) => (
             <ModalKonfirmasiTindakan
-              passValue={() => this.handleSave(state.dataLogin.nik)}
+              passValue={() =>
+                this.handleSave(state.dataLogin.nik, state.dataLogin.id_lokasi)
+              }
               modal="notification1"
             />
           )}
