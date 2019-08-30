@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import detailPasien from "../../Methods/RekamMedis/Pasien/detailPasien";
-import listAntrian from "../../Methods/Pendaftaran/Antrian/listAntrian";
+import { listAntrian } from "../../Methods/Pendaftaran/Antrian/listAntrian";
 class DetailPasien extends Component {
   constructor(props) {
     super(props);

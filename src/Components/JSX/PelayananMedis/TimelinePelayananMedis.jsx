@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "../../ASSETS/CSS/Timeline.css";
-import listAntrian from "../../../Methods/Pendaftaran/Antrian/listAntrian";
+import { listAntrian } from "../../../Methods/Pendaftaran/Antrian/listAntrian";
 import detailPasien from "../../../Methods/RekamMedis/Pasien/detailPasien";
 import { dateFormat } from "../../../Methods/waktu";
 import { Consumer } from "../../../Methods/User/Auth/Store";

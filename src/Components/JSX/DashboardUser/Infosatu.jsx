@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../../ASSETS/CSS/Dashboard.css";
-import listPasien from "../../../Methods/Admin/getDataLabor";
+// import listPasien from "../../../Methods/Admin/getDataLabor";
+import { jmlAntrian } from "../../../Methods/Pendaftaran/Antrian/listAntrian";
 
 class Infosatu extends Component {
   constructor(props) {
@@ -11,14 +12,23 @@ class Infosatu extends Component {
   }
 
   componentDidMount() {
-    listPasien().then(({ data }) => {
+    jmlAntrian().then(({ data }) => {
       this.setState({
-        pasien: this.state.pasien.concat(data)
+        pasien: data
       });
     });
   }
 
+  cariNilai = value => {
+    const filter = this.state.pasien.filter(e => e.status_antrian == value)
+      .length;
+    return filter;
+  };
+
   render() {
+    const data = this.state;
+
+    console.log("filee", data);
     return (
       <div className="card-group">
         <div className="card gradient">
@@ -32,7 +42,7 @@ class Infosatu extends Component {
                     style={{ width: "1em", height: "1em" }}
                   />
                 </h2>
-                <h3 className="text-white">{this.state.pasien.length}</h3>
+                <h3 className="text-white">{this.cariNilai("menunggu")}</h3>
                 <h4 className="card-subtitle text-white">
                   Jumlah Pasien Hari Ini
                 </h4>
@@ -63,7 +73,7 @@ class Infosatu extends Component {
                     style={{ width: "1em", height: "1em" }}
                   />
                 </h2>
-                <h3 className="text-white">{this.state.pasien.length}</h3>
+                <h3 className="text-white">{this.cariNilai("selesai")}</h3>
                 <h4 className="card-subtitle text-white">Pasien Terlayani</h4>
               </div>
               <div className="col-12">
