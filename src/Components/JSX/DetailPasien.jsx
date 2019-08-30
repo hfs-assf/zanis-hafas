@@ -17,12 +17,12 @@ class DetailPasien extends Component {
   }
 
   componentDidMount() {
-    listAntrian(this.props.no_rm).then(({ data }) => {
+    listAntrian(this.props.antrian_pasien).then(({ data }) => {
+      const filter = data.filter(e => e.uid == this.props.antrian_pasien);
       this.setState({
-        poli: data[0].poli,
-        no_rm: data[0].nomor_rekam_medis,
-        jaminan: data[0].jaminan,
-        dokter: data[0].dokter
+        poli: filter[0].poli,
+        jaminan: filter[0].jaminan,
+        dokter: filter[0].dokter
       });
     });
 

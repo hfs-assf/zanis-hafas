@@ -3,7 +3,15 @@ import SOAP from "./Soap/SoapPasien";
 import ResepObat from "./ResepObat/ResepObat";
 import Tindakan from "./Tindakan/TindakanPasien";
 import Laboratorium from "./Laboratorium/LaboratoriumPasien";
+import editStatusAntrian from "../../../Methods/Pendaftaran/Antrian/editStatusAntrian";
+
 class TabulasiPelayananMedis extends Component {
+  handleStatus = () => {
+    editStatusAntrian(this.props.antrian_pasien).then(() => {
+      this.setState(this.state);
+    });
+  };
+
   render() {
     return (
       <div>
@@ -57,7 +65,12 @@ class TabulasiPelayananMedis extends Component {
           </div>
         </div>
         <div className="modal-footer justify-content-center">
-          <button className="btn btn-primary">Selesai</button>
+          <button
+            className="btn btn-primary"
+            onClick={() => this.handleStatus()}
+          >
+            Selesai
+          </button>
         </div>
       </div>
     );

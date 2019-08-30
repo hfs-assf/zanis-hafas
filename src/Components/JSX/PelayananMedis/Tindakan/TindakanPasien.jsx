@@ -115,12 +115,13 @@ class tindakanTabulasi extends Component {
     this.setState({ doTindakan: [] });
   }
 
-  handleSave() {
+  handleSave(id_lokasi) {
     tambahHistoriTindakan({
       uid_histori_medis: this.state.dPasien,
       uid_tindakan: this.state.doTindakan[0].uid,
       jumlah: this.state.doTindakan[0].jumlah_tindakan,
-      keterangan: this.state.doTindakan[0].keterangan
+      keterangan: this.state.doTindakan[0].keterangan,
+      id_lokasi: id_lokasi
     })
       .then(
         this.setState({
@@ -308,10 +309,18 @@ class tindakanTabulasi extends Component {
         />
         {daftarTindakan}
 
-        <ModalKonfirmasiTindakan
+        {/* <ModalKonfirmasiTindakan
           passValue={this.handleSave}
           modal="notification3"
-        />
+        /> */}
+        <Consumer>
+          {({ state }) => (
+            <ModalKonfirmasiTindakan
+              passValue={() => this.handleSave(state.dataLogin.id_lokasi)}
+              modal="notification3"
+            />
+          )}
+        </Consumer>
 
         <ModalKonfirmasi
           notification={this.state.notification}
