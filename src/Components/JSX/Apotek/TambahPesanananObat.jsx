@@ -20,6 +20,7 @@ export default class TambahPesananObat extends React.Component {
   };
 
   onKeyUp = (e, id_lokasi) => {
+    console.log("coba", id_lokasi);
     clearTimeout(set);
     const nilai = e.target.value;
     set = setTimeout(() => {

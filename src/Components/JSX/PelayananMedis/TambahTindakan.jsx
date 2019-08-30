@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import tambahTindakan from "../../../Methods/Poli/Tindakan/tambahTindakan";
+import { Consumer } from "../../../Methods/User/Auth/Store";
 
 class TambahTindakan extends Component {
   constructor(props) {
@@ -8,7 +9,8 @@ class TambahTindakan extends Component {
       showMe: false,
       nama_tindakan: "",
       biaya_tindakan: "",
-      jenis: ""
+      jenis: "",
+      id_lokasi: ""
     };
   }
 
@@ -16,12 +18,22 @@ class TambahTindakan extends Component {
     this.setState({ showMe: value });
   };
 
-  handleSave = () => {
+  handleSave = id_lokasi => {
     tambahTindakan({
+      id_lokasi: id_lokasi,
       nama_tindakan: this.state.nama_tindakan,
       biaya_tindakan: this.state.biaya_tindakan,
       jenis: this.state.jenis
-    });
+    })
+      .then(el => console.log(el, "berhasil"))
+      .catch(err => console.log("err", err));
+    // console.log(
+    //   "cuma",
+    //   id_lokasi,
+    //   this.state.nama_tindakan,
+    //   this.state.biaya_tindakan,
+    //   this.state.jenis
+    // );
   };
 
   render() {
@@ -105,14 +117,21 @@ class TambahTindakan extends Component {
                 </div>
               </form>
             </div>
+
             <div className="modal-footer justify-content-center">
-              <button
-                className="btn btn-primary"
-                data-toggle="modal"
-                onClick={() => this.handleSave()}
-              >
-                Simpan
-              </button>
+              <Consumer>
+                {({ state }) => {
+                  return (
+                    <button
+                      className="btn btn-primary"
+                      data-toggle="modal"
+                      onClick={() => this.handleSave(state.dataLogin.id_lokasi)}
+                    >
+                      Simpan
+                    </button>
+                  );
+                }}
+              </Consumer>
               <button
                 className="btn btn-outline-primary waves-effect"
                 data-dismiss="modal"

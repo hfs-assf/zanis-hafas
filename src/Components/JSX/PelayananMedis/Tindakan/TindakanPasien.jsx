@@ -6,7 +6,7 @@ import ModalKonfirmasi from "../../Animasi/ModalKonfirmasi";
 import tambahDetailTransaksi from "../../../../Methods/Kasir/DetailTransaksi/tambahDetailTransaksi.js";
 import TambahTindakan from "../TambahTindakan";
 import tambahHistoriTindakan from "../../../../Methods/Poli/HistoriTindakan/tambahHistoriTindakan";
-
+import { Consumer } from "../../../../Methods/User/Auth/Store";
 
 let set;
 class tindakanTabulasi extends Component {
@@ -30,7 +30,8 @@ class tindakanTabulasi extends Component {
       dPasien: [],
       listHistory: [],
       selected: {},
-      action: ""
+      action: "",
+      id_lokasi: ""
     };
   }
 
@@ -59,12 +60,12 @@ class tindakanTabulasi extends Component {
     this.setState({ selected: {}, action: "add" });
   };
 
-  onKeyUp = e => {
+  onKeyUp = (e, id_lokasi) => {
     clearTimeout(set);
     const nilai = e.target.value;
     set = setTimeout(() => {
       if (nilai) {
-        listTindakan(nilai).then(({ data }) =>
+        listTindakan(nilai, id_lokasi).then(({ data }) =>
           this.setState({ tindakan: data })
         );
       } else {
@@ -272,14 +273,21 @@ class tindakanTabulasi extends Component {
         <div className="row maxrow" style={{ margin: "0px" }}>
           <div className="col-md-2">Cari Tindakan</div>
           <div className="col-md-8">
-            <input
-              type="text"
-              className="form-control"
-              onKeyUp={e => this.onKeyUp(e)}
-              // value={filter}
-              // onChange={e => this.cariTindakan(e)}
-              // disabled={this.state.disabled}
-            />
+            <Consumer>
+              {({ state }) => {
+                return (
+                  <input
+                    type="text"
+                    className="form-control"
+                    onKeyUp={e => this.onKeyUp(e, state.dataLogin.id_lokasi)}
+                    // value={filter}
+                    // onChange={e => this.cariTindakan(e)}
+                    // disabled={this.state.disabled}
+                  />
+                );
+              }}
+            </Consumer>
+
             {suggestionsList}
           </div>
           <div className="col-md-2">

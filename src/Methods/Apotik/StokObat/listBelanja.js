@@ -1,9 +1,13 @@
 import axios from "axios";
 import { api } from "../../api";
 
-let listBelanja = nama_obat => {
+let listBelanja = (nama_obat, id_lokasi) => {
   return axios.get(
-    api.apotik + "/list-stok-obat?limit=20&nama_obat=" + nama_obat
+    api.apotik +
+      "/list-stok-obat?limit=5nama_obat=" +
+      nama_obat +
+      "?id_lokasi" +
+      id_lokasi
   );
 };
 
