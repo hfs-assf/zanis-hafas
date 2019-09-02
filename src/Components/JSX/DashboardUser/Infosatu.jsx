@@ -20,15 +20,17 @@ class Infosatu extends Component {
   }
 
   cariNilai = value => {
-    const filter = this.state.pasien.filter(e => e.status_antrian == value)
+    const filter = this.state.pasien.filter(e => e.status_antrian === value)
       .length;
     return filter;
   };
 
-  render() {
-    const data = this.state;
+  jmlPasien = () => {
+    const filterJml = this.state.pasien.length;
+    return filterJml;
+  };
 
-    console.log("filee", data);
+  render() {
     return (
       <div className="card-group">
         <div className="card gradient">
@@ -42,7 +44,7 @@ class Infosatu extends Component {
                     style={{ width: "1em", height: "1em" }}
                   />
                 </h2>
-                <h3 className="text-white">{this.cariNilai("menunggu")}</h3>
+                <h3 className="text-white">{this.jmlPasien()}</h3>
                 <h4 className="card-subtitle text-white">
                   Jumlah Pasien Hari Ini
                 </h4>

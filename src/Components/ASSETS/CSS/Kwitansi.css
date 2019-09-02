@@ -23,13 +23,13 @@
   border-style: none;
 }
 
-input[type="number"] {
+.center {
   border: none;
   background-color: none;
   outline: 0;
 }
 
-input[type="number"]:focus {
+.center :focus {
   border: none;
   background-color: none;
   outline: 0;

@@ -6,7 +6,6 @@ import obatList from "../../../Methods/Apotik/Obat/listObat";
 import hapusObat from "../../../Methods/Apotik/Obat/hapusObat";
 import HapusModal from "../hapusModal";
 import { Consumer } from "../../../Methods/User/Auth/Store";
-Consumer;
 
 let delay = null;
 

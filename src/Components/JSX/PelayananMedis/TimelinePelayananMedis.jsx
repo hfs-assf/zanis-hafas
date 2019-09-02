@@ -3,10 +3,8 @@ import { Link } from "react-router-dom";
 import "../../ASSETS/CSS/Timeline.css";
 import { listAntrian } from "../../../Methods/Pendaftaran/Antrian/listAntrian";
 import detailPasien from "../../../Methods/RekamMedis/Pasien/detailPasien";
-import { dateFormat } from "../../../Methods/waktu";
+import { timeFormat } from "../../../Methods/waktu";
 import { Consumer } from "../../../Methods/User/Auth/Store";
-
-let jumlahAntrian;
 
 class TimelinePelayananMedis extends Component {
   constructor(props) {
@@ -61,16 +59,20 @@ class TimelinePelayananMedis extends Component {
           </div>
         </Link>
         <span className="number">
-          <span>{dateFormat(e.waktu_daftar)}</span>
+          <span>{timeFormat(e.waktu_daftar)}</span>
           <span />
         </span>
       </li>
     ));
   };
 
-  render() {
-    jumlahAntrian = this.state.lAntrian.length;
+  cariNilai = value => {
+    const filter = this.state.lAntrian.filter(e => e.status_antrian === value)
+      .length;
+    return filter;
+  };
 
+  render() {
     return (
       <div className="row">
         <div className="col-md-7">
@@ -85,7 +87,9 @@ class TimelinePelayananMedis extends Component {
 
         <div className="col-md-4 tglpasien">
           <div className="banyakpasien">
-            <span className="badge">Jumlah Antrian : {jumlahAntrian}</span>
+            <span className="badge">
+              Jumlah Antrian : {this.cariNilai("menunggu")}
+            </span>
           </div>
         </div>
       </div>

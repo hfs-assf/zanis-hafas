@@ -121,7 +121,7 @@ class FormPembayaran extends Component {
             <th className="fontBold">Total Harga</th>
           </tr>
         </thead>
-        <tbody>{this.details()}</tbody>
+        <tbody>{this.details()}
         <tr>
           <td colSpan="2" />
           <td className="fontBold">Total</td>
@@ -153,6 +153,7 @@ class FormPembayaran extends Component {
             {this.getDiskon()}
           </td>
         </tr>
+        </tbody>
       </table>
     );
     return (

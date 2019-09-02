@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "../../ASSETS/CSS/Timeline.css";
 import listTerapis from "../../../Methods/RekamMedis/HistorisMedis/listTerapis";
 import "../../ASSETS/CSS/form.css";
-import { Consumer } from "../../../Methods/User/Auth/Store";
 
 export class TimelineTerapis extends Component {
   constructor(props) {
@@ -20,9 +19,21 @@ export class TimelineTerapis extends Component {
     });
   };
 
-  renderTable = value => {
+  // getData = async () => {
+  //   let antrian = await listTerapis().then(data => data.data);
+  //   let namaList = [];
+
+  //   const listRM = antrian.map(el => el.nomor_rekam_medis);
+  //   for (let i = 0; i < listRM.length; i++) {
+  //     let nama = await detailPasien(listRM[i]).then(data => data.data);
+  //     namaList.push(nama[0].nama_pasien);
+  //   }
+
+  //   return antrian.map((el, i) => ({ ...el, nama: namaList[i] }));
+  // };
+
+  renderTable = () => {
     const { listDaftar } = this.state;
-    // const filterData = listDaftar.filter(el => el.id_lokasi === value);
     return listDaftar.map(e => {
       return (
         <tr key={e.uid}>
@@ -39,6 +50,7 @@ export class TimelineTerapis extends Component {
   };
 
   render() {
+    console.log("miaww", this.state.listDaftar);
     return (
       <div>
         <table className="table">

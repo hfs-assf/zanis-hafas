@@ -4,12 +4,31 @@ import ResepObat from "./ResepObat/ResepObat";
 import Tindakan from "./Tindakan/TindakanPasien";
 import Laboratorium from "./Laboratorium/LaboratoriumPasien";
 import editStatusAntrian from "../../../Methods/Pendaftaran/Antrian/editStatusAntrian";
+import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
 
 class TabulasiPelayananMedis extends Component {
+  constructor(props) {
+    super();
+    this.state = {
+      notification: "0"
+    };
+  }
+
   handleStatus = () => {
-    editStatusAntrian(this.props.antrian_pasien).then(() => {
-      this.setState(this.state);
-    });
+    editStatusAntrian(this.props.antrian_pasien)
+      .then(() => {
+        this.setState(this.state);
+      })
+      .then(
+        this.setState({
+          disabled: true,
+          notification: "1"
+        })
+      )
+      .catch(err => {
+        console.log(err);
+        this.setState({ notification: "0" });
+      });
   };
 
   render() {
@@ -68,10 +87,16 @@ class TabulasiPelayananMedis extends Component {
           <button
             className="btn btn-primary"
             onClick={() => this.handleStatus()}
+            data-toggle="modal"
+            data-target="#konfirmasiTransaksi"
           >
             Selesai
           </button>
         </div>
+        <ModalKonfirmasi
+          notification={this.state.notification}
+          modal="konfirmasiTransaksi"
+        />
       </div>
     );
   }

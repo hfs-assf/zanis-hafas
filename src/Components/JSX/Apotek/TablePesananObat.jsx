@@ -4,13 +4,11 @@ import "../../ASSETS/CSS/form.css";
 import "../../ASSETS/CSS/Timeline.css";
 import editPesananObat from "../../../Methods/Apotik/PesananObat/editPesananObat";
 import listPesananObatByStatus from "../../../Methods/Apotik/PesananObat/listPesananObat";
-import TambahPesananObat from "./TambahPesanananObat";
 import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
 import kurangStockObat from "../../../Methods/Apotik/StokObat/kurangStokObat";
 import tambahDetailTransaksi from "../../../Methods/Kasir/DetailTransaksi/tambahDetailTransaksi";
-import { dateFormat } from "../../../Methods/waktu";
+import { timeFormat } from "../../../Methods/waktu";
 import { Consumer } from "../../../Methods/User/Auth/Store";
-
 class TablePesananObat extends React.Component {
   state = {
     pesanan_obat: [],
@@ -104,7 +102,7 @@ class TablePesananObat extends React.Component {
             </div>
           </div>
           <span className="number">
-            <span>{dateFormat(e.waktu_pesan)}</span>
+            <span>{timeFormat(e.waktu_pesan)}</span>
           </span>
         </li>
       );

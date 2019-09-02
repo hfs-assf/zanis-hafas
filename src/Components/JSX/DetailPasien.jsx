@@ -18,7 +18,7 @@ class DetailPasien extends Component {
 
   componentDidMount() {
     listAntrian(this.props.antrian_pasien).then(({ data }) => {
-      const filter = data.filter(e => e.uid == this.props.antrian_pasien);
+      const filter = data.filter(e => e.uid === this.props.antrian_pasien);
       this.setState({
         poli: filter[0].poli,
         jaminan: filter[0].jaminan,
