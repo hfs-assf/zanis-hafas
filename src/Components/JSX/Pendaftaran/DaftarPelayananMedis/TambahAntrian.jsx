@@ -88,27 +88,6 @@ class TambahAntrian extends Component {
             </select>
           </div>
         </div>
-
-        <div className="form-group row">
-          <label htmlFor="NamaDokter" className="col-sm-4 col-form-label">
-            Nama Dokter
-            <span className="required">*</span>
-          </label>
-          <div className="col-sm-5">
-            <select
-              className="form-control"
-              onChange={event =>
-                this.setState({
-                  dokter: event.target.value
-                })
-              }
-              required
-            >
-              <option value="">--- Pilihan ---</option>
-              <option value="dr. Nurlailiyani">dr. Nurlailiyani</option>
-            </select>
-          </div>
-        </div>
         <div className="form-group row">
           <label htmlFor="Poliklinik" className="col-sm-4 col-form-label">
             Poliklinik
@@ -130,6 +109,27 @@ class TambahAntrian extends Component {
             </select>
           </div>
         </div>
+        <div className="form-group row">
+          <label htmlFor="NamaDokter" className="col-sm-4 col-form-label">
+            Nama Dokter
+            <span className="required">*</span>
+          </label>
+          <div className="col-sm-5">
+            <select
+              className="form-control"
+              onChange={event =>
+                this.setState({
+                  dokter: event.target.value
+                })
+              }
+              required
+            >
+              <option value="">--- Pilihan ---</option>
+              <option value="dr. Nurlailiyani">dr. Nurlailiyani</option>
+            </select>
+          </div>
+        </div>
+
         <div className="form-group row">
           <label htmlFor="JenisPembayaran" className="col-sm-4 col-form-label">
             Jenis Pembayaran

@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import TablePesananObat from "../../../Components/JSX/Apotek/TablePesananObat";
-
+import FormBeli from "../../../Components/JSX/Kasir/FormBeli";
+FormBeli;
 class Apotek extends Component {
   render() {
     return (
-      <div className="container-fluid">
-        <div
+      <div className="container-timeline">
+        {/* <div
           className="alert alert-danger alert-dismissible fade show"
           role="alert"
         >
@@ -19,8 +20,13 @@ class Apotek extends Component {
           >
             <span aria-hidden="true">&times;</span>
           </button>
+        </div> */}
+        <div className="item-timeline">
+          <TablePesananObat />
         </div>
-        <TablePesananObat />
+        <div className="item-timeline-left">
+          <FormBeli />
+        </div>
       </div>
     );
   }

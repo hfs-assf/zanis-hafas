@@ -45,10 +45,6 @@ class FormPembayaran extends Component {
     });
   };
 
-  cetakFaktur = uid => {
-    this.setState({ selected: { uid }, action: "cetak" });
-  };
-
   totalPrice = () => {
     return this.state.transaksi.reduce(
       (sum, i) => (sum += i.jumlah_item * i.biaya),
@@ -121,38 +117,39 @@ class FormPembayaran extends Component {
             <th className="fontBold">Total Harga</th>
           </tr>
         </thead>
-        <tbody>{this.details()}
-        <tr>
-          <td colSpan="2" />
-          <td className="fontBold">Total</td>
-          <td className="fontBold">{this.totalPrice()}</td>
-        </tr>
-        <tr>
-          <td colSpan="2" style={{ border: "none" }} />
+        <tbody>
+          {this.details()}
+          <tr>
+            <td colSpan="2" />
+            <td className="fontBold">Total</td>
+            <td className="fontBold">{this.totalPrice()}</td>
+          </tr>
+          <tr>
+            <td colSpan="2" style={{ border: "none" }} />
 
-          <td className="fontBold">Disc (%)</td>
-          <td>
-            <input
-              type="number"
-              name="diskon"
-              className="center"
-              style={{ width: "150px", outline: "none" }}
-              onChange={e => this.setState({ diskon: e.target.value })}
-            />
-          </td>
-        </tr>
-        <tr>
-          <td colSpan="2" style={{ border: "none" }} />
-          <td className="fontBold" style={{ background: "papayawhip" }}>
-            Total Pembayaran
-          </td>
-          <td
-            className="fontBold"
-            style={{ background: "papayawhip", fontSize: "12.5pt" }}
-          >
-            {this.getDiskon()}
-          </td>
-        </tr>
+            <td className="fontBold">Disc (%)</td>
+            <td>
+              <input
+                type="number"
+                name="diskon"
+                className="center"
+                style={{ width: "150px", outline: "none" }}
+                onChange={e => this.setState({ diskon: e.target.value })}
+              />
+            </td>
+          </tr>
+          <tr>
+            <td colSpan="2" style={{ border: "none" }} />
+            <td className="fontBold" style={{ background: "papayawhip" }}>
+              Total Pembayaran
+            </td>
+            <td
+              className="fontBold"
+              style={{ background: "papayawhip", fontSize: "12.5pt" }}
+            >
+              {this.getDiskon()}
+            </td>
+          </tr>
         </tbody>
       </table>
     );

@@ -3,16 +3,18 @@ import tambahPasien from "../../../Methods/RekamMedis/Pasien/tambahPasien";
 import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
 import kecamatan from "../../../Methods/data.json";
 import { Consumer } from "../../../Methods/User/Auth/Store";
+import listMembership from "../../../Methods/RekamMedis/Pasien/listMemberships";
 
 // import listProvinsi from "../../../JSON/provinsi";
 // import listProvinsi from "../../../Methods/Pendaftaran/listProvinsi";
-
+let set;
 class FormPendaftaran extends Component {
   constructor() {
     super();
     this.state = {
       notification: "0",
       nomor_pengenal: "",
+      nomor_kartu: "",
       jenis_nomor_pengenal: "ktp",
       nama_pasien: "",
       tempat_lahir: "",
@@ -32,7 +34,9 @@ class FormPendaftaran extends Component {
       nama_penanggungjawab: "",
       status_penanggungjawab: "",
       telepon_penanggungjawab: "",
-      alamat_penanggungjawab: ""
+      alamat_penanggungjawab: "",
+      pasien: [],
+      filter: ""
     };
   }
 
@@ -43,6 +47,25 @@ class FormPendaftaran extends Component {
       [name]: value
     });
   };
+
+  // cariData = e => {
+  //   clearTimeout(set);
+  //   const nilai = e.target.value;
+  //   set = setTimeout(() => {
+  //     if (nilai) {
+  //       listMembership(nilai).then(({ data }) =>
+  //         this.setState({ pasien: data })
+  //       );
+  //     } else {
+  //       this.setState({ pasien: [] });
+  //     }
+  //   }, 1000);
+
+  //   e.preventDefault();
+  //   this.setState({
+  //     filter: nilai
+  //   });
+  // };
 
   listKelurahan(namakecamatan) {
     let saring = kecamatan.filter(
@@ -68,6 +91,7 @@ class FormPendaftaran extends Component {
     tambahPasien({
       id_lokasi: id_lokasi,
       nomor_pengenal: this.state.nomor_pengenal,
+      nomor_kartu: this.state.nomor_kartu,
       jenis_nomor_pengenal: "ktp",
       nama_pasien: this.state.nama_pasien,
       tempat_lahir: this.state.tempat_lahir,
@@ -96,7 +120,7 @@ class FormPendaftaran extends Component {
     this.setState({
       nomor_pengenal: "",
       jenis_nomor_pengenal: "ktp",
-      email: "",
+      nomor_kartu: "",
       nama_pasien: "",
       tempat_lahir: "",
       tanggal_lahir: "",
@@ -133,6 +157,20 @@ class FormPendaftaran extends Component {
             <div className="col-md-6">
               <fieldset>
                 <legend>Data Diri</legend>
+                <label>
+                  <span>
+                    Nomor Kartu <span className="required">*</span>
+                  </span>
+
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="nomor_kartu"
+                    value={this.state.nomor_kartu}
+                    onChange={e => this.handleChange(e)}
+                    required
+                  />
+                </label>
                 <label>
                   <span>
                     No KTP <span className="required">*</span>

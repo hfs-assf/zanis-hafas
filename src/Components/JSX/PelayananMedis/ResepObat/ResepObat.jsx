@@ -70,14 +70,22 @@ class resepObatTabulasi extends Component {
     });
   };
 
+  // hapus = id => {
+  //   var arrays = this.state.doResep;
+  //   arrays.forEach(i => {
+  //     console.log(i, "dapat");
+  //     if (this.state.doResep.uid === id) {
+  //       arrays.splice(i, 1);
+  //     }
+  //   });
+  //   this.setState({ doResep: arrays });
+  // };
+
   hapus = id => {
-    var arrays = this.state.doResep;
-    arrays.forEach(i => {
-      if (this.state.doResep.uid === id) {
-        arrays.splice(i, 1);
-      }
+    const arrays = this.state.doResep;
+    this.setState({
+      doResep: arrays.filter(el => el.uid !== id)
     });
-    this.setState({ doResep: arrays });
   };
 
   reset() {

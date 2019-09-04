@@ -3,8 +3,8 @@ import { api } from "../../api";
 
 let tambahPasien = ({
   nomor_pengenal,
+  nomor_kartu,
   jenis_nomor_pengenal,
-  email,
   nama_pasien,
   tempat_lahir,
   tanggal_lahir,
@@ -25,8 +25,8 @@ let tambahPasien = ({
 }) => {
   console.log({
     nomor_pengenal,
+    nomor_kartu,
     jenis_nomor_pengenal,
-    email,
     nama_pasien,
     tempat_lahir,
     tanggal_lahir,
@@ -47,6 +47,7 @@ let tambahPasien = ({
   });
   return axios.post(api.rekamMedis + "/pasien", {
     nomor_pengenal,
+    nomor_kartu,
     jenis_nomor_pengenal,
     nama_pasien: nama_pasien.toLowerCase(),
     tempat_lahir: tempat_lahir.toLowerCase(),

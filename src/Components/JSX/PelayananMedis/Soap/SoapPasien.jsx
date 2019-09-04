@@ -16,12 +16,12 @@ class SoapPasien extends Component {
       nik_dokter: "",
       subjektif: "",
       objektif: "",
-      analisa: "",
+      assesment: "",
       diagnosa: "",
       nama_terapis: "",
       jenis_perawatan: "Rawat Jalan",
       penjamin: "Umum",
-      tindakan: "",
+      planning: "",
       sistole: "",
       diastole: "",
       suhu: "",
@@ -50,12 +50,12 @@ class SoapPasien extends Component {
       nik_dokter: nik,
       subjektif: this.state.subjektif,
       objektif: this.state.objektif,
-      analisa: this.state.analisa,
+      analisa: this.state.asssesment,
       diagnosa: this.state.diagnosa,
       nama_terapis: this.state.nama_terapis,
       jenis_perawatan: this.state.jenis_perawatan,
       penjamin: this.state.penjamin,
-      tindakan: this.state.tindakan,
+      tindakan: this.state.planning,
       catatan: catatan
     })
       .then(
@@ -76,12 +76,12 @@ class SoapPasien extends Component {
       nik_dokter: "",
       subjektif: "",
       objektif: "",
-      analisa: "",
+      asssesment: "",
       diagnosa: "",
       nama_terapis: "",
       jenis_perawatan: "Rawat Jalan",
       penjamin: "Umum",
-      tindakan: "",
+      planning: "",
       sistole: "",
       diastole: "",
       suhu: "",
@@ -101,6 +101,9 @@ class SoapPasien extends Component {
     }
   };
   render() {
+    const pFont = {
+      fontSize: "8pt"
+    };
     return (
       <div className="container-fluid">
         <div className="row">
@@ -123,6 +126,7 @@ class SoapPasien extends Component {
                         disabled={this.state.disabled}
                       />
                     </td>
+                    <td style={pFont}>mmHg</td>
                   </tr>
                   <tr>
                     <td>Diastole</td>
@@ -138,6 +142,7 @@ class SoapPasien extends Component {
                         disabled={this.state.disabled}
                       />
                     </td>
+                    <td style={pFont}>mmHg</td>
                   </tr>
                   <tr>
                     <td>Suhu</td>
@@ -153,6 +158,7 @@ class SoapPasien extends Component {
                         disabled={this.state.disabled}
                       />
                     </td>
+                    <td style={pFont}>°C</td>
                   </tr>
                   <tr>
                     <td>Pulse</td>
@@ -168,6 +174,7 @@ class SoapPasien extends Component {
                         disabled={this.state.disabled}
                       />
                     </td>
+                    <td style={pFont}>x/mnt</td>
                   </tr>
                   <tr>
                     <td>Respirasi</td>
@@ -183,6 +190,7 @@ class SoapPasien extends Component {
                         disabled={this.state.disabled}
                       />
                     </td>
+                    <td style={pFont}>skls/mnt</td>
                   </tr>
                   <tr>
                     <td>Tinggi</td>
@@ -198,6 +206,7 @@ class SoapPasien extends Component {
                         disabled={this.state.disabled}
                       />
                     </td>
+                    <td style={pFont}>cm</td>
                   </tr>
                   <tr>
                     <td>Berat</td>
@@ -213,6 +222,7 @@ class SoapPasien extends Component {
                         disabled={this.state.disabled}
                       />
                     </td>
+                    <td style={pFont}>kg</td>
                   </tr>
                 </tbody>
               </table>
@@ -253,21 +263,6 @@ class SoapPasien extends Component {
                 />
               </div>
               <div className="col-md-6 rowsoap">
-                <div className="legendtitle">Analisa</div>
-                <textarea
-                  name="textarea"
-                  className="textarea"
-                  onChange={event =>
-                    this.setState({
-                      analisa: event.target.value
-                    })
-                  }
-                  disabled={this.state.disabled}
-                />
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-6 rowsoap">
                 <div className="legendtitle">Objektif</div>
                 <textarea
                   name="textarea"
@@ -280,14 +275,29 @@ class SoapPasien extends Component {
                   disabled={this.state.disabled}
                 />
               </div>
+            </div>
+            <div className="row">
               <div className="col-md-6 rowsoap">
-                <div className="legendtitle">Tindakan</div>
+                <div className="legendtitle">Assesment</div>
                 <textarea
                   name="textarea"
                   className="textarea"
                   onChange={event =>
                     this.setState({
-                      tindakan: event.target.value
+                      assesment: event.target.value
+                    })
+                  }
+                  disabled={this.state.disabled}
+                />
+              </div>
+              <div className="col-md-6 rowsoap">
+                <div className="legendtitle">Planning</div>
+                <textarea
+                  name="textarea"
+                  className="textarea"
+                  onChange={event =>
+                    this.setState({
+                      planning: event.target.value
                     })
                   }
                   disabled={this.state.disabled}

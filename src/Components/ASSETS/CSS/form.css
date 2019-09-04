@@ -383,15 +383,15 @@
   background-color: #25a9dd;
   text-align: center;
   color: white;
-  max-width: 10em;
+  width: 11em;
   border-radius: 15px 15px 0px 0px;
 }
 .isisoap {
   background-color: rgb(231, 231, 231);
   /* max-width: 10em; */
-  max-width: 10em;
+  width: 11em;
   height: auto;
-  padding: 5px;
+  padding: 2px;
 }
 .isisoap > table > tbody > tr > td {
   font-size: 15px;

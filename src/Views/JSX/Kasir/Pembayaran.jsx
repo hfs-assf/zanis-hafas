@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-
 import Form from "../../../Components/JSX/Kasir/FormPembayaran";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 class Pembayaran extends Component {
   render() {
     return (

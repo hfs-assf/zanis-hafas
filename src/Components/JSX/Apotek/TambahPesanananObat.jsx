@@ -6,7 +6,7 @@ import ModalKonfirmasiTindakan from "../../JSX/Animasi/ModalKonfirmasiTindakan";
 import ModalKonfirmasi from "../../JSX/Animasi/ModalKonfirmasi";
 import { Consumer } from "../../../Methods/User/Auth/Store";
 import kurangStokBelanja from "../../../Methods/Apotik/StokObat/kurangStokBelanja";
-import tambahDetailTransaksi from "../../../Methods/Kasir/DetailTransaksi/tambahDetailTransaksi";
+import transaksiBelanja from "../../../Methods/Kasir/Transaksi/transakiBelanja";
 
 let set;
 export default class TambahPesananObat extends React.Component {
@@ -79,11 +79,15 @@ export default class TambahPesananObat extends React.Component {
     this.setState({ doResep: [] });
   }
 
-  handleSave = nik => {
+  handleSave = (nik, id_lokasi) => {
     console.log("hallo", nik);
-    tambahDetailTransaksi({
-      nomor_rekam_medis: 0,
-      listDetail: this.state.doResep.map(
+    transaksiBelanja({
+      nik_penerbit: nik,
+      id_lokasi: id_lokasi,
+      nomor_rekam_medis: "",
+      penjamin: "umum",
+      jenis_pembayaran: "CASH",
+      detailTransaksi: this.state.doResep.map(
         ({ nama_obat, jumlah_obat, harga_jual }) => ({
           item_transaksi: nama_obat,
           jumlah_item: jumlah_obat,
@@ -103,8 +107,10 @@ export default class TambahPesananObat extends React.Component {
       });
     kurangStokBelanja({
       nik_karyawan: nik,
+      id_lokasi: id_lokasi,
       listDetail: this.state.doResep.map(({ uid_obat, jumlah_obat }) => ({
         uid_obat: uid_obat,
+        id_lokasi: id_lokasi,
         jumlah_item: jumlah_obat
       }))
     })
@@ -209,7 +215,7 @@ export default class TambahPesananObat extends React.Component {
                     <th className="text-center">ACTION</th>
                   </tr>
                 </thead>
-                {this.tambahPesanan()}
+                <tbody>{this.tambahPesanan()}</tbody>
               </div>
             </div>
           </div>
@@ -291,7 +297,12 @@ export default class TambahPesananObat extends React.Component {
             <Consumer>
               {({ state }) => (
                 <ModalKonfirmasiTindakan
-                  passValue={() => this.handleSave(state.dataLogin.nik)}
+                  passValue={() =>
+                    this.handleSave(
+                      state.dataLogin.nik,
+                      state.dataLogin.id_lokasi
+                    )
+                  }
                   modal="notification2"
                 />
               )}

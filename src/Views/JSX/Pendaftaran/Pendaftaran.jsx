@@ -24,7 +24,8 @@ class Pendaftaran extends Component {
             <strong>
               Sesudah menginput data pasien atau melihat data pasien lama
             </strong>
-            klik menu pencarian.
+            <span> klik menu pencarian. </span>
+
             <button
               type="button"
               className="close"
