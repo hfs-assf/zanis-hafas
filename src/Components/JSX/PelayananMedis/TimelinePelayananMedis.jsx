@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "../../ASSETS/CSS/Timeline.css";
 import { listAntrian } from "../../../Methods/Pendaftaran/Antrian/listAntrian";
-import detailPasien from "../../../Methods/RekamMedis/Pasien/detailPasien";
+
 import { timeFormat } from "../../../Methods/waktu";
 import { Consumer } from "../../../Methods/User/Auth/Store";
 
@@ -12,47 +12,32 @@ class TimelinePelayananMedis extends Component {
     this.state = {
       antrian: [],
       nama: [],
-      tanggal: new Date("mm/dd/YYYY"),
       lAntrian: [],
       dapatID: ""
     };
   }
 
-  componentDidMount = () => {
-    this.getData()
-      .then(data => {
-        this.setState({
-          lAntrian: data
-        });
-      })
-      .catch(err => console.log(err));
-  };
-
-  getData = async () => {
-    let antrian = await listAntrian().then(data => data.data);
-    let namaList = [];
-
-    const listRM = antrian.map(el => el.nomor_rekam_medis);
-    for (let i = 0; i < listRM.length; i++) {
-      let nama = await detailPasien(listRM[i]).then(data => data.data);
-      namaList.push(nama[0].nama_pasien);
-    }
-
-    return antrian.map((el, i) => ({ ...el, nama: namaList[i] }));
-  };
+  componentDidMount() {
+    listAntrian().then(({ data }) => {
+      this.setState({
+        lAntrian: data
+      });
+    });
+  }
 
   antrianList = value => {
     const { lAntrian } = this.state;
-    const saringData = lAntrian.filter(el => el.id_lokasi === value);
+    console.log("ayo check", lAntrian);
+    const filterData = lAntrian.filter(el => el.id_lokasi === value);
 
-    return saringData.map(e => (
+    return filterData.map(e => (
       <li key={e.uid} className="animated bounceIn">
         <Link to={"/pelayanan-medis/" + e.uid + "/" + e.nomor_rekam_medis}>
           <span />
           <div className="number"> {e.nomor_antrian} </div>
           <div>
             <div className="title">{e.nomor_rekam_medis}</div>
-            <div className="tefalsext-white">{e.nama}</div>
+            <div className="tefalsext-white">{e.nama_pasien}</div>
             <div className="type">
               {e.dokter} - {e.poli}
             </div>

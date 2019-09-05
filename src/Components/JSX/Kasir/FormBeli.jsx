@@ -1,25 +1,18 @@
 import React, { Component } from "react";
 import "../../ASSETS/CSS/form.css";
-import SVGBillInvoice from "../../ASSETS/SVG/SVGBillInvoice";
 import TambahPesananObat from "../../JSX/Apotek/TambahPesanananObat";
-import TambahTransaksi from "./TambahTransaksi";
 import SVGApotik from "../../ASSETS/SVG/svgapotek";
 
 export class FormBeli extends Component {
   constructor() {
     super();
     this.state = {
-      modalObat: false,
-      modalTransaksi: false
+      modalObat: false
     };
   }
 
   tambahPesanan = () => {
     this.setState({ modalObat: true, selected: {} });
-  };
-
-  tambahTransaksi = () => {
-    this.setState({ modalTransaksi: true, selected: {} });
   };
 
   render() {
@@ -51,20 +44,6 @@ export class FormBeli extends Component {
         <div className="container-beli">
           <div
             className="flex-beli"
-            onClick={() => this.tambahTransaksi()}
-            data-toggle="modal"
-            data-target="#addtransaksi"
-            title="Tambah Transaksi"
-          >
-            <div className="items-subs">
-              <div style={icon}>
-                <SVGBillInvoice />
-              </div>
-              <h5 style={h5}>Transaksi</h5>
-            </div>
-          </div>
-          <div
-            className="flex-beli"
             onClick={() => this.tambahPesanan()}
             data-toggle="modal"
             data-target="#addmedicine"
@@ -80,7 +59,6 @@ export class FormBeli extends Component {
             </div>
           </div>
         </div>
-        <TambahTransaksi selected={this.state.selected} />
         <TambahPesananObat selected={this.state.selected} />
       </div>
     );

@@ -52,9 +52,8 @@
 
 .middle {
   position: fixed;
-  right: 0;
   text-align: center;
-  margin-right: 80px;
+  right: 0;
   margin-top: -60px;
   width: 250px;
   height: auto;
@@ -186,6 +185,7 @@
 .boxdaftar {
   position: fixed;
   padding: 20px;
+  right: 0;
   /* background-color: rgb(238, 238, 238); */
   width: 55%;
   box-shadow: 0 10px 10px rgba(116, 112, 112, 0.16),

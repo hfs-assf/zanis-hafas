@@ -15,3 +15,12 @@ export const dateFormat = () => {
   let tanggalSekarang = year + "-" + (month + 1) + "-" + date;
   return tanggalSekarang;
 };
+
+export const date_format = () => {
+  let d = new Date();
+  let date = d.getDate();
+  let month = d.getMonth();
+  let year = d.getFullYear();
+  let dateStr = date + "-" + (month + 1) + "-" + year;
+  return dateStr;
+};

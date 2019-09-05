@@ -4,6 +4,7 @@ import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
 import kecamatan from "../../../Methods/data.json";
 import { Consumer } from "../../../Methods/User/Auth/Store";
 import listMembership from "../../../Methods/RekamMedis/Pasien/listMemberships";
+import { date_format } from "../../../Methods/waktu";
 
 // import listProvinsi from "../../../JSON/provinsi";
 // import listProvinsi from "../../../Methods/Pendaftaran/listProvinsi";
@@ -16,10 +17,10 @@ class FormPendaftaran extends Component {
       nomor_pengenal: "",
       nomor_kartu: "",
       jenis_nomor_pengenal: "ktp",
-      nama_pasien: "",
+      nama_member: "",
       tempat_lahir: "",
       tanggal_lahir: "",
-      jenis_kelamin: "P",
+      jenis_kelamin: "L",
       status: "Belum Menikah",
       agama: "Islam",
       alamat: "",
@@ -46,6 +47,26 @@ class FormPendaftaran extends Component {
     this.setState({
       [name]: value
     });
+  };
+
+  cariDatmember = e => {
+    e.preventDefault();
+    const id_member = this.state.nomor_kartu;
+    listMembership(id_member).then(({ data }) =>
+      this.setState({
+        nama_member: data.nama_member,
+        nomor_pengenal: data.nomor_pengenal,
+        tempat_lahir: data.tempat_lahir,
+        tanggal_lahir: data.tanggal_lahir,
+        agama: data.agama,
+        jenis_kelamin: data.jenis_kelamin,
+        alamat: data.alamat,
+        kecamatan: data.kecamatan,
+        kelurahan: data.kelurahan,
+        kode_pos: data.kode_pos,
+        handphone: data.handphone
+      })
+    );
   };
 
   // cariData = e => {
@@ -93,7 +114,7 @@ class FormPendaftaran extends Component {
       nomor_pengenal: this.state.nomor_pengenal,
       nomor_kartu: this.state.nomor_kartu,
       jenis_nomor_pengenal: "ktp",
-      nama_pasien: this.state.nama_pasien,
+      nama_member: this.state.nama_member,
       tempat_lahir: this.state.tempat_lahir,
       tanggal_lahir: this.state.tanggal_lahir,
       jenis_kelamin: this.state.jenis_kelamin,
@@ -121,10 +142,10 @@ class FormPendaftaran extends Component {
       nomor_pengenal: "",
       jenis_nomor_pengenal: "ktp",
       nomor_kartu: "",
-      nama_pasien: "",
+      nama_member: "",
       tempat_lahir: "",
       tanggal_lahir: "",
-      jenis_kelamin: "P",
+      jenis_kelamin: "L",
       status: "Belum Menikah",
       agama: "Islam",
       alamat: "",
@@ -161,15 +182,16 @@ class FormPendaftaran extends Component {
                   <span>
                     Nomor Kartu <span className="required">*</span>
                   </span>
-
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="nomor_kartu"
-                    value={this.state.nomor_kartu}
-                    onChange={e => this.handleChange(e)}
-                    required
-                  />
+                  <form onSubmit={e => this.cariDatmember(e)}>
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="nomor_kartu"
+                      value={this.state.nomor_kartu}
+                      onChange={e => this.handleChange(e)}
+                      required
+                    />
+                  </form>
                 </label>
                 <label>
                   <span>
@@ -192,8 +214,8 @@ class FormPendaftaran extends Component {
                   <input
                     type="text"
                     className="form-control"
-                    name="nama_pasien"
-                    value={this.state.nama_pasien}
+                    name="nama_member"
+                    value={this.state.nama_member}
                     onChange={e => this.handleChange(e)}
                     required
                   />
@@ -262,8 +284,8 @@ class FormPendaftaran extends Component {
                         onChange={e => this.handleChange(e)}
                         required
                       >
-                        <option defaultValue="P">Perempuan</option>
-                        <option value="L">Laki-laki</option>
+                        <option defaultValue="L">Laki-laki</option>
+                        <option value="P">Perempuan</option>
                       </select>
                     </label>
                   </div>

@@ -50,8 +50,8 @@ class TablePesananObat extends React.Component {
     this.setState({ showDetail: false });
   };
 
-  finishPress = (uid, id_lokasi) => {
-    editPesananObat(uid, "SELESAI").then(() => {
+  handleConf = (uid, id_lokasi) => {
+    editPesananObat(uid, "KONFIRMASI").then(() => {
       this.setState(this.state);
     });
     kurangStockObat(uid, id_lokasi).then(() => {
@@ -97,6 +97,7 @@ class TablePesananObat extends React.Component {
           <div className="menunggu"> {e.status_pesanan} </div>
           <div>
             <div className="title">{e.nomor_rekam_medis}</div>
+            <div className="tefalsext-white">{e.nama_pasien}</div>
             <div className="tefalsext-white">
               {new Date(e.waktu_pesan).toLocaleDateString("en-GB")}
             </div>
@@ -186,14 +187,14 @@ class TablePesananObat extends React.Component {
                             type="radio"
                             name="radio"
                             onClick={() =>
-                              this.finishPress(
+                              this.handleConf(
                                 this.state.uid,
                                 state.dataLogin.id_lokasi
                               )
                             }
                           />
                           <div class="front-end box">
-                            <span>SELESAI</span>
+                            <span>KONFIRMASI</span>
                           </div>
                         </label>
                       );
