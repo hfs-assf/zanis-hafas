@@ -1,6 +1,4 @@
 import React from "react";
-import "../../ASSETS/CSS/form.css";
-import "../../ASSETS/CSS/Timeline.css";
 import listBelanja from "../../../Methods/Apotik/StokObat/listBelanja";
 import ModalKonfirmasiTindakan from "../../JSX/Animasi/ModalKonfirmasiTindakan";
 import ModalKonfirmasi from "../../JSX/Animasi/ModalKonfirmasi";
@@ -20,7 +18,6 @@ export default class TambahPesananObat extends React.Component {
   };
 
   onKeyUp = (e, id_lokasi) => {
-    console.log("coba", id_lokasi);
     clearTimeout(set);
     const nilai = e.target.value;
     set = setTimeout(() => {
@@ -128,7 +125,7 @@ export default class TambahPesananObat extends React.Component {
 
   tambahPesanan = () => {
     return this.state.doResep.map((resep, index) => (
-      <tbody key={index}>
+      <tbody key={index} className="bodyTable">
         <tr>
           <td className="text-center">{resep.nama_obat}</td>
           <td className="text-center">
@@ -205,18 +202,16 @@ export default class TambahPesananObat extends React.Component {
       daftarResep = (
         <React.Fragment>
           <div className="modal-body">
-            <div className="table-responsive">
-              <div className="table">
-                <thead>
-                  <tr>
-                    <th className="text-center">NAMA OBAT</th>
-                    <th className="text-center">JUMLAH</th>
-                    <th className="text-center">HARGA</th>
-                    <th className="text-center">ACTION</th>
-                  </tr>
-                </thead>
-                <tbody>{this.tambahPesanan()}</tbody>
-              </div>
+            <div className="table1">
+              <thead className="headTable">
+                <tr>
+                  <th className="text-center">NAMA OBAT</th>
+                  <th className="text-center">JUMLAH</th>
+                  <th className="text-center">HARGA</th>
+                  <th className="text-center">ACTION</th>
+                </tr>
+              </thead>
+              {this.tambahPesanan()}
             </div>
           </div>
           <div className="modal-footer justify-content-center">

@@ -18,11 +18,13 @@ class TimelinePelayananMedis extends Component {
   }
 
   componentDidMount() {
-    listAntrian().then(({ data }) => {
-      this.setState({
-        lAntrian: data
-      });
-    });
+    listAntrian()
+      .then(({ data }) => {
+        this.setState({
+          lAntrian: data
+        });
+      })
+      .catch(e => console.log("error", e));
   }
 
   antrianList = value => {

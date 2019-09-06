@@ -4,11 +4,10 @@ import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
 import kecamatan from "../../../Methods/data.json";
 import { Consumer } from "../../../Methods/User/Auth/Store";
 import listMembership from "../../../Methods/RekamMedis/Pasien/listMemberships";
-import { date_format } from "../../../Methods/waktu";
 
 // import listProvinsi from "../../../JSON/provinsi";
 // import listProvinsi from "../../../Methods/Pendaftaran/listProvinsi";
-let set;
+
 class FormPendaftaran extends Component {
   constructor() {
     super();

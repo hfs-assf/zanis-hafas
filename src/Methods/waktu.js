@@ -24,3 +24,17 @@ export const date_format = () => {
   let dateStr = date + "-" + (month + 1) + "-" + year;
   return dateStr;
 };
+
+export const conversi = value => {
+  var reverse = value
+      .toString()
+      .split("")
+      .reverse()
+      .join(""),
+    ribuan = reverse.match(/\d{1,3}/g);
+  return ribuan
+    .join(".")
+    .split("")
+    .reverse()
+    .join("");
+};

@@ -39,6 +39,7 @@ export class TimelineTerapis extends Component {
         <tr key={e.uid}>
           <td>{new Date(e.waktu_checkup).toLocaleDateString("en-GB")}</td>
           <td>{e.nama_terapis}</td>
+          <td>{e.nama_pasien}</td>
           <td>{e.subjektif}</td>
           <td>{e.objektif}</td>
           <td>{e.analisa}</td>
@@ -58,6 +59,7 @@ export class TimelineTerapis extends Component {
             <tr>
               <th>tanggal</th>
               <th>Nama Terapis</th>
+              <th>Nama Pasien</th>
               <th>subjektif</th>
               <th>Objektif</th>
               <th>Analisa</th>

@@ -26,11 +26,13 @@ class TablePesananObat extends React.Component {
   };
 
   componentDidMount() {
-    listPesananObatByStatus("MENUNGGU").then(({ data }) => {
-      this.setState({
-        pesanan_obat: data
-      });
-    });
+    listPesananObatByStatus("MENUNGGU")
+      .then(({ data }) => {
+        this.setState({
+          pesanan_obat: data
+        });
+      })
+      .catch(e => console.log("error", e));
   }
 
   handleClick = (el, uid, nomormr) => {

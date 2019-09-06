@@ -1,3 +1,31 @@
+/* .cont {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  margin: 0 auto;
+  width: 70%;
+  margin-top: 100px;
+  padding: 0;
+  justify-content: space-between;
+}
+.cont li {
+  align-self: flex-start;
+} */
+
+.cont {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  margin: 0 auto;
+  padding: 0;
+  margin-top: 50px;
+  width: 100%;
+  text-transform: capitalize;
+}
+.cont li {
+  flex: 0 0 50%;
+  text-align: center;
+}
 /* Container-Parent */
 
 .container-beli {
@@ -232,29 +260,29 @@
 
 /* FORM TANBAH PESANAN OBAT */
 
-.modal-body .table {
+.modal-body .table1 {
   padding: 2px;
   margin-top: 15px;
   width: 100;
   margin-bottom: 25px;
-  background-color: transparent;
 }
 
-.modal-body .table thead tr th {
+.modal-body .table1 .headTable tr th {
   font-size: 1em;
-  font-weight: 900;
+  font-weight: 700;
 }
 
-.modal-body .table > thead > tr > th {
+.modal-body .table1 > thead > tr > th {
   color: #25a9dd;
   padding: 12px 7px;
   vertical-align: middle;
   border-bottom-width: 1px;
   font-weight: 600;
   border: 0;
+  width: 20%;
 }
 
-.modal-body .table > tbody > tr > td {
+.modal-body .table1 > .bodyTable > tr > td {
   padding: 12px 8px;
   vertical-align: middle;
   border-bottom: #ddd;

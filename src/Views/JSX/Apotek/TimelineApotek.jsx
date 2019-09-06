@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import TablePesananObat from "../../../Components/JSX/Apotek/TablePesananObat";
 import FormBeli from "../../../Components/JSX/Kasir/FormBeli";
-FormBeli;
+
 class Apotek extends Component {
   render() {
     return (

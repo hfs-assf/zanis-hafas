@@ -7,8 +7,8 @@ import "../../../Components/ASSETS/CSS/Sidebar.css";
 import SVGApotek from "../../../Components/ASSETS/SVG/svgapotek";
 import SVGPelayananMedis from "../../../Components/ASSETS/SVG/SVGpelayananmedis";
 import SVGKasir from "../../../Components/ASSETS/SVG/SVGkasir";
-import SVGAdmin from "../../../Components/ASSETS/SVG/SVGAdmin";
-import SVGAkunting from "../../../Components/ASSETS/SVG/Akunting";
+// import SVGAdmin from "../../../Components/ASSETS/SVG/SVGAdmin";
+// import SVGAkunting from "../../../Components/ASSETS/SVG/Akunting";
 class Sidebar extends Component {
   lastNumber = num => {
     return num
@@ -115,7 +115,7 @@ class Sidebar extends Component {
                           </li>
                         </ul>
                       </li>
-                      <li>
+                      {/* <li>
                         <Link
                           to="/admin"
                           className="has-arrow"
@@ -144,7 +144,7 @@ class Sidebar extends Component {
                             </Link>
                           </li>
                         </ul>
-                      </li>
+                      </li> */}
                       {/* <li>
                         <Link
                           to="/jurnal-umum"

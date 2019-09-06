@@ -23,12 +23,6 @@ export class FormBeli extends Component {
       justifyContent: "center"
     };
 
-    const icon = {
-      width: "3.25em",
-      display: "flex",
-      justifyContent: "center"
-    };
-
     const fonts = {
       display: "flex",
       justifyContent: "center",

@@ -8,7 +8,7 @@ import list from "../../../Methods/Kasir/Transaksi/listTransaksi";
 import bayarTransaksi from "../../../Methods/Kasir/Transaksi/bayarTransaksi";
 import ModalKonfirmasiTindakan from "../Animasi/ModalKonfirmasiTindakan";
 import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
-import { dateFormat } from "../../../Methods/waktu";
+import { date_format, conversi } from "../../../Methods/waktu";
 import { Consumer } from "../../../Methods/User/Auth/Store";
 import ReactToPrint from "react-to-print";
 
@@ -24,7 +24,8 @@ class FormPembayaran extends Component {
       action: "",
       uid_transaksi: "",
       no_transaksi: "",
-      waktu_terbit: ""
+      waktu_terbit: "",
+      nama_pasien: ""
     };
   }
 
@@ -40,7 +41,8 @@ class FormPembayaran extends Component {
         daftarTransaksi: data,
         no_transaksi: data[0].no_transaksi,
         waktu_terbit: data[0].waktu_terbit,
-        alamat: data[0].alamat
+        alamat: data[0].alamat,
+        nama_pasien: data[0].nama_pasien
       });
     });
   };
@@ -57,8 +59,11 @@ class FormPembayaran extends Component {
       <tr key={e.uid}>
         <td className="fontBold">{e.item_transaksi}</td>
         <td style={{ fontSize: "12.5pt" }}>{e.jumlah_item} </td>
-        <td style={{ fontSize: "12.5pt" }}>{e.biaya}</td>
-        <td style={{ fontSize: "12.5pt" }}>{e.biaya * e.jumlah_item}</td>
+        <td style={{ fontSize: "12.5pt" }}>Rp.{conversi(e.biaya)}</td>
+        <td style={{ fontSize: "12.5pt" }}>
+          Rp.
+          {conversi(e.biaya * e.jumlah_item)}
+        </td>
       </tr>
     ));
   };
@@ -90,6 +95,7 @@ class FormPembayaran extends Component {
     bayarTransaksi({
       uid_transaksi: this.props.antrian_kasir,
       nik_kasir: nik,
+      nomor_rekam_medis: this.props.kasir,
       status: "DONE"
     })
       .then(
@@ -122,7 +128,7 @@ class FormPembayaran extends Component {
           <tr>
             <td colSpan="2" />
             <td className="fontBold">Total</td>
-            <td className="fontBold">{this.totalPrice()}</td>
+            <td className="fontBold">Rp.{conversi(this.totalPrice())}</td>
           </tr>
           <tr>
             <td colSpan="2" style={{ border: "none" }} />
@@ -147,7 +153,7 @@ class FormPembayaran extends Component {
               className="fontBold"
               style={{ background: "papayawhip", fontSize: "12.5pt" }}
             >
-              {this.getDiskon()}
+              Rp.{conversi(this.getDiskon())}
             </td>
           </tr>
         </tbody>
@@ -165,12 +171,22 @@ class FormPembayaran extends Component {
                 </div>
                 <div className="item-container">
                   <h2>No: {this.state.no_transaksi}</h2>
-                  <h4>Tanggal: {dateFormat(this.state.waktu_terbit)}</h4>
+                  <h4>Tanggal: {date_format(this.state.waktu_terbit)}</h4>
                 </div>
               </div>
             )}
           </Consumer>
           <div className="boxpelayanan">{header}</div>
+          <Consumer>
+            {({ state }) => (
+              <ul className="cont">
+                <li>Pasien</li>
+                <li>Petugas</li>
+                <li style={{ marginTop: "40px" }}>{this.state.nama_pasien}</li>
+                <li style={{ marginTop: "40px" }}>{state.dataLogin.nama}</li>
+              </ul>
+            )}
+          </Consumer>
 
           <Consumer>
             {({ state }) => (

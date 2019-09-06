@@ -9,8 +9,8 @@ class TimelinePelayananMedis extends Component {
           className="alert alert-danger alert-dismissible fade show"
           role="alert"
         >
-          <strong>Arahkan kursor untuk melanjutkan perintah.</strong> Untuk
-          melihat data sebelumnya silahkan pilih tanggal di pojok kanan.
+          <strong>Antrian Pelayanan Medis</strong>
+
           <button
             type="button"
             className="close"
