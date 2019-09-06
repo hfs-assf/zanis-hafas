@@ -29,7 +29,7 @@ class TimelinePelayananMedis extends Component {
 
   antrianList = value => {
     const { lAntrian } = this.state;
-    console.log("ayo check", lAntrian);
+
     const filterData = lAntrian.filter(el => el.id_lokasi === value);
 
     return filterData.map(e => (

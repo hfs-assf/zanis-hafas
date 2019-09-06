@@ -8,7 +8,6 @@ let tambahAntrian = ({
   dokter,
   id_lokasi
 }) => {
-  console.log({ nomor_rekam_medis, poli, jaminan, dokter, id_lokasi });
   return axios.post(api.pendaftaran + "/antrian", {
     nomor_rekam_medis,
     poli,
