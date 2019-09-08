@@ -5,5 +5,5 @@ export const api = {
   poli: "http://165.22.98.116:8003/api/v1",
   kasir: "http://165.22.98.116:8004/api/v1",
   apotik: "http://165.22.98.116:8005/api/v1",
-  akunUser: "http://165.22.98.116:8000/api/v1"
+  akunUser: "http://165.22.98.116:8006/api/v1"
 };
