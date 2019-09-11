@@ -3,6 +3,7 @@ import daftarTransaksi from "../../../Methods/Kasir/Transaksi/daftarTransaksi";
 
 import * as waktu from "../../../Methods/waktu";
 import "../../ASSETS/CSS/form.css";
+import { Consumer } from "../../../Methods/User/Auth/Store";
 
 export class DaftarTransaksi extends Component {
   constructor(props) {
@@ -13,12 +14,12 @@ export class DaftarTransaksi extends Component {
     };
   }
 
-  gantiTanggal = e => {
+  gantiTanggal = (e, id_lokasi) => {
     this.setState({
       filterTanggal: e.target.value
     });
 
-    daftarTransaksi(this.state.filterTanggal).then(({ data }) => {
+    daftarTransaksi(this.state.filterTanggal, id_lokasi).then(({ data }) => {
       this.setState({
         listDaftar: data
       });
@@ -33,16 +34,30 @@ export class DaftarTransaksi extends Component {
           <th>waktu transaksi</th>
           <th>total biaya</th>
           <th>dicatat oleh</th>
+          <th>status transaksi</th>
+          <th>no transaksi</th>
         </tr>
       </thead>
+
       {this.state.listDaftar.map(
-        ({ uid, waktu_transaksi, total_biaya, nik_kasir }) => (
-          <tr key={uid}>
-            <td>{new Date(waktu_transaksi).toLocaleDateString("en-GB")}</td>
-            <td>{waktu.timeFormat(waktu_transaksi)}</td>
-            <td>{total_biaya}</td>
-            <td>{nik_kasir}</td>
-          </tr>
+        ({
+          uid,
+          waktu_transaksi,
+          total,
+          nik_kasir,
+          status_transaksi,
+          no_transaksi
+        }) => (
+          <tbody key={uid}>
+            <tr>
+              <td>{new Date(waktu_transaksi).toLocaleDateString("en-GB")}</td>
+              <td>{waktu.timeFormat(waktu_transaksi)}</td>
+              <td>Rp.{waktu.conversi(total)}</td>
+              <td>{nik_kasir}</td>
+              <td>{status_transaksi}</td>
+              <td>{no_transaksi}</td>
+            </tr>
+          </tbody>
         )
       )}
     </table>
@@ -52,13 +67,20 @@ export class DaftarTransaksi extends Component {
     return (
       <div>
         <div className="boxpelayanan">
-          <input
-            type="date"
-            className="form-control"
-            placeholder="cari transaksi"
-            // onKeyUp={e => this.onKeyUp(e)}
-            onChange={e => this.gantiTanggal(e)}
-          />
+          <Consumer>
+            {({ state }) => {
+              return (
+                <input
+                  type="date"
+                  className="form-control"
+                  placeholder="cari transaksi"
+                  onChange={e =>
+                    this.gantiTanggal(e, state.dataLogin.id_lokasi)
+                  }
+                />
+              );
+            }}
+          </Consumer>
         </div>
         {/* <button onClick={this.getData()}>Cari</button>} */}
         {/* {this.state.listDaftar.length === 0 ? (

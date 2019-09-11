@@ -304,7 +304,7 @@ class SoapPasien extends Component {
                 />
               </div>
             </div>
-            <div className="row">
+            {/* <div className="row">
               <div className="col-md-4 rowsoap">
                 <div className="custom-checkbox">
                   <input
@@ -338,7 +338,7 @@ class SoapPasien extends Component {
                   />
                 ) : null}
               </div>
-            </div>
+            </div> */}
           </div>
 
           <div className="row maxrow" style={{ margin: "10px" }}>

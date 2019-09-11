@@ -9,6 +9,8 @@ import kurangStockObat from "../../../Methods/Apotik/StokObat/kurangStokObat";
 import tambahDetailTransaksi from "../../../Methods/Kasir/DetailTransaksi/tambahDetailTransaksi";
 import { timeFormat } from "../../../Methods/waktu";
 import { Consumer } from "../../../Methods/User/Auth/Store";
+import hapusDetailPesanan from "../../../Methods/Apotik/DetailPesananObat/hapusDetailPesanan";
+
 class TablePesananObat extends React.Component {
   state = {
     pesanan_obat: [],
@@ -46,6 +48,16 @@ class TablePesananObat extends React.Component {
         });
       });
     this.setState({ uid });
+  };
+
+  hapus = uid => {
+    console.log("test", uid);
+    const arrays = this.state.detail_pesanan;
+    hapusDetailPesanan(uid).then(() => {
+      this.setState({
+        detail_pesanan: arrays.filter(el => el.uid !== uid)
+      });
+    });
   };
 
   tutup = () => {
@@ -138,7 +150,7 @@ class TablePesananObat extends React.Component {
                 </button>
 
                 <div className="table-responsive">
-                  <div className="table">
+                  <table className="table">
                     <thead>
                       <tr>
                         <th className="text-center">NAMA OBAT</th>
@@ -147,6 +159,7 @@ class TablePesananObat extends React.Component {
                         <th className="text-center">HARGA</th>
                         <th className="text-center">KATEGORI</th>
                         <th className="text-center">KETERANGAN</th>
+                        <th className="text-center">AKSI</th>
                       </tr>
                     </thead>
                     {detail_pesanan.map(subRow => {
@@ -161,11 +174,20 @@ class TablePesananObat extends React.Component {
                             <td className="text-center">{subRow.harga_jual}</td>
                             <td className="text-center">{subRow.kategori}</td>
                             <td className="text-center">{subRow.keterangan}</td>
+                            <td className="text-center">
+                              <button
+                                type="button"
+                                className="btn btn-danger btn-sm"
+                                onClick={() => this.hapus(subRow.uid)}
+                              >
+                                Hapus
+                              </button>
+                            </td>
                           </tr>
                         </tbody>
                       );
                     })}
-                  </div>
+                  </table>
                 </div>
                 <span>
                   <button
@@ -179,8 +201,7 @@ class TablePesananObat extends React.Component {
                   </button>
                 </span>
 
-                <div class="middle">
-                  <h5>Pilih Status</h5>
+                <span className="middle">
                   <Consumer>
                     {({ state }) => {
                       return (
@@ -195,7 +216,7 @@ class TablePesananObat extends React.Component {
                               )
                             }
                           />
-                          <div class="front-end box">
+                          <div className="front-end box">
                             <span>KONFIRMASI</span>
                           </div>
                         </label>
@@ -208,11 +229,11 @@ class TablePesananObat extends React.Component {
                       name="radio"
                       onClick={() => this.cancelPress(this.state.uid)}
                     />
-                    <div class="back-end box">
+                    <div className="back-end box">
                       <span>BATAL</span>
                     </div>
                   </label>
-                </div>
+                </span>
               </div>
             ) : null}
 

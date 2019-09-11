@@ -23,7 +23,7 @@ class FormPendaftaran extends Component {
       status: "Belum Menikah",
       agama: "Islam",
       alamat: "",
-      kecamatan: "Sail",
+      kecamatan: "",
       kelurahan: "",
       kode_pos: "",
       telepon: "",
@@ -148,8 +148,8 @@ class FormPendaftaran extends Component {
       status: "Belum Menikah",
       agama: "Islam",
       alamat: "",
-      kecamatan: "Sail",
-      kelurahan: "Tenayan Raya",
+      kecamatan: "",
+      kelurahan: "",
       kode_pos: "",
       telepon: "",
       handphone: "",
@@ -324,6 +324,19 @@ class FormPendaftaran extends Component {
                   <div className="col-sm-4">
                     <label>
                       <span>
+                        Kecamatan <span className="required">*</span>
+                      </span>
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="kecamatan"
+                        value={this.state.kecamatan}
+                        onChange={e => this.handleChange(e)}
+                        required
+                      />
+                    </label>
+                    {/* <label>
+                      <span>
                         Kecamatan
                         <span className="required">*</span>
                       </span>
@@ -342,10 +355,23 @@ class FormPendaftaran extends Component {
                           );
                         })}
                       </select>
-                    </label>
+                    </label> */}
                   </div>
                   <div className="col-sm-4">
                     <label>
+                      <span>
+                        Kelurahan <span className="required">*</span>
+                      </span>
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="kelurahan"
+                        value={this.state.kelurahan}
+                        onChange={e => this.handleChange(e)}
+                        required
+                      />
+                    </label>
+                    {/* <label>
                       <span>
                         Kelurahan
                         <span className="required">*</span>
@@ -360,7 +386,7 @@ class FormPendaftaran extends Component {
                         <option>Pilih Kelurahan</option>
                         {this.listKelurahan(this.state.kecamatan)}
                       </select>
-                    </label>
+                    </label> */}
                   </div>
 
                   <div className="col-sm-4">

@@ -55,7 +55,6 @@ class ViewLogin extends Component {
             <div className="field">
               <input
                 type="password"
-                id="password"
                 className="input"
                 onChange={event =>
                   this.setState({ password: event.target.value })

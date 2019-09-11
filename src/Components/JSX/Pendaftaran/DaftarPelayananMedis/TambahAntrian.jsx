@@ -126,8 +126,7 @@ class TambahAntrian extends Component {
             >
               <option value="">--- Pilihan ---</option>
               <option value="dr. Nurlailiyani">dr. Nurlailiyani</option>
-              <option value="Novri Wahyudi">Novri Wahyudi</option>
-              <option value="Lintang Timur">Lintang Timur</option>
+              <option value="Terapis">Terapis</option>
             </select>
           </div>
         </div>

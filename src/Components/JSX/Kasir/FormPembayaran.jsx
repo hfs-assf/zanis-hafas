@@ -18,7 +18,7 @@ class FormPembayaran extends Component {
     this.state = {
       transaksi: [],
       daftarTransaksi: [],
-      diskon: 0,
+      diskon: "",
       notification: "0",
       selected: {},
       action: "",
@@ -111,54 +111,6 @@ class FormPembayaran extends Component {
   };
 
   render() {
-    let header;
-
-    header = (
-      <table className="table">
-        <thead>
-          <tr>
-            <th className="fontBold">Deskripsi</th>
-            <th className="fontBold">Jumlah</th>
-            <th className="fontBold">Harga</th>
-            <th className="fontBold">Total Harga</th>
-          </tr>
-        </thead>
-        <tbody>
-          {this.details()}
-          <tr>
-            <td colSpan="2" />
-            <td className="fontBold">Total</td>
-            <td className="fontBold">Rp.{conversi(this.totalPrice())}</td>
-          </tr>
-          <tr>
-            <td colSpan="2" style={{ border: "none" }} />
-
-            <td className="fontBold">Disc (%)</td>
-            <td>
-              <input
-                type="number"
-                name="diskon"
-                className="center"
-                style={{ width: "150px", outline: "none" }}
-                onChange={e => this.setState({ diskon: e.target.value })}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td colSpan="2" style={{ border: "none" }} />
-            <td className="fontBold" style={{ background: "papayawhip" }}>
-              Total Pembayaran
-            </td>
-            <td
-              className="fontBold"
-              style={{ background: "papayawhip", fontSize: "12.5pt" }}
-            >
-              Rp.{conversi(this.getDiskon())}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    );
     return (
       <React.Fragment>
         <div ref={el => (this.componentRef = el)}>
@@ -176,7 +128,56 @@ class FormPembayaran extends Component {
               </div>
             )}
           </Consumer>
-          <div className="boxpelayanan">{header}</div>
+          <div className="boxpelayanan">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th className="fontBold">Deskripsi</th>
+                  <th className="fontBold">Jumlah</th>
+                  <th className="fontBold">Harga</th>
+                  <th className="fontBold">Total Harga</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.details()}
+                <tr>
+                  <td colSpan="2" />
+                  <td className="fontBold">Total</td>
+                  <td className="fontBold">Rp.{conversi(this.totalPrice())}</td>
+                </tr>
+                <tr>
+                  <td colSpan="2" style={{ border: "none" }} />
+
+                  <td className="fontBold">Disc (%)</td>
+                  <td>
+                    <input
+                      type="text"
+                      className="center"
+                      value={this.state.diskon}
+                      style={{
+                        width: "150px",
+                        outline: "none",
+                        fontSize: "12.5pt"
+                      }}
+                      onChange={e => this.setState({ diskon: e.target.value })}
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td colSpan="2" style={{ border: "none" }} />
+                  <td className="fontBold" style={{ background: "papayawhip" }}>
+                    Total Pembayaran
+                  </td>
+                  <td
+                    className="fontBold"
+                    style={{ background: "papayawhip", fontSize: "12.5pt" }}
+                  >
+                    Rp.{conversi(this.getDiskon())}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <Consumer>
             {({ state }) => (
               <ul className="cont">
