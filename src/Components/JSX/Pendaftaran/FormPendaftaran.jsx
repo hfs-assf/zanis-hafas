@@ -68,25 +68,6 @@ class FormPendaftaran extends Component {
     );
   };
 
-  // cariData = e => {
-  //   clearTimeout(set);
-  //   const nilai = e.target.value;
-  //   set = setTimeout(() => {
-  //     if (nilai) {
-  //       listMembership(nilai).then(({ data }) =>
-  //         this.setState({ pasien: data })
-  //       );
-  //     } else {
-  //       this.setState({ pasien: [] });
-  //     }
-  //   }, 1000);
-
-  //   e.preventDefault();
-  //   this.setState({
-  //     filter: nilai
-  //   });
-  // };
-
   listKelurahan(namakecamatan) {
     let saring = kecamatan.filter(
       el => el.nama_kecamatan === `${namakecamatan}`
@@ -97,13 +78,6 @@ class FormPendaftaran extends Component {
       </option>
     ));
   }
-
-  // toTitleCase = text => {
-  //   return text
-  //     .split(" ")
-  //     .map(string => string.charAt(0).toUpperCase() + string.substring(1))
-  //     .join(" ");
-  // };
 
   onSubmit = id_lokasi => {
     const catatan = `Penanggung Jawab: ${this.state.nama_penanggungjawab}, ${this.state.status_penanggungjawab},${this.state.telepon_penanggungjawab}, ${this.state.alamat_penanggungjawab}`;

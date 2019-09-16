@@ -64,11 +64,11 @@ class TablePesananObat extends React.Component {
     this.setState({ showDetail: false });
   };
 
-  handleConf = (uid, id_lokasi) => {
+  handleConf = (uid, id_lokasi, nik) => {
     editPesananObat(uid, "KONFIRMASI").then(() => {
       this.setState(this.state);
     });
-    kurangStockObat(uid, id_lokasi).then(() => {
+    kurangStockObat(uid, id_lokasi, nik).then(() => {
       this.setState(this.state);
     });
   };
@@ -212,7 +212,8 @@ class TablePesananObat extends React.Component {
                             onClick={() =>
                               this.handleConf(
                                 this.state.uid,
-                                state.dataLogin.id_lokasi
+                                state.dataLogin.id_lokasi,
+                                state.dataLogin.nik
                               )
                             }
                           />

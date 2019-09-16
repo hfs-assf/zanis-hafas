@@ -57,19 +57,26 @@ class App extends Component {
       <Store>
         <HashRouter>
           <div style={{ backgroundColor: "#f8f9fa", fontWeight: "bold" }}>
-            <Consumer>
-              {({ state }) => (
-                <div>
-                  {/* {console.log("ini status", state.auth)} */}
-                  {state.auth ? <Redirect exact to="/dashboard" /> : null}
-                </div>
-              )}
-            </Consumer>
             <Header />
             <Profil />
             <Route path="/tampilantv" component={TampilanTV} />
             <Sidebar />
             <div className="containercontent">
+              <Consumer>
+                {({ state }) => (
+                  <div>
+                    {/* {console.log("ini status", state.auth)} */}
+                    {state.auth ? (
+                      <Redirect
+                        exact
+                        from="/
+                      "
+                        to="/dashboard"
+                      />
+                    ) : null}
+                  </div>
+                )}
+              </Consumer>
               <Switch>
                 <Route exact path="/" component={Login} />
                 <ProtectedRoute exact path="/dashboard" component={Dashboard} />

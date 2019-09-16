@@ -18,14 +18,16 @@ class FormPembayaran extends Component {
     this.state = {
       transaksi: [],
       daftarTransaksi: [],
-      diskon: "",
+      diskon: 0,
       notification: "0",
       selected: {},
       action: "",
-      uid_transaksi: "",
+      uid: "",
+
       no_transaksi: "",
       waktu_terbit: "",
-      nama_pasien: ""
+      nama_pasien: "",
+      total: 0
     };
   }
 
@@ -42,7 +44,8 @@ class FormPembayaran extends Component {
         no_transaksi: data[0].no_transaksi,
         waktu_terbit: data[0].waktu_terbit,
         alamat: data[0].alamat,
-        nama_pasien: data[0].nama_pasien
+        nama_pasien: data[0].nama_pasien,
+        total: data[0].total
       });
     });
   };
@@ -61,8 +64,7 @@ class FormPembayaran extends Component {
         <td style={{ fontSize: "12.5pt" }}>{e.jumlah_item} </td>
         <td style={{ fontSize: "12.5pt" }}>Rp.{conversi(e.biaya)}</td>
         <td style={{ fontSize: "12.5pt" }}>
-          Rp.
-          {conversi(e.biaya * e.jumlah_item)}
+          Rp.{conversi(e.jumlah_item * e.biaya)}
         </td>
       </tr>
     ));
@@ -70,7 +72,7 @@ class FormPembayaran extends Component {
 
   getDiskon = () => {
     let harga = this.totalPrice();
-    return harga - harga * (this.state.diskon / 100);
+    return harga - this.state.diskon;
   };
 
   reset = nik => {
@@ -96,7 +98,9 @@ class FormPembayaran extends Component {
       uid_transaksi: this.props.antrian_kasir,
       nik_kasir: nik,
       nomor_rekam_medis: this.props.kasir,
-      status: "DONE"
+      status: "DONE",
+      diskon: this.state.diskon,
+      total: this.totalPrice()
     })
       .then(
         this.setState({
@@ -143,13 +147,16 @@ class FormPembayaran extends Component {
                 <tr>
                   <td colSpan="2" />
                   <td className="fontBold">Total</td>
+
                   <td className="fontBold">Rp.{conversi(this.totalPrice())}</td>
                 </tr>
                 <tr>
                   <td colSpan="2" style={{ border: "none" }} />
 
-                  <td className="fontBold">Disc (%)</td>
-                  <td>
+                  <td className="fontBold">Disc</td>
+
+                  <td style={{ fontSize: "12.5pt" }}>
+                    Rp.
                     <input
                       type="text"
                       className="center"
