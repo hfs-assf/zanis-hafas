@@ -17,12 +17,15 @@ export class TimelineTerapis extends Component {
   }
 
   componentDidMount = () => {
-    listTerapis().then(({ data }) => {
-      this.setState({
-        listDaftar: data,
-        nama_terapis: data[0].nama_terapis
-      });
-    });
+    listTerapis()
+      .then(({ data }) => {
+        console.log("data", data);
+        this.setState({
+          listDaftar: data,
+          nama_terapis: data[0].nama_terapis
+        });
+      })
+      .catch(err => console.log(err, "err"));
   };
 
   handleForm = uid => {
