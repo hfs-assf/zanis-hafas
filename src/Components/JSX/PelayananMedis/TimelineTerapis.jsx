@@ -35,9 +35,10 @@ export class TimelineTerapis extends Component {
 
   renderTable = value => {
     const { listDaftar } = this.state;
-    const filterData = listDaftar.filter(el => el.id_lokasi === value);
+    // const filterData = listDaftar.filter(el => el.id_lokasi === value);
 
-    return filterData.map(e => (
+    // console.log("filter", filterData);
+    return listDaftar.map(e => (
       <tr key={e.uid}>
         <td>{new Date(e.waktu_checkup).toLocaleDateString("en-GB")}</td>
         <td>
