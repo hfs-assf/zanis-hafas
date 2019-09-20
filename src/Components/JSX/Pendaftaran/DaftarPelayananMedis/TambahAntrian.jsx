@@ -17,7 +17,7 @@ class TambahAntrian extends Component {
         nomor_rekam_medis: "",
         dokter: "",
         poli: "",
-        notification: "",
+        notification: "0",
         jenis_pembayaran: ""
       },
       id_lokasi: ""
@@ -29,6 +29,7 @@ class TambahAntrian extends Component {
   };
 
   handleSave = (nik, id_lokasi) => {
+    window.location.reload();
     tambahTransaksi({
       nik_penerbit: nik,
       id_lokasi: id_lokasi,
