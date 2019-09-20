@@ -32,6 +32,7 @@ export class TimelineTerapis extends Component {
     editTerapis(uid, this.state.nama_terapis)
       .then(this.setState({ notification: "1" }))
       .catch(err => {
+        console.log(err, "err");
         this.setState({ notification: "0" });
       });
   };
@@ -44,11 +45,18 @@ export class TimelineTerapis extends Component {
     return listDaftar.map(e => (
       <tr key={e.uid}>
         <td>{new Date(e.waktu_checkup).toLocaleDateString("en-GB")}</td>
+        <td>{e.nama_terapis}</td>
+        <td>{e.nama_pasien}</td>
+        <td>{e.subjektif}</td>
+        <td>{e.objektif}</td>
+        <td>{e.analisa}</td>
+        <td>{e.tindakan}</td>
+        <td>{e.diagnosa}</td>
         <td>
           <input
             className="center"
             style={{
-              width: "150px",
+              width: "100px",
               outline: "none",
               fontSize: "12.5pt"
             }}
@@ -62,12 +70,7 @@ export class TimelineTerapis extends Component {
             required
           />
         </td>
-        <td>{e.nama_pasien}</td>
-        <td>{e.subjektif}</td>
-        <td>{e.objektif}</td>
-        <td>{e.analisa}</td>
-        <td>{e.tindakan}</td>
-        <td>{e.diagnosa}</td>
+
         <td>
           <button
             className="btn btn-sm btn-danger"
@@ -89,13 +92,14 @@ export class TimelineTerapis extends Component {
           <thead>
             <tr>
               <th>tanggal</th>
-              <th>Nama Terapis</th>
-              <th>Nama Pasien</th>
+              <th>Terapis</th>
+              <th>Pasien</th>
               <th>subjektif</th>
               <th>Objektif</th>
               <th>Analisa</th>
               <th>Tindakan</th>
               <th>Diagnosa</th>
+              <th>Tambah</th>
               <th>Action</th>
             </tr>
           </thead>
