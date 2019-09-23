@@ -29,7 +29,6 @@ class TambahAntrian extends Component {
   };
 
   handleSave = (nik, id_lokasi) => {
-    window.location.reload();
     tambahTransaksi({
       nik_penerbit: nik,
       id_lokasi: id_lokasi,
