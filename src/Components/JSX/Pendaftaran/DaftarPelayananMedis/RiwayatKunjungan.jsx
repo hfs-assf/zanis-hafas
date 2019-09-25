@@ -31,6 +31,11 @@ class RiwayatKunjungan extends Component {
             <li>{rm.penjamin}</li>
             <li>{rm.diagnosa}</li>
             <li>{rm.jenis_perawatan}</li>
+            <li>{rm.subjektif}</li>
+            <li>{rm.objektif}</li>
+            <li>{rm.analisa}</li>
+            <li>{rm.tindakan}</li>
+            <li>{rm.nama_terapis}</li>
           </ul>
         </div>
       </div>

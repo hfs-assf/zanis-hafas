@@ -35,7 +35,6 @@ import DetailRekamMedis from "./Views/JSX/PelayananMedis/RekamMedis/DetailRekamM
 import PelayananMedis from "./Views/JSX/PelayananMedis/PelayananMedis";
 import TimelinePelayananMedis from "./Views/JSX/PelayananMedis/TimelinePelayananMedis";
 import antrianTerapis from "./Views/JSX/PelayananMedis/antrianTerapis";
-import DetailRM from "./Components/JSX/PelayananMedis/RekamMedis/DataRekamMedisPasien";
 
 //Pendaftaran
 import Pendaftaran from "./Views/JSX/Pendaftaran/Pendaftaran";
@@ -46,8 +45,6 @@ import Akunting from "./Views/JSX/Akunting/ViewJurnal";
 import DaftarAkun from "./Views/JSX/Akunting/ViewDaftarAkun";
 import BukuBesar from "./Views/JSX/Akunting/ViewBukuBesar";
 import SaldoAwal from "./Views/JSX/Akunting/ViewSaldoAwal";
-
-// import ListAsuransi from "./Views/JSX/Akunting/ViewAsuransi";
 
 class App extends Component {
   render() {
@@ -137,12 +134,14 @@ class App extends Component {
                   path="/peralatan-laboratorium"
                   component={KelolaItemLaboratorium}
                 />
+                {/* <ProtectedRoute
+                  path="/rekam-medis/:no_rm"
+                  render={({ match }) => <DataRMPasien data={match.params} />}
+                /> */}
                 <ProtectedRoute
                   path="/rekam-medis"
                   component={DaftarRekamMedis}
                 />
-
-                {/* <ProtectedRoute path="/coba" component={DetailRM} /> */}
                 <ProtectedRoute
                   path="/detail-rekam-medis/:id"
                   render={({ match }) => (

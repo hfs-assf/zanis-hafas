@@ -23,11 +23,6 @@ class DataRMPasien extends Component {
     });
   }
 
-  handleClick = nomor_rekam_medis => {
-    console.log("check", nomor_rekam_medis);
-    this.setState({ modal: true, selected: { nomor_rekam_medis } });
-  };
-
   renderDaftarRM = (rm, index) => {
     const { textFilter } = this.state;
     if (textFilter !== "") {
@@ -38,15 +33,16 @@ class DataRMPasien extends Component {
           <div className="cell text-center">{rm.jenis_kelamin}</div>
           <div className="cell text-center">{rm.status}</div>
           <div className="cell text-center">
-            <button
-              className="btn btn-danger btn-sm"
-              onClick={() => this.handleClick(rm.nomor_rekam_medis)}
-              data-toggle="modal"
-              data-target="#detail"
-              title="detailPasien"
-            >
-              Detail
-            </button>
+            <Link to={"/detail-rekam-medis/" + rm.nomor_rekam_medis}>
+              <button
+                className="btn btn-danger btn-sm"
+                data-toggle="modal"
+                data-target="#detail"
+                title="detailPasien"
+              >
+                Detail
+              </button>
+            </Link>
           </div>
         </div>
       );
@@ -54,6 +50,7 @@ class DataRMPasien extends Component {
   };
 
   render() {
+    console.log("ini apa");
     let header;
     const { textFilter, pasien } = this.state;
 
@@ -93,7 +90,7 @@ class DataRMPasien extends Component {
       );
     }
     return (
-      <div className="card" style={{ borderTop: "2px solid #1976d2" }}>
+      <div className="card">
         <div className="card-body">
           <div className="flex-container">
             <div className="box column1">
@@ -115,7 +112,6 @@ class DataRMPasien extends Component {
               </div>
             </div>
           </div>
-          <hr className="hr2" />
           <div className="row">
             <div className="col-md-12 rowsoap">{header}</div>
           </div>

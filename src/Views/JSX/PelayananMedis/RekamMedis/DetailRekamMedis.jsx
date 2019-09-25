@@ -1,32 +1,16 @@
 import React, { Component } from "react";
-import ViewRekamMedisList from "../../../../Components/JSX/PelayananMedis/RekamMedis/ViewRekamMedislist";
-import ProfileKiriPasien from "../../../../Components/JSX/Pendaftaran/DaftarPelayananMedis/ProfileKiriPasien";
+import ProfileRM from "../../../../Components/JSX/PelayananMedis/RekamMedis/ProfileRM";
+import RiwayatRM from "../../../../Components/JSX/PelayananMedis/RekamMedis/RiwayatRM";
+
 class RekamMedisList extends Component {
   render() {
     return (
-      <div
-        className="card"
-        style={{ width: "99%", borderTop: "2px solid #1976d2" }}
-      >
+      <div>
         <div className="card-body">
-          <div className="flex-container">
-            <div className="box column1">
-              <h2 className="card-title text-left">
-                Detail List Rekam Medis Pasien
-              </h2>
-            </div>
-
-            <div className="box column2" />
-          </div>
-          <hr className="hr2" />{" "}
           <div className="row">
-            <div className="col-md-5 hidden-sm hidden-xs">
-              <ProfileKiriPasien pasien={this.props.pasien.id} />
-            </div>
-            <div className="col-md-7 hidden-sm hidden-xs">
-              {/* <div className="kotak"> */}
-              <ViewRekamMedisList />
-              {/* </div> */}
+            <div className="col-md-12 hidden-sm hidden-xs">
+              <ProfileRM pasien={this.props.pasien.id} />
+              <RiwayatRM pasien={this.props.pasien.id} />
             </div>
           </div>
         </div>
