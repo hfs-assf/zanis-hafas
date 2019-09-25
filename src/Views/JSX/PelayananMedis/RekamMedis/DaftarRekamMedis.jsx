@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import DetailRM from "../../../../Components/JSX/PelayananMedis/RekamMedis/DataRekamMedisPasien";
+import DataRMPasien from "../../../../Components/JSX/PelayananMedis/RekamMedis/DataRekamMedisPasien";
 
 class DaftarRekamMedis extends Component {
   render() {
@@ -9,7 +9,7 @@ class DaftarRekamMedis extends Component {
           className="alert alert-danger alert-dismissible fade show"
           role="alert"
         >
-          <strong>Antrian Pelayanan Medis</strong>
+          <strong>Cari Daftar Rekam Medis</strong>
 
           <button
             type="button"
@@ -21,7 +21,7 @@ class DaftarRekamMedis extends Component {
           </button>
         </div>
 
-        <DetailRM />
+        <DataRMPasien />
       </div>
     );
   }
