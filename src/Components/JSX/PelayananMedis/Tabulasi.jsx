@@ -5,6 +5,8 @@ import Tindakan from "./Tindakan/TindakanPasien";
 import Laboratorium from "./Laboratorium/LaboratoriumPasien";
 import editStatusAntrian from "../../../Methods/Pendaftaran/Antrian/editStatusAntrian";
 import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
+import FormPuyer from "./Puyer/FormPuyer";
+import HistoryRM from "./HistoryRM";
 
 class TabulasiPelayananMedis extends Component {
   constructor(props) {
@@ -51,8 +53,12 @@ class TabulasiPelayananMedis extends Component {
               </label>
               <input id="tab4" type="radio" name="tabs" />
               <label htmlFor="tab4" className="empat">
-                Laboratorium
+                Riwayat RM
               </label>
+              {/* <input id="tab5" type="radio" name="tabs" />
+              <label htmlFor="tab5" className="empat">
+                Riwayat RM
+              </label> */}
               <section id="content1" className="empat">
                 <SOAP
                   no_rm={this.props.no_rm}
@@ -75,7 +81,13 @@ class TabulasiPelayananMedis extends Component {
               </section>
 
               <section id="content4" className="empat">
-                <Laboratorium
+                <HistoryRM
+                  no_rm={this.props.no_rm}
+                  antrian_pasien={this.props.antrian_pasien}
+                />
+              </section>
+              <section id="content5" className="empat">
+                <FormPuyer
                   no_rm={this.props.no_rm}
                   antrian_pasien={this.props.antrian_pasien}
                 />

@@ -144,9 +144,7 @@ class App extends Component {
                 />
                 <ProtectedRoute
                   path="/detail-rekam-medis/:id"
-                  render={({ match }) => (
-                    <DetailRekamMedis pasien={match.params} />
-                  )}
+                  render={({ match }) => <DetailRekamMedis rm={match.params} />}
                 />
                 <ProtectedRoute path="*" component={Login} />
                 {/* <Route

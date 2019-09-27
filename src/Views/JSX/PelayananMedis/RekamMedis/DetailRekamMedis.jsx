@@ -9,8 +9,8 @@ class RekamMedisList extends Component {
         <div className="card-body">
           <div className="row">
             <div className="col-md-12 hidden-sm hidden-xs">
-              <ProfileRM pasien={this.props.pasien.id} />
-              <RiwayatRM pasien={this.props.pasien.id} />
+              <ProfileRM pasien={this.props.rm.id} />
+              <RiwayatRM pasien={this.props.rm.id} />
             </div>
           </div>
         </div>
