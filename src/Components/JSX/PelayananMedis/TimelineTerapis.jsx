@@ -5,6 +5,7 @@ import "../../ASSETS/CSS/form.css";
 import editTerapis from "../../../Methods/RekamMedis/HistorisMedis/editTerapis";
 import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
 import { Consumer } from "../../../Methods/User/Auth/Store";
+import ReactToPrint from "react-to-print";
 
 export class TimelineTerapis extends Component {
   constructor(props) {
@@ -49,7 +50,6 @@ export class TimelineTerapis extends Component {
         <td>{e.nama_pasien}</td>
         <td>{e.subjektif}</td>
         <td>{e.objektif}</td>
-        <td>{e.analisa}</td>
         <td>{e.tindakan}</td>
         <td>{e.diagnosa}</td>
         <td>
@@ -73,10 +73,13 @@ export class TimelineTerapis extends Component {
 
         <td>
           <button
-            className="btn btn-sm btn-danger"
+            className="btn btn-sm"
             onClick={() => this.handleForm(e.uid)}
             data-toggle="modal"
             data-target="#notification1"
+            style={{
+              background: "#24a4d6"
+            }}
           >
             Tambah
           </button>
@@ -87,35 +90,46 @@ export class TimelineTerapis extends Component {
 
   render() {
     return (
-      <div>
-        <table className="table">
-          <thead>
-            <tr>
-              <th>tanggal</th>
-              <th>Terapis</th>
-              <th>Pasien</th>
-              <th>subjektif</th>
-              <th>Objektif</th>
-              <th>Analisa</th>
-              <th>Tindakan</th>
-              <th>Diagnosa</th>
-              <th>Tambah</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <Consumer>
-            {({ state }) => {
-              return (
-                <tbody>{this.renderTable(state.dataLogin.id_lokasi)}</tbody>
-              );
-            }}
-          </Consumer>
-        </table>
-        <ModalKonfirmasi
-          notification={this.state.notification}
-          modal="notification1"
+      <React.Fragment>
+        <div ref={el => (this.componentRef = el)}>
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Tanggal</th>
+                <th>Terapis</th>
+                <th>Pasien</th>
+                <th>subjektif</th>
+                <th>Objektif</th>
+                <th>Planning</th>
+                <th>Diagnosa</th>
+                <th>Tambah</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <Consumer>
+              {({ state }) => {
+                return (
+                  <tbody>{this.renderTable(state.dataLogin.id_lokasi)}</tbody>
+                );
+              }}
+            </Consumer>
+          </table>
+          <ModalKonfirmasi
+            notification={this.state.notification}
+            modal="notification1"
+          />
+        </div>
+        <ReactToPrint
+          trigger={() => (
+            <a href={null}>
+              <button className="btn btn-sm" style={{ background: "#24a4d6" }}>
+                Save
+              </button>
+            </a>
+          )}
+          content={() => this.componentRef}
         />
-      </div>
+      </React.Fragment>
     );
   }
 }
