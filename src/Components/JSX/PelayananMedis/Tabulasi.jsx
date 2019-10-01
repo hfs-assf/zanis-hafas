@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import SOAP from "./Soap/SoapPasien";
 import ResepObat from "./ResepObat/ResepObat";
 import Tindakan from "./Tindakan/TindakanPasien";
-import Laboratorium from "./Laboratorium/LaboratoriumPasien";
+// import Laboratorium from "./Laboratorium/LaboratoriumPasien";
 import editStatusAntrian from "../../../Methods/Pendaftaran/Antrian/editStatusAntrian";
 import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
 import FormPuyer from "./Puyer/FormPuyer";
@@ -17,7 +17,41 @@ class TabulasiPelayananMedis extends Component {
   }
 
   handleStatus = () => {
-    editStatusAntrian(this.props.antrian_pasien)
+    editStatusAntrian(this.props.antrian_pasien, "selesai")
+      .then(() => {
+        this.setState(this.state);
+      })
+      .then(
+        this.setState({
+          disabled: true,
+          notification: "1"
+        })
+      )
+      .catch(err => {
+        console.log(err);
+        this.setState({ notification: "0" });
+      });
+  };
+
+  handleStatus = () => {
+    editStatusAntrian(this.props.antrian_pasien, "selesai")
+      .then(() => {
+        this.setState(this.state);
+      })
+      .then(
+        this.setState({
+          disabled: true,
+          notification: "1"
+        })
+      )
+      .catch(err => {
+        console.log(err);
+        this.setState({ notification: "0" });
+      });
+  };
+
+  cancelStatus = () => {
+    editStatusAntrian(this.props.antrian_pasien, "batal")
       .then(() => {
         this.setState(this.state);
       })
@@ -51,14 +85,15 @@ class TabulasiPelayananMedis extends Component {
               <label htmlFor="tab3" className="empat">
                 Tindakan
               </label>
+
               <input id="tab4" type="radio" name="tabs" />
               <label htmlFor="tab4" className="empat">
-                Riwayat RM
+                Obat Racik
               </label>
-              {/* <input id="tab5" type="radio" name="tabs" />
+              <input id="tab5" type="radio" name="tabs" />
               <label htmlFor="tab5" className="empat">
                 Riwayat RM
-              </label> */}
+              </label>
               <section id="content1" className="empat">
                 <SOAP
                   no_rm={this.props.no_rm}
@@ -79,15 +114,14 @@ class TabulasiPelayananMedis extends Component {
                   antrian_pasien={this.props.antrian_pasien}
                 />
               </section>
-
               <section id="content4" className="empat">
-                <HistoryRM
+                <FormPuyer
                   no_rm={this.props.no_rm}
                   antrian_pasien={this.props.antrian_pasien}
                 />
               </section>
               <section id="content5" className="empat">
-                <FormPuyer
+                <HistoryRM
                   no_rm={this.props.no_rm}
                   antrian_pasien={this.props.antrian_pasien}
                 />
@@ -103,6 +137,14 @@ class TabulasiPelayananMedis extends Component {
             data-target="#konfirmasiTransaksi"
           >
             Selesai
+          </button>
+          <button
+            className="btn btn-primary"
+            onClick={() => this.cancelStatus()}
+            data-toggle="modal"
+            data-target="#konfirmasiTransaksi"
+          >
+            Cancel
           </button>
         </div>
         <ModalKonfirmasi

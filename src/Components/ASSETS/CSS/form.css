@@ -385,7 +385,7 @@
 }
 
 .main label.empat {
-  width: 25%;
+  width: 20%;
 }
 .main label:hover {
   color: rgb(0, 85, 255);
@@ -401,7 +401,8 @@
 #tab1:checked ~ #content1,
 #tab2:checked ~ #content2,
 #tab3:checked ~ #content3,
-#tab4:checked ~ #content4 {
+#tab4:checked ~ #content4,
+#tab5:checked ~ #content5 {
   display: block;
 }
 
