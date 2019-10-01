@@ -12,7 +12,8 @@ class DetailPasien extends Component {
       poli: "",
       jaminan: "",
       dokter: "",
-      lAntrian: []
+      lAntrian: [],
+      gender: ""
     };
   }
 
@@ -29,7 +30,8 @@ class DetailPasien extends Component {
     detailPasien(this.props.no_rm).then(({ data }) => {
       this.setState({
         nama_pasien: data[0].nama_pasien,
-        tanggal_lahir: data[0].tanggal_lahir
+        tanggal_lahir: data[0].tanggal_lahir,
+        gender: data[0].jenis_kelamin
       });
     });
   }
@@ -63,6 +65,13 @@ class DetailPasien extends Component {
                 :&ensp;
                 {this.state.nama_pasien} (
                 {this.calculateAge(this.state.tanggal_lahir)} tahun)
+              </td>
+            </tr>
+            <tr>
+              <td>Jenis Kelamin</td>
+              <td className="datatable">
+                :&ensp;
+                {this.state.gender}
               </td>
             </tr>
             <tr>
