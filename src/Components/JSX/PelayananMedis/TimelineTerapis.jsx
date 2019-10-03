@@ -43,8 +43,9 @@ export class TimelineTerapis extends Component {
     // const filterData = listDaftar.filter(el => el.id_lokasi === value);
 
     // console.log("filter", filterData);
-    return listDaftar.map(e => (
+    return listDaftar.map((e, index) => (
       <tr key={e.uid}>
+        <td>{index + 1}</td>
         <td>{new Date(e.waktu_checkup).toLocaleDateString("en-GB")}</td>
         <td>{e.nama_terapis}</td>
         <td>{e.nama_pasien}</td>
@@ -95,6 +96,7 @@ export class TimelineTerapis extends Component {
           <table className="table">
             <thead>
               <tr>
+                <th>No</th>
                 <th>Tanggal</th>
                 <th>Terapis</th>
                 <th>Pasien</th>
