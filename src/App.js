@@ -20,6 +20,7 @@ import ProfilKlinik from "./Views/JSX/Admin/ProfilKlinik";
 
 // Apotek
 import DetailObat from "./Views/JSX/Apotek/DetailObat";
+import PelayananApotik from "./Views/JSX/Apotek/PelayananApotik";
 import KelolaObat from "./Views/JSX/Apotek/KelolaObat";
 import TransaksiObat from "./Views/JSX/Apotek/TransaksiOBat";
 import Apotek from "./Views/JSX/Apotek/TimelineApotek";
@@ -80,6 +81,12 @@ class App extends Component {
                 <Route exact path="/" component={Login} />
                 <ProtectedRoute exact path="/dashboard" component={Dashboard} />
                 <ProtectedRoute path="/apotek" component={Apotek} />
+                <ProtectedRoute
+                  path="/layanan-apotek/:id/:no_rm"
+                  render={({ match }) => (
+                    <PelayananApotik antrian={match.params} />
+                  )}
+                />
                 <ProtectedRoute path="/kasir" component={Kasir} />
                 <ProtectedRoute path="/kelola-biaya" component={KelolaBiaya} />
                 <ProtectedRoute

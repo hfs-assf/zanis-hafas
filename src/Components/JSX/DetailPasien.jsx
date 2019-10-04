@@ -18,14 +18,16 @@ class DetailPasien extends Component {
   }
 
   componentDidMount() {
-    listAntrian(this.props.antrian_pasien).then(({ data }) => {
-      const filter = data.filter(e => e.uid === this.props.antrian_pasien);
-      this.setState({
-        poli: filter[0].poli,
-        jaminan: filter[0].jaminan,
-        dokter: filter[0].dokter
-      });
-    });
+    listAntrian(this.props.antrian_pasien)
+      .then(({ data }) => {
+        const filter = data.filter(e => e.uid === this.props.antrian_pasien);
+        this.setState({
+          poli: filter[0].poli,
+          jaminan: filter[0].jaminan,
+          dokter: filter[0].dokter
+        });
+      })
+      .catch(err => console.log(err));
 
     detailPasien(this.props.no_rm).then(({ data }) => {
       this.setState({

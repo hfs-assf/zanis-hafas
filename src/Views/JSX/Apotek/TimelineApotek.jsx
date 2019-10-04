@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TablePesananObat from "../../../Components/JSX/Apotek/TablePesananObat";
 import FormBeli from "../../../Components/JSX/Kasir/FormBeli";
+import TimelinePelayananApotik from "../../../Components/JSX/Apotek/TimelinePelayananApotik";
 
 class Apotek extends Component {
   render() {
@@ -22,7 +23,7 @@ class Apotek extends Component {
           </button>
         </div> */}
         <div className="item-timeline">
-          <TablePesananObat />
+          <TimelinePelayananApotik />
         </div>
         <div className="item-timeline-left">
           <FormBeli />

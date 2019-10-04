@@ -32,12 +32,14 @@ class FormPembayaran extends Component {
   }
 
   componentDidMount = () => {
-    listTransaksi(this.props.antrian_kasir).then(({ data }) => {
-      this.setState({
-        transaksi: data,
-        uid_transaksi: data[0].uid_transaksi
-      });
-    });
+    listTransaksi(this.props.antrian_kasir)
+      .then(({ data }) => {
+        this.setState({
+          transaksi: data,
+          uid_transaksi: data[0].uid_transaksi
+        });
+      })
+      .catch(err => console.log(err));
     list(this.props.kasir).then(({ data }) => {
       this.setState({
         daftarTransaksi: data,
