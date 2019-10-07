@@ -27,7 +27,8 @@ class FormTambahDetailObat extends Component {
         kadaluarsa: new Date(nextProps.selected.kadaluarsa).toLocaleDateString(
           "en-GB"
         ),
-        harga_modal: nextProps.selected.harga_modal
+        harga_modal: nextProps.selected.harga_modal,
+        harga_jual: nextProps.selected.harga_jual
       });
       React.createElement("input", {
         type: "checkbox",
@@ -65,6 +66,7 @@ class FormTambahDetailObat extends Component {
       editStokObat({
         uid: this.props.selected.uid,
         stok: this.state.stok,
+        id_lokasi: id_lokasi,
         harga_modal: this.state.harga_modal,
         kadaluarsa: this.state.kadaluarsa,
         harga_jual: this.state.harga_jual
