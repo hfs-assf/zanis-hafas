@@ -12,7 +12,8 @@ export class PesananObat extends Component {
   constructor() {
     super();
     this.state = {
-      detail_pesanan: []
+      detail_pesanan: [],
+      notification: "0"
     };
   }
 
@@ -25,7 +26,6 @@ export class PesananObat extends Component {
   };
 
   handleDelete = uid => {
-    console.log("dapat uid", uid);
     const arrays = this.state.detail_pesanan;
     hapusDetailPesanan(uid).then(() => {
       this.setState({
@@ -47,7 +47,7 @@ export class PesananObat extends Component {
       .catch(err => console.log(err));
   };
 
-  handleCancle = uid => {
+  handleCancel = uid => {
     editPesananObat(uid, "BATAL")
       .then(() => {
         this.setState(this.state);
@@ -65,7 +65,11 @@ export class PesananObat extends Component {
           biaya: harga_jual
         })
       )
-    }).catch(err => console.log(err));
+    })
+      .then(this.setState({ notification: "1" }))
+      .catch(err => {
+        this.setState({ notification: "0" });
+      });
   };
 
   render() {
@@ -147,7 +151,7 @@ export class PesananObat extends Component {
               <input
                 type="radio"
                 name="radio"
-                onClick={() => this.handleCancle(this.props.uid)}
+                onClick={() => this.handleCancel(this.props.uid)}
               />
               <div className="back-end box">
                 <span>BATAL</span>

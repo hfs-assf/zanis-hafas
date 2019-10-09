@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import SoapPasien from "../PelayananMedis/Soap/SoapPasien";
 import PesananObat from "./PesananObat";
+import PesananPuyer from "./PesananPuyer";
 
 export class TabPesananObat extends Component {
   constructor(props) {
@@ -26,7 +26,7 @@ export class TabPesananObat extends Component {
               </section>
 
               <section id="content2" className="dua">
-                <SoapPasien uid={this.props.uid} no_rm={this.props.no_rm} />
+                <PesananPuyer uid={this.props.uid} no_rm={this.props.no_rm} />
               </section>
             </div>
           </div>

@@ -13,18 +13,17 @@ export class FormPuyer extends Component {
       nomor_rekam_medis: "",
       nama_racik: "",
       komposisi: "",
-      nama_dokter: "",
       jumlah_racik: 0
     };
   }
 
-  handleSave = (id_lokasi, nama) => {
+  handleSave = (nik, id_lokasi) => {
     console.log("lokasi", id_lokasi);
-    console.log("lokasi", nama);
+    console.log("lokasi", nik);
     puyer({
       nomor_rekam_medis: this.props.no_rm,
       id_lokasi: id_lokasi,
-      nama_dokter: nama,
+      nik_dokter: nik,
       nama_racik: this.state.nama_racik,
       komposisi: this.state.komposisi,
       jumlah_racik: this.state.jumlah_racik
@@ -86,45 +85,36 @@ export class FormPuyer extends Component {
             </div>
           </div>
         </div>
-        <Consumer>
-          {({ state }) => (
-            <div className="col-md-12">
-              <div className="modal-footer justify-content-center">
-                <button
-                  className="btn btn-primary"
-                  data-toggle="modal"
-                  data-target="#konfirmasiRacik"
-                  onClick={() =>
-                    this.handleSave(
-                      state.dataLogin.id_lokasi,
-                      state.dataLogin.nama
-                    )
-                  }
-                >
-                  Simpan
-                </button>
-                <button
-                  className="btn btn-warning"
-                  data-toggle="modal"
-                  data-target="#konfirmasiRacik"
-                >
-                  Bersihkan
-                </button>
-              </div>
-            </div>
-          )}
-        </Consumer>
 
-        {/* <Consumer>
+        <div className="col-md-12">
+          <div className="modal-footer justify-content-center">
+            <button
+              className="btn btn-primary"
+              data-toggle="modal"
+              data-target="#konfirmasiRacik"
+            >
+              Simpan
+            </button>
+            <button
+              className="btn btn-warning"
+              data-toggle="modal"
+              data-target="#konfirmasiRacik"
+            >
+              Bersihkan
+            </button>
+          </div>
+        </div>
+
+        <Consumer>
           {({ state }) => (
             <ModalKonfirmasiTindakan
               passValue={() =>
-                this.handleSave(state.dataLogin.nama, state.dataLogin.id_lokasi)
+                this.handleSave(state.dataLogin.nik, state.dataLogin.id_lokasi)
               }
-              modal="notification1"
+              modal="konfirmasiRacik"
             />
           )}
-        </Consumer> */}
+        </Consumer>
         <ModalKonfirmasi
           notification={this.state.notification}
           modal="konfirmasiRacik"
