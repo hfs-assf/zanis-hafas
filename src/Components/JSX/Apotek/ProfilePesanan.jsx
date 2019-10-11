@@ -34,8 +34,6 @@ export class ProfilePesanan extends Component {
   };
 
   render() {
-    console.log("uid", this.props.no_rm);
-    console.log("hayoo", this.state.nama_pasien);
     return (
       <div>
         <table>

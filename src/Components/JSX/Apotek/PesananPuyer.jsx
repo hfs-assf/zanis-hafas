@@ -14,22 +14,28 @@ export class PesananPuyer extends Component {
       list: [],
       modalKurang: false,
       notification: "0",
-      uid: ""
+      uidPuyer: ""
     };
   }
   componentDidMount = () => {
-    listPuyer(this.props.uid).then(({ data }) => {
-      this.setState({
-        list: data,
-        uid: data[0].uid
+    listPuyer(this.props.uid)
+      .then(({ data }) => {
+        this.setState({
+          list: data,
+          uidPuyer: data[0].uid
+        });
+      })
+      .catch(err => {
+        console.log(err);
       });
-    });
   };
 
   handleConf = uid => {
     EditStatusPuyer(uid, "konfirmasi")
       .then(() => this.setState(this.state))
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   handleModal = uid => {
@@ -127,7 +133,10 @@ export class PesananPuyer extends Component {
           notification={this.state.notification}
           modal="KonfirmasiTransaksi"
         />
-        <ModalKurang uidPuyer={this.state.uid} selected={this.state.selected} />
+        <ModalKurang
+          uidPuyer={this.state.uidPuyer}
+          selected={this.state.selected}
+        />
       </div>
     );
   }

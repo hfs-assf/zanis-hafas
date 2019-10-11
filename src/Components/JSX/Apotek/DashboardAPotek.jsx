@@ -13,16 +13,19 @@ class DashboardApotek extends Component {
   }
 
   componentDidMount = () => {
-    obat().then(({ data }) => {
-      this.setState({
-        daftarObat: data
+    obat()
+      .then(({ data }) => {
+        this.setState({
+          daftarObat: data
+        });
+      })
+      .catch(err => {
+        console.log(err);
       });
-    });
   };
 
   render() {
     jumlahObat = this.state.daftarObat.length;
-    console.log("panjang", this.state.daftarObat.length);
     return (
       <div className="row">
         <div className="col-md-4 ">

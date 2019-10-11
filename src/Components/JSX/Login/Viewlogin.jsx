@@ -38,9 +38,9 @@ class ViewLogin extends Component {
             </div>
             <div className="field">
               {this.state.error ? (
-                <h7 style={{ textAlign: "center", color: "red" }}>
+                <h4 style={{ textAlign: "center", color: "red" }}>
                   {this.state.pesan}
-                </h7>
+                </h4>
               ) : null}
               <input
                 type="text"

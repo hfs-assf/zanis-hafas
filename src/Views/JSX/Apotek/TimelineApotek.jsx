@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import TablePesananObat from "../../../Components/JSX/Apotek/TablePesananObat";
 import FormBeli from "../../../Components/JSX/Kasir/FormBeli";
 import TimelinePelayananApotik from "../../../Components/JSX/Apotek/TimelinePelayananApotik";
 

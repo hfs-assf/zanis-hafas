@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import "../../../Components/ASSETS/CSS/TopHeader.css";
 import logout from "../../../Methods/User/Auth/logout";
 import { Consumer } from "../../../Methods/User/Auth/Store";
-// import NotifikasiHeaderPasien from "../../View/Header/Notifikasi_PasienHeader/Notifikasi_pasienHeader";
-// import NotifikasiHeaderPesan from "../../View/Header/Notifikasi_PesanHeader/Notifikasi_PesanHeader";
 
 export default class Header extends Component {
   signOut = (e, action) => {
@@ -19,7 +17,7 @@ export default class Header extends Component {
         {({ state, action }) => (
           <div>
             {state.auth ? (
-              <nav className="mb-4 navbar navbar-expand-lg sticky-top navbar-dark navTop">
+              <nav className="mb-4 navbar navbar-expand-lg sticky-top navTop">
                 <Link to="/" className="navbar-brand font-bold" href="#">
                   <img
                     src={require("../../../Components/ASSETS/IMG/teman.jpg")}
@@ -54,7 +52,7 @@ export default class Header extends Component {
                         style={{ color: "#333" }}
                       >
                         <i className="fa fa-user" />
-                        Selamat Datang Admin
+                        Selamat Datang {state.dataLogin.nama}
                       </a>
                       <div
                         className="dropdown-menu dropdown-menu-right"
