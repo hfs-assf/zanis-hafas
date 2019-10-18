@@ -2,10 +2,10 @@ import React from "react";
 import "../../ASSETS/CSS/Apotek.css";
 import "../../ASSETS/CSS/form.css";
 import { Link } from "react-router-dom";
-import obatList from "../../../Methods/Apotik/Obat/listObat";
 import hapusObat from "../../../Methods/Apotik/Obat/hapusObat";
 import HapusModal from "../hapusModal";
 import { Consumer } from "../../../Methods/User/Auth/Store";
+import cariObat from "../../../Methods/Apotik/Obat/cariObat";
 
 let delay = null;
 
@@ -29,7 +29,7 @@ export default class TableObat extends React.Component {
     const nilai = e.target.value;
     delay = setTimeout(() => {
       if (nilai) {
-        obatList(nilai, id_lokasi).then(({ data }) =>
+        cariObat(nilai, id_lokasi).then(({ data }) =>
           this.setState({ obat: data })
         );
       } else {
@@ -42,10 +42,6 @@ export default class TableObat extends React.Component {
       filterKey: nilai
     });
   };
-
-  // detailObat = uid => {
-  //   window.location.assign("/detail-obat/" + uid);
-  // };
 
   deleteModal = uid => {
     this.setState({ deleted: true, selected: { uid }, field: "obat" });
@@ -66,19 +62,14 @@ export default class TableObat extends React.Component {
         <div className="cell">Nama Obat</div>
         <div className="cell">Jenis Obat</div>
         <div className="cell">Persediaan</div>
-        <div className="cell">Harga Jual</div>
         <div className="cell">Aksi</div>
       </div>
       {this.state.obat.map(
-        ({ uid, nama_obat, kategori, stok_total, satuan, harga_jual }) => (
+        ({ uid, nama_obat, kategori, stok_total, satuan }) => (
           <div className="row1" key={uid}>
             <div className="cell">{nama_obat}</div>
             <div className="cell text-center">{kategori}</div>
             <div className="cell text-center"> {stok_total + " " + satuan}</div>
-            <div className="cell text-right">
-              Rp.0
-              {harga_jual}
-            </div>
             <div className="cell text-center">
               <Link to={"/detail-obat/" + uid}>
                 <button className="btn btn-primary btn-sm ">Detail</button>

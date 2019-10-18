@@ -197,7 +197,6 @@ class resepObatTabulasi extends Component {
               <div className="row1 header">
                 <div className="cell">Nama Obat</div>
                 <div className="cell">Jumlah</div>
-                <div className="cell">Harga</div>
                 <div className="cell">Keterangan</div>
                 <div className="cell">Aksi</div>
               </div>

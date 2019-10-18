@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import SVGapotek from "../../ASSETS/SVG/svgapotek";
 import "../../ASSETS/CSS/DashboardApotek.css";
 import { obat } from "../../../Methods/Apotik/Obat/listObat";
+import { jmlObat } from "../../../Methods/Apotik/Obat/cariObat";
 
 let jumlahObat;
 class DashboardApotek extends Component {
@@ -13,7 +14,7 @@ class DashboardApotek extends Component {
   }
 
   componentDidMount = () => {
-    obat()
+    jmlObat()
       .then(({ data }) => {
         this.setState({
           daftarObat: data

@@ -78,16 +78,6 @@ export class Store extends React.Component {
     dataLogin: {}
   };
 
-  action = {
-    checkSession: () => this.storeCheckSession(),
-    setAuth: () => this.setState({ auth: true }),
-    clearAuth: () => this.setState({ auth: false })
-  };
-
-  componentWillMount = () => {
-    this.storeCheckSession();
-  };
-
   storeCheckSession = () => {
     checkSession()
       // .then(data => console.log("check datat", data))
@@ -100,6 +90,16 @@ export class Store extends React.Component {
       .catch(err => {
         localStorage.clear();
       });
+  };
+
+  componentWillMount = () => {
+    this.storeCheckSession();
+  };
+
+  action = {
+    checkSession: () => this.storeCheckSession(),
+    setAuth: () => this.setState({ auth: true }),
+    clearAuth: () => this.setState({ auth: false })
   };
 
   render = () => (

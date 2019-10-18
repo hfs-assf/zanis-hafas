@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../../../Components/ASSETS/CSS/Pendaftaran.css";
-import FormDetailObat from "../../../Components/JSX/Apotek/FormDetailObat";
+// import FormDetailObat from "../../../Components/JSX/Apotek/FormDetailObat";
 // import TableDetailObat from "../../../Components/JSX/Apotek/TableDetailObat";
 import TambahObatMasuk from "../../../Components/JSX/Apotek/FormTambahDetailObat";
 import listStokObat from "../../../Methods/Apotik/StokObat/listStokObat";
@@ -136,40 +136,38 @@ class DetailObat extends Component {
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div className="row">
-            <FormDetailObat uid={this.props.uid.id} />
-            <div
-              className="card col-md-7"
-              style={{ borderTop: "2px solid #1976d2" }}
-            >
-              <div className="card-body">
-                <div className="flex-container">
-                  <div className="box column1">
-                    <h2 className="card-title text-left">
-                      Persediaan
-                      <button
-                        className="btn btn-sm btn-primary"
-                        data-toggle="modal"
-                        data-target="#tambahObatMasuk"
-                        onClick={() => this.addModal()}
-                      >
-                        Tambah Persediaan Obat
-                      </button>
-                    </h2>
-                  </div>
-                </div>
-                <hr className="hr2" />
-                <div className="row">
-                  <div className="col-md-12 rowsoap">{header}</div>
+
+          <div
+            className="card col-md-12"
+            style={{ borderTop: "2px solid #1976d2" }}
+          >
+            <div className="card-body">
+              <div className="flex-container">
+                <div className="box column1">
+                  <h2 className="card-title text-left">
+                    Persediaan
+                    <button
+                      className="btn btn-sm btn-primary"
+                      data-toggle="modal"
+                      data-target="#tambahObatMasuk"
+                      onClick={() => this.addModal()}
+                    >
+                      Tambah Persediaan Obat
+                    </button>
+                  </h2>
                 </div>
               </div>
+              <hr className="hr2" />
+              <div className="row">
+                <div className="col-md-12 rowsoap">{header}</div>
+              </div>
             </div>
-            <TambahObatMasuk
-              uid={this.props.uid.id}
-              selected={this.state.selected}
-              action={this.state.action}
-            />
           </div>
+          <TambahObatMasuk
+            uid={this.props.uid.id}
+            selected={this.state.selected}
+            action={this.state.action}
+          />
         </div>
       </div>
     );

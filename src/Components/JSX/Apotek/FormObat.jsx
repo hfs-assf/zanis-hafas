@@ -145,6 +145,7 @@ class FormObat extends Component {
                       >
                         <option value="Minum">Minum</option>
                         <option value="Makan">Makan</option>
+                        <option value="Peralatan">Peralatan</option>
                       </select>
                     </div>
                   </div>
