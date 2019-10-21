@@ -4,7 +4,6 @@ import "../../ASSETS/CSS/DashboardApotek.css";
 import { obat } from "../../../Methods/Apotik/Obat/listObat";
 import { Consumer } from "../../../Methods/User/Auth/Store";
 
-let jumlahObat;
 class DashboardApotek extends Component {
   constructor(props) {
     super(props);
@@ -32,7 +31,6 @@ class DashboardApotek extends Component {
   };
 
   render() {
-    jumlahObat = this.state.daftarObat.length;
     return (
       <div className="row">
         <div className="col-md-4 ">

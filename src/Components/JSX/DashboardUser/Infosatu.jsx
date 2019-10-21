@@ -3,7 +3,6 @@ import "../../ASSETS/CSS/Dashboard.css";
 // import listPasien from "../../../Methods/Admin/getDataLabor";
 import { jmlAntrian } from "../../../Methods/Pendaftaran/Antrian/listAntrian";
 import { Consumer } from "../../../Methods/User/Auth/Store";
-Consumer;
 
 class Infosatu extends Component {
   constructor(props) {
