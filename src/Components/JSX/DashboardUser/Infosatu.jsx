@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "../../ASSETS/CSS/Dashboard.css";
 // import listPasien from "../../../Methods/Admin/getDataLabor";
 import { jmlAntrian } from "../../../Methods/Pendaftaran/Antrian/listAntrian";
+import { Consumer } from "../../../Methods/User/Auth/Store";
+Consumer;
 
 class Infosatu extends Component {
   constructor(props) {
@@ -19,14 +21,16 @@ class Infosatu extends Component {
     });
   }
 
-  cariNilai = value => {
-    const filter = this.state.pasien.filter(e => e.status_antrian === value)
-      .length;
-    return filter;
+  cariNilai = (status, value) => {
+    const { pasien } = this.state;
+    const filterStatus = pasien.filter(e => e.status_antrian === status);
+    const filterId = filterStatus.filter(e => e.id_lokasi === value).length;
+    return filterId;
   };
 
-  jmlPasien = () => {
-    const filterJml = this.state.pasien.length;
+  jmlPasien = value => {
+    const { pasien } = this.state;
+    const filterJml = pasien.filter(el => el.id_lokasi === value).length;
     return filterJml;
   };
 
@@ -44,7 +48,16 @@ class Infosatu extends Component {
                     style={{ width: "1em", height: "1em" }}
                   />
                 </h2>
-                <h3 className="text-white">{this.jmlPasien()}</h3>
+                <Consumer>
+                  {({ state }) => {
+                    return (
+                      <h3 className="text-white">
+                        {this.jmlPasien(state.dataLogin.id_lokasi)}
+                      </h3>
+                    );
+                  }}
+                </Consumer>
+
                 <h4 className="card-subtitle text-white">
                   Jumlah Pasien Hari Ini
                 </h4>
@@ -75,7 +88,16 @@ class Infosatu extends Component {
                     style={{ width: "1em", height: "1em" }}
                   />
                 </h2>
-                <h3 className="text-white">{this.cariNilai("selesai")}</h3>
+                <Consumer>
+                  {({ state }) => {
+                    return (
+                      <h3 className="text-white">
+                        {this.cariNilai("selesai", state.dataLogin.id_lokasi)}
+                      </h3>
+                    );
+                  }}
+                </Consumer>
+
                 <h4 className="card-subtitle text-white">Pasien Terlayani</h4>
               </div>
               <div className="col-12">

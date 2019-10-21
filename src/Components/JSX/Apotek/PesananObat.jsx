@@ -7,6 +7,7 @@ import hapusDetailPesanan from "../../../Methods/Apotik/DetailPesananObat/hapusD
 import editPesananObat from "../../../Methods/Apotik/PesananObat/editPesananObat";
 import kurangStokObat from "../../../Methods/Apotik/StokObat/kurangStokObat";
 import tambahDetailTransaksi from "../../../Methods/Kasir/DetailTransaksi/tambahDetailTransaksi";
+import ReactToPrint from "react-to-print";
 
 export class PesananObat extends Component {
   constructor() {
@@ -74,7 +75,7 @@ export class PesananObat extends Component {
 
   render() {
     return (
-      <div>
+      <div ref={el => (this.componentRef = el)}>
         <div className="table-responsive">
           <table className="table">
             <thead>
@@ -122,6 +123,19 @@ export class PesananObat extends Component {
             >
               Simpan
             </button>
+            <ReactToPrint
+              trigger={() => (
+                <a href={null}>
+                  <button
+                    className="btn btn-sm"
+                    style={{ background: "#24a4d6" }}
+                  >
+                    Print
+                  </button>
+                </a>
+              )}
+              content={() => this.componentRef}
+            />
           </div>
 
           <div className="middle ">

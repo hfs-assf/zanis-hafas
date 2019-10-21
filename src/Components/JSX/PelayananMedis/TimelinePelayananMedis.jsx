@@ -53,10 +53,12 @@ class TimelinePelayananMedis extends Component {
     ));
   };
 
-  cariNilai = value => {
-    const filter = this.state.lAntrian.filter(e => e.status_antrian === value)
-      .length;
-    return filter;
+  cariNilai = (status, value) => {
+    const filterStatus = this.state.lAntrian.filter(
+      e => e.status_antrian === status
+    );
+    const filterId = filterStatus.filter(e => e.id_lokasi === value).length;
+    return filterId;
   };
 
   render() {
@@ -74,9 +76,16 @@ class TimelinePelayananMedis extends Component {
 
         <div className="col-md-4 tglpasien">
           <div className="banyakpasien">
-            <span className="badge">
-              Jumlah Antrian : {this.cariNilai("menunggu")}
-            </span>
+            <Consumer>
+              {({ state }) => {
+                return (
+                  <span className="badge">
+                    Jumlah Antrian :{" "}
+                    {this.cariNilai("menunggu", state.dataLogin.id_lokasi)}
+                  </span>
+                );
+              }}
+            </Consumer>
           </div>
         </div>
       </div>

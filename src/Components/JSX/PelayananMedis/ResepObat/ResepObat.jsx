@@ -1,15 +1,14 @@
 import React, { Component } from "react";
-import obatList from "../../../../Methods/Apotik/Obat/listObat";
 import ModalKonfirmasiTindakan from "../../Animasi/ModalKonfirmasiTindakan";
 import ModalKonfirmasi from "../../Animasi/ModalKonfirmasi";
 import tambahPesananObat from "../../../../Methods/Apotik/PesananObat/tambahPesananObat";
 import { Consumer } from "../../../../Methods/User/Auth/Store";
+import cariObat from "../../../../Methods/Apotik/Obat/cariObat";
 
 let set;
 class resepObatTabulasi extends Component {
   constructor(props) {
     super(props);
-    // this.cariObat = this.cariObat.bind(this);
     this.ubahJumlahObat = this.ubahJumlahObat.bind(this);
     this.ubahKeteranganObat = this.ubahKeteranganObat.bind(this);
     this.handleSave = this.handleSave.bind(this);
@@ -30,7 +29,7 @@ class resepObatTabulasi extends Component {
     const nilai = e.target.value;
     set = setTimeout(() => {
       if (nilai) {
-        obatList(nilai, id_lokasi).then(({ data }) =>
+        cariObat(nilai, id_lokasi).then(({ data }) =>
           this.setState({ daftarObat: data })
         );
       } else {

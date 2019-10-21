@@ -25,6 +25,7 @@ export default class TableObat extends React.Component {
   }
 
   onKeyUp = (e, id_lokasi) => {
+    console.log("id_lokasi", id_lokasi);
     clearTimeout(delay);
     const nilai = e.target.value;
     delay = setTimeout(() => {

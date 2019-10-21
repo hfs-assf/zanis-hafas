@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import SVGapotek from "../../ASSETS/SVG/svgapotek";
 import "../../ASSETS/CSS/DashboardApotek.css";
 import { obat } from "../../../Methods/Apotik/Obat/listObat";
-import { jmlObat } from "../../../Methods/Apotik/Obat/cariObat";
+import { Consumer } from "../../../Methods/User/Auth/Store";
 
 let jumlahObat;
 class DashboardApotek extends Component {
@@ -14,7 +14,7 @@ class DashboardApotek extends Component {
   }
 
   componentDidMount = () => {
-    jmlObat()
+    obat()
       .then(({ data }) => {
         this.setState({
           daftarObat: data
@@ -23,6 +23,12 @@ class DashboardApotek extends Component {
       .catch(err => {
         console.log(err);
       });
+  };
+
+  jmlObat = value => {
+    const { daftarObat } = this.state;
+    const filter = daftarObat.filter(e => e.id_lokasi === value).length;
+    return filter;
   };
 
   render() {
@@ -38,7 +44,15 @@ class DashboardApotek extends Component {
                 </div>
                 <div className="col-sm-9">
                   <h4 className="text-white">Daftar Obat</h4>
-                  <h2 className="font-light text-white">{jumlahObat}</h2>
+                  <Consumer>
+                    {({ state }) => {
+                      return (
+                        <h2 className="font-light text-white">
+                          {this.jmlObat(state.dataLogin.id_lokasi)}
+                        </h2>
+                      );
+                    }}
+                  </Consumer>
                 </div>
               </div>
             </div>
