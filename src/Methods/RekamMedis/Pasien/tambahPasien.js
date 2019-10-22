@@ -45,7 +45,7 @@ let tambahPasien = ({
     id_lokasi,
     catatan
   });
-  return axios.post(api.rekamMedis + "/pasien", {
+  return axios.post(`${api.rekamMedis}/pasien`, {
     nomor_pengenal,
     nomor_kartu,
     jenis_nomor_pengenal,

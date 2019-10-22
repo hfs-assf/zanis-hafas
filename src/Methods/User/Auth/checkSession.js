@@ -6,7 +6,7 @@ let checkSession = () => {
   let token = getToken();
   if (token)
     return axios
-      .get(api.akunUser + "/cek-token", {
+      .get(`${api.akunUser}/cek-token`, {
         headers: { Authorization: token }
       })
       .catch(err => console.log(err));

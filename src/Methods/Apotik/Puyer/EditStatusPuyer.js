@@ -6,7 +6,7 @@ let EditStatusPuyer = (id, status) => {
     id,
     status
   });
-  return axios.put(api.apotik + "/status-racik/" + id, {
+  return axios.put(`${api.apotik}/status-racik/${id}`, {
     status
   });
 };

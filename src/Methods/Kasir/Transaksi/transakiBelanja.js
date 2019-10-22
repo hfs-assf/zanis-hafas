@@ -17,7 +17,7 @@ let transaksiBelanja = ({
     jenis_pembayaran,
     detailTransaksi
   });
-  return axios.post(api.kasir + "/transaksi-belanja", {
+  return axios.post(`${api.kasir}/transaksi-belanja`, {
     nik_penerbit,
     id_lokasi,
     nomor_rekam_medis,

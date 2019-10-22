@@ -17,7 +17,7 @@ let puyer = ({
     jumlah_racik,
     id_lokasi
   });
-  return axios.post(api.apotik + "/racik", {
+  return axios.post(`${api.apotik}/racik`, {
     nomor_rekam_medis,
     nama_racik,
     komposisi,

@@ -8,7 +8,7 @@ let tambahHistoriTindakan = ({
   keterangan,
   id_lokasi
 }) => {
-  return axios.post(api.poli + "/histori_tindakan", {
+  return axios.post(`${api.poli}/histori_tindakan`, {
     uid_histori_medis,
     uid_tindakan,
     jumlah,

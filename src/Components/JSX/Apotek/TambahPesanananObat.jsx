@@ -202,7 +202,7 @@ export default class TambahPesananObat extends React.Component {
       daftarResep = (
         <React.Fragment>
           <div className="modal-body">
-            <div className="table1">
+            <table className="table1">
               <thead className="headTable">
                 <tr>
                   <th className="text-center">NAMA OBAT</th>
@@ -212,7 +212,7 @@ export default class TambahPesananObat extends React.Component {
                 </tr>
               </thead>
               {this.tambahPesanan()}
-            </div>
+            </table>
           </div>
           <div className="modal-footer justify-content-center">
             <button

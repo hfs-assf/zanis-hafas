@@ -131,11 +131,6 @@ class resepObatTabulasi extends Component {
             required
           />
           &nbsp;
-          {resep.satuan}
-        </div>
-        <div className="cell text-right">
-          Rp.
-          {resep.harga_jual}
         </div>
         <div className="cell text-center">
           <input

@@ -16,7 +16,7 @@ let editStokObat = ({
     harga_jual,
     id_lokasi
   });
-  return axios.put(api.apotik + "/stok-obat/" + uid, {
+  return axios.put(`${api.apotik}/stok-obat/${uid}`, {
     stok,
     harga_modal,
     kadaluarsa,

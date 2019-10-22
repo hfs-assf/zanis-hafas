@@ -14,7 +14,7 @@ let tambahHistoriMedis = ({
   catatan,
   nama_terapis
 }) => {
-  return axios.post(api.rekamMedis + "/histori-medis/" + nomor_rekam_medis, {
+  return axios.post(`${api.rekamMedis}/histori-medis/${nomor_rekam_medis}`, {
     nik_dokter,
     subjektif,
     objektif,

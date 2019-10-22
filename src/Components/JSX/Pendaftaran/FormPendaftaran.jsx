@@ -5,9 +5,6 @@ import kecamatan from "../../../Methods/data.json";
 import { Consumer } from "../../../Methods/User/Auth/Store";
 import listMembership from "../../../Methods/RekamMedis/Pasien/listMemberships";
 
-// import listProvinsi from "../../../JSON/provinsi";
-// import listProvinsi from "../../../Methods/Pendaftaran/listProvinsi";
-
 class FormPendaftaran extends Component {
   constructor() {
     super();

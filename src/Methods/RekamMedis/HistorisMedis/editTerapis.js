@@ -3,7 +3,7 @@ import { api } from "../../api";
 
 let editTerapis = (uid, namaTerapis) => {
   console.log({ uid, namaTerapis });
-  return axios.put(api.rekamMedis + "/histori-medis/" + uid, {
+  return axios.put(`${api.rekamMedis}/histori-medis/${uid}`, {
     namaTerapis
   });
 };

@@ -7,7 +7,7 @@ let listPasien = pencarian => {
   if (pencarian !== "") {
     filter = "?cari=" + pencarian;
   }
-  return axios.get(api.rekamMedis + "/pasien" + filter);
+  return axios.get(`${api.rekamMedis}/pasien/${filter}`);
 };
 
 export default listPasien;

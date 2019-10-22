@@ -6,7 +6,7 @@ let tambahDetailTransaksi = ({ nomor_rekam_medis, listDetail }) => {
     nomor_rekam_medis,
     listDetail
   });
-  return axios.post(api.kasir + "/detail-transaksi", {
+  return axios.post(`${api.kasir}/detail-transaksi`, {
     nomor_rekam_medis,
     listDetail
   });

@@ -10,7 +10,7 @@ let tambahStokObat = ({
   harga_jual,
   id_lokasi
 }) => {
-  return axios.post(api.apotik + "/stok-obat/" + uid, {
+  return axios.post(`${api.apotik}/stok-obat/${uid}`, {
     stok,
     kadaluarsa,
     nik_penerima,

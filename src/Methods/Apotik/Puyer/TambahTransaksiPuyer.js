@@ -6,7 +6,7 @@ let TambahTransaksiPuyer = ({ uid_pesanan, nomor_rekam_medis }) => {
     uid_pesanan,
     nomor_rekam_medis
   });
-  return axios.post(api.apotik + "/racik-ke-kasir/", {
+  return axios.post(`${api.apotik}/racik-ke-kasir/`, {
     uid_pesanan,
     nomor_rekam_medis
   });

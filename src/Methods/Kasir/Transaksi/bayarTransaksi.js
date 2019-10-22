@@ -17,7 +17,7 @@ const bayarTransaksi = ({
     diskon,
     total
   });
-  return axios.put(api.kasir + `/transaksi/${uid_transaksi}`, {
+  return axios.put(`${api.kasir}/transaksi/${uid_transaksi}`, {
     uid_transaksi,
     status,
     nik_kasir,

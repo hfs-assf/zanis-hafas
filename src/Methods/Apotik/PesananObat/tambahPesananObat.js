@@ -7,7 +7,7 @@ let tambahPesananObat = ({
   detail_pesanan_obat,
   id_lokasi
 }) => {
-  return axios.post(api.apotik + "/pesanan-obat", {
+  return axios.post(`${api.apotik}/pesanan-obat`, {
     nik_dokter,
     nomor_rekam_medis,
     detail_pesanan_obat,

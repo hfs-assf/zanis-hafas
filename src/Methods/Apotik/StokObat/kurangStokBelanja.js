@@ -7,7 +7,7 @@ let kurangStokBelanja = ({ nik_karyawan, listDetail, id_lokasi }) => {
     listDetail,
     id_lokasi
   });
-  return axios.patch(api.apotik + "/stok-obat", {
+  return axios.patch(`${api.apotik}/stok-obat`, {
     nik_karyawan,
     listDetail,
     id_lokasi

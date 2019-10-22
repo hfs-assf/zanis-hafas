@@ -6,7 +6,7 @@ const editPesananObat = (id, status_pesanan) => {
     id,
     status_pesanan
   });
-  return axios.put(api.apotik + "/pesanan-obat/" + id, {
+  return axios.put(`${api.apotik}/pesanan-obat/${id}`, {
     status_pesanan
   });
 };

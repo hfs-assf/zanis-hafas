@@ -6,7 +6,7 @@ let editPuyer = ({ uid, listDetail }) => {
     uid,
     listDetail
   });
-  return axios.put(api.apotik + "/harga-racik/" + uid, {
+  return axios.put(`${api.apotik}/harga-racik/${uid}`, {
     listDetail
   });
 };

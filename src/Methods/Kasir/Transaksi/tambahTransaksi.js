@@ -8,7 +8,7 @@ let tambahTransaksi = ({
   penjamin,
   jenis_pembayaran
 }) => {
-  return axios.post(api.kasir + "/transaksi", {
+  return axios.post(`${api.kasir}/transaksi`, {
     nik_penerbit,
     id_lokasi,
     nomor_rekam_medis,
