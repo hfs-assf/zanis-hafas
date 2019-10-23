@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import RiwayatPasien from "./RiwayatKunjungan";
+import { withContext } from "../../../../Methods/HOC/withContext";
 import detailPasien from "../../../../Methods/RekamMedis/Pasien/detailPasien";
 
 class ProfileKiriPasien extends Component {
@@ -7,8 +8,9 @@ class ProfileKiriPasien extends Component {
     pasien: []
   };
 
-  componentWillMount() {
-    detailPasien(this.props.pasien).then(({ data }) => {
+  componentDidMount() {
+    console.log("props", this.props.getValue);
+    detailPasien(this.props.pasien, this.props.getValue).then(({ data }) => {
       this.setState({ pasien: this.state.pasien.concat(data) });
     });
   }
@@ -105,4 +107,4 @@ class ProfileKiriPasien extends Component {
     );
   }
 }
-export default ProfileKiriPasien;
+export default withContext(ProfileKiriPasien);

@@ -1,26 +1,21 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "../../ASSETS/CSS/Pendaftaran.css";
-import listPasien from "../../../Methods/RekamMedis/Pasien/listPasien";
+import { cariPasien } from "../../../Methods/RekamMedis/Pasien/listPasien";
+import { Consumer } from "../../../Methods/User/Auth/Store";
 
 class CariPasien extends Component {
   constructor() {
     super();
     this.state = {
       textFilter: "",
-      showSuggestions: false,
       pasien: []
     };
   }
 
-  // addQueue =(e, id) => {
-  //   e.preventDefault()
-  //   window.location.assign("/tambah-layanan/" + id);
-  // };
-
-  onChange = e => {
+  onChange = (e, id_lokasi) => {
     var filter = e.target.value;
-    listPasien(filter).then(({ data }) => {
+    cariPasien(filter, id_lokasi).then(({ data }) => {
       this.setState({
         pasien: data,
         textFilter: filter,
@@ -65,12 +60,19 @@ class CariPasien extends Component {
       <div className="mainsearch">
         <div className="form-group has-search">
           <span className="fa fa-search form-control-feedback" />
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Cari pasien"
-            onChange={e => this.onChange(e)}
-          />
+          <Consumer>
+            {({ state }) => {
+              return (
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Cari pasien"
+                  onChange={e => this.onChange(e, state.dataLogin.id_lokasi)}
+                />
+              );
+            }}
+          </Consumer>
+
           {suggestionsList}
         </div>
       </div>
