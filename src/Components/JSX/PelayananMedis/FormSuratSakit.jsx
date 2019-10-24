@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import jsPDF from "jspdf";
 import detailPasien from "../../../Methods/RekamMedis/Pasien/detailPasien";
+import { withContext } from "../../../Methods/HOC/withContext";
 
 class FormObat extends Component {
   constructor(props) {
@@ -17,17 +18,19 @@ class FormObat extends Component {
     };
   }
 
-  componentWillMount = () => {
-    detailPasien(this.props.no_rm).then(({ data }) => {
-      this.setState({
-        nama_pasien: data[0].nama_pasien,
-        tanggal_lahir: data[0].tanggal_lahir,
-        alamat: data[0].alamat
-      });
-    });
-  }
+  componentDidMount = () => {
+    detailPasien(this.props.no_rm, this.props.getValue)
+      .then(({ data }) => {
+        this.setState({
+          nama_pasien: data[0].nama_pasien,
+          tanggal_lahir: data[0].tanggal_lahir,
+          alamat: data[0].alamat
+        });
+      })
+      .catch(err => err);
+  };
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
     const form = event.target;
     var doc = new jsPDF({
@@ -65,7 +68,7 @@ class FormObat extends Component {
     doc.text("Diagnosis :  " + form.elements["diagnosis"].value, 1, 10);
     doc.text("Harap yang berkepentingan maklum.", 1, 11);
     doc.save(form.elements["nama"].value + ".pdf");
-  }
+  };
 
   calculateAge(date) {
     var today = new Date();
@@ -197,4 +200,4 @@ class FormObat extends Component {
   }
 }
 
-export default FormObat;
+export default withContext(FormObat);

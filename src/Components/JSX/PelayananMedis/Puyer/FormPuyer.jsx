@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "../../../ASSETS/CSS/TambahPelayananAntrian.css";
 import puyer from "../../../../Methods/Apotik/Puyer/Puyer";
 import { Consumer } from "../../../../Methods/User/Auth/Store";
-import ModalKonfirmasiTindakan from "../../Animasi/ModalKonfirmasiTindakan";
 import ModalKonfirmasi from "../../Animasi/ModalKonfirmasi";
 
 export class FormPuyer extends Component {
@@ -18,8 +17,6 @@ export class FormPuyer extends Component {
   }
 
   handleSave = (nik, id_lokasi) => {
-    console.log("lokasi", id_lokasi);
-    console.log("lokasi", nik);
     puyer({
       nomor_rekam_medis: this.props.no_rm,
       id_lokasi: id_lokasi,
@@ -36,8 +33,6 @@ export class FormPuyer extends Component {
   };
 
   render() {
-    console.log("ini props nya", this.props.no_rm);
-
     return (
       <div className="container-fluid">
         <div className="row">
@@ -88,13 +83,24 @@ export class FormPuyer extends Component {
 
         <div className="col-md-12">
           <div className="modal-footer justify-content-center">
-            <button
-              className="btn btn-primary"
-              data-toggle="modal"
-              data-target="#konfirmasiRacik"
-            >
-              Simpan
-            </button>
+            <Consumer>
+              {({ state }) => (
+                <button
+                  className="btn btn-primary"
+                  data-toggle="modal"
+                  data-target="#konfirmasiRacik"
+                  onClick={() =>
+                    this.handleSave(
+                      state.dataLogin.nik,
+                      state.dataLogin.id_lokasi
+                    )
+                  }
+                >
+                  Simpan
+                </button>
+              )}
+            </Consumer>
+
             <button
               className="btn btn-warning"
               data-toggle="modal"
@@ -104,17 +110,6 @@ export class FormPuyer extends Component {
             </button>
           </div>
         </div>
-
-        <Consumer>
-          {({ state }) => (
-            <ModalKonfirmasiTindakan
-              passValue={() =>
-                this.handleSave(state.dataLogin.nik, state.dataLogin.id_lokasi)
-              }
-              modal="konfirmasiRacik"
-            />
-          )}
-        </Consumer>
         <ModalKonfirmasi
           notification={this.state.notification}
           modal="konfirmasiRacik"

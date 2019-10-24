@@ -11,6 +11,7 @@ import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
 import { date_format, conversi } from "../../../Methods/waktu";
 import { Consumer } from "../../../Methods/User/Auth/Store";
 import ReactToPrint from "react-to-print";
+import { withContext } from "../../../Methods/HOC/withContext";
 
 class FormPembayaran extends Component {
   constructor(props) {
@@ -39,15 +40,16 @@ class FormPembayaran extends Component {
           uid_transaksi: data[0].uid_transaksi
         });
       })
-      .catch(err => console.log(err));
-    list(this.props.kasir).then(({ data }) => {
+      .catch(err => err);
+    list(this.props.getValue, this.props.antrian_kasir).then(({ data }) => {
+      const filter = data.filter(e => e.uid === this.props.antrian_kasir);
       this.setState({
-        daftarTransaksi: data,
-        no_transaksi: data[0].no_transaksi,
-        waktu_terbit: data[0].waktu_terbit,
-        alamat: data[0].alamat,
-        nama_pasien: data[0].nama_pasien,
-        total: data[0].total
+        daftarTransaksi: filter,
+        no_transaksi: filter[0].no_transaksi,
+        waktu_terbit: filter[0].waktu_terbit,
+        alamat: filter[0].alamat,
+        nama_pasien: filter[0].nama_pasien,
+        total: filter[0].total
       });
     });
   };
@@ -198,29 +200,25 @@ class FormPembayaran extends Component {
             )}
           </Consumer>
 
-          <Consumer>
-            {({ state }) => (
-              <ModalKonfirmasiTindakan
-                passValue={() => this.handleSave(state.dataLogin.nik)}
-                modal="notification2"
-              />
-            )}
-          </Consumer>
           <ModalKonfirmasi
             notification={this.state.notification}
-            modal="konfirmasiResep"
+            modal="notification2"
           />
         </div>
         <div className="main">
           <div className="modal-footer justify-content-center">
-            <button
-              className="btn btn-primary"
-              data-toggle="modal"
-              data-target="#notification2"
-              disabled={this.state.disabled}
-            >
-              Simpan
-            </button>
+            <Consumer>
+              {({ state }) => (
+                <button
+                  className="btn btn-primary"
+                  data-toggle="modal"
+                  data-target="#notification2"
+                  onClick={() => this.handleSave(state.dataLogin.nik)}
+                >
+                  Simpan
+                </button>
+              )}
+            </Consumer>
 
             <button
               className="btn btn-warning"
@@ -247,4 +245,4 @@ class FormPembayaran extends Component {
   }
 }
 
-export default FormPembayaran;
+export default withContext(FormPembayaran);

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import detailPasien from "../../Methods/RekamMedis/Pasien/detailPasien";
 import { listAntrian } from "../../Methods/Pendaftaran/Antrian/listAntrian";
+import { withContext } from "../../Methods/HOC/withContext";
 class DetailPasien extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +19,20 @@ class DetailPasien extends Component {
   }
 
   componentDidMount() {
-    listAntrian(this.props.antrian_pasien)
+    const no_rm = this.props.no_rm;
+    const id_lokasi = this.props.getValue;
+    detailPasien(no_rm, id_lokasi)
+      .then(({ data }) => {
+        const filter = data.filter(e => e.nomor_rekam_medis === no_rm);
+        this.setState({
+          nama_pasien: filter[0].nama_pasien,
+          tanggal_lahir: filter[0].tanggal_lahir,
+          gender: filter[0].jenis_kelamin
+        });
+      })
+      .catch(err => err);
+
+    listAntrian(id_lokasi, this.props.antrian_pasien)
       .then(({ data }) => {
         const filter = data.filter(e => e.uid === this.props.antrian_pasien);
         this.setState({
@@ -27,15 +41,7 @@ class DetailPasien extends Component {
           dokter: filter[0].dokter
         });
       })
-      .catch(err => console.log(err));
-
-    detailPasien(this.props.no_rm).then(({ data }) => {
-      this.setState({
-        nama_pasien: data[0].nama_pasien,
-        tanggal_lahir: data[0].tanggal_lahir,
-        gender: data[0].jenis_kelamin
-      });
-    });
+      .catch(err => err);
   }
 
   calculateAge(date) {
@@ -104,4 +110,4 @@ class DetailPasien extends Component {
   }
 }
 
-export default DetailPasien;
+export default withContext(DetailPasien);

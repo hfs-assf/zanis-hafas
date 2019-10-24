@@ -9,7 +9,6 @@ class ProfileKiriPasien extends Component {
   };
 
   componentDidMount() {
-    console.log("props", this.props.getValue);
     detailPasien(this.props.pasien, this.props.getValue).then(({ data }) => {
       this.setState({ pasien: this.state.pasien.concat(data) });
     });

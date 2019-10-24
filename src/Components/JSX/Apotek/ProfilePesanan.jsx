@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import listPesananObat from "../../../Methods/Apotik/PesananObat/listPesananObat";
+import { withContext } from "../../../Methods/HOC/withContext";
 export class ProfilePesanan extends Component {
   constructor(props) {
     super(props);
@@ -12,14 +13,16 @@ export class ProfilePesanan extends Component {
     };
   }
   componentDidMount = () => {
-    listPesananObat("MENUNGGU", this.props.uid).then(({ data }) => {
-      const filter = data.filter(e => e.uid === this.props.uid);
-      this.setState({
-        nama_pasien: filter[0].nama_pasien,
-        tanggal_lahir: filter[0].tanggal_lahir,
-        nik_dokter: filter[0].nik_dokter
-      });
-    });
+    listPesananObat(this.props.getValue, this.props.uid)
+      .then(({ data }) => {
+        const filter = data.filter(e => e.uid === this.props.uid);
+        this.setState({
+          nama_pasien: filter[0].nama_pasien,
+          tanggal_lahir: filter[0].tanggal_lahir,
+          nik_dokter: filter[0].nik_dokter
+        });
+      })
+      .catch(err => err);
   };
 
   calculateAge = date => {
@@ -67,4 +70,4 @@ export class ProfilePesanan extends Component {
   }
 }
 
-export default ProfilePesanan;
+export default withContext(ProfilePesanan);

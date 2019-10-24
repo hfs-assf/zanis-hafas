@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "../../../ASSETS/CSS/TambahPelayananAntrian.css";
-import ModalKonfirmasiTindakan from "../../Animasi/ModalKonfirmasiTindakan";
 import ModalKonfirmasi from "../../Animasi/ModalKonfirmasi";
 import tambahHistoriMedis from "../../../../Methods/RekamMedis/HistorisMedis/tambahHistoriMedis";
 import { Consumer } from "../../../../Methods/User/Auth/Store";
@@ -34,7 +33,6 @@ class SoapPasien extends Component {
   }
 
   handleSave = nik => {
-    console.log("ini nik dokter", nik);
     const catatan = JSON.stringify({
       sistole: this.state.sistole,
       diastole: this.state.diastole,
@@ -358,14 +356,19 @@ class SoapPasien extends Component {
           </div>
           <div className="col-md-12">
             <div className="modal-footer justify-content-center">
-              <button
-                className="btn btn-primary"
-                data-toggle="modal"
-                data-target="#notification1"
-                disabled={this.state.disabled}
-              >
-                Simpan
-              </button>
+              <Consumer>
+                {({ state }) => (
+                  <button
+                    className="btn btn-primary"
+                    data-toggle="modal"
+                    data-target="#notification1"
+                    onClick={() => this.handleSave(state.dataLogin.nik)}
+                  >
+                    Simpan
+                  </button>
+                )}
+              </Consumer>
+
               <button
                 className="btn btn-warning"
                 data-placement="bottom"
@@ -377,17 +380,10 @@ class SoapPasien extends Component {
             </div>
           </div>
         </div>
-        <Consumer>
-          {({ state }) => (
-            <ModalKonfirmasiTindakan
-              passValue={() => this.handleSave(state.dataLogin.nik)}
-              modal="notification1"
-            />
-          )}
-        </Consumer>
+
         <ModalKonfirmasi
           notification={this.state.notification}
-          modal="konfirmasiSOAP"
+          modal="notification1"
         />
       </div>
     );

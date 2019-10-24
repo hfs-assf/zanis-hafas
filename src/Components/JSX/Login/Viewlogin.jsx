@@ -36,45 +36,53 @@ class ViewLogin extends Component {
             <div className="fadeIn first">
               <img src={Logo} id="icon" alt="User Icon" />
             </div>
-            <div className="field">
-              {this.state.error ? (
-                <h4 style={{ textAlign: "center", color: "red" }}>
-                  {this.state.pesan}
-                </h4>
-              ) : null}
-              <input
-                type="text"
-                id="nik"
-                className="input"
-                onChange={event => this.setState({ nik: event.target.value })}
-              />
-              <label htmlFor="nik" className="form-control-placeholder">
-                Nik
-              </label>
-            </div>
-            <div className="field">
-              <input
-                type="password"
-                className="input"
-                onChange={event =>
-                  this.setState({ password: event.target.value })
-                }
-              />
-              <label htmlFor="password" className="form-control-placeholder">
-                Sandi
-              </label>
-            </div>
-            <input
-              style={{
-                width: "75%",
-                letterSpacing: "2.5px",
-                fontWeight: "600"
-              }}
-              type="button"
-              className="fadeIn fourth"
-              value="Masuk"
-              onClick={event => this.newLogin(event, action)}
-            />
+            <React.Fragment>
+              <form onSubmit={event => this.newLogin(event, action)}>
+                <div className="field">
+                  {this.state.error ? (
+                    <h4 style={{ textAlign: "center", color: "red" }}>
+                      {this.state.pesan}
+                    </h4>
+                  ) : null}
+                  <input
+                    type="text"
+                    id="nik"
+                    className="input"
+                    onChange={event =>
+                      this.setState({ nik: event.target.value })
+                    }
+                  />
+                  <label htmlFor="nik" className="form-control-placeholder">
+                    Nik
+                  </label>
+                </div>
+                <div className="field">
+                  <input
+                    type="password"
+                    className="input"
+                    onChange={event =>
+                      this.setState({ password: event.target.value })
+                    }
+                  />
+                  <label
+                    htmlFor="password"
+                    className="form-control-placeholder"
+                  >
+                    Sandi
+                  </label>
+                </div>
+                <input
+                  style={{
+                    width: "75%",
+                    letterSpacing: "2.5px",
+                    fontWeight: "600"
+                  }}
+                  type="submit"
+                  className="fadeIn fourth"
+                  value="Masuk"
+                />
+              </form>
+            </React.Fragment>
             <div id="formFooter">
               <h5 className="underlineHover">Teman Klinik V.Alpha</h5>
               <h6 className="underlineHover2"> Team IT PT Senang</h6>

@@ -25,9 +25,7 @@ export class PesananPuyer extends Component {
           uidPuyer: data[0].uid
         });
       })
-      .catch(err => {
-        console.log(err);
-      });
+      .catch(err => err);
   };
 
   handleConf = uid => {

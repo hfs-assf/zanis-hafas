@@ -8,6 +8,7 @@ import editPesananObat from "../../../Methods/Apotik/PesananObat/editPesananObat
 import kurangStokObat from "../../../Methods/Apotik/StokObat/kurangStokObat";
 import tambahDetailTransaksi from "../../../Methods/Kasir/DetailTransaksi/tambahDetailTransaksi";
 import ReactToPrint from "react-to-print";
+import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
 
 export class PesananObat extends Component {
   constructor() {
@@ -120,6 +121,8 @@ export class PesananObat extends Component {
               type="button"
               className="btn btn-success btn-sm"
               onClick={() => this.handleSave()}
+              data-toggle="modal"
+              data-target="#notification"
             >
               Simpan
             </button>
@@ -173,6 +176,10 @@ export class PesananObat extends Component {
             </label>
           </div>
         </div>
+        <ModalKonfirmasi
+          notification={this.state.notification}
+          modal="notification"
+        />
       </div>
     );
   }

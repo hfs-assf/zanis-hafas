@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import listTindakan from "../../../../Methods/Poli/Tindakan/listTindakan";
 import detailPasien from "../../../../Methods/RekamMedis/Pasien/detailPasien";
-import ModalKonfirmasiTindakan from "../../Animasi/ModalKonfirmasiTindakan";
 import ModalKonfirmasi from "../../Animasi/ModalKonfirmasi";
 import tambahDetailTransaksi from "../../../../Methods/Kasir/DetailTransaksi/tambahDetailTransaksi.js";
 import TambahTindakan from "../TambahTindakan";
 import tambahHistoriTindakan from "../../../../Methods/Poli/HistoriTindakan/tambahHistoriTindakan";
 import { Consumer } from "../../../../Methods/User/Auth/Store";
+import { withContext } from "../../../../Methods/HOC/withContext";
 
 let set;
 class tindakanTabulasi extends Component {
+  _isMounted = false;
   constructor(props) {
     super(props);
     // this.cariTindakan = this.cariTindakan.bind(this);
@@ -36,25 +37,32 @@ class tindakanTabulasi extends Component {
   }
 
   getRm() {
-    let rm = detailPasien(this.props.no_rm).then(
+    let rm = detailPasien(this.props.no_rm, this.props.getValue).then(
       data => data.data[0].histori_medis[0].uid
     );
     return rm;
   }
 
   componentDidMount = () => {
+    this._isMounted = true;
     this.getRm()
-      .then(data =>
-        this.setState({
-          dPasien: data
-        })
-      )
+      .then(data => {
+        if (this._isMounted) {
+          this.setState({
+            dPasien: data
+          });
+        }
+      })
       .catch(error =>
         this.setState({
           error
         })
       );
   };
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
 
   addModal = () => {
     this.setState({ selected: {}, action: "add" });
@@ -150,9 +158,7 @@ class tindakanTabulasi extends Component {
           notification: "1"
         })
       )
-      // .then(data => {
-      //   console.log("ini datanya , :", data);
-      // })
+
       .catch(err => {
         console.log(err);
         this.setState({ notification: "0" });
@@ -248,14 +254,18 @@ class tindakanTabulasi extends Component {
           </div>
           <div className="col-md-12">
             <div className="modal-footer justify-content-center">
-              <button
-                className="btn btn-primary"
-                data-toggle="modal"
-                data-target="#notification3"
-                disabled={this.state.disabled}
-              >
-                Simpan
-              </button>
+              <Consumer>
+                {({ state }) => (
+                  <button
+                    className="btn btn-primary"
+                    data-toggle="modal"
+                    data-target="#notification"
+                    onClick={() => this.handleSave(state.dataLogin.id_lokasi)}
+                  >
+                    Simpan
+                  </button>
+                )}
+              </Consumer>
               <button
                 className="btn btn-warning"
                 disabled={this.state.disabled}
@@ -281,9 +291,6 @@ class tindakanTabulasi extends Component {
                     type="text"
                     className="form-control"
                     onKeyUp={e => this.onKeyUp(e, state.dataLogin.id_lokasi)}
-                    // value={filter}
-                    // onChange={e => this.cariTindakan(e)}
-                    // disabled={this.state.disabled}
                   />
                 );
               }}
@@ -309,26 +316,13 @@ class tindakanTabulasi extends Component {
         />
         {daftarTindakan}
 
-        {/* <ModalKonfirmasiTindakan
-          passValue={this.handleSave}
-          modal="notification3"
-        /> */}
-        <Consumer>
-          {({ state }) => (
-            <ModalKonfirmasiTindakan
-              passValue={() => this.handleSave(state.dataLogin.id_lokasi)}
-              modal="notification3"
-            />
-          )}
-        </Consumer>
-
         <ModalKonfirmasi
           notification={this.state.notification}
-          modal="konfirmasiTindakan"
+          modal="notification"
         />
       </div>
     );
   }
 }
 
-export default tindakanTabulasi;
+export default withContext(tindakanTabulasi);

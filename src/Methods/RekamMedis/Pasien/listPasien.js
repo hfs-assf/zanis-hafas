@@ -13,7 +13,7 @@ let listPasien = pencarian => {
 export default listPasien;
 
 export const cariPasien = (nama_pasien, id_lokasi) => {
-  return axios.get(
-    `${api.rekamMedis}/pasien?id_lokasi=${id_lokasi}&cari=${nama_pasien}`
-  );
+  return axios
+    .get(`${api.rekamMedis}/pasien?id_lokasi=${id_lokasi}&cari=${nama_pasien}`)
+    .catch(err => err);
 };

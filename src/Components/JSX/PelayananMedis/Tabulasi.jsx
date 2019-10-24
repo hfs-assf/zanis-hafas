@@ -10,7 +10,7 @@ import HistoryRM from "./HistoryRM";
 
 class TabulasiPelayananMedis extends Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       notification: "0"
     };

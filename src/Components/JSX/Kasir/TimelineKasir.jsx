@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import "../../ASSETS/CSS/Timeline.css";
 import listTransaksi from "../../../Methods/Kasir/Transaksi/listTransaksi";
 import { timeFormat } from "../../../Methods/waktu";
-import { Consumer } from "../../../Methods/User/Auth/Store";
+import { withContext } from "../../../Methods/HOC/withContext";
 
 class TimelinePelayananMedis extends Component {
+  _isMounted = false;
   constructor(props) {
     super(props);
     this.state = {
@@ -16,22 +17,26 @@ class TimelinePelayananMedis extends Component {
   }
 
   componentDidMount = () => {
-    listTransaksi("PENDING")
+    this._isMounted = true;
+    listTransaksi(this.props.getValue)
       .then(({ data }) => {
-        this.setState({
-          lAntrian: data
-        });
+        if (this._isMounted) {
+          this.setState({
+            lAntrian: data
+          });
+        }
       })
-      .catch(err => {
-        console.log(err);
-        this.setState(this.state);
-      });
+      .catch(err => err);
   };
 
-  listAntrian = value => {
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
+  listAntrian = () => {
     const { lAntrian } = this.state;
-    const filterData = lAntrian.filter(el => el.id_lokasi === value);
-    return filterData.map(e => {
+
+    return lAntrian.map(e => {
       return (
         <li key={e.uid} className="animated bounceIn">
           <Link to={"/form-pembayaran/" + e.uid + "/" + e.nomor_rekam_medis}>
@@ -60,11 +65,7 @@ class TimelinePelayananMedis extends Component {
       <div className="row" style={{ marginTop: "15px" }}>
         <div className="col-md-7">
           <div className="container">
-            <Consumer>
-              {({ state }) => {
-                return <ul>{this.listAntrian(state.dataLogin.id_lokasi)}</ul>;
-              }}
-            </Consumer>
+            <ul>{this.listAntrian()}</ul>
           </div>
         </div>
       </div>
@@ -72,4 +73,4 @@ class TimelinePelayananMedis extends Component {
   }
 }
 
-export default TimelinePelayananMedis;
+export default withContext(TimelinePelayananMedis);

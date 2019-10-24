@@ -2,29 +2,38 @@ import React, { Component } from "react";
 import "../../ASSETS/CSS/form.css";
 import "../../ASSETS/CSS/Timeline.css";
 import { Link } from "react-router-dom";
-import { Consumer } from "../../../Methods/User/Auth/Store";
 import { timeFormat } from "../../../Methods/waktu";
 import listPesananObat from "../../../Methods/Apotik/PesananObat/listPesananObat";
+import { withContext } from "../../../Methods/HOC/withContext";
 
 class TimelinePelayananApotik extends Component {
+  _isMounted = false;
   state = {
     timeline: []
   };
 
   componentDidMount() {
-    listPesananObat("MENUNGGU")
+    this._isMounted = true;
+    const id_lokasi = this.props.getValue;
+    listPesananObat(id_lokasi)
       .then(({ data }) => {
-        this.setState({
-          timeline: data
-        });
+        if (this._isMounted) {
+          this.setState({
+            timeline: data
+          });
+        }
       })
-      .catch(e => console.log("error", e));
+      .catch(err => err);
   }
 
-  header = value => {
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
+  header = () => {
     const { timeline } = this.state;
-    const filter = timeline.filter(el => el.id_lokasi === value);
-    return filter.map(e => {
+
+    return timeline.map(e => {
       return (
         <li key={e.uid} className="animated bounceIn">
           <Link to={"/layanan-apotek/" + e.uid + "/" + e.nomor_rekam_medis}>
@@ -51,11 +60,7 @@ class TimelinePelayananApotik extends Component {
       <div className="row">
         <div className="col-md-4">
           <div className="container">
-            <Consumer>
-              {({ state }) => {
-                return <ul>{this.header(state.dataLogin.id_lokasi)}</ul>;
-              }}
-            </Consumer>
+            <ul>{this.header()}</ul>
           </div>
         </div>
       </div>
@@ -63,4 +68,4 @@ class TimelinePelayananApotik extends Component {
   }
 }
 
-export default TimelinePelayananApotik;
+export default withContext(TimelinePelayananApotik);

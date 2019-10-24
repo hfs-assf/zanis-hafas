@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "../../ASSETS/CSS/Timeline.css";
 import { listAntrian } from "../../../Methods/Pendaftaran/Antrian/listAntrian";
-
 import { timeFormat } from "../../../Methods/waktu";
-import { Consumer } from "../../../Methods/User/Auth/Store";
+import { withContext } from "../../../Methods/HOC/withContext";
 
 class TimelinePelayananMedis extends Component {
+  _isMounted = false;
   constructor(props) {
     super(props);
     this.state = {
@@ -18,21 +18,26 @@ class TimelinePelayananMedis extends Component {
   }
 
   componentDidMount() {
-    listAntrian()
+    this._isMounted = true;
+    listAntrian(this.props.getValue)
       .then(({ data }) => {
-        this.setState({
-          lAntrian: data
-        });
+        if (this._isMounted) {
+          this.setState({
+            lAntrian: data
+          });
+        }
       })
-      .catch(e => console.log("error", e));
+      .catch(err => err);
   }
 
-  antrianList = value => {
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
+  antrianList = () => {
     const { lAntrian } = this.state;
 
-    const filterData = lAntrian.filter(el => el.id_lokasi === value);
-
-    return filterData.map(e => (
+    return lAntrian.map(e => (
       <li key={e.uid} className="animated bounceIn">
         <Link to={"/pelayanan-medis/" + e.uid + "/" + e.nomor_rekam_medis}>
           <span />
@@ -53,12 +58,11 @@ class TimelinePelayananMedis extends Component {
     ));
   };
 
-  cariNilai = (status, value) => {
+  cariNilai = status => {
     const filterStatus = this.state.lAntrian.filter(
       e => e.status_antrian === status
-    );
-    const filterId = filterStatus.filter(e => e.id_lokasi === value).length;
-    return filterId;
+    ).length;
+    return filterStatus;
   };
 
   render() {
@@ -66,26 +70,15 @@ class TimelinePelayananMedis extends Component {
       <div className="row">
         <div className="col-md-7">
           <div className="container">
-            <Consumer>
-              {({ state }) => {
-                return <ul>{this.antrianList(state.dataLogin.id_lokasi)}</ul>;
-              }}
-            </Consumer>
+            <ul>{this.antrianList()}</ul>
           </div>
         </div>
 
         <div className="col-md-4 tglpasien">
           <div className="banyakpasien">
-            <Consumer>
-              {({ state }) => {
-                return (
-                  <span className="badge">
-                    Jumlah Antrian :{" "}
-                    {this.cariNilai("menunggu", state.dataLogin.id_lokasi)}
-                  </span>
-                );
-              }}
-            </Consumer>
+            <span className="badge">
+              Jumlah Antrian :{this.cariNilai("menunggu")}
+            </span>
           </div>
         </div>
       </div>
@@ -93,4 +86,4 @@ class TimelinePelayananMedis extends Component {
   }
 }
 
-export default TimelinePelayananMedis;
+export default withContext(TimelinePelayananMedis);

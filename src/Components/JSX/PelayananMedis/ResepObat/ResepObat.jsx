@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ModalKonfirmasiTindakan from "../../Animasi/ModalKonfirmasiTindakan";
 import ModalKonfirmasi from "../../Animasi/ModalKonfirmasi";
 import tambahPesananObat from "../../../../Methods/Apotik/PesananObat/tambahPesananObat";
 import { Consumer } from "../../../../Methods/User/Auth/Store";
@@ -199,14 +198,24 @@ class resepObatTabulasi extends Component {
           </div>
           <div className="col-md-12">
             <div className="modal-footer justify-content-center">
-              <button
-                className="btn btn-primary"
-                data-toggle="modal"
-                data-target="#notification2"
-                disabled={this.state.disabled}
-              >
-                Simpan
-              </button>
+              <Consumer>
+                {({ state }) => (
+                  <button
+                    className="btn btn-primary"
+                    data-toggle="modal"
+                    data-target="#notification2"
+                    onClick={() =>
+                      this.handleSave(
+                        state.dataLogin.nik,
+                        state.dataLogin.id_lokasi
+                      )
+                    }
+                  >
+                    Simpan
+                  </button>
+                )}
+              </Consumer>
+
               <button
                 className="btn btn-warning"
                 disabled={this.state.disabled}
@@ -244,19 +253,10 @@ class resepObatTabulasi extends Component {
           </div>
         </div>
         {daftarResep}
-        <Consumer>
-          {({ state }) => (
-            <ModalKonfirmasiTindakan
-              passValue={() =>
-                this.handleSave(state.dataLogin.nik, state.dataLogin.id_lokasi)
-              }
-              modal="notification2"
-            />
-          )}
-        </Consumer>
+
         <ModalKonfirmasi
           notification={this.state.notification}
-          modal="konfirmasiResep"
+          modal="notification2"
         />
       </div>
     );

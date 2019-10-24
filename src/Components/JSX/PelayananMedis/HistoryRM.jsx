@@ -17,11 +17,8 @@ export class HistoryRM extends Component {
     });
   };
 
-  renderTable = value => {
+  renderTable = () => {
     const { histori } = this.state;
-    // const filterData = listDaftar.filter(el => el.id_lokasi === value);
-
-    // console.log("filter", filterData);
     return histori.map(e => (
       <tr key={e.uid}>
         <td>{new Date(e.waktu_checkup).toLocaleDateString("en-GB")}</td>

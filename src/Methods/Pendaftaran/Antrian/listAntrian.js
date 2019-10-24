@@ -1,10 +1,16 @@
 import axios from "axios";
 import { api } from "../../api";
 
-export let listAntrian = () => {
-  return axios.get(`${api.pendaftaran}/antrian?status_antrian=menunggu`);
+export let listAntrian = id_lokasi => {
+  return axios
+    .get(
+      `${api.pendaftaran}/antrian?status_antrian=menunggu&id_lokasi=${id_lokasi}`
+    )
+    .catch(err => err);
 };
 
-export const jmlAntrian = () => {
-  return axios.get(`${api.pendaftaran}/antrian`);
+export const jmlAntrian = id_lokasi => {
+  return axios
+    .get(`${api.pendaftaran}/antrian?id_lokasi=${id_lokasi}`)
+    .catch(err => err);
 };

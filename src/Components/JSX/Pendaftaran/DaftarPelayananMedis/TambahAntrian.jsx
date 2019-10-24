@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import tambahAntrian from "../../../../Methods/Pendaftaran/Antrian/tambahAntrian";
 import tambahTransaksi from "../../../../Methods/Kasir/Transaksi/tambahTransaksi";
 import ModalKonfirmasi from "../../Animasi/ModalKonfirmasi";
-import ModalKonfirmasiTindakan from "../../Animasi/ModalKonfirmasiTindakan";
+// import ModalKonfirmasiTindakan from "../../Animasi/ModalKonfirmasiTindakan";
 import { Consumer } from "../../../../Methods/User/Auth/Store";
 
 class TambahAntrian extends Component {
@@ -154,28 +154,31 @@ class TambahAntrian extends Component {
         </div>
         <div className="col-md-12">
           <div className="modal-footer justify-content-center">
-            <button
-              className="btn btn-primary"
-              data-toggle="modal"
-              data-target="#konfirmasiAntrian"
-              // onClick={() => this.handleSave(state.dataLogin.nik)}
-              disabled={this.state.disabled}
-            >
-              Simpan
-            </button>
+            <Consumer>
+              {({ state }) => (
+                <button
+                  className="btn btn-primary"
+                  data-toggle="modal"
+                  data-target="#konfirmasiAntrian"
+                  onClick={() =>
+                    this.handleSave(
+                      state.dataLogin.nik,
+                      state.dataLogin.id_lokasi
+                    )
+                  }
+                  disabled={this.state.disabled}
+                >
+                  Simpan
+                </button>
+              )}
+            </Consumer>
           </div>
         </div>
-        <Consumer>
-          {({ state }) => (
-            <ModalKonfirmasiTindakan
-              passValue={() =>
-                this.handleSave(state.dataLogin.nik, state.dataLogin.id_lokasi)
-              }
-              modal="konfirmasiAntrian"
-            />
-          )}
-        </Consumer>
-        <ModalKonfirmasi notification={this.state.notification} />
+
+        <ModalKonfirmasi
+          notification={this.state.notification}
+          modal="konfirmasiAntrian"
+        />
       </div>
     );
   }

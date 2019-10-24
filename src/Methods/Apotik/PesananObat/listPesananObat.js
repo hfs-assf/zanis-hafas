@@ -1,10 +1,12 @@
 import axios from "axios";
 import { api } from "../../api";
 
-const listPesananObat = status => {
-  return axios.get(
-    `${api.apotik}/pesanan-obat?status_pesanan=${status}&limit=10`
-  );
+const listPesananObat = id_lokasi => {
+  return axios
+    .get(
+      `${api.apotik}/pesanan-obat?status_pesanan=MENUNGGU&limit=10&id_lokasi=${id_lokasi}`
+    )
+    .catch(err => err);
 };
 
 export default listPesananObat;

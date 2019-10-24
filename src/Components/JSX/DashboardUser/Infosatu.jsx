@@ -3,33 +3,41 @@ import "../../ASSETS/CSS/Dashboard.css";
 // import listPasien from "../../../Methods/Admin/getDataLabor";
 import { jmlAntrian } from "../../../Methods/Pendaftaran/Antrian/listAntrian";
 import { Consumer } from "../../../Methods/User/Auth/Store";
+import { withContext } from "../../../Methods/HOC/withContext";
 
 class Infosatu extends Component {
+  _isMounted = false;
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       pasien: []
     };
   }
 
   componentDidMount() {
-    jmlAntrian().then(({ data }) => {
-      this.setState({
-        pasien: data
-      });
+    this._isMounted = true;
+    jmlAntrian(this.props.getValue).then(({ data }) => {
+      if (this._isMounted) {
+        this.setState({
+          pasien: data
+        });
+      }
     });
   }
 
-  cariNilai = (status, value) => {
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
+  cariNilai = status => {
     const { pasien } = this.state;
-    const filterStatus = pasien.filter(e => e.status_antrian === status);
-    const filterId = filterStatus.filter(e => e.id_lokasi === value).length;
-    return filterId;
+    const filterStatus = pasien.filter(e => e.status_antrian === status).length;
+    return filterStatus;
   };
 
   jmlPasien = value => {
     const { pasien } = this.state;
-    const filterJml = pasien.filter(el => el.id_lokasi === value).length;
+    const filterJml = pasien.length;
     return filterJml;
   };
 
@@ -119,4 +127,4 @@ class Infosatu extends Component {
   }
 }
 
-export default Infosatu;
+export default withContext(Infosatu);
