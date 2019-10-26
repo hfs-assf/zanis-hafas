@@ -20,7 +20,7 @@ class Sidebar extends Component {
   render() {
     return (
       <Consumer>
-        {({ state, action }) => (
+        {({ state }) => (
           <React.Fragment>
             {/* {console.log("Ada ga ya", state.dataLogin.nik)} */}
             {state.auth ? (

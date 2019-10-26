@@ -56,7 +56,7 @@ class App extends Component {
     return (
       <Store>
         <HashRouter>
-          <div style={{ backgroundColor: "#f8f9fa", fontWeight: "bold" }}>
+          <React.Fragment>
             <Header />
             <Profil />
             <Route path="/tampilantv" component={TampilanTV} />
@@ -165,7 +165,7 @@ class App extends Component {
                 {/* <Route path="/list-asuransi" component={ListAsuransi} /> */}
               </Switch>
             </div>
-          </div>
+          </React.Fragment>
         </HashRouter>
       </Store>
     );

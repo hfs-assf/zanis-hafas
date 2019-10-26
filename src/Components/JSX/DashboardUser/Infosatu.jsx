@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import "../../ASSETS/CSS/Dashboard.css";
-// import listPasien from "../../../Methods/Admin/getDataLabor";
 import { jmlAntrian } from "../../../Methods/Pendaftaran/Antrian/listAntrian";
-import { Consumer } from "../../../Methods/User/Auth/Store";
 import { withContext } from "../../../Methods/HOC/withContext";
 
 class Infosatu extends Component {
@@ -35,7 +33,7 @@ class Infosatu extends Component {
     return filterStatus;
   };
 
-  jmlPasien = value => {
+  jmlPasien = () => {
     const { pasien } = this.state;
     const filterJml = pasien.length;
     return filterJml;
@@ -55,15 +53,8 @@ class Infosatu extends Component {
                     style={{ width: "1em", height: "1em" }}
                   />
                 </h2>
-                <Consumer>
-                  {({ state }) => {
-                    return (
-                      <h3 className="text-white">
-                        {this.jmlPasien(state.dataLogin.id_lokasi)}
-                      </h3>
-                    );
-                  }}
-                </Consumer>
+
+                <h3 className="text-white">{this.jmlPasien()}</h3>
 
                 <h4 className="card-subtitle text-white">
                   Jumlah Pasien Hari Ini
@@ -95,15 +86,8 @@ class Infosatu extends Component {
                     style={{ width: "1em", height: "1em" }}
                   />
                 </h2>
-                <Consumer>
-                  {({ state }) => {
-                    return (
-                      <h3 className="text-white">
-                        {this.cariNilai("selesai", state.dataLogin.id_lokasi)}
-                      </h3>
-                    );
-                  }}
-                </Consumer>
+
+                <h3 className="text-white">{this.cariNilai("selesai")}</h3>
 
                 <h4 className="card-subtitle text-white">Pasien Terlayani</h4>
               </div>

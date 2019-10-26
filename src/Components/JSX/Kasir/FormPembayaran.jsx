@@ -6,7 +6,6 @@ import listTransaksi from "../../../Methods/Kasir/DetailTransaksi/listTransaksi"
 import list from "../../../Methods/Kasir/Transaksi/listTransaksi";
 
 import bayarTransaksi from "../../../Methods/Kasir/Transaksi/bayarTransaksi";
-import ModalKonfirmasiTindakan from "../Animasi/ModalKonfirmasiTindakan";
 import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
 import { date_format, conversi } from "../../../Methods/waktu";
 import { Consumer } from "../../../Methods/User/Auth/Store";
