@@ -6,8 +6,10 @@ import editTerapis from "../../../Methods/RekamMedis/HistorisMedis/editTerapis";
 import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
 import { Consumer } from "../../../Methods/User/Auth/Store";
 import ReactToPrint from "react-to-print";
+import { withContext } from "../../../Methods/HOC/withContext";
 
 export class TimelineTerapis extends Component {
+  _isMounted = false;
   constructor(props) {
     super(props);
     this.state = {
@@ -18,16 +20,22 @@ export class TimelineTerapis extends Component {
   }
 
   componentDidMount = () => {
-    listTerapis()
+    this._isMounted = true;
+    listTerapis(this.props.getValue)
       .then(({ data }) => {
-        console.log("data", data);
-        this.setState({
-          listDaftar: data,
-          nama_terapis: data[0].nama_terapis
-        });
+        if (this._isMounted) {
+          this.setState({
+            listDaftar: data,
+            nama_terapis: data[0].nama_terapis
+          });
+        }
       })
       .catch(err => console.log(err, "err"));
   };
+
+  componentWillMount() {
+    this._isMounted = false;
+  }
 
   handleForm = uid => {
     editTerapis(uid, this.state.nama_terapis)
@@ -136,4 +144,4 @@ export class TimelineTerapis extends Component {
   }
 }
 
-export default TimelineTerapis;
+export default withContext(TimelineTerapis);
