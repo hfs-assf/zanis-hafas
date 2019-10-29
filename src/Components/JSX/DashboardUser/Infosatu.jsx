@@ -14,13 +14,15 @@ class Infosatu extends Component {
 
   componentDidMount() {
     this._isMounted = true;
-    jmlAntrian(this.props.getValue).then(({ data }) => {
-      if (this._isMounted) {
-        this.setState({
-          pasien: data
-        });
-      }
-    });
+    jmlAntrian(this.props.getValue)
+      .then(({ data }) => {
+        if (this._isMounted) {
+          this.setState({
+            pasien: data
+          });
+        }
+      })
+      .catch(err => console.log(err));
   }
 
   componentWillUnmount() {

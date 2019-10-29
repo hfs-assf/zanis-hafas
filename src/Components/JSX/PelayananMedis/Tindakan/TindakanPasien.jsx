@@ -70,10 +70,10 @@ class tindakanTabulasi extends Component {
 
   onKeyUp = (e, id_lokasi) => {
     clearTimeout(set);
-    const nilai = e.target.value;
+    const cari = e.target.value;
     set = setTimeout(() => {
-      if (nilai) {
-        listTindakan(nilai, id_lokasi).then(({ data }) =>
+      if (cari) {
+        listTindakan(cari, id_lokasi).then(({ data }) =>
           this.setState({ tindakan: data })
         );
       } else {
@@ -83,7 +83,7 @@ class tindakanTabulasi extends Component {
 
     e.preventDefault();
     this.setState({
-      filter: nilai
+      filter: cari
     });
   };
 
