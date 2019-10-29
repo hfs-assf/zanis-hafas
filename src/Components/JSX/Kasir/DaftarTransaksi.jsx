@@ -3,28 +3,20 @@ import daftarTransaksi from "../../../Methods/Kasir/Transaksi/daftarTransaksi";
 
 import * as waktu from "../../../Methods/waktu";
 import "../../ASSETS/CSS/form.css";
-import { Consumer } from "../../../Methods/User/Auth/Store";
+import { withContext } from "../../../Methods/HOC/withContext";
 
 export class DaftarTransaksi extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      listDaftar: [],
-      filterTanggal: waktu.dateFormat()
+      listDaftar: []
     };
   }
 
-  gantiTanggal = (e, id_lokasi) => {
-    this.setState({
-      filterTanggal: e.target.value
-    });
-
-    daftarTransaksi(this.state.filterTanggal, id_lokasi).then(({ data }) => {
-      this.setState({
-        listDaftar: data
-      });
-    });
-  };
+  panggilData = tanggal =>
+    daftarTransaksi(this.props.getValue, tanggal).then(({ data }) =>
+      this.setState({ listDaftar: data })
+    );
 
   renderTable = () => (
     <table className="table">
@@ -67,33 +59,18 @@ export class DaftarTransaksi extends Component {
     return (
       <div>
         <div className="boxpelayanan">
-          <Consumer>
-            {({ state }) => {
-              return (
-                <input
-                  type="date"
-                  className="form-control"
-                  placeholder="cari transaksi"
-                  onChange={e =>
-                    this.gantiTanggal(e, state.dataLogin.id_lokasi)
-                  }
-                />
-              );
-            }}
-          </Consumer>
+          <input
+            type="date"
+            className="form-control"
+            placeholder="cari transaksi"
+            onChange={e => this.panggilData(e.target.value)}
+          />
         </div>
-        {/* <button onClick={this.getData()}>Cari</button>} */}
-        {/* {this.state.listDaftar.length === 0 ? (
-          <div className="boxpelayan">
-            <strong>Untuk melihat data Transaksi</strong> klik menu pencarian.
-          </div>
-        ) : (
-          <div className="boxpelayanan">{this.renderTable()}</div>
-        )} */}
+
         <div className="boxpelayanan">{this.renderTable()}</div>
       </div>
     );
   };
 }
 
-export default DaftarTransaksi;
+export default withContext(DaftarTransaksi);

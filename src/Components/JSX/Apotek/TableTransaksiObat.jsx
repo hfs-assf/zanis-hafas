@@ -50,7 +50,6 @@ class TableTransaksiObat extends Component {
   render() {
     let header;
     const { filter, transaksi_obat } = this.state;
-    console.log("coba check", transaksi_obat);
     const filteredTransaksi = transaksi_obat;
 
     if (filteredTransaksi.length !== 0 && filter !== "") {

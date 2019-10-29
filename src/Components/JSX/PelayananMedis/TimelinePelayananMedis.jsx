@@ -7,15 +7,12 @@ import { withContext } from "../../../Methods/HOC/withContext";
 
 class TimelinePelayananMedis extends Component {
   _isMounted = false;
-  constructor(props) {
-    super(props);
-    this.state = {
-      antrian: [],
-      nama: [],
-      lAntrian: [],
-      dapatID: ""
-    };
-  }
+  state = {
+    antrian: [],
+    nama: [],
+    lAntrian: [],
+    dapatID: ""
+  };
 
   componentDidMount() {
     this._isMounted = true;
