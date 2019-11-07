@@ -28,11 +28,12 @@ class SoapPasien extends Component {
       respirasi: "",
       tinggi: "",
       berat: "",
-      disabled: false
+      disabled: false,
+      id_lokasi: ""
     };
   }
 
-  handleSave = nik => {
+  handleSave = (nik, id_lokasi) => {
     const catatan = JSON.stringify({
       sistole: this.state.sistole,
       diastole: this.state.diastole,
@@ -54,7 +55,8 @@ class SoapPasien extends Component {
       jenis_perawatan: this.state.jenis_perawatan,
       penjamin: this.state.penjamin,
       tindakan: this.state.planning,
-      catatan: catatan
+      catatan: catatan,
+      id_lokasi
     })
       .then(
         this.setState({
@@ -362,7 +364,12 @@ class SoapPasien extends Component {
                     className="btn btn-primary"
                     data-toggle="modal"
                     data-target="#notification1"
-                    onClick={() => this.handleSave(state.dataLogin.nik)}
+                    onClick={() =>
+                      this.handleSave(
+                        state.dataLogin.nik,
+                        state.dataLogin.id_lokasi
+                      )
+                    }
                   >
                     Simpan
                   </button>
