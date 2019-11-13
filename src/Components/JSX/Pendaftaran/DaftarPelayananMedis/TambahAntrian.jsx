@@ -4,8 +4,12 @@ import tambahTransaksi from "../../../../Methods/Kasir/Transaksi/tambahTransaksi
 import ModalKonfirmasi from "../../Animasi/ModalKonfirmasi";
 // import ModalKonfirmasiTindakan from "../../Animasi/ModalKonfirmasiTindakan";
 import { Consumer } from "../../../../Methods/User/Auth/Store";
+import listDokter from "../../../../Methods/Poli/Dokter/listDokter";
+import { withContext } from "../../../../Methods/HOC/withContext";
+import { list } from "postcss";
 
 class TambahAntrian extends Component {
+  _isMounted = false;
   constructor(props) {
     super(props);
     this.handleSave = this.handleSave.bind(this);
@@ -20,12 +24,31 @@ class TambahAntrian extends Component {
         notification: "0",
         jenis_pembayaran: ""
       },
-      id_lokasi: ""
+      id_lokasi: "",
+      list_dokter: []
     };
   }
 
-  showHide = value => {
-    this.setState({ showMe: value });
+  componentDidMount() {
+    this._isMounted = true;
+    listDokter(this.props.getValue)
+      .then(({ data }) => {
+        if (this._isMounted) {
+          this.setState({
+            list_dokter: data
+          });
+        }
+      })
+      .catch(err => err);
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
+  showToggle = () => {
+    const { showMe } = this.state;
+    this.setState({ showMe: !showMe });
   };
 
   handleSave = (nik, id_lokasi) => {
@@ -56,6 +79,7 @@ class TambahAntrian extends Component {
   };
 
   render() {
+    console.log("apa ni", this.state.list_dokter);
     return (
       <div className="card-box">
         <div className="flex-container">
@@ -83,11 +107,27 @@ class TambahAntrian extends Component {
             >
               <option value="">--- Pilihan ---</option>
               <option value="Umum">Umum</option>
-              <option value="Asuransi BPJS">Asuransi BPJS</option>
+              <option value="BPJS">Asuransi BPJS</option>
               <option value="Lain-lain">Lain-lain</option>
             </select>
           </div>
         </div>
+        {this.state.jaminan === "BPJS" || this.state.jaminan === "Lain-lain" ? (
+          <div className="form-group row">
+            <label htmlFor="nomor" className="col-sm-4 col-form-label">
+              Nomor
+              <span className="required">*</span>
+            </label>
+            <div className="col-sm-5">
+              <input
+                type="text"
+                placeholder="Masukan Nomor"
+                name="nomor"
+                onChange={event => this.setState({ nomor: event.target.value })}
+              />
+            </div>
+          </div>
+        ) : null}
         <div className="form-group row">
           <label htmlFor="Poliklinik" className="col-sm-4 col-form-label">
             Poliklinik
@@ -125,8 +165,9 @@ class TambahAntrian extends Component {
               required
             >
               <option value="">--- Pilihan ---</option>
-              <option value="dr. Nurlailiyani">dr. Nurlailiyani</option>
-              <option value="Terapis">Terapis</option>
+              {this.state.list_dokter.map(el => (
+                <option value={el.nama_dokter}>{el.nama_dokter}</option>
+              ))}
             </select>
           </div>
         </div>
@@ -183,4 +224,4 @@ class TambahAntrian extends Component {
     );
   }
 }
-export default TambahAntrian;
+export default withContext(TambahAntrian);

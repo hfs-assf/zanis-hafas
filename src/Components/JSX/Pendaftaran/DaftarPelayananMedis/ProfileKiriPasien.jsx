@@ -4,14 +4,24 @@ import { withContext } from "../../../../Methods/HOC/withContext";
 import detailPasien from "../../../../Methods/RekamMedis/Pasien/detailPasien";
 
 class ProfileKiriPasien extends Component {
+  _isMounted = false;
   state = {
     pasien: []
   };
 
   componentDidMount() {
-    detailPasien(this.props.pasien, this.props.getValue).then(({ data }) => {
-      this.setState({ pasien: this.state.pasien.concat(data) });
-    });
+    this._isMounted = true;
+    detailPasien(this.props.pasien, this.props.getValue)
+      .then(({ data }) => {
+        if (this._isMounted) {
+          this.setState({ pasien: this.state.pasien.concat(data) });
+        }
+      })
+      .catch(err => err);
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   calculateAge(date) {
