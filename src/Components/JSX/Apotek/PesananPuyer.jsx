@@ -30,9 +30,9 @@ export class PesananPuyer extends Component {
 
   handleConf = uid => {
     EditStatusPuyer(uid, "konfirmasi")
-      .then(() => this.setState(this.state))
+      .then(this.setState({ notification: "1" }))
       .catch(err => {
-        console.log(err);
+        this.setState({ notification: "0" });
       });
   };
 
@@ -84,6 +84,8 @@ export class PesananPuyer extends Component {
             <button
               type="button"
               className="btn btn-danger btn-sm"
+              data-toggle="modal"
+              data-target="#KonfirmasiTransaksi"
               onClick={() => this.handleConf(e.uid)}
             >
               Konfirmasi

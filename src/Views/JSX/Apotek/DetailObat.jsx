@@ -4,6 +4,7 @@ import "../../../Components/ASSETS/CSS/Pendaftaran.css";
 // import TableDetailObat from "../../../Components/JSX/Apotek/TableDetailObat";
 import TambahObatMasuk from "../../../Components/JSX/Apotek/FormTambahDetailObat";
 import listStokObat from "../../../Methods/Apotik/StokObat/listStokObat";
+import { conversi } from "../../../Methods/waktu";
 
 class DetailObat extends Component {
   constructor(props) {
@@ -54,8 +55,8 @@ class DetailObat extends Component {
         <div className="cell text-center">
           {new Date(kadaluarsa).toLocaleDateString("en-GB")}
         </div>
-        <div className="cell text-left">Rp. {harga_modal}</div>
-        <div className="cell text-left">{harga_jual}</div>
+        <div className="cell text-center">Rp. {conversi(harga_modal)}</div>
+        <div className="cell text-center">Rp.{conversi(harga_jual)}</div>
         <div className="cell text-center">
           <button
             className="btn btn-primary btn-sm "

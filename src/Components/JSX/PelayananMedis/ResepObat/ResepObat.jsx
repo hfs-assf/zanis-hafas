@@ -23,7 +23,6 @@ class resepObatTabulasi extends Component {
   }
 
   onKeyUp = (e, id_lokasi) => {
-    console.log("id", id_lokasi);
     clearTimeout(set);
     const nilai = e.target.value;
     set = setTimeout(() => {

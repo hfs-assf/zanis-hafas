@@ -6,7 +6,6 @@ import ModalKonfirmasi from "../../Animasi/ModalKonfirmasi";
 import { Consumer } from "../../../../Methods/User/Auth/Store";
 import listDokter from "../../../../Methods/Poli/Dokter/listDokter";
 import { withContext } from "../../../../Methods/HOC/withContext";
-import { list } from "postcss";
 
 class TambahAntrian extends Component {
   _isMounted = false;
