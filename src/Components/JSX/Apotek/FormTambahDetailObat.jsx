@@ -17,7 +17,8 @@ class FormTambahDetailObat extends Component {
       nik_penerima: "",
       harga_modal: "",
       harga_jual: "",
-      notification: ""
+      notification: "",
+      diskon: ""
     };
   }
   componentWillReceiveProps(nextProps) {
@@ -41,10 +42,17 @@ class FormTambahDetailObat extends Component {
         stok: "",
         kadaluarsa: "",
         harga_modal: "",
-        harga_jual: ""
+        harga_jual: 0
       });
     }
   }
+
+  getHargaMarkup = () => {
+    return (
+      Number(this.state.harga_modal) +
+      this.state.harga_modal * (this.state.diskon / 100)
+    );
+  };
 
   handleSave = (nik, id_lokasi) => {
     if (this.props.action === "add") {
@@ -55,7 +63,7 @@ class FormTambahDetailObat extends Component {
         nik_penerima: nik,
         id_lokasi: id_lokasi,
         harga_modal: this.state.harga_modal,
-        harga_jual: this.state.harga_jual
+        harga_jual: this.getHargaMarkup()
       })
         .then(this.setState({ notification: "1" }))
         .catch(err => {
@@ -69,7 +77,7 @@ class FormTambahDetailObat extends Component {
         id_lokasi: id_lokasi,
         harga_modal: this.state.harga_modal,
         kadaluarsa: this.state.kadaluarsa,
-        harga_jual: this.state.harga_jual
+        harga_jual: this.getHargaMarkup()
       })
         .then(this.setState({ notification: "1" }))
         .catch(err => {
@@ -80,6 +88,7 @@ class FormTambahDetailObat extends Component {
   };
 
   render() {
+    console.log("apa ini", this.getHargaMarkup());
     return (
       <div
         className="modal fade right"
@@ -181,10 +190,27 @@ class FormTambahDetailObat extends Component {
                     <div className="md-form mb-0">
                       <input
                         type="number"
+                        name="harga_modal"
+                        className="form-control"
+                        placeholder="Persen"
+                        value={this.state.diskon}
+                        onChange={event =>
+                          this.setState({
+                            diskon: event.target.value
+                          })
+                        }
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div className="col-md-12">
+                    <div className="md-form mb-0">
+                      <input
+                        type="number"
                         name="harga_jual"
                         className="form-control"
                         placeholder="Harga Jual"
-                        value={this.state.harga_jual}
+                        value={this.getHargaMarkup()}
                         onChange={event =>
                           this.setState({
                             harga_jual: event.target.value

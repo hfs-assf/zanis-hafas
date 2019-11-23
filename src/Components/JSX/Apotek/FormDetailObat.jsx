@@ -124,6 +124,10 @@ class FormDetailObat extends Component {
                         </option>
                         <option value="Minum">Minum</option>
                         <option value="Makan">Makan</option>
+                        <option value="Obat Tetes">Obat Tetes</option>
+                        <option value="Injeksi">Makan</option>
+                        <option value="Sopp">Sopp</option>
+                        <option value="Alat Kesehatan">Alat Kesehatan</option>
                       </select>
                     </label>
                   </div>
