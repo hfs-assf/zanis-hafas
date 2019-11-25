@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import * as waktu from "../../../Methods/waktu";
 import expiredObat from "../../../Methods/Apotik/StokObat/expiredObat";
+import { withContext } from "../../../Methods/HOC/withContext";
 
 class ExpiredDetail extends Component {
   constructor(props) {
@@ -12,11 +13,13 @@ class ExpiredDetail extends Component {
   }
 
   componentDidMount = () => {
-    expiredObat(this.state.filterTanggal).then(({ data }) => {
-      this.setState({
-        lisObat: data
-      });
-    });
+    expiredObat(this.state.filterTanggal, this.props.getValue).then(
+      ({ data }) => {
+        this.setState({
+          lisObat: data
+        });
+      }
+    );
   };
 
   daftarObatExp() {
@@ -76,4 +79,4 @@ class ExpiredDetail extends Component {
     );
   }
 }
-export default ExpiredDetail;
+export default withContext(ExpiredDetail);

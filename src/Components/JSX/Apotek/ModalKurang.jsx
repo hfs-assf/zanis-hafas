@@ -77,14 +77,15 @@ export class ModalKurang extends Component {
     this.setState({ doResep: [] });
   };
 
-  handleSave = () => {
+  handleSave = id_lokasi => {
     editPuyer({
       uid: this.props.uidPuyer,
       listDetail: this.state.doResep.map(
         ({ nama_obat, jumlah_obat, harga_jual }) => ({
           nama_obat: nama_obat,
           jumlah_keluar: jumlah_obat,
-          harga: harga_jual
+          harga: harga_jual,
+          id_lokasi: id_lokasi
         })
       )
     })
@@ -185,14 +186,21 @@ export class ModalKurang extends Component {
             </div>
           </div>
           <div className="modal-footer justify-content-center">
-            <button
-              className="btn btn-primary btn-sm"
-              data-toggle="modal"
-              data-target="#konfirmasiResep"
-              onClick={() => this.handleSave()}
-            >
-              Simpan
-            </button>
+            <Consumer>
+              {({ state }) => {
+                return (
+                  <button
+                    className="btn btn-primary btn-sm"
+                    data-toggle="modal"
+                    data-target="#konfirmasiResep"
+                    onClick={() => this.handleSave(state.dataLogin.id_lokasi)}
+                  >
+                    Simpan
+                  </button>
+                );
+              }}
+            </Consumer>
+
             <button
               className="btn btn-warning btn-sm"
               disabled={this.state.disabled}

@@ -3,6 +3,7 @@ import SVGapotek from "../../ASSETS/SVG/svgapotek";
 import "../../ASSETS/CSS/DashboardApotek.css";
 import { obat } from "../../../Methods/Apotik/Obat/listObat";
 import { Consumer } from "../../../Methods/User/Auth/Store";
+import { withContext } from "../../../Methods/HOC/withContext";
 
 class DashboardApotek extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class DashboardApotek extends Component {
   }
 
   componentDidMount = () => {
-    obat()
+    obat(this.props.getValue)
       .then(({ data }) => {
         this.setState({
           daftarObat: data
@@ -24,9 +25,9 @@ class DashboardApotek extends Component {
       });
   };
 
-  jmlObat = value => {
+  jmlObat = () => {
     const { daftarObat } = this.state;
-    const filter = daftarObat.filter(e => e.id_lokasi === value).length;
+    const filter = daftarObat.filter.length;
     return filter;
   };
 
@@ -126,4 +127,4 @@ class DashboardApotek extends Component {
   }
 }
 
-export default DashboardApotek;
+export default withContext(DashboardApotek);

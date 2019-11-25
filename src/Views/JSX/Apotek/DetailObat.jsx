@@ -5,6 +5,7 @@ import "../../../Components/ASSETS/CSS/Pendaftaran.css";
 import TambahObatMasuk from "../../../Components/JSX/Apotek/FormTambahDetailObat";
 import listStokObat from "../../../Methods/Apotik/StokObat/listStokObat";
 import { conversi } from "../../../Methods/waktu";
+import { withContext } from "../../../Methods/HOC/withContext";
 
 class DetailObat extends Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class DetailObat extends Component {
   }
 
   componentDidMount() {
-    listStokObat(this.props.uid.id).then(({ data }) => {
+    listStokObat(this.props.uid.id, this.props.getValue).then(({ data }) => {
       this.setState({
         obat: this.state.obat.concat(data)
       });
@@ -175,4 +176,4 @@ class DetailObat extends Component {
   }
 }
 
-export default DetailObat;
+export default withContext(DetailObat);

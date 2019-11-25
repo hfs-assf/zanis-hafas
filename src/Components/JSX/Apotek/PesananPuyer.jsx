@@ -6,6 +6,7 @@ import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
 import TambahTransaksiPuyer from "../../../Methods/Apotik/Puyer/TambahTransaksiPuyer";
 import EditStatusPuyer from "../../../Methods/Apotik/Puyer/EditStatusPuyer";
 import editPesananObat from "../../../Methods/Apotik/PesananObat/editPesananObat";
+import { withContext } from "../../../Methods/HOC/withContext";
 
 export class PesananPuyer extends Component {
   constructor() {
@@ -18,7 +19,7 @@ export class PesananPuyer extends Component {
     };
   }
   componentDidMount = () => {
-    listPuyer(this.props.uid)
+    listPuyer(this.props.uid, this.props.getValue)
       .then(({ data }) => {
         this.setState({
           list: data,
@@ -142,4 +143,4 @@ export class PesananPuyer extends Component {
   }
 }
 
-export default PesananPuyer;
+export default withContext(PesananPuyer);
