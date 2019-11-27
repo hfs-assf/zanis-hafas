@@ -1,37 +1,55 @@
 import React, { Component } from "react";
-import obat from "../../../JSON/daftarObat.json";
+import { withContext } from "../../../Methods/HOC/withContext.js";
+import { lsObat } from "../../../Methods/Apotik/StokObat/listStokObat.js";
 
 class MinStockDetail extends Component {
   constructor() {
     super();
     this.state = {
+      list: [],
       id_obat: ""
     };
   }
-  daftarObatExp() {
-    return obat.map((el, index) => (
-      <li
-        className="list-group-item d-flex justify-content-between align-items-center"
-        key={index}
-      >
-        <span>
-          <input
-            type="checkbox"
-            name="id_obat"
-            value="{el.id}"
-            {...this.id_obat}
-          />
-          &nbsp;
-          {el.nama}
-        </span>
-        <span className="badge badge-danger badge-pill">
-          {el.persediaan} {el.satuan}
-        </span>
-      </li>
-    ));
+
+  componentDidMount() {
+    lsObat(this.props.getValue).then(({ data }) => {
+      this.setState({
+        list: data
+      });
+    });
   }
 
+  filterData = () => {
+    const { list } = this.state;
+    const filterMin = list.filter(e => e.stok);
+    return filterMin;
+  };
+
+  // daftarObatExp() {
+  //   return this.filterData((el, index) => (
+  //     <li
+  //       className="list-group-item d-flex justify-content-between align-items-center"
+  //       key={index}
+  //     >
+  //       <span>
+  //         <input
+  //           type="checkbox"
+  //           name="id_obat"
+  //           value="{el.id}"
+  //           {...this.id_obat}
+  //         />
+  //         &nbsp;
+  //         {el.nama}
+  //       </span>
+  //       <span className="badge badge-danger badge-pill">
+  //         {el.persediaan} {el.satuan}
+  //       </span>
+  //     </li>
+  //   ));
+  // }
+
   render() {
+    console.log("apa nih", this.filterData());
     return (
       <div
         className="modal fade"
@@ -61,7 +79,7 @@ class MinStockDetail extends Component {
               <div className="text-center">
                 <p>Harap segera melakukan pemesanan obat ke pemasok.</p>
               </div>
-              <ul className="list-group z-depth-0">{this.daftarObatExp()}</ul>
+              <ul className="list-group z-depth-0">{}</ul>
               <div className="text-center">
                 <p>
                   <br />
@@ -87,4 +105,4 @@ class MinStockDetail extends Component {
     );
   }
 }
-export default MinStockDetail;
+export default withContext(MinStockDetail);

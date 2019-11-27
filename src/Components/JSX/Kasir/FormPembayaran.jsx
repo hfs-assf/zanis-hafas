@@ -11,6 +11,7 @@ import { date_format, conversi } from "../../../Methods/waktu";
 import { Consumer } from "../../../Methods/User/Auth/Store";
 import ReactToPrint from "react-to-print";
 import { withContext } from "../../../Methods/HOC/withContext";
+import { api } from "../../../Methods/api";
 
 class FormPembayaran extends Component {
   constructor(props) {
@@ -124,18 +125,22 @@ class FormPembayaran extends Component {
           <Consumer>
             {({ state }) => (
               <div className="container-flex">
-                <div className="item-container">
-                  <h3>{state.dataLogin.nama_lokasi}</h3>
+                <div className="item-flex">
+                  <img
+                    src={api.logo + state.dataLogin.id_lokasi}
+                    alt=""
+                    style={{ width: "15%" }}
+                  />
                   <h4>{state.dataLogin.alamat}</h4>
-                </div>
-                <div className="item-container">
-                  <h2>No: {this.state.no_transaksi}</h2>
-                  <h4>Tanggal: {date_format(this.state.waktu_terbit)}</h4>
                 </div>
               </div>
             )}
           </Consumer>
           <div className="boxpelayanan">
+            <div className="container-flex">
+              <h4>Tanggal: {date_format(this.state.waktu_terbit)}</h4>
+              <h3>No: {this.state.no_transaksi}</h3>
+            </div>
             <table className="table">
               <thead>
                 <tr>

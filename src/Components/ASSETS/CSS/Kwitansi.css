@@ -1,8 +1,13 @@
 .container-flex {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  padding: 15px;
+  padding: 12px;
+}
+
+.item-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .fontBold {
