@@ -62,7 +62,8 @@ export default class TableObat extends React.Component {
       <div className="row1 header">
         <div className="cell">Nama Obat</div>
         <div className="cell">Jenis Obat</div>
-        <div className="cell">Persediaan</div>
+        <div className="cell">Satuan</div>
+        <div className="cell">Stock Total</div>
         <div className="cell">Aksi</div>
       </div>
       {this.state.obat.map(
@@ -70,7 +71,8 @@ export default class TableObat extends React.Component {
           <div className="row1" key={uid}>
             <div className="cell">{nama_obat}</div>
             <div className="cell text-center">{kategori}</div>
-            <div className="cell text-center"> {stok_total + " " + satuan}</div>
+            <div className="cell text-center">{satuan}</div>
+            <div className="cell text-center"> {stok_total}</div>
             <div className="cell text-center">
               <Link to={"/detail-obat/" + uid}>
                 <button className="btn btn-primary btn-sm ">Detail</button>
@@ -91,6 +93,7 @@ export default class TableObat extends React.Component {
   );
 
   render = () => {
+    console.log("obat", this.state.obat);
     return (
       <React.Fragment>
         <div className="card" style={{ borderTop: "2px solid #1976d2" }}>
