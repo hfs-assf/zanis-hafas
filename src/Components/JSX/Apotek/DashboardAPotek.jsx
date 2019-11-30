@@ -27,7 +27,7 @@ class DashboardApotek extends Component {
 
   jmlObat = () => {
     const { daftarObat } = this.state;
-    const filter = daftarObat.filter.length;
+    const filter = daftarObat.length;
     return filter;
   };
 
