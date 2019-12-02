@@ -10,6 +10,7 @@ class FormTambahDetailObat extends Component {
     super(props);
     this.handleSave = this.handleSave.bind(this);
     this.state = {
+      harga_markup: 0,
       showMe: false,
       uid: "",
       stok: "",
@@ -42,12 +43,20 @@ class FormTambahDetailObat extends Component {
         stok: "",
         kadaluarsa: "",
         harga_modal: "",
-        harga_jual: 0
+        harga_jual: ""
       });
     }
   }
 
-  getHargaMarkup = () => {
+  getPersenMarkup = () => {
+    return (
+      ((this.state.harga_markup - this.state.harga_modal) /
+        this.state.harga_modal) *
+      100
+    );
+  };
+
+  getHargaMarkup = e => {
     return (
       Number(this.state.harga_modal) +
       this.state.harga_modal * (this.state.diskon / 100)
@@ -63,7 +72,7 @@ class FormTambahDetailObat extends Component {
         nik_penerima: nik,
         id_lokasi: id_lokasi,
         harga_modal: this.state.harga_modal,
-        harga_jual: this.getHargaMarkup()
+        harga_jual: this.state.harga_jual
       })
         .then(this.setState({ notification: "1" }))
         .catch(err => {
@@ -77,7 +86,7 @@ class FormTambahDetailObat extends Component {
         id_lokasi: id_lokasi,
         harga_modal: this.state.harga_modal,
         kadaluarsa: this.state.kadaluarsa,
-        harga_jual: this.getHargaMarkup()
+        harga_jual: this.state.harga_jual
       })
         .then(this.setState({ notification: "1" }))
         .catch(err => {
@@ -88,7 +97,6 @@ class FormTambahDetailObat extends Component {
   };
 
   render() {
-    console.log("apa ini", this.getHargaMarkup());
     return (
       <div
         className="modal fade right"
@@ -177,11 +185,12 @@ class FormTambahDetailObat extends Component {
                         className="form-control"
                         placeholder="Harga Modal"
                         value={this.state.harga_modal}
-                        onChange={event =>
+                        onChange={event => {
                           this.setState({
-                            harga_modal: event.target.value
-                          })
-                        }
+                            harga_modal: event.target.value,
+                            harga_jual: this.getHargaMarkup()
+                          });
+                        }}
                         required
                       />
                     </div>
@@ -196,7 +205,8 @@ class FormTambahDetailObat extends Component {
                         value={this.state.diskon}
                         onChange={event =>
                           this.setState({
-                            diskon: event.target.value
+                            diskon: event.target.value,
+                            harga_jual: this.getHargaMarkup()
                           })
                         }
                         required
@@ -209,11 +219,13 @@ class FormTambahDetailObat extends Component {
                         type="number"
                         name="harga_jual"
                         className="form-control"
-                        placeholder="Harga Jual"
-                        value={this.getHargaMarkup()}
+                        placeholder="Harga-Jual"
+                        value={this.state.harga_jual}
                         onChange={event =>
                           this.setState({
+                            // harga_markup: event.target.value,
                             harga_jual: event.target.value
+                            // diskon: this.getPersenMarkup()
                           })
                         }
                         required

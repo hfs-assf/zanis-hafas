@@ -49,7 +49,6 @@ class MinStockDetail extends Component {
   // }
 
   render() {
-    console.log("apa nih", this.filterData());
     return (
       <div
         className="modal fade"

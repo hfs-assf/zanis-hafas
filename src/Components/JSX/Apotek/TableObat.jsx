@@ -93,7 +93,6 @@ export default class TableObat extends React.Component {
   );
 
   render = () => {
-    console.log("obat", this.state.obat);
     return (
       <React.Fragment>
         <div className="card" style={{ borderTop: "2px solid #1976d2" }}>
