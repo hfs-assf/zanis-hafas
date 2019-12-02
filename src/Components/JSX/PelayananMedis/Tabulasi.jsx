@@ -7,6 +7,8 @@ import editStatusAntrian from "../../../Methods/Pendaftaran/Antrian/editStatusAn
 import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
 import FormPuyer from "./Puyer/FormPuyer";
 import HistoryRM from "./HistoryRM";
+import nomorTransaksi from "../../../Methods/Kasir/Transaksi/nomorTransaksi";
+import { Consumer } from "../../../Methods/User/Auth/Store";
 
 class TabulasiPelayananMedis extends Component {
   constructor(props) {
@@ -16,7 +18,7 @@ class TabulasiPelayananMedis extends Component {
     };
   }
 
-  handleStatus = () => {
+  handleStatus = id_lokasi => {
     editStatusAntrian(this.props.antrian_pasien, "selesai")
       .then(() => {
         this.setState(this.state);
@@ -31,10 +33,7 @@ class TabulasiPelayananMedis extends Component {
         console.log(err);
         this.setState({ notification: "0" });
       });
-  };
-
-  handleStatus = () => {
-    editStatusAntrian(this.props.antrian_pasien, "selesai")
+    nomorTransaksi(this.props.no_rm, id_lokasi)
       .then(() => {
         this.setState(this.state);
       })
@@ -130,14 +129,21 @@ class TabulasiPelayananMedis extends Component {
           </div>
         </div>
         <div className="modal-footer justify-content-center">
-          <button
-            className="btn btn-primary"
-            onClick={() => this.handleStatus()}
-            data-toggle="modal"
-            data-target="#konfirmasiTransaksi"
-          >
-            Selesai
-          </button>
+          <Consumer>
+            {({ state }) => {
+              return (
+                <button
+                  className="btn btn-primary"
+                  onClick={() => this.handleStatus(state.dataLogin.id_lokasi)}
+                  data-toggle="modal"
+                  data-target="#konfirmasiTransaksi"
+                >
+                  Selesai
+                </button>
+              );
+            }}
+          </Consumer>
+
           <button
             className="btn btn-primary"
             onClick={() => this.cancelStatus()}
