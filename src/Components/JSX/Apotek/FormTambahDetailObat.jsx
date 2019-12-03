@@ -48,15 +48,7 @@ class FormTambahDetailObat extends Component {
     }
   }
 
-  getPersenMarkup = () => {
-    return (
-      ((this.state.harga_markup - this.state.harga_modal) /
-        this.state.harga_modal) *
-      100
-    );
-  };
-
-  getHargaMarkup = e => {
+  getHargaMarkup = () => {
     return (
       Number(this.state.harga_modal) +
       this.state.harga_modal * (this.state.diskon / 100)
@@ -219,13 +211,12 @@ class FormTambahDetailObat extends Component {
                         type="number"
                         name="harga_jual"
                         className="form-control"
-                        placeholder="Harga-Jual"
-                        value={this.state.harga_jual}
+                        placeholder="Harga_Jual"
+                        value={this.getHargaMarkup()}
                         onChange={event =>
                           this.setState({
                             // harga_markup: event.target.value,
                             harga_jual: event.target.value
-                            // diskon: this.getPersenMarkup()
                           })
                         }
                         required
