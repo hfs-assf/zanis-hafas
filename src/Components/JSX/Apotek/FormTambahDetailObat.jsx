@@ -19,9 +19,11 @@ class FormTambahDetailObat extends Component {
       harga_modal: "",
       harga_jual: "",
       notification: "",
-      diskon: ""
+      diskon: "",
+      status: false
     };
   }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.action === "edit") {
       this.setState({
@@ -55,6 +57,17 @@ class FormTambahDetailObat extends Component {
     );
   };
 
+  changeHargaJual = e => {
+    let harga = e.target.value;
+    this.setState({
+      harga_jual: harga
+    });
+  };
+
+  checkStatus = () => {
+    return this.state.status ? this.getHargaMarkup() : this.state.harga_jual;
+  };
+
   handleSave = (nik, id_lokasi) => {
     if (this.props.action === "add") {
       tambahStokObat({
@@ -64,7 +77,7 @@ class FormTambahDetailObat extends Component {
         nik_penerima: nik,
         id_lokasi: id_lokasi,
         harga_modal: this.state.harga_modal,
-        harga_jual: this.state.harga_jual
+        harga_jual: this.checkStatus()
       })
         .then(this.setState({ notification: "1" }))
         .catch(err => {
@@ -78,7 +91,7 @@ class FormTambahDetailObat extends Component {
         id_lokasi: id_lokasi,
         harga_modal: this.state.harga_modal,
         kadaluarsa: this.state.kadaluarsa,
-        harga_jual: this.state.harga_jual
+        harga_jual: this.checkStatus()
       })
         .then(this.setState({ notification: "1" }))
         .catch(err => {
@@ -179,8 +192,7 @@ class FormTambahDetailObat extends Component {
                         value={this.state.harga_modal}
                         onChange={event => {
                           this.setState({
-                            harga_modal: event.target.value,
-                            harga_jual: this.getHargaMarkup()
+                            harga_modal: event.target.value
                           });
                         }}
                         required
@@ -190,21 +202,36 @@ class FormTambahDetailObat extends Component {
                   <div className="col-md-12">
                     <div className="md-form mb-0">
                       <input
-                        type="number"
-                        name="harga_modal"
-                        className="form-control"
-                        placeholder="Persen"
-                        value={this.state.diskon}
-                        onChange={event =>
+                        type="checkbox"
+                        onChange={e =>
                           this.setState({
-                            diskon: event.target.value,
-                            harga_jual: this.getHargaMarkup()
+                            status: e.target.checked
                           })
                         }
-                        required
                       />
+                      <span>Klik untuk pakai diskon</span>
                     </div>
                   </div>
+                  {this.state.status === false ? null : (
+                    <div className="col-md-12">
+                      <div className="md-form mb-0">
+                        <input
+                          type="number"
+                          name="harga_modal"
+                          className="form-control"
+                          placeholder="Persen"
+                          value={this.state.diskon}
+                          onChange={event =>
+                            this.setState({
+                              diskon: event.target.value
+                            })
+                          }
+                          required
+                        />
+                      </div>
+                    </div>
+                  )}
+
                   <div className="col-md-12">
                     <div className="md-form mb-0">
                       <input
@@ -212,13 +239,8 @@ class FormTambahDetailObat extends Component {
                         name="harga_jual"
                         className="form-control"
                         placeholder="Harga_Jual"
-                        value={this.getHargaMarkup()}
-                        onChange={event =>
-                          this.setState({
-                            // harga_markup: event.target.value,
-                            harga_jual: event.target.value
-                          })
-                        }
+                        value={this.checkStatus()}
+                        onChange={this.changeHargaJual}
                         required
                       />
                     </div>
