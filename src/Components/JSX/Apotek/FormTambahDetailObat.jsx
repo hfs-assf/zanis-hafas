@@ -77,7 +77,7 @@ class FormTambahDetailObat extends Component {
         nik_penerima: nik,
         id_lokasi: id_lokasi,
         harga_modal: this.state.harga_modal,
-        harga_jual: this.checkStatus()
+        harga_jual: `${this.checkStatus()}`
       })
         .then(this.setState({ notification: "1" }))
         .catch(err => {
@@ -91,7 +91,7 @@ class FormTambahDetailObat extends Component {
         id_lokasi: id_lokasi,
         harga_modal: this.state.harga_modal,
         kadaluarsa: this.state.kadaluarsa,
-        harga_jual: this.checkStatus()
+        harga_jual: `${this.checkStatus()}`
       })
         .then(this.setState({ notification: "1" }))
         .catch(err => {
