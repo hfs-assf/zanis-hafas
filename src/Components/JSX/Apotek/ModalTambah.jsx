@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import obatList from "../../../Methods/Apotik/Obat/listObat";
-import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
 import { Consumer } from "../../../Methods/User/Auth/Store";
-import editPuyer from "../../../Methods/Apotik/Puyer/EditPuyer";
+import tambahDetailPesananObat from "../../../Methods/Apotik/DetailPesananObat/tambahDetailPesananObat";
 
 let set;
-export class ModalKurang extends Component {
+export default class ModalTambah extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,7 +15,6 @@ export class ModalKurang extends Component {
       disabled: false
     };
   }
-
   onKeyUp = (e, id_lokasi) => {
     clearTimeout(set);
     const nilai = e.target.value;
@@ -43,7 +41,7 @@ export class ModalKurang extends Component {
   };
 
   ubahKeteranganObat = (e, i) => {
-    let doResep = [...this.state.doResep];
+    const doResep = [...this.state.doResep];
     doResep[i].keterangan = e.target.value;
     this.setState({ doResep });
   };
@@ -51,45 +49,38 @@ export class ModalKurang extends Component {
   tambah = daftarObat => {
     this.setState({
       doResep: this.state.doResep.concat({
-        uid_obat: daftarObat.uid_obat,
+        uid_obat: daftarObat.uid,
         nama_obat: daftarObat.nama_obat,
         jumlah_obat: 0,
-        harga_jual: daftarObat.harga_jual
+        keterangan: ""
       }),
       filter: ""
     });
-  };
-
-  hapus = id => {
-    var arrays = this.state.doResep;
-    arrays.forEach(i => {
-      if (this.state.doResep.uid === id) {
-        arrays.splice(i, 1);
-      }
-    });
-    this.setState({ doResep: arrays });
   };
 
   reset = () => {
     this.setState({ doResep: [] });
   };
 
-  handleSave = id_lokasi => {
-    editPuyer({
-      uid: this.props.uidPuyer,
-      listDetail: this.state.doResep.map(
-        ({ nama_obat, jumlah_obat, harga_jual }) => ({
-          nama_obat: nama_obat,
-          jumlah_keluar: jumlah_obat,
-          harga: harga_jual,
-          id_lokasi: id_lokasi
-        })
-      )
-    })
-      .then(this.setState({ notification: "1" }))
-      .catch(err => {
-        this.setState({ notification: "0" });
-      });
+  handleSave = () => {
+    tambahDetailPesananObat({
+      uid_pesanan: this.props.uid_pesanan,
+      uid_obat: this.state.doResep[0].uid_obat,
+      jumlah_obat: this.state.doResep[0].jumlah_obat,
+      keterangan: this.state.doResep[0].keterangan
+    });
+    window.location.reload(false);
+  };
+
+  hapus = id => {
+    var arrays = this.state.doResep;
+    console.log("loha", arrays);
+    arrays.forEach(i => {
+      if (this.state.doResep.uid === id) {
+        arrays.splice(i, 1);
+      }
+    });
+    this.setState({ doResep: arrays });
   };
 
   tambahPesanan = () => {
@@ -114,7 +105,14 @@ export class ModalKurang extends Component {
           &nbsp;
           {resep.satuan}
         </td>
-        <td className="text-center">{resep.harga_jual}</td>
+        <td className="text-center">
+          <input
+            type="text"
+            refs="keteranganobat"
+            onChange={e => this.ubahKeteranganObat(e, index)}
+            disabled={this.state.disabled}
+          />
+        </td>
         <td className="text-center">
           <button
             className="btn btn-sm mt-0 mb-0 btn-danger"
@@ -174,8 +172,8 @@ export class ModalKurang extends Component {
                   <tr>
                     <th className="text-center">NAMA OBAT</th>
                     <th className="text-center">JUMLAH</th>
-                    <th className="text-center">HARGA</th>
-                    <th className="text-center">ACTION</th>
+                    <th className="text-center">ATURAN PAKAI</th>
+                    <th className="text-center">AKSI</th>
                   </tr>
                 </thead>
                 <tbody className="bodyTable">{this.tambahPesanan()}</tbody>
@@ -183,20 +181,12 @@ export class ModalKurang extends Component {
             </div>
           </div>
           <div className="modal-footer justify-content-center">
-            <Consumer>
-              {({ state }) => {
-                return (
-                  <button
-                    className="btn btn-primary btn-sm"
-                    data-toggle="modal"
-                    data-target="#konfirmasiResep"
-                    onClick={() => this.handleSave(state.dataLogin.id_lokasi)}
-                  >
-                    Simpan
-                  </button>
-                );
-              }}
-            </Consumer>
+            <button
+              className="btn btn-primary btn-sm"
+              onClick={() => this.handleSave()}
+            >
+              Simpan
+            </button>
 
             <button
               className="btn btn-warning btn-sm"
@@ -266,13 +256,7 @@ export class ModalKurang extends Component {
             {daftarResep}
           </div>
         </div>
-        <ModalKonfirmasi
-          notification={this.state.notification}
-          modal="konfirmasiResep"
-        />
       </div>
     );
   }
 }
-
-export default ModalKurang;

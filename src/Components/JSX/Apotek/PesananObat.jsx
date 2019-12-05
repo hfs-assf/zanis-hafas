@@ -9,13 +9,15 @@ import kurangStokObat from "../../../Methods/Apotik/StokObat/kurangStokObat";
 import tambahDetailTransaksi from "../../../Methods/Kasir/DetailTransaksi/tambahDetailTransaksi";
 import ReactToPrint from "react-to-print";
 import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
+import ModalTambah from "./ModalTambah";
 
 export class PesananObat extends Component {
   constructor() {
     super();
     this.state = {
       detail_pesanan: [],
-      notification: "0"
+      notification: "0",
+      modalTambah: false
     };
   }
 
@@ -57,6 +59,9 @@ export class PesananObat extends Component {
       .catch(err => console.log(err));
   };
 
+  handleEdit = () => {
+    this.setState({ modalTambah: true });
+  };
   handleSave = () => {
     tambahDetailTransaksi({
       nomor_rekam_medis: this.props.no_rm,
@@ -139,6 +144,16 @@ export class PesananObat extends Component {
               )}
               content={() => this.componentRef}
             />
+            <button
+              type="button"
+              className="btn btn-danger btn-sm"
+              onClick={() => this.handleEdit()}
+              data-toggle="modal"
+              data-target="#addmedicine"
+              title="Kurang Obat"
+            >
+              Edit
+            </button>
           </div>
 
           <div className="middle ">
@@ -179,6 +194,10 @@ export class PesananObat extends Component {
         <ModalKonfirmasi
           notification={this.state.notification}
           modal="notification"
+        />
+        <ModalTambah
+          uid_pesanan={this.props.uid}
+          selected={this.state.selected}
         />
       </div>
     );
