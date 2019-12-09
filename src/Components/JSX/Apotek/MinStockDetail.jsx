@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withContext } from "../../../Methods/HOC/withContext.js";
-import { lsObat } from "../../../Methods/Apotik/StokObat/listStokObat.js";
+import menipis from "../../../Methods/Apotik/StokObat/minStokObat";
 
 class MinStockDetail extends Component {
   constructor() {
@@ -12,41 +12,35 @@ class MinStockDetail extends Component {
   }
 
   componentDidMount() {
-    lsObat(this.props.getValue).then(({ data }) => {
+    menipis(this.props.getValue).then(({ data }) => {
       this.setState({
         list: data
       });
     });
   }
 
-  filterData = () => {
-    const { list } = this.state;
-    const filterMin = list.filter(e => e.stok);
-    return filterMin;
+  daftarObatExp = () => {
+    return this.state.list.map((el, index) => (
+      <li
+        className="list-group-item d-flex justify-content-between align-items-center"
+        key={index}
+      >
+        <span>
+          <input
+            type="checkbox"
+            name="id_obat"
+            value="{el.id}"
+            {...this.uid_obat}
+          />
+          &nbsp;
+          {el.nama_obat}
+        </span>
+        <span className="badge badge-danger badge-pill">
+          stok tinggal {el.stok}
+        </span>
+      </li>
+    ));
   };
-
-  // daftarObatExp() {
-  //   return this.filterData((el, index) => (
-  //     <li
-  //       className="list-group-item d-flex justify-content-between align-items-center"
-  //       key={index}
-  //     >
-  //       <span>
-  //         <input
-  //           type="checkbox"
-  //           name="id_obat"
-  //           value="{el.id}"
-  //           {...this.id_obat}
-  //         />
-  //         &nbsp;
-  //         {el.nama}
-  //       </span>
-  //       <span className="badge badge-danger badge-pill">
-  //         {el.persediaan} {el.satuan}
-  //       </span>
-  //     </li>
-  //   ));
-  // }
 
   render() {
     return (
@@ -78,7 +72,7 @@ class MinStockDetail extends Component {
               <div className="text-center">
                 <p>Harap segera melakukan pemesanan obat ke pemasok.</p>
               </div>
-              <ul className="list-group z-depth-0">{}</ul>
+              <ul className="list-group z-depth-0">{this.daftarObatExp()}</ul>
               <div className="text-center">
                 <p>
                   <br />
@@ -93,7 +87,7 @@ class MinStockDetail extends Component {
               </div>
             </div>
             <div className="modal-footer justify-content-center">
-              <button className="btn btn-info">Pesan</button>
+              {/* <button className="btn btn-info">Pesan</button> */}
               <button className="btn btn-outline-info" data-dismiss="modal">
                 Kembali
               </button>

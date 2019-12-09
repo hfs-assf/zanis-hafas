@@ -15,25 +15,57 @@ export class PesananObat extends Component {
   constructor() {
     super();
     this.state = {
-      detail_pesanan: [],
+      listPesanan: [],
       notification: "0",
-      modalTambah: false
+      modalTambah: false,
+      timer: null
     };
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
+    this.getData();
+  }
+
+  getData() {
     ListDetailPesananObat(this.props.uid).then(({ data }) => {
+      console.log("ambil data", data);
       this.setState({
-        detail_pesanan: data
+        listPesanan: data
       });
     });
+  }
+
+  mapPesanan = () => {
+    return this.state.listPesanan.map(el => (
+      <tr key={el.uid}>
+        <td className="text-center">{el.nama_obat}</td>
+        <td className="text-center">{el.jumlah_obat}</td>
+        <td className="text-center">{el.satuan}</td>
+        <td className="text-center">{el.kategori}</td>
+        <td className="text-center">{el.keterangan}</td>
+        <td className="text-center">
+          <button
+            type="button"
+            className="btn btn-danger btn-sm"
+            onClick={() => this.handleDelete(el.uid)}
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    ));
+  };
+
+  fnRefresh = () => {
+    console.log("refreshing");
+    this.getData();
   };
 
   handleDelete = uid => {
-    const arrays = this.state.detail_pesanan;
+    const arrays = this.state.listPesanan;
     hapusDetailPesanan(uid).then(() => {
       this.setState({
-        detail_pesanan: arrays.filter(el => el.uid !== uid)
+        listPesanan: arrays.filter(el => el.uid !== uid)
       });
     });
   };
@@ -62,10 +94,11 @@ export class PesananObat extends Component {
   handleEdit = () => {
     this.setState({ modalTambah: true });
   };
+
   handleSave = () => {
     tambahDetailTransaksi({
       nomor_rekam_medis: this.props.no_rm,
-      listDetail: this.state.detail_pesanan.map(
+      listDetail: this.state.listPesanan.map(
         ({ nama_obat, jumlah_obat, harga_jual }) => ({
           item_transaksi: nama_obat,
           jumlah_item: jumlah_obat,
@@ -80,6 +113,7 @@ export class PesananObat extends Component {
   };
 
   render() {
+    console.log("hey", this.state.listPesanan);
     return (
       <div ref={el => (this.componentRef = el)}>
         <div className="table-responsive">
@@ -94,28 +128,7 @@ export class PesananObat extends Component {
                 <th className="text-center">Aksi</th>
               </tr>
             </thead>
-            {this.state.detail_pesanan.map(e => {
-              return (
-                <tbody key={e.uid}>
-                  <tr>
-                    <td className="text-center">{e.nama_obat}</td>
-                    <td className="text-center">{e.jumlah_obat}</td>
-                    <td className="text-center">{e.satuan}</td>
-                    <td className="text-center">{e.kategori}</td>
-                    <td className="text-center">{e.keterangan}</td>
-                    <td className="text-center">
-                      <button
-                        type="button"
-                        className="btn btn-danger btn-sm"
-                        onClick={() => this.handleDelete(e.uid)}
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              );
-            })}
+            <tbody>{this.mapPesanan()}</tbody>
           </table>
         </div>
 
@@ -196,6 +209,7 @@ export class PesananObat extends Component {
           modal="notification"
         />
         <ModalTambah
+          fnRefresh={this.fnRefresh}
           uid_pesanan={this.props.uid}
           selected={this.state.selected}
         />

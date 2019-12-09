@@ -68,8 +68,10 @@ export default class ModalTambah extends Component {
       uid_obat: this.state.doResep[0].uid_obat,
       jumlah_obat: this.state.doResep[0].jumlah_obat,
       keterangan: this.state.doResep[0].keterangan
-    });
-    window.location.reload(false);
+    }).then(() => 
+      this.props.fnRefresh()
+    )
+    // window.location.reload(false);
   };
 
   hapus = id => {
