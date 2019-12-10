@@ -162,8 +162,8 @@ export class PesananObat extends Component {
               className="btn btn-danger btn-sm"
               onClick={() => this.handleEdit()}
               data-toggle="modal"
-              data-target="#addmedicine"
-              title="Kurang Obat"
+              data-target="#modaltambah"
+              title="Tambah Obat"
             >
               Edit
             </button>

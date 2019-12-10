@@ -68,9 +68,7 @@ export default class ModalTambah extends Component {
       uid_obat: this.state.doResep[0].uid_obat,
       jumlah_obat: this.state.doResep[0].jumlah_obat,
       keterangan: this.state.doResep[0].keterangan
-    }).then(() => 
-      this.props.fnRefresh()
-    )
+    }).then(() => this.props.fnRefresh());
     // window.location.reload(false);
   };
 
@@ -205,7 +203,7 @@ export default class ModalTambah extends Component {
     return (
       <div
         className="modal fade right"
-        id="addmedicine"
+        id="modaltambah"
         tabIndex="1"
         role="dialog"
         aria-labelledby="myModalLabel"

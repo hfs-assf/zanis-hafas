@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import obatList from "../../../Methods/Apotik/Obat/listObat";
 import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
 import { Consumer } from "../../../Methods/User/Auth/Store";
 import editPuyer from "../../../Methods/Apotik/Puyer/EditPuyer";
+import { cariStokObat } from "../../../Methods/Apotik/StokObat/listStokObat";
 
 let set;
 export class ModalKurang extends Component {
@@ -22,7 +22,7 @@ export class ModalKurang extends Component {
     const nilai = e.target.value;
     set = setTimeout(() => {
       if (nilai) {
-        obatList(nilai, id_lokasi).then(({ data }) =>
+        cariStokObat(nilai, id_lokasi).then(({ data }) =>
           this.setState({ daftarObat: data })
         );
       } else {
@@ -51,7 +51,7 @@ export class ModalKurang extends Component {
   tambah = daftarObat => {
     this.setState({
       doResep: this.state.doResep.concat({
-        uid_obat: daftarObat.uid_obat,
+        uid: daftarObat.uid,
         nama_obat: daftarObat.nama_obat,
         jumlah_obat: 0,
         harga_jual: daftarObat.harga_jual
@@ -74,15 +74,16 @@ export class ModalKurang extends Component {
     this.setState({ doResep: [] });
   };
 
-  handleSave = id_lokasi => {
+  handleSave = (id_lokasi, nik_karyawan) => {
     editPuyer({
       uid: this.props.uidPuyer,
+      id_lokasi: id_lokasi,
+      nik_karyawan: nik_karyawan,
       listDetail: this.state.doResep.map(
-        ({ nama_obat, jumlah_obat, harga_jual }) => ({
-          nama_obat: nama_obat,
+        ({ uid, jumlah_obat, harga_jual }) => ({
+          uid_stok: uid,
           jumlah_keluar: jumlah_obat,
-          harga: harga_jual,
-          id_lokasi: id_lokasi
+          harga: harga_jual
         })
       )
     })
@@ -190,7 +191,12 @@ export class ModalKurang extends Component {
                     className="btn btn-primary btn-sm"
                     data-toggle="modal"
                     data-target="#konfirmasiResep"
-                    onClick={() => this.handleSave(state.dataLogin.id_lokasi)}
+                    onClick={() =>
+                      this.handleSave(
+                        state.dataLogin.id_lokasi,
+                        state.dataLogin.nik
+                      )
+                    }
                   >
                     Simpan
                   </button>
@@ -213,7 +219,7 @@ export class ModalKurang extends Component {
     return (
       <div
         className="modal fade right"
-        id="addmedicine"
+        id="modalkurang"
         tabIndex="1"
         role="dialog"
         aria-labelledby="myModalLabel"

@@ -75,7 +75,7 @@ export class PesananPuyer extends Component {
               className="btn btn-success btn-sm"
               onClick={() => this.handleModal(e.uid)}
               data-toggle="modal"
-              data-target="#addmedicine"
+              data-target="#modalkurang"
               title="Kurang Obat"
             >
               Kurang Obat
