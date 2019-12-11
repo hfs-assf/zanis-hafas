@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import daftarTransaksi from "../../../Methods/Kasir/Transaksi/daftarTransaksi";
-
 import * as waktu from "../../../Methods/waktu";
 import "../../ASSETS/CSS/form.css";
 import { withContext } from "../../../Methods/HOC/withContext";

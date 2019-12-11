@@ -1,119 +1,119 @@
 import React, { Component } from "react";
-import "../../ASSETS/CSS/Apotek.css";
 import "../../ASSETS/CSS/form.css";
 import listTransaksiObat from "../../../Methods/Apotik/TransaksiObat/listTransaksiObat";
+import { withContext } from "../../../Methods/HOC/withContext";
+import * as waktu from "../../../Methods/waktu";
 
 class TableTransaksiObat extends Component {
   constructor() {
     super();
-    this.onChange = this.onChange.bind(this);
     this.state = {
       filter: "",
-      transaksi_obat: []
+      transaksi_obat: [],
+      tanggal: {
+        tanggalAwal: "",
+        tanggalAkhir: ""
+      }
     };
   }
 
-  onChange(e) {
-    e.preventDefault();
-    var filter = e.target.value;
-    listTransaksiObat(filter)
-      // .then(data => console.log("aku", data.data));
-      .then(({ data }) => {
-        this.setState({
-          transaksi_obat: data,
-          filter: filter
-        });
-      });
-  }
-
-  renderTransaksiObat = (
-    index,
-    { waktu_transaksi, nama_obat, jumlah, nik_karyawan }
-  ) => {
-    if (this.state.filter !== "") {
-      return (
-        <div className="row1" key={index}>
-          <div className="cell">
-            {new Date(waktu_transaksi).toLocaleDateString("en-GB")}
-          </div>
-          <div className="cell text-center">{nama_obat}</div>
-          <div className="cell text-center">
-            {jumlah < 0 ? "Keluar" : "Masuk"} sebanyak
-            {" " + Math.abs(jumlah)}
-          </div>
-          <div className="cell text-center">{nik_karyawan}</div>
-        </div>
-      );
-    }
+  ubahValue = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
   };
 
+  listObat = e => {
+    e.preventDefault();
+    listTransaksiObat(
+      this.props.getValue,
+      this.state.tanggalAwal,
+      this.state.tanggalAkhir
+    ).then(({ data }) => {
+      this.setState({
+        transaksi_obat: data
+      });
+    });
+  };
+
+  renderTable = () => (
+    <table className="table">
+      <thead>
+        <tr>
+          <th className="text-center" style={{ fontWeight: "600" }}>
+            Tanggal Transaksi
+          </th>
+          <th className="text-center" style={{ fontWeight: "600" }}>
+            Waktu Transaksi
+          </th>
+          <th className="text-center" style={{ fontWeight: "600" }}>
+            Total Biaya
+          </th>
+          <th className="text-center" style={{ fontWeight: "600" }}>
+            Masuk/Keluar
+          </th>
+          <th className="text-center" style={{ fontWeight: "600" }}>
+            Dicatat Oleh
+          </th>
+        </tr>
+      </thead>
+
+      {this.state.transaksi_obat.map(
+        ({ uid, waktu_transaksi, nama_obat, jumlah, nama_karyawan }) => (
+          <tbody key={uid}>
+            <tr>
+              <td className="text-center">
+                {new Date(waktu_transaksi).toLocaleDateString("en-GB")}
+              </td>
+              <td className="text-center">
+                {waktu.timeFormat(waktu_transaksi)}
+              </td>
+              <td className="text-center">{nama_obat}</td>
+              <td className="text-center">
+                {jumlah > 0 ? "Masuk" : "Keluar"} sebanyak
+                {" " + Math.abs(jumlah)}
+              </td>
+              <td className="text-center">{nama_karyawan}</td>
+            </tr>
+          </tbody>
+        )
+      )}
+    </table>
+  );
+
   render() {
-    let header;
-    const { filter, transaksi_obat } = this.state;
-    const filteredTransaksi = transaksi_obat;
-
-    if (filteredTransaksi.length !== 0 && filter !== "") {
-      header = (
-        <div className="table">
-          <div className="row1 header">
-            <div className="cell">Waktu Transaksi</div>
-            <div className="cell">Nama Obat</div>
-            <div className="cell">Keterangan</div>
-            <div className="cell">Dicatat Oleh</div>
-          </div>
-          {filteredTransaksi.map((obat, index) => {
-            return this.renderTransaksiObat(index, obat);
-          })}
-        </div>
-      );
-    } else if (filteredTransaksi.length === 0 && filter !== "") {
-      header = (
-        <div className="table">
-          <div className="row1">
-            <div className="cell">Transaksi obat tidak ada</div>
-          </div>
-        </div>
-      );
-    } else {
-      header = (
-        <div
-          className="alert alert-warning alert-dismissible fade show"
-          role="alert"
-        >
-          <strong>Untuk melihat transaksi</strong> klik menu pencarian.
-        </div>
-      );
-    }
     return (
-      <div className="card" style={{ borderTop: "2px solid #1976d2" }}>
-        <div className="card-body">
-          <div className="flex-container">
-            <div className="box column1">
-              <h2 className="card-title text-left">Daftar Transaksi Obat</h2>
-            </div>
-
-            <div className="box column2">
-              <div className="mainsearch">
-                <div className="form-group has-search">
-                  <span className="fa fa-search form-control-feedback" />
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Cari"
-                    onChange={e => this.onChange(e)}
-                  />
-                </div>
-              </div>
-            </div>
+      <div>
+        <form onSubmit={e => this.lihatObat(e)}>
+          <div className="boxtanggal">
+            <input
+              type="date"
+              style={{ height: "100%", width: "45%" }}
+              className="form-control"
+              placeholder="from date"
+              name="tanggalAwal"
+              onChange={e => this.ubahValue(e)}
+            />
+            <input
+              type="date"
+              style={{ height: "100%", width: "45%" }}
+              name="tanggalAkhir"
+              className="form-control"
+              placeholder="to date"
+              onChange={e => this.ubahValue(e)}
+            />
+            <button
+              className="btn btn-warning btn-sm"
+              onClick={e => this.listObat(e)}
+            >
+              Cari
+            </button>
           </div>
-          <hr className="hr2" />
-          <div className="row">
-            <div className="col-md-12 rowsoap">{header}</div>
-          </div>
-        </div>
+        </form>
+        <div className="boxpelayanan">{this.renderTable()}</div>
       </div>
     );
   }
 }
 
-export default TableTransaksiObat;
+export default withContext(TableTransaksiObat);

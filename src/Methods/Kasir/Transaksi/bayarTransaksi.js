@@ -9,14 +9,6 @@ const bayarTransaksi = ({
   diskon,
   total
 }) => {
-  console.log({
-    uid_transaksi,
-    status,
-    nik_kasir,
-    nomor_rekam_medis,
-    diskon,
-    total
-  });
   return axios.put(`${api.kasir}/transaksi/${uid_transaksi}`, {
     uid_transaksi,
     status,

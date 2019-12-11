@@ -12,6 +12,14 @@
   align-self: flex-start;
 } */
 
+/* box tanggal */
+
+.boxtanggal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .cont {
   display: flex;
   flex-wrap: wrap;
