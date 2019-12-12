@@ -79,6 +79,7 @@ class FormTambahDetailObat extends Component {
         harga_modal: this.state.harga_modal,
         harga_jual: `${this.checkStatus()}`
       })
+        .then(() => this.props.fnRefresh())
         .then(this.setState({ notification: "1" }))
         .catch(err => {
           console.log(err);
@@ -93,6 +94,7 @@ class FormTambahDetailObat extends Component {
         kadaluarsa: this.state.kadaluarsa,
         harga_jual: `${this.checkStatus()}`
       })
+        .then(() => this.props.fnRefresh())
         .then(this.setState({ notification: "1" }))
         .catch(err => {
           console.log(err);

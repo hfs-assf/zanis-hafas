@@ -22,12 +22,16 @@ class DetailObat extends Component {
   }
 
   componentDidMount() {
+    this.getData();
+  }
+
+  getData = () => {
     listStokObat(this.props.uid.id, this.props.getValue).then(({ data }) => {
       this.setState({
         obat: this.state.obat.concat(data)
       });
     });
-  }
+  };
 
   addModal() {
     this.setState({ selected: {}, action: "add" });
@@ -39,6 +43,11 @@ class DetailObat extends Component {
       action: "edit"
     });
   }
+
+  fnRefresh = () => {
+    this.getData();
+  };
+
   renderDaftarObat = ({
     uid,
     waktu_masuk,
@@ -166,6 +175,7 @@ class DetailObat extends Component {
             </div>
           </div>
           <TambahObatMasuk
+            fnRefresh={this.fnRefresh}
             uid={this.props.uid.id}
             selected={this.state.selected}
             action={this.state.action}
