@@ -28,9 +28,6 @@ class FormTambahDetailObat extends Component {
     if (nextProps.action === "edit") {
       this.setState({
         stok: nextProps.selected.stok,
-        kadaluarsa: new Date(nextProps.selected.kadaluarsa).toLocaleDateString(
-          "en-GB"
-        ),
         harga_modal: nextProps.selected.harga_modal,
         harga_jual: nextProps.selected.harga_jual
       });
@@ -85,7 +82,7 @@ class FormTambahDetailObat extends Component {
           console.log(err);
           this.setState({ notification: "0" });
         });
-    } else {
+    } else if (this.props.action === "edit") {
       editStokObat({
         uid: this.props.selected.uid,
         stok: this.state.stok,
@@ -138,32 +135,17 @@ class FormTambahDetailObat extends Component {
                   <div className="col-md-12">
                     <div className="md-form mb-0">
                       <span>Kadaluarsa</span>
-                      {this.props.action === "add" ? (
-                        <input
-                          type="date"
-                          name="kadaluarsa"
-                          className="form-control"
-                          onChange={event =>
-                            this.setState({
-                              kadaluarsa: event.target.value
-                            })
-                          }
-                          required
-                        />
-                      ) : (
-                        <input
-                          type="text"
-                          name="kadaluarsa"
-                          className="form-control"
-                          value={this.state.kadaluarsa}
-                          onChange={event =>
-                            this.setState({
-                              kadaluarsa: event.target.value
-                            })
-                          }
-                          required
-                        />
-                      )}
+                      <input
+                        type="date"
+                        name="kadaluarsa"
+                        className="form-control"
+                        onChange={event =>
+                          this.setState({
+                            kadaluarsa: event.target.value
+                          })
+                        }
+                        required
+                      />
                     </div>
                   </div>
                   <div className="col-md-12">

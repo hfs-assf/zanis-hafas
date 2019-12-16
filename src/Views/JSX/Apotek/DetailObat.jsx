@@ -4,7 +4,6 @@ import "../../../Components/ASSETS/CSS/Pendaftaran.css";
 // import TableDetailObat from "../../../Components/JSX/Apotek/TableDetailObat";
 import TambahObatMasuk from "../../../Components/JSX/Apotek/FormTambahDetailObat";
 import listStokObat from "../../../Methods/Apotik/StokObat/listStokObat";
-import { conversi } from "../../../Methods/waktu";
 import { withContext } from "../../../Methods/HOC/withContext";
 
 class DetailObat extends Component {
@@ -28,7 +27,7 @@ class DetailObat extends Component {
   getData = () => {
     listStokObat(this.props.uid.id, this.props.getValue).then(({ data }) => {
       this.setState({
-        obat: this.state.obat.concat(data)
+        obat: data
       });
     });
   };
@@ -37,7 +36,8 @@ class DetailObat extends Component {
     this.setState({ selected: {}, action: "add" });
   }
 
-  editModal({ uid, waktu_masuk, stok, kadaluarsa, harga_modal, harga_jual }) {
+  editModal(uid, waktu_masuk, stok, kadaluarsa, harga_modal, harga_jual) {
+    console.log("ini harga jual nya", harga_jual);
     this.setState({
       selected: { uid, waktu_masuk, stok, kadaluarsa, harga_modal, harga_jual },
       action: "edit"
@@ -48,68 +48,65 @@ class DetailObat extends Component {
     this.getData();
   };
 
-  renderDaftarObat = ({
-    uid,
-    waktu_masuk,
-    stok,
-    kadaluarsa,
-    harga_modal,
-    harga_jual
-  }) => {
-    return (
-      <div className="row1" key={uid}>
-        <div className="cell text-center">
-          {new Date(waktu_masuk).toLocaleDateString("en-GB")}
-        </div>
-        <div className="cell text-center">{stok}</div>
-        <div className="cell text-center">
-          {new Date(kadaluarsa).toLocaleDateString("en-GB")}
-        </div>
-        <div className="cell text-center">Rp. {conversi(harga_modal)}</div>
-        <div className="cell text-center">Rp.{conversi(harga_jual)}</div>
-        <div className="cell text-center">
-          <button
-            className="btn btn-primary btn-sm "
-            onClick={() =>
-              this.editModal({
-                uid,
-                waktu_masuk,
-                stok,
-                kadaluarsa,
-                harga_modal
-              })
-            }
-            data-toggle="modal"
-            data-target="#tambahObatMasuk"
-          >
-            Ubah
-          </button>
-        </div>
-      </div>
-    );
-    // }
+  getListObat = () => {
+    const { obat } = this.state;
+    return obat.map(e => {
+      return (
+        <tr key={e.uid}>
+          <td className="text-center">
+            {new Date(e.waktu_masuk).toLocaleDateString("en-GB")}
+          </td>
+          <td className="text-center">{e.stok}</td>
+          <td className="text-center">
+            {new Date(e.kadaluarsa).toLocaleDateString("en-GB")}
+          </td>
+          <td className="text-center">{e.harga_modal}</td>
+          <td className="text-center">{e.harga_jual}</td>
+          <td className="text-center">
+            <button
+              className="btn btn-primary btn-sm "
+              onClick={() =>
+                this.editModal(
+                  e.uid,
+                  e.waktu_masuk,
+                  e.stok,
+                  e.kadaluarsa,
+                  e.harga_modal,
+                  e.harga_jual
+                )
+              }
+              data-toggle="modal"
+              data-target="#tambahObatMasuk"
+            >
+              Ubah
+            </button>
+          </td>
+        </tr>
+      );
+    });
   };
 
   render() {
     let header;
     const { obat } = this.state;
-
     const filteredObat = obat.length;
 
     if (filteredObat !== 0) {
       header = (
-        <div className="table">
-          <div className="row1 header">
-            <div className="cell">Waktu Masuk</div>
-            <div className="cell">Jumlah</div>
-            <div className="cell">Kadaluarsa</div>
-            <div className="cell">Harga Modal</div>
-            <div className="cell">Harga</div>
-            <div className="cell">Aksi</div>
-          </div>
-          {obat.map(obat => {
-            return this.renderDaftarObat(obat);
-          })}
+        <div className="table-responsive">
+          <table className="table">
+            <thead>
+              <tr>
+                <th className="text-center">Waktu Masuk</th>
+                <th className="text-center">Jumlah</th>
+                <th className="text-center">Kadaluarsa</th>
+                <th className="text-center">Harga Modal</th>
+                <th className="text-center">Harga</th>
+                <th className="text-center">Aksi</th>
+              </tr>
+            </thead>
+            <tbody>{this.getListObat()}</tbody>
+          </table>
         </div>
       );
     } else {
