@@ -4,7 +4,9 @@ import "../../../Components/ASSETS/CSS/Pendaftaran.css";
 // import TableDetailObat from "../../../Components/JSX/Apotek/TableDetailObat";
 import TambahObatMasuk from "../../../Components/JSX/Apotek/FormTambahDetailObat";
 import listStokObat from "../../../Methods/Apotik/StokObat/listStokObat";
+import { conversi } from "../../../Methods/waktu";
 import { withContext } from "../../../Methods/HOC/withContext";
+import hapusStokObat from "../../../Methods/Apotik/StokObat/hapusStokObat";
 
 class DetailObat extends Component {
   constructor(props) {
@@ -48,6 +50,16 @@ class DetailObat extends Component {
     this.getData();
   };
 
+  hapusModal = (uid, id_lokasi) => {
+    console.log("uidnya", uid);
+    const arrays = this.state.obat;
+    hapusStokObat(uid, id_lokasi).then(() => {
+      this.setState({
+        obat: arrays.filter(el => el.uid !== uid)
+      });
+    });
+  };
+
   getListObat = () => {
     const { obat } = this.state;
     return obat.map(e => {
@@ -60,8 +72,8 @@ class DetailObat extends Component {
           <td className="text-center">
             {new Date(e.kadaluarsa).toLocaleDateString("en-GB")}
           </td>
-          <td className="text-center">{e.harga_modal}</td>
-          <td className="text-center">{e.harga_jual}</td>
+          <td className="text-center">Rp. {conversi(e.harga_modal)}</td>
+          <td className="text-center">Rp .{conversi(e.harga_jual)}</td>
           <td className="text-center">
             <button
               className="btn btn-primary btn-sm "
@@ -79,6 +91,12 @@ class DetailObat extends Component {
               data-target="#tambahObatMasuk"
             >
               Ubah
+            </button>
+            <button
+              className="btn btn-red btn-sm"
+              onClick={() => this.hapusModal(e.uid, this.props.getValue)}
+            >
+              hapus
             </button>
           </td>
         </tr>
