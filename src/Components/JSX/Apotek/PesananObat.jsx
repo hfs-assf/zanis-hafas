@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ListDetailPesananObat from "../../../Methods/Apotik/DetailPesananObat/ListDetailPesanan";
 import "../../ASSETS/CSS/form.css";
 import "../../ASSETS/CSS/Timeline.css";
 import { Consumer } from "../../../Methods/User/Auth/Store";
@@ -10,6 +9,7 @@ import tambahDetailTransaksi from "../../../Methods/Kasir/DetailTransaksi/tambah
 import ReactToPrint from "react-to-print";
 import ModalKonfirmasi from "../Animasi/ModalKonfirmasi";
 import ModalTambah from "./ModalTambah";
+import ListDetailPesananObat from "../../../Methods/Apotik/DetailPesananObat/ListDetailPesanan";
 
 export class PesananObat extends Component {
   constructor() {
@@ -28,9 +28,8 @@ export class PesananObat extends Component {
 
   getData() {
     ListDetailPesananObat(this.props.uid).then(({ data }) => {
-      console.log("ambil data", data);
       this.setState({
-        listPesanan: data
+        listPesanan: data.detail_pesanan
       });
     });
   }
@@ -113,7 +112,6 @@ export class PesananObat extends Component {
   };
 
   render() {
-    console.log("hey", this.state.listPesanan);
     return (
       <div ref={el => (this.componentRef = el)}>
         <div className="table-responsive">
